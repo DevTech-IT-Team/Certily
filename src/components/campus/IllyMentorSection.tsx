@@ -174,13 +174,32 @@ function IllyShowcaseScene() {
     <div className="relative mx-auto w-full max-w-[34rem] sm:max-w-[36rem] lg:max-w-[38rem]">
       <div
         ref={stageRef}
-        className="relative min-h-[27rem] sm:min-h-[30rem] lg:min-h-[32rem]"
+        className="relative flex flex-col gap-3.5 overflow-visible sm:block sm:min-h-[30rem] lg:min-h-[32rem]"
       >
-        {/* Video — back layer */}
+        {/* Your guide */}
+        <div
+          ref={identityRef}
+          className={cn(
+            "relative z-[3] inline-flex w-fit items-center gap-2.5 rounded-full border py-1.5 pl-1.5 pr-4 sm:absolute sm:left-2 sm:top-1",
+            cardBase,
+            activeCard === "identity" ? cardActive : cardIdle
+          )}
+        >
+          <div className="h-9 w-9 overflow-hidden rounded-full bg-[#0F1533] ring-2 ring-white sm:h-10 sm:w-10">
+            <img
+              src={illyImg}
+              alt=""
+              className="h-full w-full scale-110 object-contain object-bottom"
+            />
+          </div>
+          <span className="text-[13px] font-semibold text-foreground sm:text-sm">Your guide</span>
+        </div>
+
+        {/* Video — centered on mobile, right collage on sm+ */}
         <div
           ref={videoRef}
           className={cn(
-            "absolute right-0 top-6 z-[1] w-[55%] max-w-[16rem] overflow-hidden rounded-[1.5rem] border bg-[#0F1533] shadow-[0_28px_60px_-22px_rgba(15,21,51,0.45)] transition-all duration-300 sm:top-8 sm:max-w-[18rem] lg:max-w-[19.5rem]",
+            "relative z-[1] mx-auto w-full max-w-[12.5rem] overflow-hidden rounded-[1.5rem] border bg-[#0F1533] shadow-[0_28px_60px_-22px_rgba(15,21,51,0.45)] transition-all duration-300 sm:absolute sm:right-0 sm:top-8 sm:mx-0 sm:w-[55%] sm:max-w-[18rem] lg:max-w-[19.5rem]",
             activeCard === "video"
               ? "border-[#5B4CF5]/35 shadow-[0_32px_64px_-20px_rgba(91,76,245,0.32)]"
               : "border-border/50"
@@ -205,30 +224,11 @@ function IllyShowcaseScene() {
           </div>
         </div>
 
-        {/* Your guide */}
-        <div
-          ref={identityRef}
-          className={cn(
-            "absolute left-1 top-1 z-[3] inline-flex items-center gap-2.5 rounded-full border py-1.5 pl-1.5 pr-4 sm:left-2",
-            cardBase,
-            activeCard === "identity" ? cardActive : cardIdle
-          )}
-        >
-          <div className="h-9 w-9 overflow-hidden rounded-full bg-[#0F1533] ring-2 ring-white sm:h-10 sm:w-10">
-            <img
-              src={illyImg}
-              alt=""
-              className="h-full w-full scale-110 object-contain object-bottom"
-            />
-          </div>
-          <span className="text-[13px] font-semibold text-foreground sm:text-sm">Your guide</span>
-        </div>
-
-        {/* Campus guidance — overlaps video edge */}
+        {/* Campus guidance */}
         <div
           ref={guidanceRef}
           className={cn(
-            "absolute left-1 top-[4.75rem] z-[4] w-[min(100%,16.5rem)] p-3.5 sm:left-3 sm:top-[5.25rem] sm:w-[18rem] sm:p-4",
+            "relative z-[4] w-full p-3.5 sm:absolute sm:left-3 sm:top-[5.25rem] sm:w-[18rem] sm:p-4",
             cardBase,
             activeCard === "guidance" ? cardActive : cardIdle
           )}
@@ -246,11 +246,11 @@ function IllyShowcaseScene() {
           </div>
         </div>
 
-        {/* Your question — sits over lower video */}
+        {/* Your question */}
         <div
           ref={questionRef}
           className={cn(
-            "absolute bottom-6 left-1 z-[5] w-[min(100%,17rem)] p-3.5 sm:bottom-8 sm:left-3 sm:w-[19rem] sm:p-4",
+            "relative z-[5] w-full p-3.5 sm:absolute sm:bottom-8 sm:left-3 sm:w-[19rem] sm:p-4",
             cardBase,
             activeCard === "question" ? cardActive : cardIdle
           )}
@@ -264,7 +264,7 @@ function IllyShowcaseScene() {
           </p>
         </div>
 
-        {/* Cursor — top layer, moves across full stage */}
+        {/* Cursor — animates across stacked mobile + collage desktop */}
         <div
           ref={cursorRef}
           className="pointer-events-none absolute left-0 top-0 z-[100] will-change-transform"
@@ -296,7 +296,7 @@ export function IllyMentorSection() {
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(91,76,245,0.05),transparent_55%)]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
         <Reveal>
           <div className="max-w-xl">
             <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B4CF5]">
