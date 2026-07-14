@@ -3,8 +3,20 @@ import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { ArrowRight, Lock, MessageCircle } from "lucide-react";
 import campusMapImg from "@/assets/certbg.png";
-import illyImg from "@/assets/illy.png";
 import { CAMPUS_MAP_AREAS, type CampusMapArea } from "@/lib/campus";
+import avatarHi from "@/assets/avatars/hi.png";
+import avatarPoint from "@/assets/avatars/point.png";
+import avatarStand from "@/assets/avatars/stand.png";
+import avatarStare from "@/assets/avatars/stare.png";
+import avatarThink from "@/assets/avatars/think.png";
+
+const ILY_AVATARS = {
+  hi: avatarHi,
+  point: avatarPoint,
+  stand: avatarStand,
+  stare: avatarStare,
+  think: avatarThink,
+};
 import { canAccessBuilding } from "@/lib/enrollment";
 import { useIlly } from "./IllyContext";
 import { IllyAvatar } from "./IllyAvatar";
@@ -209,6 +221,7 @@ function HeroCampusFrame({
   illyRef: RefObject<HTMLButtonElement | null>;
   setReady: (v: boolean) => void;
 }) {
+  const { reaction } = useIlly();
   const byId = (id: string) => visibleAreas.find((b) => b.id === id);
 
   const renderBadge = (id: string) => {
@@ -322,7 +335,7 @@ function HeroCampusFrame({
           aria-label="Chat with Illy"
         >
           <img
-            src={illyImg}
+            src={ILY_AVATARS[reaction] || ILY_AVATARS.stand}
             alt="Illy on the campus plaza"
             className="relative h-auto w-full max-w-none object-contain object-bottom mix-blend-screen drop-shadow-[0_8px_20px_rgba(91,76,245,0.2)]"
             draggable={false}
@@ -507,7 +520,7 @@ export function CampusMap({
 
   const handleActivate = (building: CampusMapArea) => {
     setActiveId(building.id);
-    setMessage(building.illyIntro, true);
+    setMessage(building.illyIntro, true, "point");
   };
 
   const scene = isHero ? (
@@ -517,11 +530,11 @@ export function CampusMap({
       onActivate={handleActivate}
       onDeactivate={() => {
         setActiveId(null);
-        setMessage(DEFAULT_CAMPUS_MSG);
+        setMessage(DEFAULT_CAMPUS_MSG, false, "stand");
       }}
       onIllyClick={() => {
         setActiveId(null);
-        setMessage("Tap any building — I'll tell you what's inside!", true);
+        setMessage("Tap any building — I'll tell you what's inside!", true, "hi");
         (window as Window & { focusIllyChat?: () => void }).focusIllyChat?.();
       }}
       illyRef={illyHeroRef}
@@ -558,7 +571,7 @@ export function CampusMap({
             className="scale-[0.45] sm:scale-[0.58] md:scale-[0.65] lg:scale-[0.72]"
             onInteract={() => {
               setActiveId(null);
-              setMessage("Tap any building pin — I'll tell you what's inside!", true);
+              setMessage("Tap any building pin — I'll tell you what's inside!", true, "hi");
               (window as Window & { focusIllyChat?: () => void }).focusIllyChat?.();
             }}
           />

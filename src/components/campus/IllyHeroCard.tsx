@@ -1,4 +1,4 @@
-import illyImg from "@/assets/illy.png";
+import { IllyAvatar } from "./IllyAvatar";
 import { useIlly } from "./IllyContext";
 
 const GREETING =
@@ -11,15 +11,13 @@ export function IllyHeroCard() {
     <button
       type="button"
       onClick={() => {
-        setMessage(GREETING, true);
+        setMessage(GREETING, true, "hi");
         setFloatingOpen(true);
       }}
       className="group w-full rounded-2xl border border-[#E4E2F0] bg-white p-4 text-left shadow-[0_8px_32px_-12px_rgba(15,14,26,0.1)] transition-all hover:border-[#5B4CF5]/20 hover:shadow-[0_12px_36px_-10px_rgba(91,76,245,0.18)] sm:p-5"
     >
       <div className="flex items-center gap-4">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#0F1533]">
-          <img src={illyImg} alt="" className="h-[92%] w-[92%] object-contain object-bottom" />
-        </div>
+        <IllyAvatar size="md" reaction="hi" className="shrink-0 bg-[#0F1533] p-0.5 rounded-full" />
         <div className="min-w-0 flex-1">
           <p className="text-sm font-bold text-foreground sm:text-base">
             Hi, I&apos;m <span className="font-display tracking-wide">ILY</span>!{" "}

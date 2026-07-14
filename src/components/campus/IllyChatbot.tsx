@@ -1,23 +1,18 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { X } from "lucide-react";
-import { useEffect } from "react";
-import illyImg from "@/assets/illy.png";
-import { useIlly } from "./IllyContext";
-import { getIllyMessageForPath, ILLY_STARTER_PROMPTS } from "@/lib/illy-guide";
+import { X, Send, RefreshCw } from "lucide-react";
+import { useEffect, useState, useRef, FormEvent } from "react";
+import { useIlly, type IllyReaction } from "./IllyContext";
+import { IllyAvatar } from "./IllyAvatar";
+import { getIllyMessageForPath, ILLY_STARTER_PROMPTS, matchIllyResponse } from "@/lib/illy-guide";
 import { cn } from "@/lib/utils";
 
-function IllyMark({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#0F1533]",
-        className
-      )}
-    >
-      <img src={illyImg} alt="" className="h-[88%] w-[88%] object-contain object-bottom" />
-    </div>
-  );
-}
+type ChatMessage = {
+  id: string;
+  sender: "illy" | "user";
+  text: string;
+  timestamp: Date;
+  reaction?: IllyReaction;
+};
 
 function IllyMascotPanel({
   className,
@@ -26,7 +21,97 @@ function IllyMascotPanel({
   className?: string;
   onClose?: () => void;
 }) {
-  const { message, showTip } = useIlly();
+  const { message, reaction, setMessage, setReaction } = useIlly();
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: "initial",
+      sender: "illy",
+      text: message,
+      timestamp: new Date(),
+      reaction: reaction,
+    },
+  ]);
+  const [inputValue, setInputValue] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const lastGlobalMsg = useRef(message);
+
+  // Auto-scroll to the bottom of the chat list
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  // Sync route changes or map building clicks into the chat log
+  useEffect(() => {
+    if (message !== lastGlobalMsg.current) {
+      lastGlobalMsg.current = message;
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `global-${Date.now()}`,
+          sender: "illy",
+          text: message,
+          timestamp: new Date(),
+          reaction: reaction,
+        },
+      ]);
+    }
+  }, [message, reaction]);
+
+  const handleSend = (text: string) => {
+    if (!text.trim()) return;
+
+    // 1. Add user message to history
+    const userMsg: ChatMessage = {
+      id: `user-${Date.now()}`,
+      sender: "user",
+      text: text,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMsg]);
+    setInputValue("");
+    setIsTyping(true);
+    setReaction("think"); // pose: thinking
+
+    // 2. Simulate AI thinking delay and add reply
+    setTimeout(() => {
+      const response = matchIllyResponse(text);
+      const illyMsg: ChatMessage = {
+        id: `illy-${Date.now()}`,
+        sender: "illy",
+        text: response.message,
+        timestamp: new Date(),
+        reaction: response.reaction,
+      };
+      setMessages((prev) => [...prev, illyMsg]);
+      setIsTyping(false);
+      
+      // Update global context so map avatar matches chatbot
+      setMessage(response.message, true, response.reaction);
+    }, 1100);
+  };
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    handleSend(inputValue);
+  };
+
+  const handleReset = () => {
+    setMessages([
+      {
+        id: `reset-${Date.now()}`,
+        sender: "illy",
+        text: "Hi! How can I help you navigate the Certily campus today?",
+        timestamp: new Date(),
+        reaction: "hi",
+      },
+    ]);
+    setMessage("Hi! How can I help you navigate the Certily campus today?", true, "hi");
+  };
 
   return (
     <div
@@ -35,61 +120,118 @@ function IllyMascotPanel({
         className
       )}
     >
+      {/* Header */}
       <div className="flex items-center justify-between bg-gradient-to-r from-[#5B4CF5] to-[#7C6FF7] px-4 py-3 text-white">
         <div className="flex items-center gap-2.5">
-          <IllyMark className="h-9 w-9" />
+          <IllyAvatar size="sm" reaction={isTyping ? "think" : reaction} className="bg-[#0F1533] p-0.5 rounded-full" />
           <div>
             <p className="font-display text-sm font-semibold tracking-wide">ILY</p>
-            <p className="text-[10px] text-white/80">Your campus guide</p>
+            <p className="text-[10px] text-white/80">Interactive AI Guide</p>
           </div>
         </div>
-        {onClose && (
+        <div className="flex items-center gap-1">
           <button
             type="button"
-            onClick={onClose}
-            className="rounded-lg p-1.5 text-white/80 hover:bg-white/15"
-            aria-label="Close ILY"
+            onClick={handleReset}
+            className="rounded-lg p-1.5 text-white/80 hover:bg-white/15 transition-colors"
+            title="Reset conversation"
+            aria-label="Reset chat history"
           >
-            <X className="h-4 w-4" />
+            <RefreshCw className="h-3.5 w-3.5" />
           </button>
-        )}
-      </div>
-
-      <div className="flex gap-3 px-4 py-4">
-        <IllyMark className="mt-0.5 h-8 w-8" />
-        <div className="min-w-0 rounded-2xl rounded-tl-md bg-[#F7F8FC] px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
-          {message}
-        </div>
-      </div>
-
-      <div className="border-t border-border/60 px-4 py-3">
-        <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-          Quick guides
-        </p>
-        <div className="flex flex-col gap-2">
-          {ILLY_STARTER_PROMPTS.map((prompt) =>
-            prompt.href ? (
-              <Link
-                key={prompt.id}
-                to={prompt.href}
-                onClick={() => showTip(prompt.message, true)}
-                className="rounded-xl border border-border/70 bg-[#FAFBFE] px-3 py-2.5 text-left text-xs font-medium text-foreground transition-colors hover:border-[#5B4CF5]/30 hover:bg-[#F7F8FC]"
-              >
-                {prompt.label}
-              </Link>
-            ) : (
-              <button
-                key={prompt.id}
-                type="button"
-                onClick={() => showTip(prompt.message, true)}
-                className="rounded-xl border border-border/70 bg-[#FAFBFE] px-3 py-2.5 text-left text-xs font-medium text-foreground transition-colors hover:border-[#5B4CF5]/30 hover:bg-[#F7F8FC]"
-              >
-                {prompt.label}
-              </button>
-            )
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg p-1.5 text-white/80 hover:bg-white/15 transition-colors"
+              aria-label="Close ILY"
+            >
+              <X className="h-4 w-4" />
+            </button>
           )}
         </div>
       </div>
+
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto bg-[#F8F9FD] p-4 min-h-[260px] max-h-[340px] space-y-3 scrollbar-thin">
+        {messages.map((msg) => {
+          const isUser = msg.sender === "user";
+          return (
+            <div
+              key={msg.id}
+              className={cn("flex gap-2 max-w-[85%]", isUser ? "ml-auto flex-row-reverse" : "mr-auto")}
+            >
+              {!isUser && (
+                <IllyAvatar
+                  size="sm"
+                  reaction={msg.reaction || "stand"}
+                  className="mt-0.5 h-7 w-7 bg-[#0F1533] p-0.5 rounded-full shrink-0"
+                />
+              )}
+              <div
+                className={cn(
+                  "rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed shadow-sm",
+                  isUser
+                    ? "bg-gradient-to-br from-[#5B4CF5] to-[#7C6FF7] text-white rounded-tr-sm"
+                    : "bg-white text-foreground border border-border/40 rounded-tl-sm"
+                )}
+              >
+                {msg.text}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Typing Indicator */}
+        {isTyping && (
+          <div className="flex gap-2 max-w-[85%] mr-auto">
+            <IllyAvatar
+              size="sm"
+              reaction="think"
+              className="mt-0.5 h-7 w-7 bg-[#0F1533] p-0.5 rounded-full shrink-0"
+            />
+            <div className="flex gap-1 items-center px-4 py-3 bg-white border border-border/40 rounded-2xl rounded-tl-sm w-16">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#5B4CF5] animate-bounce [animation-delay:0ms]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#5B4CF5] animate-bounce [animation-delay:150ms]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#5B4CF5] animate-bounce [animation-delay:300ms]" />
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Suggestion Chips */}
+      <div className="flex gap-1.5 overflow-x-auto px-3 py-2 border-t border-border/50 bg-white scrollbar-none">
+        {ILLY_STARTER_PROMPTS.map((prompt) => (
+          <button
+            key={prompt.id}
+            type="button"
+            onClick={() => handleSend(prompt.label)}
+            className="shrink-0 rounded-full border border-border/80 bg-[#FAFBFE] px-3 py-1 text-[11px] font-medium text-foreground/80 hover:border-[#5B4CF5]/40 hover:bg-[#5B4CF5]/5 hover:text-[#5B4CF5] transition-all"
+          >
+            {prompt.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Input Field */}
+      <form onSubmit={onSubmit} className="flex items-center gap-2 border-t border-border/60 px-3 py-2.5 bg-white">
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Ask me about pathways, map buildings..."
+          className="flex-1 rounded-xl border border-border/70 px-3 py-2 text-xs focus:border-[#5B4CF5] focus:outline-none placeholder:text-muted-foreground/75"
+        />
+        <button
+          type="submit"
+          disabled={!inputValue.trim() || isTyping}
+          className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#5B4CF5] text-white transition-all hover:bg-[#7C6FF7] disabled:bg-muted disabled:text-muted-foreground"
+          aria-label="Send message"
+        >
+          <Send className="h-3.5 w-3.5" />
+        </button>
+      </form>
     </div>
   );
 }
@@ -111,6 +253,16 @@ export function IllyChatFloating() {
     return () => window.removeEventListener("keydown", onKey);
   }, [floatingOpen, setFloatingOpen]);
 
+  // Expose function globally to focus chatbot from other areas (e.g. map clicks)
+  useEffect(() => {
+    (window as Window & { focusIllyChat?: () => void }).focusIllyChat = () => {
+      setFloatingOpen(true);
+    };
+    return () => {
+      delete (window as Window & { focusIllyChat?: () => void }).focusIllyChat;
+    };
+  }, [setFloatingOpen]);
+
   if (!floatingOpen) {
     return (
       <button
@@ -124,8 +276,8 @@ export function IllyChatFloating() {
           style={{ animationDuration: "4s" }}
           aria-hidden
         />
-        <span className="relative flex items-center gap-2.5 rounded-full border border-[#E4E2F0] bg-white py-1.5 pl-1.5 pr-5 shadow-[0_12px_40px_-12px_rgba(91,76,245,0.35)] transition-transform group-hover:scale-[1.03]">
-          <IllyMark className="h-9 w-9" />
+        <span className="relative flex items-center gap-2.5 rounded-full border border-[#E4E2F0] bg-white py-1.5 pl-1.5 pr-5 shadow-[0_12px_40px_-12px_rgba(91,76,245,0.35)] transition-all group-hover:scale-[1.03]">
+          <IllyAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full shrink-0" />
           <span className="font-display text-sm font-semibold tracking-wide text-[#5B4CF5]">
             ILY
           </span>
@@ -135,7 +287,7 @@ export function IllyChatFloating() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-[90] w-[min(calc(100vw-1.5rem),20rem)]">
+    <div className="fixed bottom-6 right-6 z-[90] w-[min(calc(100vw-1.5rem),21rem)]">
       <IllyMascotPanel className="w-full" onClose={() => setFloatingOpen(false)} />
     </div>
   );

@@ -299,24 +299,120 @@ export function getIllyMessageForPath(pathname: string): string {
   return ILLY_PAGE_MESSAGES[pathname] ?? DEFAULT_ILLY_MESSAGE;
 }
 
-export function matchIllyResponse(input: string): string {
-  const q = input.trim().toLowerCase();
-  if (!q) return "Type a question or pick a prompt — I'm ready to help!";
+export type IllyReaction = "hi" | "point" | "stand" | "stare" | "think";
 
+export function matchIllyResponse(input: string): { message: string; reaction: IllyReaction } {
+  const q = input.trim().toLowerCase();
+  if (!q) {
+    return {
+      message: "Type a question or pick a prompt — I'm ready to help!",
+      reaction: "stare"
+    };
+  }
+
+  // Greetings
+  if (q === "hi" || q === "hello" || q === "hey" || q.includes("who are you") || q.startsWith("hello") || q.startsWith("hi ")) {
+    return {
+      message: "Hey there! I'm ILY, your Certily AI campus guide. I can show you around, explain public vs. locked zones, or recommend the best certification pathway for your goals. Ask me anything!",
+      reaction: "hi"
+    };
+  }
+
+  // Enrollment questions
+  if (q.includes("enroll") || q.includes("sign up") || q.includes("register") || q.includes("how to join") || q.includes("join")) {
+    return {
+      message: "Enrollment is super simple! You can browse all of our certification pathways for free. Once you find one you love and enroll, you'll immediately unlock My Classroom, the hands-on AI Lab, and Mission Control (your student/parent dashboard) on the map.",
+      reaction: "stand"
+    };
+  }
+
+  // Classroom
+  if (q.includes("classroom") || q.includes("class") || q.includes("learn")) {
+    return {
+      message: "My Classroom is where the learning magic happens! Once enrolled in a pathway, this is where you'll access lessons, take interactive quizzes, and track your curriculum progress. Ready to check it out?",
+      reaction: "point"
+    };
+  }
+
+  // AI Lab
+  if (q.includes("lab") || q.includes("project") || q.includes("capstone") || q.includes("build")) {
+    return {
+      message: "The AI Lab is where you put theory into practice! Enrolled students build real-world AI projects, work on capstones, and compile a portfolio that is shareable with colleges and employers. It's a key part of every Certily pathway.",
+      reaction: "point"
+    };
+  }
+
+  // Certification Hall
+  if (q.includes("cert") || q.includes("credential") || q.includes("hall") || q.includes("verify")) {
+    return {
+      message: "The Certification Hall houses all of your completed credentials! Every Certily certification you earn comes with a secure, verifiable link that you can share with colleges, parents, and employers to prove your AI capabilities.",
+      reaction: "point"
+    };
+  }
+
+  // Mission Control / Dashboard
+  if (q.includes("mission") || q.includes("control") || q.includes("dashboard") || q.includes("parent")) {
+    return {
+      message: "Mission Control is the central dashboard for students and parents. Parents can easily track progress, view certificates, and see grading details, ensuring they're involved in their child's AI education journey.",
+      reaction: "point"
+    };
+  }
+
+  // Newsroom
+  if (q.includes("news") || q.includes("trend") || q.includes("why learn") || q.includes("why ai")) {
+    return {
+      message: "The Newsroom is where we connect today's AI trends with what you learn in Certily. It's a great place for parents and students to see why AI skills are so valuable in today's landscape and what careers are emerging.",
+      reaction: "point"
+    };
+  }
+
+  // Campus map
+  if (q.includes("map") || q.includes("building") || q.includes("tour") || q.includes("where is")) {
+    return {
+      message: "The campus map has six main buildings. Public zones like Learning Pathways, AI Hall, and the Newsroom are open to explore right now! Enrolled zones like My Classroom, AI Lab, and Mission Control unlock once you sign up.",
+      reaction: "point"
+    };
+  }
+
+  // Help / Commands
+  if (q.includes("help") || q.includes("what can you do") || q.includes("commands")) {
+    return {
+      message: "I can guide you through the campus, help you pick a certification pathway, or explain how parent dashboards work. Try asking questions like 'What pathways do you have?', 'How does enrollment work?', or 'Tell me about the AI Lab!'",
+      reaction: "stand"
+    };
+  }
+
+  // Fallback keyword search
   const slash = ILLY_POPULAR_PROMPTS.find((p) => p.command === q || q.startsWith(p.command));
-  if (slash) return slash.message;
+  if (slash) {
+    let reaction: IllyReaction = "stand";
+    if (slash.message.toLowerCase().includes("pathway") || slash.message.toLowerCase().includes("map")) {
+      reaction = "point";
+    }
+    return { message: slash.message, reaction };
+  }
 
   const topic = ILLY_QUICK_TOPICS.find((t) => q.includes(t.label.toLowerCase()));
-  if (topic) return topic.message;
+  if (topic) {
+    return { message: topic.message, reaction: "point" };
+  }
 
   const persona = ILLY_PERSONAS.find(
     (p) => q.includes(p.title.toLowerCase()) || q.includes(p.prompt.toLowerCase())
   );
-  if (persona) return persona.message;
-
-  for (const { keys, message } of KEYWORD_RESPONSES) {
-    if (keys.some((k) => q.includes(k))) return message;
+  if (persona) {
+    return { message: persona.message, reaction: "think" };
   }
 
-  return "Great question! For pathways visit Learning Pathways, for the full experience explore the campus map — or try a prompt below and I'll guide you step by step.";
+  for (const { keys, message } of KEYWORD_RESPONSES) {
+    if (keys.some((k) => q.includes(k))) {
+      return { message, reaction: "stand" };
+    }
+  }
+
+  // General smart fallback
+  return {
+    message: "That's an interesting question! I'm always learning, but as your campus guide, I can help you pick a certification pathway, tour our map buildings, or explain how parent dashboards work. What would you like to explore next?",
+    reaction: "think"
+  };
 }

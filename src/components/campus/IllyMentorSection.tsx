@@ -7,8 +7,9 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import illyImg from "@/assets/illy.png";
 import illyVideo from "@/assets/ilyvideo.mp4";
+import avatarStand from "@/assets/avatars/stand.png";
+import { IllyAvatar } from "./IllyAvatar";
 import { useIlly } from "./IllyContext";
 import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
@@ -185,13 +186,7 @@ function IllyShowcaseScene() {
             activeCard === "identity" ? cardActive : cardIdle
           )}
         >
-          <div className="h-9 w-9 overflow-hidden rounded-full bg-[#0F1533] ring-2 ring-white sm:h-10 sm:w-10">
-            <img
-              src={illyImg}
-              alt=""
-              className="h-full w-full scale-110 object-contain object-bottom"
-            />
-          </div>
+          <IllyAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full ring-2 ring-white" />
           <span className="text-[13px] font-semibold text-foreground sm:text-sm">Your guide</span>
         </div>
 
@@ -213,7 +208,7 @@ function IllyShowcaseScene() {
               muted
               playsInline
               preload="auto"
-              poster={illyImg}
+              poster={avatarStand}
               className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[center_74%]"
               aria-label="ILY campus guide preview"
             />
@@ -283,7 +278,8 @@ export function IllyMentorSection() {
   const openGuide = () => {
     setMessage(
       "Need directions? I can point you to pathways, buildings, and enrollment — just tap a quick link below.",
-      true
+      true,
+      "hi"
     );
     setFloatingOpen(true);
   };

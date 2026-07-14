@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Clock, Star, Users, ArrowRight, Lock } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CampusBuildingHeader } from "@/components/campus/CampusBuildingHeader";
 import { LearningPathwaysSection } from "@/components/campus/LearningPathwaysSection";
 import { Section } from "@/components/Section";
@@ -30,6 +30,19 @@ type LevelFilter = PathwayLevelId | "all";
 
 function Courses() {
   const [level, setLevel] = useState<LevelFilter>("k12");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const queryLevel = searchParams.get("level") as LevelFilter;
+      if (queryLevel && ["k12", "college", "professional", "career", "all"].includes(queryLevel)) {
+        setLevel(queryLevel);
+        setTimeout(() => {
+          document.getElementById("course-catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 300);
+      }
+    }
+  }, []);
 
   const filtered = useMemo(() => coursesForLevel(level), [level]);
   const activeLevel = PATHWAY_LEVELS.find((l) => l.id === level);

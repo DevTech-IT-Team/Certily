@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import illyImg from "@/assets/illy.png";
+import { IllyAvatar } from "./IllyAvatar";
 import { useIlly } from "./IllyContext";
 import { ILLY_STARTER_PROMPTS } from "@/lib/illy-guide";
 import { cn } from "@/lib/utils";
@@ -28,9 +28,7 @@ export function IllyChatDock({ className, embedded = false, compact = false }: D
         )}
       >
         {!compact && (
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#0F1533]">
-            <img src={illyImg} alt="" className="h-[92%] w-[92%] object-contain object-bottom" />
-          </div>
+          <IllyAvatar size="md" reaction="stand" className="shrink-0 bg-[#0F1533] p-0.5 rounded-full" />
         )}
 
         <div className="min-w-0 flex-1 text-left">
@@ -42,7 +40,7 @@ export function IllyChatDock({ className, embedded = false, compact = false }: D
               const chip = (
                 <button
                   type="button"
-                  onClick={() => showTip(p.message, true)}
+                  onClick={() => showTip(p.message, true, "point")}
                   className="rounded-full border border-border/80 bg-white px-3 py-1.5 text-left text-xs font-medium text-foreground/75 shadow-sm transition-all hover:border-primary/30 hover:text-primary"
                 >
                   {p.label}
@@ -50,7 +48,7 @@ export function IllyChatDock({ className, embedded = false, compact = false }: D
               );
               if (p.href) {
                 return (
-                  <Link key={p.id} to={p.href} onClick={() => showTip(p.message, true)}>
+                  <Link key={p.id} to={p.href} onClick={() => showTip(p.message, true, "point")}>
                     {chip}
                   </Link>
                 );

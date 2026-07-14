@@ -1,7 +1,21 @@
 import { useCallback, useRef, useState, type RefObject } from "react";
 import gsap from "gsap";
-import illyImg from "@/assets/illy.png";
 import { cn } from "@/lib/utils";
+import { useIlly, type IllyReaction } from "./IllyContext";
+
+import avatarHi from "@/assets/avatars/hi.png";
+import avatarPoint from "@/assets/avatars/point.png";
+import avatarStand from "@/assets/avatars/stand.png";
+import avatarStare from "@/assets/avatars/stare.png";
+import avatarThink from "@/assets/avatars/think.png";
+
+const ILY_AVATARS = {
+  hi: avatarHi,
+  point: avatarPoint,
+  stand: avatarStand,
+  stare: avatarStare,
+  think: avatarThink,
+};
 
 type IllyAvatarProps = {
   size?: "sm" | "md" | "lg" | "xl" | "hero" | "statue";
@@ -14,6 +28,7 @@ type IllyAvatarProps = {
   interactive?: boolean;
   onInteract?: () => void;
   showHint?: boolean;
+  reaction?: IllyReaction;
 };
 
 const sizes = {
@@ -35,12 +50,24 @@ export function IllyAvatar({
   interactive = false,
   onInteract,
   showHint = false,
+  reaction,
 }: IllyAvatarProps) {
   const useOrb = variant === "orb";
   const hideMatte = onLight && !useOrb;
   const rootRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
   const [wiggle, setWiggle] = useState(false);
+
+  let contextReaction: IllyReaction = "stand";
+  try {
+    const context = useIlly();
+    contextReaction = context.reaction;
+  } catch (e) {
+    // Fail silently if used outside provider
+  }
+
+  const activeReaction = reaction || contextReaction;
+  const imageSrc = ILY_AVATARS[activeReaction] || avatarStand;
 
   const bounce = useCallback(() => {
     const el = rootRef.current;
@@ -89,7 +116,7 @@ export function IllyAvatar({
         )}
       >
         <img
-          src={illyImg}
+          src={imageSrc}
           alt="ILY, your AI campus guide"
           className={cn(
             "relative z-10 h-full w-full object-contain object-bottom transition-transform duration-300",
