@@ -288,7 +288,7 @@ export function IllyMentorSection() {
     <section
       id="meet-illy"
       data-illy-section="illy-mentor"
-      className="relative overflow-visible border-t border-border/40 bg-white py-14 sm:py-16 md:py-24"
+      className="relative overflow-visible border-t border-border/40 bg-white py-16 sm:py-20"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(91,76,245,0.05),transparent_55%)]" />
 
@@ -297,17 +297,17 @@ export function IllyMentorSection() {
           <div className="max-w-xl">
             <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B4CF5]">
               <Sparkles className="h-4 w-4" strokeWidth={2} />
-              Meet your campus guide
+              Meet Illy — your campus guide
             </p>
 
             <h2 className="mt-4 font-display text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl lg:text-[2.65rem]">
-              Never get lost on your learning journey
+              Guided at every step of your journey
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              ILY helps you navigate pathways, find the right buildings, and understand what to
-              do next — whether you&apos;re exploring for the first time or working toward your
-              certification.
+              Illy is built into the campus — not just a chatbot. She helps you find the right
+              pathway, understand what each building does, track your progress, and know
+              exactly what to do next.
             </p>
 
             <ul className="mt-6 space-y-2.5 text-sm text-foreground/80">
@@ -315,13 +315,13 @@ export function IllyMentorSection() {
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-[#5B4CF5]">
                   <MapPin className="h-3.5 w-3.5" />
                 </span>
-                Find buildings and pathways in seconds
+                Navigate pathways, buildings, and what's public vs enrolled
               </li>
               <li className="flex items-center gap-2.5">
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#4CD1B0]/15 text-[#00A88A]">
                   <Compass className="h-3.5 w-3.5" />
                 </span>
-                Clear tips for students and parents
+                Personalised guidance for students and parents alike
               </li>
             </ul>
 
@@ -330,7 +330,7 @@ export function IllyMentorSection() {
               onClick={openGuide}
               className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_14px_40px_-14px_rgba(91,76,245,0.55)] transition-all hover:scale-[1.02] hover:bg-[#4A3BE8] active:scale-[0.98]"
             >
-              Start exploring
+              Ask Illy anything
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>

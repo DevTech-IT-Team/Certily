@@ -100,7 +100,7 @@ export function HomeStatsSection() {
     <section
       id="community"
       data-illy-section="community"
-      className="relative overflow-hidden border-t border-border/40 py-14 sm:py-16 md:py-24"
+      className="relative overflow-hidden border-t border-border/40 py-16 sm:py-20"
     >
       <div
         className="pointer-events-none absolute inset-0"
@@ -117,14 +117,14 @@ export function HomeStatsSection() {
           <div className="max-w-2xl">
             <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B4CF5]">
               <Users className="h-4 w-4" strokeWidth={2} />
-              Community
+              Campus community
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl">
-              You&apos;re not learning alone
+              Learning is better together
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Students, parents, and educators building real AI skills together — with events,
-              showcases, and peers who actually show up.
+              Students, parents, and educators on the same campus — with live events, project
+              showcases, and real people who show up.
             </p>
           </div>
         </Reveal>

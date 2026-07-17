@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Playfair Display (headings) + Inter (body) */
-  --font-display: "Playfair Display", system-ui, -apple-system, "Segoe UI", serif;
+  /* Noto Sans (headings) + Inter (body) */
+  --font-display: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);

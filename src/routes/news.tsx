@@ -1,233 +1,270 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Clock, Radio } from "lucide-react";
-import { CampusBuildingHeader } from "@/components/campus/CampusBuildingHeader";
-import { Section } from "@/components/Section";
-import heroFeatured from "@/assets/hero.png";
-import heroThumb from "@/assets/heroimage.png";
+import { ArrowRight, BookOpen, Mail, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/news")({
   head: () => ({
     meta: [
       { title: "Newsroom — Certily AI Campus" },
-      { name: "description", content: "AI news, industry updates, and explainers connecting today's trends to Certily certifications." },
+      {
+        name: "description",
+        content:
+          "AI news, industry updates, and plain-language explainers that connect today's trends to Certily certifications.",
+      },
     ],
   }),
-  component: News,
+  component: NewsPage,
 });
 
-/** Curated Unsplash-style URLs (stable IDs) + local assets for offline-friendly hero art. */
+const FEATURED = {
+  tag: "Industry",
+  title: "Why AI literacy is the most in-demand skill of 2026",
+  excerpt:
+    "From K–12 classrooms to Fortune 500 boardrooms — understanding AI is no longer optional. Here's what the data says, and how Certily pathways map directly to it.",
+  date: "May 14, 2026",
+  readTime: "5 min read",
+  img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1400&q=80",
+};
+
 const ARTICLES = [
   {
     tag: "Research",
-    t: "AI Campus Atlas: an adaptive curriculum engine for personalized learning paths",
-    d: "Jan 12, 2026",
-    x: "How we built a model that re-plans your week based on what you actually learned.",
-    img: heroFeatured,
+    title: "How Certily builds curriculum around real AI outcomes",
+    excerpt: "Industry professionals and SMEs validate every course direction before it publishes.",
+    date: "May 09, 2026",
+    readTime: "4 min",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
   },
   {
     tag: "Product",
-    t: "GPU Lab now supports H100 clusters for capstone projects",
-    d: "Feb 04, 2026",
-    x: "Bigger experiments, faster iteration, smaller bills.",
-    img: heroThumb,
+    title: "Capstone projects now ship with shareable portfolio links",
+    excerpt: "Every AI Lab submission produces a verifiable, linkable portfolio artifact.",
+    date: "Apr 28, 2026",
+    readTime: "3 min",
+    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
   },
   {
     tag: "Community",
-    t: "Cohort 2026 enrollments cross 10,000 learners worldwide",
-    d: "Mar 18, 2026",
-    x: "From São Paulo to Seoul — the most diverse cohort yet.",
-    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop",
+    title: "Cohort 2026 enrollments cross 400 learners",
+    excerpt: "Students from across the US are now building their first AI certifications on campus.",
+    date: "Apr 18, 2026",
+    readTime: "2 min",
+    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
   },
   {
     tag: "Industry",
-    t: "How Fortune 500s are upskilling 50,000 employees on AI Campus",
-    d: "Apr 02, 2026",
-    x: "Inside the enterprise rollouts powering AI literacy at scale.",
-    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop",
+    title: "Generative AI in K–12: what parents need to know",
+    excerpt: "A plain-language guide to how schools are responding — and how Certily prepares students.",
+    date: "Apr 05, 2026",
+    readTime: "6 min",
+    img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
   },
   {
     tag: "Research",
-    t: "Open-sourcing our autograding LLM evaluator",
-    d: "Apr 22, 2026",
-    x: "A reproducible benchmark for grading code, math, and writing tasks.",
-    img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&auto=format&fit=crop",
+    title: "The skills gap starts in high school",
+    excerpt: "Students who engage with AI tools before college are 3× more likely to land technical internships.",
+    date: "Mar 22, 2026",
+    readTime: "5 min",
+    img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
   },
   {
-    tag: "Events",
-    t: "Recap: AI Campus Summit 2026 — 14 talks you can't miss",
-    d: "May 09, 2026",
-    x: "From frontier labs to indie builders — what we learned in San Francisco.",
-    img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80&auto=format&fit=crop",
+    tag: "Product",
+    title: "Illy now guides learners through capstone checkpoints",
+    excerpt: "Our AI campus guide surfaces personalised tips at every project milestone.",
+    date: "Mar 10, 2026",
+    readTime: "3 min",
+    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
   },
 ] as const;
 
-function NewsTicker() {
-  const segmentRow = (suffix: string) =>
-    ARTICLES.map((a) => (
-      <span key={`${a.t}-${suffix}`} className="shrink-0 text-zinc-200">
-        <span className="text-red-400/90">{a.tag}</span>
-        <span className="text-zinc-500"> · </span>
-        <span className="normal-case tracking-normal text-zinc-100">{a.t}</span>
-        <span className="mx-6 text-zinc-600">|</span>
-      </span>
-    ));
+const TAG_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
+  Industry:  { bg: "#EFF6FF", text: "#2563EB", dot: "#3B82F6" },
+  Research:  { bg: "#F5F3FF", text: "#7C3AED", dot: "#8B5CF6" },
+  Product:   { bg: "#EEF2FF", text: "#5B4CF5", dot: "#5B4CF5" },
+  Community: { bg: "#F0FDF4", text: "#16A34A", dot: "#22C55E" },
+};
+
+const TICKER_ITEMS = [ARTICLES[0], ARTICLES[1], ARTICLES[2]] as const;
+
+function TagPill({ tag }: { tag: string }) {
+  const s = TAG_COLORS[tag] ?? { bg: "#F7F8FC", text: "#5A607A", dot: "#8892A4" };
   return (
-    <div className="border-y border-red-900/25 bg-zinc-950 py-2.5 text-zinc-100 dark:border-red-500/20">
-      <div className="overflow-hidden">
-        <div className="flex w-max animate-news-ticker font-mono text-xs font-semibold uppercase tracking-wide">
-          <div className="flex shrink-0 items-center pr-8">{segmentRow("a")}</div>
-          <div className="flex shrink-0 items-center pr-8" aria-hidden="true">
-            {segmentRow("b")}
+    <span
+      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+      style={{ background: s.bg, color: s.text }}
+    >
+      <span className="h-1.5 w-1.5 rounded-full" style={{ background: s.dot }} />
+      {tag}
+    </span>
+  );
+}
+
+const BLUE_OVERLAY = "linear-gradient(160deg, rgba(15,12,50,0.62) 0%, rgba(59,76,245,0.32) 55%, rgba(15,21,51,0.48) 100%)";
+
+function NewsPage() {
+  return (
+    <div className="min-h-screen bg-white">
+
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-white pt-24 pb-14 sm:pt-28 sm:pb-16">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 80% 55% at 50% -10%, rgba(91,76,245,0.10) 0%, transparent 70%)" }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%235B4CF5' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1.5'/%3E%3Ccircle cx='23' cy='3' r='1.5'/%3E%3Ccircle cx='3' cy='23' r='1.5'/%3E%3Ccircle cx='23' cy='23' r='1.5'/%3E%3C/g%3E%3C/svg%3E\")",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid items-start gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
+
+            {/* Left */}
+            <div className="pt-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#5B4CF5]/20 bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#5B4CF5]">
+                <TrendingUp className="h-3.5 w-3.5" />
+                Newsroom
+              </span>
+              <h1 className="mt-5 font-display text-5xl font-extrabold leading-[1.04] tracking-tight text-[#0F1533] sm:text-6xl lg:text-[4rem]">
+                Stay informed.
+                <br />
+                <span style={{ background: "linear-gradient(90deg, #5B4CF5 0%, #3B82F6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                  AI moves fast.
+                </span>
+              </h1>
+              <p className="mt-5 max-w-lg text-lg leading-relaxed text-[#5A607A]">
+                AI news, research, and plain-language explainers — connecting what's
+                happening in the world to what you're learning on campus.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {(["Industry", "Research", "Product", "Community"] as const).map((tag) => {
+                  const s = TAG_COLORS[tag];
+                  return (
+                    <span key={tag} className="cursor-default rounded-full px-3 py-1 text-xs font-semibold" style={{ background: s.bg, color: s.text }}>
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right — ticker widget */}
+            <div className="rounded-2xl border border-[#E8EAF4] bg-[#F7F8FC] p-5">
+              <div className="mb-4 flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#8892A4]">Latest from the newsroom</span>
+                <BookOpen className="h-3.5 w-3.5 text-[#5B4CF5]" />
+              </div>
+              <div className="flex flex-col divide-y divide-[#E8EAF4]">
+                {TICKER_ITEMS.map((a) => (
+                  <a key={a.title} href="#" className="group flex flex-col gap-2 py-4 first:pt-0 last:pb-0">
+                    <div className="flex items-center justify-between gap-3">
+                      <TagPill tag={a.tag} />
+                      <span className="text-[10px] text-[#8892A4]">{a.date}</span>
+                    </div>
+                    <p className="text-sm font-semibold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5]">{a.title}</p>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#5B4CF5]">
+                      {a.readTime} read <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
+      </section>
 
-function ArticleImage({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className={`h-full w-full object-cover transition duration-500 group-hover:scale-[1.03] ${className}`}
-      loading="lazy"
-      decoding="async"
-    />
-  );
-}
-
-function News() {
-  const [lead, ...rest] = ARTICLES;
-  const rail = rest.slice(0, 2);
-  const grid = rest.slice(2);
-
-  return (
-    <>
-      <CampusBuildingHeader route="/news" />
-
-      <NewsTicker />
-
-      <div className="relative border-t border-border/60 bg-muted/35 dark:border-white/10 dark:bg-muted/10">
-        <div className="pointer-events-none absolute inset-0 bg-mesh opacity-[0.4] dark:opacity-15" />
-        <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.22] dark:opacity-10" />
-
-        <Section spacing="tight" className="relative z-[1] !py-8 md:!py-10">
-          <div className="mx-auto mb-6 flex max-w-6xl flex-col gap-3 rounded-xl border border-border/70 bg-background/85 px-4 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-card/50 sm:flex-row sm:items-center sm:justify-between md:px-5">
-            <div className="flex items-center gap-2.5">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500/60 opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600" />
-              </span>
-              <Radio className="h-4 w-4 text-red-600 dark:text-red-500" aria-hidden />
-              <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
-                Live desk
-              </span>
-              <span className="hidden text-muted-foreground sm:inline">·</span>
-              <span className="hidden text-xs text-muted-foreground sm:inline">Wire copy filed continuously</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Clock className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              <span>Broadcast window · May 12, 2026 · 06:00 UTC</span>
-            </div>
-          </div>
-
-          <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-3 lg:gap-6">
-            <a
-              href="#"
-              className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-md dark:border-white/10 lg:col-span-2"
-            >
-              <div className="relative aspect-[2/1] max-h-[min(22rem,42vw)] w-full overflow-hidden bg-muted sm:aspect-[21/9]">
-                <ArticleImage
-                  src={lead.img as string}
-                  alt={lead.t}
-                  className="absolute inset-0 opacity-95 group-hover:opacity-100"
-                />
-                {/* Dark scrim so copy stays readable on any photo (e.g. Atlas / hero art). */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/35 to-transparent pt-12 md:pt-20" />
-                <div className="absolute bottom-0 left-0 right-0 z-20 p-5 md:p-7">
-                  <div className="inline-flex rounded-md bg-red-600 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
-                    Top story
-                  </div>
-                  <div className="mt-2 text-xs font-medium text-zinc-200">
-                    {lead.d} · {lead.tag}
-                  </div>
-                  <h2 className="font-display mt-1 text-balance text-xl font-bold leading-tight tracking-tight text-white [text-shadow:0_1px_2px_rgb(0_0_0/0.85)] md:text-2xl lg:text-3xl">
-                    {lead.t}
-                  </h2>
-                  <p className="mt-2 line-clamp-2 max-w-3xl text-sm leading-relaxed text-zinc-100/95 md:text-base">
-                    {lead.x}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-sky-300 [text-shadow:0_1px_2px_rgb(0_0_0/0.75)] group-hover:text-sky-200">
-                    Continue <ArrowRight className="h-4 w-4" aria-hidden />
-                  </span>
-                </div>
+      {/* ── FEATURED ─────────────────────────────────────────── */}
+      <section className="bg-[#F7F8FC] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8892A4]">Featured story</p>
+          <a
+            href="#"
+            className="group grid overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5B4CF5]/20 hover:shadow-[0_24px_56px_-16px_rgba(91,76,245,0.14)] lg:grid-cols-[1fr_480px]"
+          >
+            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+              <TagPill tag={FEATURED.tag} />
+              <h2 className="mt-4 font-display text-2xl font-extrabold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5] sm:text-3xl lg:text-[2rem]">
+                {FEATURED.title}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#5A607A]">{FEATURED.excerpt}</p>
+              <div className="mt-6 flex items-center gap-5">
+                <span className="text-sm text-[#8892A4]">{FEATURED.date} · {FEATURED.readTime}</span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#5B4CF5] px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-6px_rgba(91,76,245,0.40)] transition-all group-hover:bg-[#4A3BE8]">
+                  Read article <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
               </div>
-            </a>
-
-            <div className="flex flex-col gap-4">
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground">
-                Wire updates
-              </p>
-              {rail.map((a) => (
-                <a
-                  href="#"
-                  key={a.t}
-                  className="group flex gap-3 overflow-hidden rounded-2xl border border-border/70 bg-background/80 p-3 shadow-sm transition hover:border-primary/30 hover:shadow-md dark:border-white/10 dark:bg-card/60"
-                >
-                  <div className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl bg-muted">
-                    <ArticleImage src={a.img as string} alt={a.t} />
-                  </div>
-                  <div className="min-w-0 flex-1 py-0.5">
-                    <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      {a.tag} · {a.d}
-                    </div>
-                    <h3 className="mt-1 font-display text-sm font-semibold leading-snug text-foreground group-hover:text-primary">
-                      {a.t}
-                    </h3>
-                  </div>
-                </a>
-              ))}
             </div>
+            <div className="relative aspect-[16/10] overflow-hidden bg-[#EEF2FF] lg:aspect-auto lg:min-h-[340px]">
+              <img src={FEATURED.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="eager" />
+              <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {/* ── ARTICLE GRID ─────────────────────────────────────── */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mb-8 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4 text-[#5B4CF5]" />
+              <h2 className="font-display text-2xl font-extrabold text-[#0F1533]">Latest articles</h2>
+            </div>
+            <span className="rounded-full border border-[#E8EAF4] bg-[#F7F8FC] px-3 py-1 text-xs font-semibold text-[#5A607A]">{ARTICLES.length} articles</span>
           </div>
-        </Section>
 
-        <Section spacing="tight" className="relative z-[1] !pt-0 !pb-10 md:!pb-12">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-4 flex items-end justify-between gap-3 border-b border-border/60 pb-3 dark:border-white/10">
-              <h2 className="font-display text-lg font-bold tracking-tight md:text-xl">More headlines</h2>
-              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Field desk</span>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-              {grid.map((a) => (
-                <a
-                  href="#"
-                  key={a.t}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/80 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md dark:border-white/10 dark:bg-card/55"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-                    <ArticleImage src={a.img as string} alt={a.t} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent opacity-0 transition group-hover:opacity-100 dark:from-zinc-950/70" />
-                  </div>
-                  <div className="flex flex-1 flex-col p-4">
-                    <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      {a.d} · {a.tag}
-                    </div>
-                    <h3 className="font-display mt-1.5 flex-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">
-                      {a.t}
-                    </h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.x}</p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary">
-                      Read <ArrowRight className="h-3.5 w-3.5" />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {ARTICLES.map((a) => (
+              <a
+                key={a.title}
+                href="#"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5B4CF5]/20 hover:shadow-[0_20px_48px_-16px_rgba(91,76,245,0.14)]"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-[#EEF2FF]">
+                  <img src={a.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" decoding="async" />
+                  <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
+                  <div className="absolute bottom-3 left-3"><TagPill tag={a.tag} /></div>
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="flex-1 font-display text-base font-bold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5]">{a.title}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#5A607A]">{a.excerpt}</p>
+                  <div className="mt-4 flex items-center justify-between border-t border-[#F0F1F8] pt-4">
+                    <span className="text-xs text-[#8892A4]">{a.date} · {a.readTime}</span>
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#5B4CF5] transition-all group-hover:gap-1.5">
+                      Read <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>
-                </a>
-              ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ───────────────────────────────────────── */}
+      <section className="border-t border-[#E8EAF4] bg-[#F7F8FC] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm">
+            <div className="p-8 text-center sm:p-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#5B4CF5]/20 bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#5B4CF5]">
+                <Mail className="h-3.5 w-3.5" />
+                Weekly digest
+              </span>
+              <h2 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-[#0F1533] sm:text-3xl">Stay ahead of AI trends</h2>
+              <p className="mt-2 text-base text-[#5A607A]">New articles every week — connecting industry news to the skills you're building on campus.</p>
+              <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                <input type="email" placeholder="Your email address" className="h-12 w-full rounded-full border border-[#E8EAF4] bg-[#F7F8FC] px-5 text-sm text-[#0F1533] outline-none transition focus:border-[#5B4CF5]/40 focus:bg-white focus:ring-2 focus:ring-[#5B4CF5]/15 sm:w-72" />
+                <button type="button" className="inline-flex h-12 shrink-0 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_8px_24px_-6px_rgba(91,76,245,0.40)] transition-all hover:bg-[#4A3BE8] hover:scale-[1.02] active:scale-[0.98]">
+                  Subscribe <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+              <p className="mt-3 text-xs text-[#8892A4]">No spam. Unsubscribe any time.</p>
             </div>
           </div>
-        </Section>
-      </div>
-    </>
+        </div>
+      </section>
+
+    </div>
   );
 }

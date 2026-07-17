@@ -4,10 +4,10 @@ export function TrustLogosMarquee() {
   const logos = [...PARTNER_LOGOS, ...PARTNER_LOGOS];
 
   return (
-    <section className="border-t border-border/60 bg-white py-10 sm:py-12">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="border-t border-border/60 bg-white py-12 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <p className="text-center text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-          Trusted by learners and partners worldwide
+          Built for learners partnering with
         </p>
       </div>
       <div className="relative mt-6 overflow-hidden">

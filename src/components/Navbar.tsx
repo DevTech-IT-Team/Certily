@@ -1,17 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { GraduationCap, Lock, Menu, Search, X } from "lucide-react";
-import { ENROLLED_AREAS } from "@/lib/campus";
-import { useEnrollment } from "@/lib/enrollment";
+import { Menu, Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logoImg from "@/assets/logoo.png";
 
 const LMS_LOGIN = "https://lmsathena.com/login";
 
 const NAV_LINKS = [
   { to: "/courses", label: "Learning" },
-  { to: "/ai-lab", label: "AI Lab", enrolledOnly: true },
+  { to: "/ai-lab", label: "AI Lab" },
   { to: "/news", label: "Newsroom" },
-  { to: "/events", label: "Community" },
+  { to: "/events", label: "Events" },
   { to: "/contact", label: "About" },
 ] as const;
 
@@ -28,7 +27,7 @@ const MOBILE_GROUPS = [
   {
     label: "More",
     items: [
-      { to: "/events", label: "Community & Events" },
+      { to: "/events", label: "Events" },
       { to: "/faqs", label: "Help Center" },
       { to: "/contact", label: "Contact" },
     ],
@@ -37,15 +36,12 @@ const MOBILE_GROUPS = [
 
 function CertilyLogo({ className }: { className?: string }) {
   return (
-    <span
-      className={cn(
-        "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#5B4CF5] to-[#4A3BE8] shadow-[0_4px_16px_-4px_rgba(91,76,245,0.55)] ring-1 ring-[#5B4CF5]/20",
-        className
-      )}
-      aria-hidden
-    >
-      <GraduationCap className="h-[18px] w-[18px] text-white" strokeWidth={2.25} />
-    </span>
+    <img
+      src={logoImg}
+      alt="Certily AI Campus"
+      className={cn("h-9 w-auto object-contain", className)}
+      draggable={false}
+    />
   );
 }
 
@@ -53,7 +49,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const { enrolled } = useEnrollment();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);

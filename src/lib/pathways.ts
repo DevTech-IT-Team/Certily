@@ -103,7 +103,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
     price: "$149",
     outcome: "Certified AI Explorer — portfolio-ready mini-project",
     preview: "Illy-led nuggets, parent guides, and safe AI tool exploration.",
-    img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=720&q=72",
+    img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=720&q=72",
     featured: true,
   },
   {
@@ -117,7 +117,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
     price: "$179",
     outcome: "MSA-aligned starter certification with guided capstone",
     preview: "Mechanism Academy curriculum maturing under K–12 strategy.",
-    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=72",
+    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=720&q=72",
     featured: true,
   },
   {
@@ -131,7 +131,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
     price: "$169",
     outcome: "Responsible GenAI practitioner badge",
     preview: "Short videos, quizzes, and creative AI projects.",
-    img: "https://images.unsplash.com/photo-1527430253228-e93688616381?auto=format&fit=crop&w=720&q=72",
+    img: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=720&q=72",
   },
   {
     id: "college-ai-essentials",
@@ -144,7 +144,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
     price: "$199",
     outcome: "College-ready AI certification with shareable credential",
     preview: "Practical modules validated by industry need and student relevance.",
-    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=720&q=72",
+    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=720&q=72",
     featured: true,
   },
   {

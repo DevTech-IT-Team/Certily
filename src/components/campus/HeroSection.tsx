@@ -60,14 +60,23 @@ export function HeroSection() {
                 {CAMPUS_POSITIONING.lead}
               </p>
 
-              <div data-hero-line className="mt-6 sm:mt-7">
+              <div data-hero-line className="mt-6 flex flex-wrap items-center gap-3 sm:mt-7">
                 <Link
                   to="/courses"
                   className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-brand-gradient px-8 text-base font-bold text-white shadow-elegant transition-all hover:scale-[1.03] hover:shadow-[0_20px_48px_-12px_rgba(91,76,245,0.55)] active:scale-[0.98]"
                 >
-                  Start Learning
+                  Explore Learning Pathways
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
                 </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    document.getElementById("meet-illy")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="inline-flex h-12 items-center gap-2 rounded-full border border-[#E4E2F0] bg-white px-6 text-base font-semibold text-[#5A5872] shadow-sm transition-all hover:border-[#5B4CF5]/30 hover:text-[#5B4CF5] active:scale-[0.98]"
+                >
+                  Meet Illy
+                </button>
               </div>
 
               <div data-hero-line className="mt-6 w-full max-w-lg sm:mt-7">

@@ -31,85 +31,85 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
   {
     id: "learning-pathways",
     name: "Learning Pathways",
-    tagline: "Certification outcomes",
+    tagline: "Find your certification track",
     description:
-      "Browse K–12, college, and professional pathways with clear outcomes, previews, and enrollment options.",
+      "Browse K–12 and college pathways with clear learning outcomes, course previews, and guided enrollment. Start exploring for free.",
     route: "/courses",
     access: "public",
     icon: GraduationCap,
     mapPosition: { top: "18%", left: "28%" },
     illyIntro:
-      "Start here! Learning Pathways is where you explore certification courses — from K–12 fundamentals to college-level programs.",
+      "This is your first stop! Learning Pathways shows every certification track — from K–12 AI fundamentals to college-ready outcomes. Browse free, enroll when you're ready.",
     color: "#7B6CFF",
   },
   {
     id: "my-classroom",
     name: "My Classroom",
-    tagline: "Your enrolled courses",
+    tagline: "Your guided learning space",
     description:
-      "Video lessons, assignments, quizzes, discussions, and resources — unlocked after enrollment.",
+      "Self-paced lessons, knowledge checks, assignments, and Illy-guided progress tracking — all in one place once you enroll.",
     route: "/classroom",
     access: "enrolled",
     icon: BookOpen,
     mapPosition: { top: "62%", left: "26%" },
     illyIntro:
-      "My Classroom is your guided learning space — lessons, nuggets, and progress tracking. Enroll to unlock it!",
+      "My Classroom is where your learning journey lives — structured lessons, quizzes, and Illy guiding you through every module. Enroll in a pathway to unlock it.",
     color: "#5B4FE0",
   },
   {
     id: "ai-lab",
     name: "AI Lab",
-    tagline: "Capstone & projects",
+    tagline: "Build real AI projects",
     description:
-      "Hands-on capstone projects, practice labs, AI tools workspace, and project submissions for enrolled learners.",
+      "Apply what you've learned through hands-on capstone projects, guided builds, and AI tool workspaces — for enrolled learners.",
     route: "/ai-lab",
     access: "enrolled",
     icon: Beaker,
     mapPosition: { top: "16%", left: "72%" },
     illyIntro:
-      "The AI Lab is where theory becomes real projects — capstones, templates, and guided builds. Members only!",
+      "The AI Lab is where learning becomes doing. You'll build real capstone projects that go straight into your portfolio. Enroll in a pathway to get in.",
     color: "#4CD1B0",
   },
   {
     id: "newsroom",
     name: "Newsroom",
-    tagline: "AI relevance & credibility",
+    tagline: "Why your skills matter now",
     description:
-      "Latest AI news, industry updates, and explainers that connect today's trends to Certily certifications.",
+      "AI news, industry updates, and plain-language explainers that connect today's trends directly to Certily certifications.",
     route: "/news",
     access: "public",
     icon: Newspaper,
     mapPosition: { top: "32%", left: "76%" },
     illyIntro:
-      "The Newsroom shows why our courses matter right now — AI news, trends, and parent-friendly explainers.",
+      "The Newsroom shows students and parents why AI skills matter right now — connecting industry headlines to the certifications we teach.",
     color: "#6366F1",
   },
   {
     id: "certification-hall",
     name: "AI Certification Hall",
-    tagline: "Hall of Fame",
+    tagline: "Earn and share your credentials",
     description:
-      "Certificates, badges, verification links, and achievement showcases after completing pathways.",
+      "Verifiable certificates and achievement badges earned after completing pathways — shareable with colleges, parents, and employers.",
     route: "/certification-hall",
     access: "enrolled",
     icon: Award,
     mapPosition: { top: "72%", left: "50%" },
     illyIntro:
-      "The Certification Hall celebrates your wins — verifiable certificates you can share with colleges and employers.",
+      "This is where you celebrate finishing a pathway! Every certificate you earn here is verifiable — share it with anyone, anywhere.",
     color: "#B8ABFF",
   },
   {
     id: "mission-control",
     name: "Mission Control",
-    tagline: "Student & parent dashboard",
+    tagline: "Your student and parent dashboard",
     description:
-      "Track goals, assignments, capstone status, payments, events, and notifications in one control center.",
+      "Track learning goals, assignment progress, capstone status, and certificates — with a dedicated parent view built in.",
     route: "/dashboard",
     access: "enrolled",
     icon: LayoutDashboard,
     mapPosition: { top: "58%", left: "74%" },
     illyIntro:
-      "Mission Control is your command center — progress, quizzes, certificates, and parent views all in one place.",
+      "Mission Control keeps everyone on track — students see their progress, parents see the full picture. It unlocks with enrollment.",
     color: "#0F1533",
   },
 ];

@@ -43,9 +43,9 @@ export function MasterclassSection() {
     <section
       id="masterclass"
       data-illy-section="masterclass"
-      className="border-t border-border/60 bg-[#FAFBFE] py-12 sm:py-16 md:py-20"
+      className="border-t border-border/60 bg-[#FAFBFE] py-16 sm:py-20"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
           <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-[#0F1533] shadow-[0_24px_60px_-24px_rgba(15,21,51,0.45)]">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-[#4CD1B0]/20" />

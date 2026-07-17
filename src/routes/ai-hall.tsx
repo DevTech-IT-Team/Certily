@@ -29,32 +29,32 @@ const ACTIVITIES = [
   {
     icon: Zap,
     title: "AI mini-projects",
-    description: "Short guided builds to explore tools and concepts without full enrollment.",
+    description: "Short guided builds that let you explore real AI concepts before committing to a full pathway.",
   },
   {
     icon: Gamepad2,
     title: "Game creation workshops",
-    description: "Create simple AI-powered games and share with the community.",
+    description: "Build simple AI-powered games and share your creations with the campus community.",
   },
   {
     icon: Calendar,
     title: "Webinars & live events",
-    description: "Parent sessions, student showcases, and industry guest talks.",
+    description: "Parent info sessions, student project showcases, and guest talks from industry practitioners.",
   },
   {
     icon: Trophy,
     title: "Quiz challenges & hackathons",
-    description: "Low-ticket competitions and practice experiences to build confidence.",
+    description: "Friendly competitions and practice experiences that build real confidence in AI.",
   },
   {
     icon: Wrench,
     title: "AI tool exploration",
-    description: "Standalone demos and sandbox activities to try new AI tools safely.",
+    description: "Hands-on sandbox activities to try leading AI tools safely — no prior experience needed.",
   },
   {
     icon: Radio,
-    title: "Student competitions",
-    description: "Mini hackathons and showcase events — public engagement before enrollment.",
+    title: "Student showcases",
+    description: "Mini hackathons and demo days where every learner can share what they've built.",
   },
 ];
 

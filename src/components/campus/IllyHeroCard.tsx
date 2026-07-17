@@ -2,7 +2,7 @@ import { IllyAvatar } from "./IllyAvatar";
 import { useIlly } from "./IllyContext";
 
 const GREETING =
-  "I'm your campus guide — tap me anytime for directions on pathways, buildings, and enrollment.";
+  "Not sure where to start? Tell me your goal — K–12, college, or career — and I'll point you to the right pathway.";
 
 export function IllyHeroCard() {
   const { setMessage, setFloatingOpen } = useIlly();
@@ -20,7 +20,7 @@ export function IllyHeroCard() {
         <IllyAvatar size="md" reaction="hi" className="shrink-0 bg-[#0F1533] p-0.5 rounded-full" />
         <div className="min-w-0 flex-1">
           <p className="text-sm font-bold text-foreground sm:text-base">
-            Hi, I&apos;m <span className="font-display tracking-wide">ILY</span>!{" "}
+            Meet <span className="font-display tracking-wide">Illy</span> — your campus guide{" "}
             <span aria-hidden>👋</span>
           </p>
           <p className="mt-1 text-sm leading-relaxed text-[#5A5872]">{GREETING}</p>
