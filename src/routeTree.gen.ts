@@ -19,6 +19,7 @@ import { Route as ClassroomRouteImport } from './routes/classroom'
 import { Route as CertificationHallRouteImport } from './routes/certification-hall'
 import { Route as AiLabRouteImport } from './routes/ai-lab'
 import { Route as AiHallRouteImport } from './routes/ai-hall'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const NewsRoute = NewsRouteImport.update({
@@ -71,6 +72,11 @@ const AiHallRoute = AiHallRouteImport.update({
   path: '/ai-hall',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -79,6 +85,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
   '/certification-hall': typeof CertificationHallRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
   '/certification-hall': typeof CertificationHallRoute
@@ -106,6 +114,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
   '/certification-hall': typeof CertificationHallRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/ai-hall'
     | '/ai-lab'
     | '/certification-hall'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/ai-hall'
     | '/ai-lab'
     | '/certification-hall'
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/ai-hall'
     | '/ai-lab'
     | '/certification-hall'
@@ -161,6 +173,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AiHallRoute: typeof AiHallRoute
   AiLabRoute: typeof AiLabRoute
   CertificationHallRoute: typeof CertificationHallRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiHallRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -257,6 +277,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AiHallRoute: AiHallRoute,
   AiLabRoute: AiLabRoute,
   CertificationHallRoute: CertificationHallRoute,

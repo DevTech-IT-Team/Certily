@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { CAMPUS_POSITIONING } from "@/lib/campus";
 import { CampusMap } from "./CampusMap";
 import { IllyHeroCard } from "./IllyHeroCard";
 import { HomeFeatureBar } from "./HomeFeatureBar";
@@ -32,50 +31,60 @@ export function HeroSection() {
       <section
         ref={sectionRef}
         data-illy-section="hero"
-        className="relative overflow-visible bg-[#F7F8FC] pb-2 pt-20 sm:pb-4 sm:pt-24 md:pt-24"
+        className="relative overflow-visible bg-[#EEEEF8] pb-6 pt-24 sm:pt-28 md:pt-32 lg:pt-32 xl:pt-36"
       >
-        <div className="pointer-events-none absolute inset-0 bg-genz-hero" />
-        <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.1]" />
-        <div className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-primary/[0.07] blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 top-8 h-72 w-72 rounded-full bg-[#4CD1B0]/[0.06] blur-3xl" />
+        {/* Soft ambient background glows */}
+        <div className="pointer-events-none absolute left-1/4 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#5B4CF5]/10 blur-3xl" />
+        <div className="pointer-events-none absolute right-10 top-20 -z-0 h-80 w-80 rounded-full bg-[#4CD1B0]/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8">
-          {/* Text left · campus map right (lg+) — mockup layout */}
-          <div className="grid items-center gap-8 overflow-visible lg:grid-cols-[minmax(0,0.4fr)_minmax(0,0.6fr)] lg:gap-6 xl:gap-10">
-            <div className="flex flex-col items-start justify-center text-left lg:py-2">
+        {/* Soft dot grid */}
+        <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.07]" />
+
+        <div className="relative mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-8 overflow-visible lg:grid-cols-12 lg:gap-8 xl:gap-10">
+
+            {/* ── Left: copy + CTAs ── */}
+            <div className="flex flex-col items-start justify-center pb-6 pt-2 text-left lg:col-span-5 lg:pb-10 xl:col-span-5">
+
               <h1
                 data-hero-line
-                className="max-w-[12ch] text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.035em] text-foreground sm:max-w-none sm:text-[3rem] lg:text-[3.35rem] xl:text-[3.85rem]"
+                className="font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem]"
               >
-                {CAMPUS_POSITIONING.headline}
-                <span className="mt-1.5 block text-[#5B4CF5] sm:mt-2">
-                  {CAMPUS_POSITIONING.subhead}
+                <span className="block">Real skills. Real impact.</span>
+                <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">
+                  Built for the future.
                 </span>
               </h1>
 
               <p
                 data-hero-line
-                className="mt-4 max-w-[36ch] text-lg leading-[1.65] text-muted-foreground sm:mt-5 sm:text-xl sm:leading-relaxed lg:max-w-[38ch]"
+                className="mt-4 max-w-lg text-base leading-relaxed text-[#5A607A] sm:mt-5 sm:text-lg lg:text-[1.05rem]"
               >
-                {CAMPUS_POSITIONING.lead}
+                Certily is your AI-powered campus for learning, building, and
+                growing. Explore pathways, build real projects, and earn
+                credentials that matter.
               </p>
 
               <div data-hero-line className="mt-6 flex flex-wrap items-center gap-3 sm:mt-7">
                 <Link
                   to="/courses"
-                  className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-brand-gradient px-8 text-base font-bold text-white shadow-elegant transition-all hover:scale-[1.03] hover:shadow-[0_20px_48px_-12px_rgba(91,76,245,0.55)] active:scale-[0.98]"
+                  className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-[#5B4CF5] px-7 text-base font-bold text-white shadow-[0_8px_28px_-8px_rgba(91,76,245,0.55)] transition-all hover:scale-[1.03] hover:bg-[#4A3BE0] hover:shadow-[0_16px_40px_-8px_rgba(91,76,245,0.60)] active:scale-[0.98]"
                 >
-                  Explore Learning Pathways
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                  Explore Pathways
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
+
                 <button
                   type="button"
-                  onClick={() => {
-                    document.getElementById("meet-illy")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="inline-flex h-12 items-center gap-2 rounded-full border border-[#E4E2F0] bg-white px-6 text-base font-semibold text-[#5A5872] shadow-sm transition-all hover:border-[#5B4CF5]/30 hover:text-[#5B4CF5] active:scale-[0.98]"
+                  onClick={() =>
+                    document.getElementById("meet-illy")?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="inline-flex h-12 items-center gap-2.5 rounded-full border border-[#D8D6EE] bg-white px-6 text-base font-semibold text-[#5A5872] shadow-xs transition-all hover:border-[#5B4CF5]/40 hover:text-[#5B4CF5] active:scale-[0.98]"
                 >
                   Meet Illy
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-[#5B4CF5]">
+                    <Play className="h-3 w-3 fill-[#5B4CF5]" />
+                  </span>
                 </button>
               </div>
 
@@ -84,10 +93,11 @@ export function HeroSection() {
               </div>
             </div>
 
+            {/* ── Right: campus map — enlarged ── */}
             <div
               id="campus-map"
               data-hero-visual
-              className="scroll-mt-24 w-full min-w-0 overflow-visible bg-transparent shadow-none lg:justify-self-end"
+              className="w-full min-w-0 overflow-visible origin-center transition-transform lg:col-span-7 lg:scale-[1.08] xl:col-span-7 xl:scale-[1.12]"
             >
               <CampusMap embedded presentation="hero" showGuide={false} />
             </div>
@@ -99,3 +109,5 @@ export function HeroSection() {
     </>
   );
 }
+
+

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type RefObject } from 
 import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { ArrowRight, Lock, MessageCircle } from "lucide-react";
-import campusMapImg from "@/assets/certbg.png";
+import campusMapImg from "@/assets/certilybgupdate.png";
 import { CAMPUS_MAP_AREAS, type CampusMapArea } from "@/lib/campus";
 import avatarHi from "@/assets/avatars/hi.png";
 import avatarPoint from "@/assets/avatars/point.png";
@@ -46,51 +46,51 @@ type HeroZone = {
   label: { top?: string; left?: string; bottom?: string; centerX?: boolean };
 };
 
-/** certbg.png 3:2 (1536×1024) — black bg removed via mix-blend-screen on light hero */
+/** 6 exact badge positions matching reference layout */
+/** certbg.png 3:2 (1536×1024) — Badge positions matched directly to building signs */
 const HERO_BUILDING_ZONES: HeroZone[] = [
   {
+    // Learning Pathways — top-left building with "LEARNING PATHWAYS" sign
     id: "learning-pathways",
     title: "Learning Pathways",
     description: "Explore self-paced courses and structured learning paths.",
-    hit: { top: "9%", left: "8%", width: "28%", height: "38%" },
-    label: { top: "2%", left: "10%" },
+    hit: { top: "14%", left: "2%", width: "28%", height: "28%" },
+    label: { top: "-2%", left: "-4%" },
   },
   {
-    id: "ai-lab",
-    title: "AI Lab",
-    description: "Hands-on projects, capstone courses and AI tools to build.",
-    hit: { top: "7%", left: "52%", width: "38%", height: "36%" },
-    label: { top: "1%", left: "50%" },
-  },
-  {
-    id: "newsroom",
-    title: "Newsroom",
-    description: "Stay updated with AI news, industry insights and announcements.",
-    hit: { top: "20%", left: "56%", width: "34%", height: "28%" },
-    label: { top: "15%", left: "64%" },
-  },
-  {
-    id: "my-classroom",
-    title: "My Classroom",
-    description: "Access your courses, assignments and learning progress.",
-    hit: { top: "36%", left: "4%", width: "26%", height: "32%" },
-    label: { top: "30%", left: "1%" },
-  },
-  {
+    // Hall of Fame — bottom-left building with "HALL OF FAME" sign (shifted down)
     id: "certification-hall",
     title: "Hall of Fame",
     description: "Celebrate achievements, certifications and learner milestones.",
-    hit: { top: "52%", left: "30%", width: "40%", height: "44%" },
-    label: { bottom: "3%", left: "50%", centerX: true },
+    hit: { top: "34%", left: "0%", width: "28%", height: "28%" },
+    label: { top: "40%", left: "-5%" },
   },
   {
-    id: "mission-control",
-    title: "Mission Control",
-    description: "Track goals, stats, certificates and personal progress.",
-    hit: { top: "48%", left: "54%", width: "38%", height: "38%" },
-    label: { top: "42%", left: "58%" },
+    // My Classroom — top-center building with "MY CLASSROOM" sign (shifted further backward into sky)
+    id: "my-classroom",
+    title: "My Classroom",
+    description: "Access your courses, assignments and learning progress.",
+    hit: { top: "6%", left: "30%", width: "26%", height: "26%" },
+    label: { top: "-14%", left: "30%" },
+  },
+  {
+    // AI Lab — top-right building with "AI LAB" sign
+    id: "ai-lab",
+    title: "AI Lab",
+    description: "Hands-on projects, capstone courses and AI tools to build.",
+    hit: { top: "6%", left: "62%", width: "28%", height: "26%" },
+    label: { top: "-2%", left: "66%" },
+  },
+  {
+    // Newsroom — mid-right building with "NEWSROOM" sign (shifted further down)
+    id: "newsroom",
+    title: "Newsroom",
+    description: "Stay updated with AI news, industry insights and announcements.",
+    hit: { top: "26%", left: "64%", width: "28%", height: "26%" },
+    label: { top: "68%", left: "64%" },
   },
 ];
+
 
 const HERO_BADGE_ORDER = HERO_BUILDING_ZONES.map((z) => z.id);
 
@@ -128,26 +128,28 @@ function HeroMockupLabel({
       onFocus={onActivate}
       style={style}
       className={cn(
-        "relative block w-[7.75rem] rounded-[11px] border border-[#E8E6F0] bg-white px-2 py-1.5 shadow-[0_8px_24px_-8px_rgba(15,21,51,0.25)] transition-all duration-200",
-        "sm:w-[9rem] md:w-[10rem] lg:w-[10.75rem]",
-        "hover:scale-[1.02] hover:border-[#5B4CF5]/30 hover:shadow-[0_12px_32px_-10px_rgba(91,76,245,0.22)]",
-        highlighted && "scale-[1.02] border-[#5B4CF5]/35 ring-2 ring-[#5B4CF5]/15",
+        // White card mockup label matching reference UI
+        "relative block rounded-2xl border border-[#E8E6F0] bg-white px-3.5 py-2.5 backdrop-blur-sm",
+        "w-[10.5rem] sm:w-[11.5rem] md:w-[12.5rem] lg:w-[13rem]",
+        "shadow-[0_8px_30px_-6px_rgba(15,21,51,0.18)] transition-all duration-200",
+        "hover:scale-[1.03] hover:border-[#5B4CF5]/40 hover:shadow-[0_14px_36px_-8px_rgba(91,76,245,0.25)]",
+        highlighted && "scale-[1.03] border-[#5B4CF5]/40 ring-2 ring-[#5B4CF5]/20",
         className
       )}
     >
-      <p className="pr-5 text-[10px] font-extrabold uppercase leading-[1.2] tracking-[0.05em] text-[#0F1533] sm:text-[10.5px]">
+      <p className="pr-6 text-[11px] font-extrabold uppercase leading-tight tracking-[0.05em] text-[#0F1533] sm:text-[11.5px]">
         {title}
       </p>
-      <p className="mt-0.5 pr-4 text-[9px] leading-[1.4] text-[#5A5872] sm:text-[9.5px]">
+      <p className="mt-1 pr-5 text-[9.5px] leading-[1.45] text-[#5A607A] sm:text-[10px]">
         {description}
       </p>
       <span
         className={cn(
-          "absolute bottom-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full sm:h-5 sm:w-5",
-          locked ? "bg-[#F0F1F7] text-[#9896A9]" : "bg-[#5B4CF5] text-white"
+          "absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full sm:h-5.5 sm:w-5.5",
+          locked ? "bg-[#F0F1F7] text-[#9896A9]" : "bg-[#5B4CF5] text-white shadow-sm"
         )}
       >
-        {locked ? <Lock className="h-2 w-2 sm:h-2.5 sm:w-2.5" /> : <ArrowRight className="h-2 w-2 sm:h-2.5 sm:w-2.5" />}
+        {locked ? <Lock className="h-2.5 w-2.5" /> : <ArrowRight className="h-2.5 w-2.5" />}
       </span>
     </Link>
   );
@@ -298,12 +300,12 @@ function HeroCampusFrame({
 
   return (
     <div data-campus-scene className="relative w-full overflow-visible bg-transparent">
-      <div className="relative w-full bg-transparent">
-        {/* screen = black pixels invisible on light hero — no dark square */}
+      {/* Natural image — no container, no cropping, no border */}
+      <div className="relative w-full">
         <img
           src={campusMapImg}
           alt="Certily AI Campus — interactive 3D university with learning buildings"
-          className="relative z-0 block w-full h-auto max-w-none select-none bg-transparent mix-blend-screen"
+          className="relative z-0 block h-auto w-full select-none"
           width={1536}
           height={1024}
           onLoad={() => setReady(true)}
@@ -311,20 +313,19 @@ function HeroCampusFrame({
           decoding="sync"
         />
 
-        {/* Badges — normal blend, on top of campus */}
+        {/* Building hit zones — interactive previews without floating badges */}
         <div
-          className="pointer-events-none absolute inset-0 isolate z-10 hidden overflow-visible sm:block [&_[data-campus-badge]]:pointer-events-auto"
+          className="pointer-events-none absolute inset-0 isolate z-20 hidden overflow-visible sm:block"
           onMouseLeave={onDeactivate}
         >
           {HERO_BUILDING_ZONES.map((zone) => renderBuildingHit(zone))}
-          {HERO_BUILDING_ZONES.map((zone) => renderMapBadge(zone))}
         </div>
 
-        {/* Illy — centre plaza */}
+        {/* Illy — centre plaza overlay */}
         <button
           ref={illyRef}
           type="button"
-          className="absolute z-[15] flex items-end justify-center overflow-visible bg-transparent outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#5B4CF5]/50"
+          className="absolute z-[25] flex items-end justify-center overflow-visible bg-transparent outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#5B4CF5]/50"
           style={{
             top: ILLY_HERO_PLAZA.top,
             left: ILLY_HERO_PLAZA.left,
@@ -337,7 +338,7 @@ function HeroCampusFrame({
           <img
             src={ILY_AVATARS[reaction] || ILY_AVATARS.stand}
             alt="Illy on the campus plaza"
-            className="relative h-auto w-full max-w-none object-contain object-bottom mix-blend-screen drop-shadow-[0_8px_20px_rgba(91,76,245,0.2)]"
+            className="relative h-auto w-full max-w-none object-contain object-bottom drop-shadow-[0_8px_20px_rgba(91,76,245,0.3)]"
             draggable={false}
           />
         </button>

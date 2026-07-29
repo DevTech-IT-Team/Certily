@@ -10,7 +10,7 @@ const platform = [
 ];
 
 const company = [
-  { label: "About", to: "/contact" },
+  { label: "About", to: "/about" },
   { label: "Blog", to: "/news" },
   { label: "Careers", to: "/contact" },
   { label: "Partnerships", to: "/contact" },

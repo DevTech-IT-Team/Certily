@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import illyVideo from "@/assets/ilyvideo.mp4";
+import illyVideo from "@/assets/certily.webm";
 import avatarStand from "@/assets/avatars/stand.png";
 import { IllyAvatar } from "./IllyAvatar";
 import { useIlly } from "./IllyContext";

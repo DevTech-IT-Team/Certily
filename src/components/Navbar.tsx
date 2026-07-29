@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { to: "/ai-lab", label: "AI Lab" },
   { to: "/news", label: "Newsroom" },
   { to: "/events", label: "Events" },
-  { to: "/contact", label: "About" },
+  { to: "/about", label: "About" },
 ] as const;
 
 const MOBILE_GROUPS = [
@@ -97,9 +97,6 @@ export function Navbar() {
                 )}
               >
                 {link.label}
-                {"enrolledOnly" in link && link.enrolledOnly && !enrolled && (
-                  <Lock className="ml-1 inline h-3 w-3 opacity-45" aria-label="Enrolled only" />
-                )}
                 {isActive(link.to) && (
                   <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-[#5B4CF5]" />
                 )}
@@ -160,9 +157,6 @@ export function Navbar() {
                     className="flex items-center justify-between rounded-lg px-2 py-2.5 text-sm font-medium hover:bg-[#F7F8FC]"
                   >
                     {item.label}
-                    {ENROLLED_AREAS.some((b) => b.route === item.to) && !enrolled && (
-                      <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-                    )}
                   </Link>
                 ))}
               </div>

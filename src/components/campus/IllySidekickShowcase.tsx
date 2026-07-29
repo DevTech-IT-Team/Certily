@@ -46,9 +46,9 @@ export function IllyChatDock({ className, embedded = false, compact = false }: D
                   {p.label}
                 </button>
               );
-              if (p.href) {
+              if ("href" in p && typeof p.href === "string") {
                 return (
-                  <Link key={p.id} to={p.href} onClick={() => showTip(p.message, true, "point")}>
+                  <Link key={p.id} to={p.href as any} onClick={() => showTip(p.message, true, "point")}>
                     {chip}
                   </Link>
                 );

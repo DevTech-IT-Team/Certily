@@ -1,7 +1,7 @@
-import { useCallback, useRef, useState, type RefObject } from "react";
+import { useCallback, useContext, useRef, useState, type RefObject } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
-import { useIlly, type IllyReaction } from "./IllyContext";
+import { IllyContext, type IllyReaction } from "./IllyContext";
 
 import avatarHi from "@/assets/avatars/hi.png";
 import avatarPoint from "@/assets/avatars/point.png";
@@ -58,13 +58,8 @@ export function IllyAvatar({
   const [hovered, setHovered] = useState(false);
   const [wiggle, setWiggle] = useState(false);
 
-  let contextReaction: IllyReaction = "stand";
-  try {
-    const context = useIlly();
-    contextReaction = context.reaction;
-  } catch (e) {
-    // Fail silently if used outside provider
-  }
+  const illyCtx = useContext(IllyContext);
+  const contextReaction: IllyReaction = illyCtx?.reaction ?? "stand";
 
   const activeReaction = reaction || contextReaction;
   const imageSrc = ILY_AVATARS[activeReaction] || avatarStand;

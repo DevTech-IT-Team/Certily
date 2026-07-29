@@ -21,7 +21,7 @@ type IllyContextValue = {
   setReaction: (reaction: IllyReaction) => void;
 };
 
-const IllyContext = createContext<IllyContextValue | null>(null);
+export const IllyContext = createContext<IllyContextValue | null>(null);
 
 export function IllyProvider({ children }: { children: ReactNode }) {
   const [message, setMessageState] = useState(DEFAULT_ILLY_MESSAGE);
