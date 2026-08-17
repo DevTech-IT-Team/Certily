@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Reveal } from "./Reveal";
 import { VAvatar } from "./VAvatar";
 import campusBg from "@/assets/certbg.png";
-import certciaVideo from "@/assets/Certcia.mp4";
+import certciaVideo from "@/assets/certcia.mp4";
 
 export function CampusExploreSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
