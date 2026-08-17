@@ -128,7 +128,8 @@ export function PathwayBannersSection() {
                 <div className="group relative flex flex-col items-center overflow-visible h-full w-full min-h-[460px]">
                   <HangingRod />
                   <Link
-                    to={`/learning/${banner.id}`}
+                    to="/learning/$pathwayId"
+                    params={{ pathwayId: banner.id }}
                     className={cn(
                       "relative mt-7 w-full flex flex-col items-center text-center px-5 pb-10 pt-5 text-white",
                       "transition-all duration-300 hover:-translate-y-1 cursor-pointer select-none rounded-t-sm"
