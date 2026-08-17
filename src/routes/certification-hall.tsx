@@ -7,7 +7,7 @@ import { canAccessBuilding } from "@/lib/enrollment";
 
 export const Route = createFileRoute("/certification-hall")({
   head: () => ({
-    meta: [{ title: "AI Certification Hall — Certily AI Campus" }],
+    meta: [{ title: "AI Certification Hall — Certcia AI Campus" }],
   }),
   component: CertificationHallPage,
 });
@@ -34,7 +34,7 @@ function CertificationHallPage() {
         route="/certification-hall"
         buildingName="AI Certification Hall"
         description="Earn, verify, and share certificates after completing pathways and capstone projects."
-        illyMessage="Complete your pathway and I'll help you celebrate — shareable credentials for college and career!"
+        vMessage="Complete your pathway and I'll help you celebrate — shareable credentials for college and career!"
       />
     );
   }
@@ -61,7 +61,7 @@ function CertificationHallPage() {
                 <div className="bg-gradient-to-r from-[#7B6CFF] to-[#B8ABFF] px-5 py-4 text-white">
                   <div className="flex items-center gap-2">
                     <Award className="h-5 w-5" />
-                    <span className="text-xs font-bold uppercase tracking-wider">Certily</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">Certcia</span>
                   </div>
                   <p className="mt-3 text-sm font-bold">{cert.badge}</p>
                   <p className="mt-1 text-xs text-white/85">{cert.title}</p>

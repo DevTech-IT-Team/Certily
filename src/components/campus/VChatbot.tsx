@@ -1,31 +1,31 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { X, Send, RefreshCw } from "lucide-react";
 import { useEffect, useState, useRef, FormEvent } from "react";
-import { useIlly, type IllyReaction } from "./IllyContext";
-import { IllyAvatar } from "./IllyAvatar";
-import { getIllyMessageForPath, ILLY_STARTER_PROMPTS, matchIllyResponse } from "@/lib/illy-guide";
+import { useV, type VReaction } from "./VContext";
+import { VAvatar } from "./VAvatar";
+import { getVMessageForPath, V_STARTER_PROMPTS, matchVResponse } from "@/lib/v-guide";
 import { cn } from "@/lib/utils";
 
 type ChatMessage = {
   id: string;
-  sender: "illy" | "user";
+  sender: "v" | "user";
   text: string;
   timestamp: Date;
-  reaction?: IllyReaction;
+  reaction?: VReaction;
 };
 
-function IllyMascotPanel({
+function VMascotPanel({
   className,
   onClose,
 }: {
   className?: string;
   onClose?: () => void;
 }) {
-  const { message, reaction, setMessage, setReaction } = useIlly();
+  const { message, reaction, setMessage, setReaction } = useV();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "initial",
-      sender: "illy",
+      sender: "v",
       text: message,
       timestamp: new Date(),
       reaction: reaction,
@@ -53,7 +53,7 @@ function IllyMascotPanel({
         ...prev,
         {
           id: `global-${Date.now()}`,
-          sender: "illy",
+          sender: "v",
           text: message,
           timestamp: new Date(),
           reaction: reaction,
@@ -79,15 +79,15 @@ function IllyMascotPanel({
 
     // 2. Simulate AI thinking delay and add reply
     setTimeout(() => {
-      const response = matchIllyResponse(text);
-      const illyMsg: ChatMessage = {
-        id: `illy-${Date.now()}`,
-        sender: "illy",
+      const response = matchVResponse(text);
+      const vMsg: ChatMessage = {
+        id: `v-${Date.now()}`,
+        sender: "v",
         text: response.message,
         timestamp: new Date(),
         reaction: response.reaction,
       };
-      setMessages((prev) => [...prev, illyMsg]);
+      setMessages((prev) => [...prev, vMsg]);
       setIsTyping(false);
       
       // Update global context so map avatar matches chatbot
@@ -104,13 +104,13 @@ function IllyMascotPanel({
     setMessages([
       {
         id: `reset-${Date.now()}`,
-        sender: "illy",
-        text: "Hi! How can I help you navigate the Certily campus today?",
+        sender: "v",
+        text: "Hi! How can I help you navigate the Certcia campus today?",
         timestamp: new Date(),
         reaction: "hi",
       },
     ]);
-    setMessage("Hi! How can I help you navigate the Certily campus today?", true, "hi");
+    setMessage("Hi! How can I help you navigate the Certcia campus today?", true, "hi");
   };
 
   return (
@@ -123,9 +123,9 @@ function IllyMascotPanel({
       {/* Header */}
       <div className="flex items-center justify-between bg-gradient-to-r from-[#5B4CF5] to-[#7C6FF7] px-4 py-3 text-white">
         <div className="flex items-center gap-2.5">
-          <IllyAvatar size="sm" reaction={isTyping ? "think" : reaction} className="bg-[#0F1533] p-0.5 rounded-full" />
+          <VAvatar size="sm" reaction={isTyping ? "think" : reaction} className="bg-[#0F1533] p-0.5 rounded-full" />
           <div>
-            <p className="font-display text-sm font-semibold tracking-wide">ILY</p>
+            <p className="font-display text-sm font-semibold tracking-wide">V</p>
             <p className="text-[10px] text-white/80">Interactive AI Guide</p>
           </div>
         </div>
@@ -144,7 +144,7 @@ function IllyMascotPanel({
               type="button"
               onClick={onClose}
               className="rounded-lg p-1.5 text-white/80 hover:bg-white/15 transition-colors"
-              aria-label="Close ILY"
+              aria-label="Close V"
             >
               <X className="h-4 w-4" />
             </button>
@@ -162,7 +162,7 @@ function IllyMascotPanel({
               className={cn("flex gap-2 max-w-[85%]", isUser ? "ml-auto flex-row-reverse" : "mr-auto")}
             >
               {!isUser && (
-                <IllyAvatar
+                <VAvatar
                   size="sm"
                   reaction={msg.reaction || "stand"}
                   className="mt-0.5 h-7 w-7 bg-[#0F1533] p-0.5 rounded-full shrink-0"
@@ -185,7 +185,7 @@ function IllyMascotPanel({
         {/* Typing Indicator */}
         {isTyping && (
           <div className="flex gap-2 max-w-[85%] mr-auto">
-            <IllyAvatar
+            <VAvatar
               size="sm"
               reaction="think"
               className="mt-0.5 h-7 w-7 bg-[#0F1533] p-0.5 rounded-full shrink-0"
@@ -202,7 +202,7 @@ function IllyMascotPanel({
 
       {/* Suggestion Chips */}
       <div className="flex gap-1.5 overflow-x-auto px-3 py-2 border-t border-border/50 bg-white scrollbar-none">
-        {ILLY_STARTER_PROMPTS.map((prompt) => (
+        {V_STARTER_PROMPTS.map((prompt) => (
           <button
             key={prompt.id}
             type="button"
@@ -236,12 +236,12 @@ function IllyMascotPanel({
   );
 }
 
-export function IllyChatFloating() {
+export function VChatFloating() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { floatingOpen, setFloatingOpen, setMessage } = useIlly();
+  const { floatingOpen, setFloatingOpen, setMessage } = useV();
 
   useEffect(() => {
-    setMessage(getIllyMessageForPath(pathname), true);
+    setMessage(getVMessageForPath(pathname), true);
   }, [pathname, setMessage]);
 
   useEffect(() => {
@@ -255,11 +255,11 @@ export function IllyChatFloating() {
 
   // Expose function globally to focus chatbot from other areas (e.g. map clicks)
   useEffect(() => {
-    (window as Window & { focusIllyChat?: () => void }).focusIllyChat = () => {
+    (window as Window & { focusVChat?: () => void }).focusVChat = () => {
       setFloatingOpen(true);
     };
     return () => {
-      delete (window as Window & { focusIllyChat?: () => void }).focusIllyChat;
+      delete (window as Window & { focusVChat?: () => void }).focusVChat;
     };
   }, [setFloatingOpen]);
 
@@ -269,7 +269,7 @@ export function IllyChatFloating() {
         type="button"
         onClick={() => setFloatingOpen(true)}
         className="group fixed bottom-6 right-6 z-[90]"
-        aria-label="Open ILY guide"
+        aria-label="Open V guide"
       >
         <span
           className="absolute inset-0 rounded-full bg-[#5B4CF5]/30 animate-ping"
@@ -277,9 +277,9 @@ export function IllyChatFloating() {
           aria-hidden
         />
         <span className="relative flex items-center gap-2.5 rounded-full border border-[#E4E2F0] bg-white py-1.5 pl-1.5 pr-5 shadow-[0_12px_40px_-12px_rgba(91,76,245,0.35)] transition-all group-hover:scale-[1.03]">
-          <IllyAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full shrink-0" />
+          <VAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full shrink-0" />
           <span className="font-display text-sm font-semibold tracking-wide text-[#5B4CF5]">
-            ILY
+            V
           </span>
         </span>
       </button>
@@ -288,7 +288,7 @@ export function IllyChatFloating() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[90] w-[min(calc(100vw-1.5rem),21rem)]">
-      <IllyMascotPanel className="w-full" onClose={() => setFloatingOpen(false)} />
+      <VMascotPanel className="w-full" onClose={() => setFloatingOpen(false)} />
     </div>
   );
 }

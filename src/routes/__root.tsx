@@ -12,8 +12,8 @@ import appCss from "../styles.css?url";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { PageEnter } from "../components/campus/PageEnter";
-import { IllyProvider } from "../components/campus/IllyContext";
-import { IllyChatFloating } from "../components/campus/IllyChatbot";
+import { VProvider } from "../components/campus/VContext";
+import { VChatFloating } from "../components/campus/VChatbot";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Certily AI Campus — Your Campus. Your Future." },
-      { name: "description", content: "Outcome-driven AI learning campus with certification pathways, Illy mentorship, and shareable credentials for students and parents." },
-      { name: "author", content: "Certily" },
-      { property: "og:title", content: "Certily AI Campus — Learn. Build. Certify." },
-      { property: "og:description", content: "Explore certification pathways, AI Lab projects, and guided learning with Illy your AI mentor." },
+      { title: "Certcia AI Campus — Your Campus. Your Future." },
+      { name: "description", content: "Outcome-driven AI learning campus with certification pathways, V mentorship, and shareable credentials for students and parents." },
+      { name: "author", content: "Certcia" },
+      { property: "og:title", content: "Certcia AI Campus — Learn. Build. Certify." },
+      { property: "og:description", content: "Explore certification pathways, AI Lab projects, and guided learning with V your AI mentor." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
@@ -131,7 +131,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <IllyProvider>
+      <VProvider>
         <div className="min-h-screen flex flex-col overflow-x-clip">
           <Navbar />
           <main className="flex-1">
@@ -140,9 +140,9 @@ function RootComponent() {
             </PageEnter>
           </main>
           <Footer />
-          <IllyChatFloating />
+          <VChatFloating />
         </div>
-      </IllyProvider>
+      </VProvider>
     </QueryClientProvider>
   );
 }

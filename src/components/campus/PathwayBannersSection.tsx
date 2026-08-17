@@ -9,7 +9,7 @@ const BANNERS = [
     badge: "01 / AGES 6-11",
     title: "Elementary",
     description: "Learn through play, imagination, and creative technology.",
-    route: "/courses?level=k12",
+    level: "k12",
     gradientFrom: "#F28E62",
     gradientTo: "#E07050",
     shadowColor: "rgba(242,142,98,0.28)",
@@ -20,7 +20,7 @@ const BANNERS = [
     badge: "02 / AGES 11-14",
     title: "Middle School",
     description: "Explore new skills and start building real projects.",
-    route: "/courses?level=k12",
+    level: "k12",
     gradientFrom: "#11998E",
     gradientTo: "#0F7A72",
     shadowColor: "rgba(17,153,142,0.28)",
@@ -31,7 +31,7 @@ const BANNERS = [
     badge: "03 / AGES 14-18",
     title: "High School",
     description: "Build advanced skills, a standout portfolio, and your future.",
-    route: "/courses?level=k12",
+    level: "k12",
     gradientFrom: "#7B6CFF",
     gradientTo: "#5B4CF5",
     shadowColor: "rgba(91,76,245,0.28)",
@@ -42,7 +42,7 @@ const BANNERS = [
     badge: "04 / AGES 18-24",
     title: "College",
     description: "Deep dive into tech, research, and innovation.",
-    route: "/courses?level=college",
+    level: "college",
     gradientFrom: "#2F80ED",
     gradientTo: "#1A60C5",
     shadowColor: "rgba(47,128,237,0.28)",
@@ -53,7 +53,7 @@ const BANNERS = [
     badge: "05 / CAREER GROWTH",
     title: "Professional",
     description: "Upskill, automate, and lead with AI at work.",
-    route: "/courses?level=professional",
+    level: "professional",
     gradientFrom: "#1E254A",
     gradientTo: "#0F1533",
     shadowColor: "rgba(15,21,51,0.28)",
@@ -86,7 +86,7 @@ export function PathwayBannersSection() {
   return (
     <section
       id="pathway-banners"
-      data-illy-section="pathway-banners"
+      data-v-section="pathway-banners"
       className="relative overflow-visible border-t border-border/30 py-14 sm:py-16 md:py-20"
     >
       {/* Background */}
@@ -128,7 +128,7 @@ export function PathwayBannersSection() {
                 <div className="group relative flex flex-col items-center overflow-visible h-full w-full min-h-[460px]">
                   <HangingRod />
                   <Link
-                    to={banner.route}
+                    to={`/learning/${banner.id}`}
                     className={cn(
                       "relative mt-7 w-full flex flex-col items-center text-center px-5 pb-10 pt-5 text-white",
                       "transition-all duration-300 hover:-translate-y-1 cursor-pointer select-none rounded-t-sm"

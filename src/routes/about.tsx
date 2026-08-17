@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { IllyCampusScrollStory } from "@/components/campus/IllyCampusScrollStory";
+import { VCampusScrollStory } from "@/components/campus/VCampusScrollStory";
 import { Reveal } from "@/components/campus/Reveal";
 import { Section } from "@/components/Section";
 import { GraduationCap, Lightbulb, Users, Zap, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
@@ -7,11 +7,11 @@ import { GraduationCap, Lightbulb, Users, Zap, ArrowRight, Sparkles, CheckCircle
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Certily AI Campus" },
+      { title: "About — Certcia AI Campus" },
       {
         name: "description",
         content:
-          "Meet Illy and explore the Certily AI Campus — a guided learning world with structured pathways, hands-on AI projects, and meaningful certifications.",
+          "Meet V and explore the Certcia AI Campus — a guided learning world with structured pathways, hands-on AI projects, and meaningful certifications.",
       },
     ],
   }),
@@ -35,19 +35,19 @@ const PILLARS = [
   {
     icon: Users,
     title: "Guided, not solo",
-    body: "Illy and a global peer community keep learners motivated — structured checkpoints replace the guesswork of self-directed study.",
+    body: "V and a global peer community keep learners motivated — structured checkpoints replace the guesswork of self-directed study.",
   },
   {
     icon: Zap,
     title: "Celebrate every milestone",
-    body: "From your first badge to your capstone certificate, every win is verified, shareable, and permanently on your Certily record.",
+    body: "From your first badge to your capstone certificate, every win is verified, shareable, and permanently on your Certcia record.",
   },
 ] as const;
 
 const HERO_HIGHLIGHTS = [
   "Structured Pathways",
   "Verifiable Credentials",
-  "24/7 AI Mentorship with Illy",
+  "24/7 AI Mentorship with V",
 ];
 
 // ---------------------------------------------------------------------------
@@ -59,7 +59,7 @@ function About() {
       {/* ------------------------------------------------------------------ */}
       {/* 3D AI CAMPUS HERO & SCROLL STORY                                   */}
       {/* ------------------------------------------------------------------ */}
-      <IllyCampusScrollStory />
+      <VCampusScrollStory />
 
       {/* ------------------------------------------------------------------ */}
       {/* Mission + pillars — shown after the scroll story completes          */}
@@ -74,10 +74,10 @@ function About() {
           title={
             <span>
               Why we built{" "}
-              <span className="gradient-text">Certily</span>
+              <span className="gradient-text">Certcia</span>
             </span>
           }
-          description="Learning should feel like progress, not busywork. We built Certily because most online education lacks structure, feedback, and proof of mastery — and we think learners deserve all three."
+          description="Learning should feel like progress, not busywork. We built Certcia because most online education lacks structure, feedback, and proof of mastery — and we think learners deserve all three."
         >
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {PILLARS.map((pillar, i) => (
@@ -113,12 +113,12 @@ function About() {
               </h2>
               
               <p className="mt-3 text-sm leading-relaxed text-[#5A607A] sm:text-base">
-                Explore structured learning pathways, build real projects, and earn credentials with Illy by your side.
+                Explore structured learning pathways, build real projects, and earn credentials with V by your side.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3.5 sm:mt-7">
                 <Link
-                  to="/courses"
+                  to="/learning"
                   className="group inline-flex h-11 items-center gap-2 rounded-full bg-[#5B4CF5] px-6 text-sm font-bold text-white shadow-[0_6px_20px_-6px_rgba(91,76,245,0.5)] transition-all hover:scale-[1.02] hover:bg-[#4A3BE0] active:scale-[0.98]"
                 >
                   Explore Pathways

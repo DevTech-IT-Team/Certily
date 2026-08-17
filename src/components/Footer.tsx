@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ChevronRight, GraduationCap, Linkedin, Twitter, Youtube } from "lucide-react";
+import { ChevronRight, Linkedin, Twitter, Youtube } from "lucide-react";
 import { cn } from "@/lib/utils";
+import certLogo from "@/assets/logo/certtt.png";
 
 const platform = [
-  { label: "Learning Pathways", to: "/courses" },
+  { label: "Learning Pathways", to: "/learning" },
   { label: "AI Lab", to: "/ai-lab" },
   { label: "Newsroom", to: "/news" },
   { label: "Certification Hall", to: "/certification-hall" },
@@ -43,19 +44,11 @@ export function Footer() {
       <div className="relative mx-auto max-w-6xl px-4 py-10 md:py-12">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link to="/" className="inline-flex items-center gap-2.5">
-              <span
-                className={cn(
-                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#5B4CF5] to-[#4A3BE8] shadow-[0_4px_16px_-4px_rgba(91,76,245,0.45)]"
-                )}
-                aria-hidden
-              >
-                <GraduationCap className="h-[18px] w-[18px] text-white" strokeWidth={2.25} />
-              </span>
-              <span className="font-display text-lg font-bold">Certily</span>
+            <Link to="/" className="inline-flex items-center">
+              <img src={certLogo} alt="Certcia Logo" className="-mb-2 -ml-4 h-16 w-auto object-contain" />
             </Link>
-            <p className="mt-3 text-sm leading-relaxed text-white/65">
-              Your AI-powered learning campus — credible certifications, real projects, and Illy
+            <p className="mt-1 text-sm leading-relaxed text-white/65">
+              Your AI-powered learning campus — credible certifications, real projects, and V
               mentorship for students, parents, and professionals.
             </p>
             <div className="mt-4 flex items-center gap-2">
@@ -103,7 +96,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-white/50 sm:flex-row">
-          <span>© {new Date().getFullYear()} Certily AI Campus. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Certcia AI Campus. All rights reserved.</span>
         </div>
       </div>
     </footer>

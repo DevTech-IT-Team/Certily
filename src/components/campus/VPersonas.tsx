@@ -1,27 +1,27 @@
-import { useIlly } from "./IllyContext";
-import { ILLY_PERSONAS } from "@/lib/illy-guide";
+import { useV } from "./VContext";
+import { V_PERSONAS } from "@/lib/v-guide";
 import { cn } from "@/lib/utils";
 
-export function IllyPersonas() {
-  const { showTip, setFloatingOpen } = useIlly();
+export function VPersonas() {
+  const { showTip, setFloatingOpen } = useV();
 
   return (
-    <section data-illy-section="personas" className="bg-[#FAFAFF] py-16 md:py-24">
+    <section data-v-section="personas" className="bg-[#FAFAFF] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
           <h2 className="text-3xl font-extrabold tracking-tight text-[#0F1533] md:text-4xl md:leading-tight">
-            Meet Illy.
+            Meet V.
             <br />
             <span className="text-muted-foreground">Navigator, mentor, and campus guide.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
-            Illy guides visitors through public areas, explains what unlocks after enrollment, and
+            V guides visitors through public areas, explains what unlocks after enrollment, and
             supports students through modules, capstones, and Mission Control.
           </p>
         </div>
 
         <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] md:grid md:grid-cols-3 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
-          {ILLY_PERSONAS.map((persona) => {
+          {V_PERSONAS.map((persona) => {
             const Icon = persona.icon;
             return (
               <button

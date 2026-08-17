@@ -62,7 +62,7 @@ export function PageHero({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-border/50 pt-20 pb-6 md:pt-24 md:pb-8",
+        "relative overflow-hidden border-b border-border/50 pt-16 pb-6 md:pt-20 md:pb-8",
         className
       )}
     >

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Lock, MapPin } from "lucide-react";
-import { IllyAvatar } from "./IllyAvatar";
+import { VAvatar } from "./VAvatar";
 import { getCampusAreaByRoute, type CampusBuilding } from "@/lib/campus";
 import { canAccessBuilding } from "@/lib/enrollment";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,7 @@ type CampusBuildingHeaderProps = {
   route: string;
   title?: string;
   description?: string;
-  illyMessage?: string;
+  vMessage?: string;
   className?: string;
 };
 
@@ -17,7 +17,7 @@ export function CampusBuildingHeader({
   route,
   title,
   description,
-  illyMessage,
+  vMessage,
   className,
 }: CampusBuildingHeaderProps) {
   const area = getCampusAreaByRoute(route);
@@ -25,12 +25,12 @@ export function CampusBuildingHeader({
   const locked = area?.access === "enrolled" && !canAccessBuilding("enrolled");
   const displayTitle = title ?? area?.name ?? "Campus";
   const displayDesc = description ?? area?.description;
-  const displayIlly = illyMessage ?? area?.illyIntro;
+  const displayV = vMessage ?? area?.vIntro;
 
   return (
     <header
       className={cn(
-        "relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-[#EDE9FF]/55 via-white to-[#F5F6FA]/80 pt-20 pb-6 md:pt-24 md:pb-8",
+        "relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-[#EDE9FF]/55 via-white to-[#F5F6FA]/80 pt-16 pb-6 md:pt-20 md:pb-8",
         className
       )}
     >
@@ -50,7 +50,7 @@ export function CampusBuildingHeader({
 
         <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
           <div className="flex shrink-0 items-end gap-3">
-            <IllyAvatar size="lg" grounded />
+            <VAvatar size="lg" grounded />
             {Icon && (
               <div
                 className="mb-1 flex h-11 w-11 items-center justify-center rounded-xl border border-primary/15 bg-white shadow-sm"
@@ -65,7 +65,7 @@ export function CampusBuildingHeader({
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
                 <MapPin className="h-3 w-3" />
-                Certily Campus
+                Certcia Campus
               </span>
               {locked && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
@@ -82,10 +82,10 @@ export function CampusBuildingHeader({
                 {displayDesc}
               </p>
             )}
-            {displayIlly && (
+            {displayV && (
               <p className="mt-4 max-w-2xl rounded-xl border border-primary/10 bg-white/80 px-4 py-3 text-sm leading-relaxed text-foreground/85 shadow-sm">
-                <span className="font-semibold text-primary">Illy says: </span>
-                {displayIlly}
+                <span className="font-semibold text-primary">V says: </span>
+                {displayV}
               </p>
             )}
           </div>

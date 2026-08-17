@@ -1,11 +1,11 @@
 import { useRouter } from "@tanstack/react-router";
-import { useIlly } from "./IllyContext";
-import { ILLY_POPULAR_PROMPTS } from "@/lib/illy-guide";
+import { useV } from "./VContext";
+import { V_POPULAR_PROMPTS } from "@/lib/v-guide";
 
-export function IllyPromptMarquee() {
-  const { showTip } = useIlly();
+export function VPromptMarquee() {
+  const { showTip } = useV();
   const router = useRouter();
-  const items = [...ILLY_POPULAR_PROMPTS, ...ILLY_POPULAR_PROMPTS];
+  const items = [...V_POPULAR_PROMPTS, ...V_POPULAR_PROMPTS];
 
   const handlePrompt = (message: string, href?: string) => {
     showTip(message, true);

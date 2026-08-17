@@ -81,7 +81,7 @@ function MarketingCard({
   const courseCount = countCoursesForLevel(pathway.id);
 
   return (
-    <Link to="/courses" className="group block w-full">
+    <Link to="/learning" className="group block w-full">
       <div
         className={cn(
           "relative flex items-center gap-5 overflow-hidden rounded-2xl border bg-white p-5 transition-all duration-300",
@@ -171,15 +171,17 @@ function PageLayout({
   const ActiveIcon = active.icon;
   const courseCount = countCoursesForLevel(active.id);
   const comingSoon = active.focus === "later";
+  const t = active.theme;
+  const isCollege = active.id === "college";
 
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_320px] lg:gap-6">
       {/* ── Left: feature panel ── */}
       <div
-        className="relative overflow-hidden rounded-2xl text-white"
+        className="relative overflow-hidden rounded-2xl text-white transition-all duration-500"
         style={{
-          background: `linear-gradient(145deg, ${activeId.darkBg} 0%, ${activeId.gradientTo}55 60%, ${activeId.gradientFrom}33 100%)`,
-          boxShadow: `0 32px 80px -24px ${activeId.glow}`,
+          background: t ? t.heroGradient : `linear-gradient(145deg, ${activeId.darkBg} 0%, ${activeId.gradientTo}55 60%, ${activeId.gradientFrom}33 100%)`,
+          boxShadow: `0 32px 80px -24px ${t ? t.glow : activeId.glow}`,
         }}
       >
         {/* Mesh overlay */}
@@ -192,21 +194,21 @@ function PageLayout({
         {/* Glow orb */}
         <div
           className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full opacity-30 blur-3xl"
-          style={{ background: activeId.gradientFrom }}
+          style={{ background: t ? t.gradientFrom : activeId.gradientFrom }}
         />
 
         <div className="relative p-7 sm:p-9">
           {/* Top row */}
           <div className="flex items-start justify-between gap-4">
             <div
-              className="flex h-14 w-14 items-center justify-center rounded-2xl ring-1 ring-white/20"
-              style={{ background: `linear-gradient(135deg, ${activeId.gradientFrom}, ${activeId.gradientTo})` }}
+              className="flex h-14 w-14 items-center justify-center rounded-2xl ring-1 ring-white/20 shadow-md"
+              style={{ background: `linear-gradient(135deg, ${t ? t.gradientFrom : activeId.gradientFrom}, ${t ? t.gradientTo : activeId.gradientTo})` }}
             >
-              <ActiveIcon className="h-6 w-6 text-white" strokeWidth={2} />
+              <ActiveIcon className="h-6 w-6 text-white" strokeWidth={2.2} />
             </div>
             <div className="flex flex-wrap gap-2 items-center justify-end">
-              <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white/80 ring-1 ring-white/15">
-                {activeId.label}
+              <span className="rounded-full bg-white/15 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-sm ring-1 ring-white/20">
+                {active.badgeLabel}
               </span>
               {comingSoon ? (
                 <span className="flex items-center gap-1 rounded-full bg-amber-400/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-300 ring-1 ring-amber-400/30">
@@ -214,7 +216,7 @@ function PageLayout({
                   Coming soon
                 </span>
               ) : (
-                <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/80 ring-1 ring-white/15">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/90 ring-1 ring-white/15">
                   {courseCount} courses available
                 </span>
               )}
@@ -222,20 +224,28 @@ function PageLayout({
           </div>
 
           {/* Heading */}
-          <h2 className="mt-6 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+          <h2
+            className={cn(
+              "mt-6 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl",
+              isCollege ? "font-serif" : "font-display"
+            )}
+          >
             {active.label}
           </h2>
-          <p className="mt-3 max-w-lg text-base leading-relaxed text-white/70">
+          <p className="mt-2 text-sm font-semibold text-white/80">
+            {active.themeTagline}
+          </p>
+          <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/70">
             {active.description}
           </p>
 
           {/* Outcomes */}
           <ul className="mt-6 grid gap-2 sm:grid-cols-2">
             {active.outcomes.map((o) => (
-              <li key={o} className="flex items-start gap-2 text-sm text-white/80">
+              <li key={o} className="flex items-start gap-2 text-sm text-white/90">
                 <CheckCircle2
                   className="mt-0.5 h-4 w-4 shrink-0"
-                  style={{ color: activeId.gradientFrom }}
+                  style={{ color: t ? "#5EEAD4" : activeId.gradientFrom }}
                 />
                 {o}
               </li>
@@ -250,8 +260,8 @@ function PageLayout({
               rel="noopener noreferrer"
               className="group inline-flex h-12 items-center gap-2.5 rounded-full px-8 text-sm font-bold text-white transition-all hover:scale-[1.03] active:scale-[0.98]"
               style={{
-                background: `linear-gradient(135deg, ${activeId.gradientFrom}, ${activeId.gradientTo})`,
-                boxShadow: `0 12px 32px -8px ${activeId.glow}`,
+                background: `linear-gradient(135deg, ${t ? t.gradientFrom : activeId.gradientFrom}, ${t ? t.gradientTo : activeId.gradientTo})`,
+                boxShadow: `0 12px 32px -8px ${t ? t.glow : activeId.glow}`,
               }}
             >
               {comingSoon ? "Join waitlist" : "Enroll now"}
@@ -359,7 +369,7 @@ export function LearningPathwaysSection({
   return (
     <section
       id="pathways"
-      data-illy-section="pathways"
+      data-v-section="pathways"
       className={cn(
         "relative overflow-hidden",
         isPage

@@ -2,9 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Play } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { CampusMap } from "./CampusMap";
-import { IllyHeroCard } from "./IllyHeroCard";
+import { VHeroCard } from "./VHeroCard";
 import { HomeFeatureBar } from "./HomeFeatureBar";
+import { CampusMap } from "./CampusMap";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,8 +30,8 @@ export function HeroSection() {
     <>
       <section
         ref={sectionRef}
-        data-illy-section="hero"
-        className="relative overflow-visible bg-[#EEEEF8] pb-6 pt-24 sm:pt-28 md:pt-32 lg:pt-32 xl:pt-36"
+        data-v-section="hero"
+        className="relative overflow-visible bg-[#EEEEF8] pb-6 pt-16 sm:pt-20 md:pt-20 lg:pt-22 xl:pt-24"
       >
         {/* Soft ambient background glows */}
         <div className="pointer-events-none absolute left-1/4 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#5B4CF5]/10 blur-3xl" />
@@ -44,7 +44,7 @@ export function HeroSection() {
           <div className="grid items-center gap-8 overflow-visible lg:grid-cols-12 lg:gap-8 xl:gap-10">
 
             {/* ── Left: copy + CTAs ── */}
-            <div className="flex flex-col items-start justify-center pb-6 pt-2 text-left lg:col-span-5 lg:pb-10 xl:col-span-5">
+            <div className="flex flex-col items-start justify-center pb-6 pt-0 text-left lg:col-span-5 lg:pb-10 xl:col-span-5">
 
               <h1
                 data-hero-line
@@ -60,14 +60,14 @@ export function HeroSection() {
                 data-hero-line
                 className="mt-4 max-w-lg text-base leading-relaxed text-[#5A607A] sm:mt-5 sm:text-lg lg:text-[1.05rem]"
               >
-                Certily is your AI-powered campus for learning, building, and
+                Certcia is your AI-powered campus for learning, building, and
                 growing. Explore pathways, build real projects, and earn
                 credentials that matter.
               </p>
 
               <div data-hero-line className="mt-6 flex flex-wrap items-center gap-3 sm:mt-7">
                 <Link
-                  to="/courses"
+                  to="/learning"
                   className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-[#5B4CF5] px-7 text-base font-bold text-white shadow-[0_8px_28px_-8px_rgba(91,76,245,0.55)] transition-all hover:scale-[1.03] hover:bg-[#4A3BE0] hover:shadow-[0_16px_40px_-8px_rgba(91,76,245,0.60)] active:scale-[0.98]"
                 >
                   Explore Pathways
@@ -77,11 +77,11 @@ export function HeroSection() {
                 <button
                   type="button"
                   onClick={() =>
-                    document.getElementById("meet-illy")?.scrollIntoView({ behavior: "smooth" })
+                    document.getElementById("meet-v")?.scrollIntoView({ behavior: "smooth" })
                   }
                   className="inline-flex h-12 items-center gap-2.5 rounded-full border border-[#D8D6EE] bg-white px-6 text-base font-semibold text-[#5A5872] shadow-xs transition-all hover:border-[#5B4CF5]/40 hover:text-[#5B4CF5] active:scale-[0.98]"
                 >
-                  Meet Illy
+                  Meet V
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-[#5B4CF5]">
                     <Play className="h-3 w-3 fill-[#5B4CF5]" />
                   </span>
@@ -89,7 +89,7 @@ export function HeroSection() {
               </div>
 
               <div data-hero-line className="mt-6 w-full max-w-lg sm:mt-7">
-                <IllyHeroCard />
+                <VHeroCard />
               </div>
             </div>
 

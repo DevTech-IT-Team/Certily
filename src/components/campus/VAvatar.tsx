@@ -1,7 +1,7 @@
 import { useCallback, useContext, useRef, useState, type RefObject } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
-import { IllyContext, type IllyReaction } from "./IllyContext";
+import { VContext, type VReaction } from "./VContext";
 
 import avatarHi from "@/assets/avatars/hi.png";
 import avatarPoint from "@/assets/avatars/point.png";
@@ -17,7 +17,7 @@ const ILY_AVATARS = {
   think: avatarThink,
 };
 
-type IllyAvatarProps = {
+type VAvatarProps = {
   size?: "sm" | "md" | "lg" | "xl" | "hero" | "statue";
   className?: string;
   variant?: "plain" | "orb";
@@ -28,7 +28,7 @@ type IllyAvatarProps = {
   interactive?: boolean;
   onInteract?: () => void;
   showHint?: boolean;
-  reaction?: IllyReaction;
+  reaction?: VReaction;
 };
 
 const sizes = {
@@ -40,7 +40,7 @@ const sizes = {
   statue: "h-52 w-40 sm:h-60 sm:w-44 md:h-72 md:w-52 lg:h-80 lg:w-56",
 };
 
-export function IllyAvatar({
+export function VAvatar({
   size = "md",
   className,
   variant = "plain",
@@ -51,15 +51,15 @@ export function IllyAvatar({
   onInteract,
   showHint = false,
   reaction,
-}: IllyAvatarProps) {
+}: VAvatarProps) {
   const useOrb = variant === "orb";
   const hideMatte = onLight && !useOrb;
-  const rootRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
+  const rootRef = useRef<HTMLElement | null>(null);
   const [hovered, setHovered] = useState(false);
   const [wiggle, setWiggle] = useState(false);
 
-  const illyCtx = useContext(IllyContext);
-  const contextReaction: IllyReaction = illyCtx?.reaction ?? "stand";
+  const vCtx = useContext(VContext);
+  const contextReaction: VReaction = vCtx?.reaction ?? "stand";
 
   const activeReaction = reaction || contextReaction;
   const imageSrc = ILY_AVATARS[activeReaction] || avatarStand;
@@ -112,7 +112,7 @@ export function IllyAvatar({
       >
         <img
           src={imageSrc}
-          alt="ILY, your AI campus guide"
+          alt="V, your AI campus guide"
           className={cn(
             "relative z-10 h-full w-full object-contain object-bottom transition-transform duration-300",
             hideMatte && "mix-blend-lighten",
@@ -135,7 +135,9 @@ export function IllyAvatar({
   if (interactive) {
     return (
       <button
-        ref={rootRef as RefObject<HTMLButtonElement>}
+        ref={(el) => {
+          (rootRef as React.MutableRefObject<HTMLElement | null>).current = el;
+        }}
         type="button"
         className={cn(
           shellClass,
@@ -147,7 +149,7 @@ export function IllyAvatar({
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
-        aria-label="Chat with Illy"
+        aria-label="Chat with V"
       >
         {inner}
       </button>
@@ -155,7 +157,12 @@ export function IllyAvatar({
   }
 
   return (
-    <div ref={rootRef} className={shellClass}>
+    <div
+      ref={(el) => {
+        (rootRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
+      className={shellClass}
+    >
       {inner}
     </div>
   );

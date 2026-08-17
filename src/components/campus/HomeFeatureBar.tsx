@@ -9,7 +9,7 @@ const JOURNEY_PILLARS = [
   {
     icon: Sparkles,
     title: "AI-Powered Learning",
-    description: "Personalized guidance from Illy, your AI mentor.",
+    description: "Personalized guidance from V, your AI mentor.",
   },
   {
     icon: Wrench,
@@ -30,7 +30,7 @@ const JOURNEY_PILLARS = [
 
 export function HomeFeatureBar() {
   return (
-    <section id="pillars" data-illy-section="pillars" className="bg-[#F0F1FA] px-4 pb-8 pt-0 sm:px-6 sm:pb-10">
+    <section id="pillars" data-v-section="pillars" className="bg-[#F0F1FA] px-4 pb-8 pt-0 sm:px-6 sm:pb-10">
       <div className="mx-auto max-w-7xl">
         <div className="rounded-2xl border border-[#E4E2F0] bg-white px-5 py-5 shadow-sm sm:px-8 sm:py-6">
           <ul className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-0">

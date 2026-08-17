@@ -7,10 +7,10 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import illyVideo from "@/assets/certily.webm";
+import vVideo from "@/assets/certcia.webm";
 import avatarStand from "@/assets/avatars/stand.png";
-import { IllyAvatar } from "./IllyAvatar";
-import { useIlly } from "./IllyContext";
+import { VAvatar } from "./VAvatar";
+import { useV } from "./VContext";
 import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
 
@@ -37,7 +37,7 @@ function HeyGenCursor() {
   );
 }
 
-function IllyShowcaseScene() {
+function VShowcaseScene() {
   const stageRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const identityRef = useRef<HTMLDivElement>(null);
@@ -186,7 +186,7 @@ function IllyShowcaseScene() {
             activeCard === "identity" ? cardActive : cardIdle
           )}
         >
-          <IllyAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full ring-2 ring-white" />
+          <VAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full ring-2 ring-white" />
           <span className="text-[13px] font-semibold text-foreground sm:text-sm">Your guide</span>
         </div>
 
@@ -202,7 +202,7 @@ function IllyShowcaseScene() {
         >
           <div className="relative aspect-[3/4] w-full">
             <video
-              src={illyVideo}
+              src={vVideo}
               autoPlay
               loop
               muted
@@ -210,7 +210,7 @@ function IllyShowcaseScene() {
               preload="auto"
               poster={avatarStand}
               className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[center_74%]"
-              aria-label="ILY campus guide preview"
+              aria-label="V campus guide preview"
             />
             <div
               className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#0F1533]/95 to-transparent"
@@ -272,8 +272,8 @@ function IllyShowcaseScene() {
   );
 }
 
-export function IllyMentorSection() {
-  const { setFloatingOpen, setMessage } = useIlly();
+export function VMentorSection() {
+  const { setFloatingOpen, setMessage } = useV();
 
   const openGuide = () => {
     setMessage(
@@ -286,8 +286,8 @@ export function IllyMentorSection() {
 
   return (
     <section
-      id="meet-illy"
-      data-illy-section="illy-mentor"
+      id="meet-v"
+      data-v-section="v-mentor"
       className="relative overflow-visible border-t border-border/40 bg-white py-16 sm:py-20"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(91,76,245,0.05),transparent_55%)]" />
@@ -297,7 +297,7 @@ export function IllyMentorSection() {
           <div className="max-w-xl">
             <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B4CF5]">
               <Sparkles className="h-4 w-4" strokeWidth={2} />
-              Meet Illy — your campus guide
+              Meet V — your campus guide
             </p>
 
             <h2 className="mt-4 font-display text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl lg:text-[2.65rem]">
@@ -305,7 +305,7 @@ export function IllyMentorSection() {
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Illy is built into the campus — not just a chatbot. She helps you find the right
+              V is built into the campus — not just a chatbot. She helps you find the right
               pathway, understand what each building does, track your progress, and know
               exactly what to do next.
             </p>
@@ -330,14 +330,14 @@ export function IllyMentorSection() {
               onClick={openGuide}
               className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_14px_40px_-14px_rgba(91,76,245,0.55)] transition-all hover:scale-[1.02] hover:bg-[#4A3BE8] active:scale-[0.98]"
             >
-              Ask Illy anything
+              Ask V anything
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
         </Reveal>
 
         <Reveal delay={0.1} className="relative w-full overflow-visible">
-          <IllyShowcaseScene />
+          <VShowcaseScene />
         </Reveal>
       </div>
     </section>

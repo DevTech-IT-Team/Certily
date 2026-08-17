@@ -56,7 +56,7 @@ const MEMBER_AVATARS = [
 const TESTIMONIALS = [
   {
     quote:
-      "Certilly helped me go from curious to confident. The projects and mentors changed everything.",
+      "Certcia helped me go from curious to confident. The projects and mentors changed everything.",
     name: "Ayaan M.",
     track: "College AI Essentials",
     initials: "AM",
@@ -99,7 +99,7 @@ export function HomeStatsSection() {
   return (
     <section
       id="community"
-      data-illy-section="community"
+      data-v-section="community"
       className="relative overflow-hidden border-t border-border/40 py-16 sm:py-20"
     >
       <div

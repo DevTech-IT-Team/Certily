@@ -1,8 +1,8 @@
 import { useCallback, useSyncExternalStore } from "react";
 
 /** Placeholder until LMS auth is wired — flip to preview enrolled areas. */
-const DEMO_ENROLLED_KEY = "certily-demo-enrolled";
-const ENROLLMENT_EVENT = "certily-enrollment-change";
+const DEMO_ENROLLED_KEY = "certcia-demo-enrolled";
+const ENROLLMENT_EVENT = "certcia-enrollment-change";
 
 function subscribe(onChange: () => void) {
   if (typeof window === "undefined") return () => {};

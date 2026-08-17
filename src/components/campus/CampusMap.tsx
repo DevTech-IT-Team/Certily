@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type RefObject } from 
 import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { ArrowRight, Lock, MessageCircle } from "lucide-react";
-import campusMapImg from "@/assets/certilybgupdate.png";
+import campusMapImg from "@/assets/certicia.png";
 import { CAMPUS_MAP_AREAS, type CampusMapArea } from "@/lib/campus";
 import avatarHi from "@/assets/avatars/hi.png";
 import avatarPoint from "@/assets/avatars/point.png";
@@ -18,17 +18,17 @@ const ILY_AVATARS = {
   think: avatarThink,
 };
 import { canAccessBuilding } from "@/lib/enrollment";
-import { useIlly } from "./IllyContext";
-import { IllyAvatar } from "./IllyAvatar";
+import { useV } from "./VContext";
+import { VAvatar } from "./VAvatar";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_CAMPUS_MSG =
   "Tap a building badge to explore — or hover a building for a quick preview.";
 
 /** Hero plaza on certbg.png — centre fountain */
-const ILLY_HERO_PLAZA = { top: "44%", left: "48%", size: "13.5%" } as const;
+const V_HERO_PLAZA = { top: "44%", left: "48%", size: "13.5%" } as const;
 /** Default map anchor — full-page map */
-const ILLY_CENTER = { top: "46%", left: "50%" } as const;
+const V_CENTER = { top: "46%", left: "50%" } as const;
 
 /** Hero map: mockup shows AI Lab (top-right), not AI Hall pin */
 const HERO_HIDDEN_PIN_IDS = new Set(["ai-hall"]);
@@ -54,23 +54,23 @@ const HERO_BUILDING_ZONES: HeroZone[] = [
     id: "learning-pathways",
     title: "Learning Pathways",
     description: "Explore self-paced courses and structured learning paths.",
-    hit: { top: "14%", left: "2%", width: "28%", height: "28%" },
+    hit: { top: "16%", left: "3%", width: "30%", height: "30%" },
     label: { top: "-2%", left: "-4%" },
   },
   {
-    // Hall of Fame — bottom-left building with "HALL OF FAME" sign (shifted down)
+    // Hall of Fame — bottom-left building with "HALL OF FAME" sign
     id: "certification-hall",
     title: "Hall of Fame",
     description: "Celebrate achievements, certifications and learner milestones.",
-    hit: { top: "34%", left: "0%", width: "28%", height: "28%" },
+    hit: { top: "48%", left: "3%", width: "30%", height: "34%" },
     label: { top: "40%", left: "-5%" },
   },
   {
-    // My Classroom — top-center building with "MY CLASSROOM" sign (shifted further backward into sky)
+    // My Classroom — top-center building with "MY CLASSROOM" sign
     id: "my-classroom",
     title: "My Classroom",
     description: "Access your courses, assignments and learning progress.",
-    hit: { top: "6%", left: "30%", width: "26%", height: "26%" },
+    hit: { top: "10%", left: "35%", width: "30%", height: "30%" },
     label: { top: "-14%", left: "30%" },
   },
   {
@@ -78,15 +78,15 @@ const HERO_BUILDING_ZONES: HeroZone[] = [
     id: "ai-lab",
     title: "AI Lab",
     description: "Hands-on projects, capstone courses and AI tools to build.",
-    hit: { top: "6%", left: "62%", width: "28%", height: "26%" },
+    hit: { top: "16%", left: "67%", width: "30%", height: "30%" },
     label: { top: "-2%", left: "66%" },
   },
   {
-    // Newsroom — mid-right building with "NEWSROOM" sign (shifted further down)
+    // Newsroom — bottom-right building with "NEWSROOM" sign
     id: "newsroom",
     title: "Newsroom",
     description: "Stay updated with AI news, industry insights and announcements.",
-    hit: { top: "26%", left: "64%", width: "28%", height: "26%" },
+    hit: { top: "48%", left: "67%", width: "30%", height: "34%" },
     label: { top: "68%", left: "64%" },
   },
 ];
@@ -122,7 +122,7 @@ function HeroMockupLabel({
 }) {
   return (
     <Link
-      to={locked ? "/courses" : building.route}
+      to={locked ? "/learning" : building.route}
       data-campus-badge
       onMouseEnter={onActivate}
       onFocus={onActivate}
@@ -174,7 +174,7 @@ function HeroBuildingBadge({
 
   return (
     <Link
-      to={locked ? "/courses" : building.route}
+      to={locked ? "/learning" : building.route}
       data-campus-badge
       onMouseEnter={onActivate}
       onFocus={onActivate}
@@ -211,20 +211,29 @@ function HeroCampusFrame({
   activeId,
   onActivate,
   onDeactivate,
-  onIllyClick,
-  illyRef,
+  onVClick,
+  vRef,
   setReady,
 }: {
   visibleAreas: CampusMapArea[];
   activeId: string | null;
   onActivate: (b: CampusMapArea) => void;
   onDeactivate: () => void;
-  onIllyClick: () => void;
-  illyRef: RefObject<HTMLButtonElement | null>;
+  onVClick: () => void;
+  vRef: RefObject<HTMLButtonElement | null>;
   setReady: (v: boolean) => void;
 }) {
-  const { reaction } = useIlly();
+  const { reaction, isInitialWelcome } = useV();
   const byId = (id: string) => visibleAreas.find((b) => b.id === id);
+  const activeBuilding = activeId ? byId(activeId) : null;
+  const activeReaction = activeBuilding ? reaction : isInitialWelcome ? "hi" : reaction;
+  
+  // Keep the last active building so the DOM doesn't get destroyed/recreated on hover, which causes layout fluctuation
+  const [lastActiveId, setLastActiveId] = useState<string | null>(null);
+  useEffect(() => {
+    if (activeId) setLastActiveId(activeId);
+  }, [activeId]);
+  const displayBuilding = activeBuilding || (lastActiveId ? byId(lastActiveId) : visibleAreas[0]);
 
   const renderBadge = (id: string) => {
     const building = byId(id);
@@ -242,43 +251,16 @@ function HeroCampusFrame({
     );
   };
 
-  const renderMapBadge = (zone: HeroZone) => {
-    const building = byId(zone.id);
-    if (!building) return null;
-    const highlighted = activeId === zone.id;
-
-    return (
-      <HeroMockupLabel
-        key={`badge-${zone.id}`}
-        building={building}
-        title={zone.title}
-        description={zone.description}
-        locked={!canAccessBuilding(building.access)}
-        highlighted={highlighted}
-        onActivate={() => onActivate(building)}
-        className={cn(
-          "pointer-events-auto absolute z-40",
-          zone.label.centerX && "-translate-x-1/2",
-          zone.id === "certification-hall" && "z-50"
-        )}
-        style={{
-          top: zone.label.top,
-          left: zone.label.left,
-          bottom: zone.label.bottom,
-        }}
-      />
-    );
-  };
-
   const renderBuildingHit = (zone: HeroZone) => {
     const building = byId(zone.id);
     if (!building) return null;
     const active = activeId === zone.id;
+    const locked = !canAccessBuilding(building.access);
 
     return (
       <div
         key={`hit-${zone.id}`}
-        className="absolute z-10"
+        className="pointer-events-auto absolute z-10 block rounded-2xl outline-none"
         style={{
           top: zone.hit.top,
           left: zone.hit.left,
@@ -286,12 +268,11 @@ function HeroCampusFrame({
           height: zone.hit.height,
         }}
         onMouseEnter={() => onActivate(building)}
+        onFocus={() => onActivate(building)}
+        aria-label={`Explore ${zone.title}`}
       >
         <div
-          className={cn(
-            "pointer-events-none absolute inset-0 rounded-2xl transition-all duration-300",
-            active ? "bg-[#5B4CF5]/[0.07] ring-2 ring-[#5B4CF5]/20" : "bg-transparent ring-0"
-          )}
+          className="pointer-events-none absolute inset-0 rounded-2xl"
           aria-hidden
         />
       </div>
@@ -304,7 +285,7 @@ function HeroCampusFrame({
       <div className="relative w-full">
         <img
           src={campusMapImg}
-          alt="Certily AI Campus — interactive 3D university with learning buildings"
+          alt="Certcia AI Campus — interactive 3D university with learning buildings"
           className="relative z-0 block h-auto w-full select-none"
           width={1536}
           height={1024}
@@ -321,27 +302,49 @@ function HeroCampusFrame({
           {HERO_BUILDING_ZONES.map((zone) => renderBuildingHit(zone))}
         </div>
 
-        {/* Illy — centre plaza overlay */}
-        <button
-          ref={illyRef}
-          type="button"
-          className="absolute z-[25] flex items-end justify-center overflow-visible bg-transparent outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#5B4CF5]/50"
+        {/* V — centre plaza overlay */}
+        <div
+          className="absolute z-[25] flex items-end justify-center overflow-visible bg-transparent aspect-[4/5]"
           style={{
-            top: ILLY_HERO_PLAZA.top,
-            left: ILLY_HERO_PLAZA.left,
-            width: ILLY_HERO_PLAZA.size,
+            top: V_HERO_PLAZA.top,
+            left: V_HERO_PLAZA.left,
+            width: V_HERO_PLAZA.size,
             transform: "translate(-54%, -56%)",
           }}
-          onClick={onIllyClick}
-          aria-label="Chat with Illy"
         >
-          <img
-            src={ILY_AVATARS[reaction] || ILY_AVATARS.stand}
-            alt="Illy on the campus plaza"
-            className="relative h-auto w-full max-w-none object-contain object-bottom drop-shadow-[0_8px_20px_rgba(91,76,245,0.3)]"
-            draggable={false}
-          />
-        </button>
+          {/* Building Explanation Speech Bubble — floating above V ONLY when a building is hovered */}
+          <div
+            className={cn(
+              "pointer-events-none absolute bottom-[180%] lg:bottom-[200%] left-1/2 z-30 w-52 sm:w-60 -translate-x-1/2 transition-opacity duration-200",
+              activeBuilding ? "opacity-100" : "opacity-0"
+            )}
+          >
+            {displayBuilding && (
+              <div className="relative rounded-2xl border border-[#5B4CF5]/40 bg-white/98 p-2.5 sm:p-3 shadow-[0_14px_36px_-6px_rgba(15,21,51,0.35)] backdrop-blur-md text-left ring-2 ring-[#5B4CF5]/20">
+                {/* Pointer triangle pointing down to V (removed or made longer if needed? Let's just remove the triangle since it's floating high now, or keep it. I will keep it for now) */}
+                <div className="absolute -bottom-2 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rotate-45 border-b border-r border-[#5B4CF5]/30 bg-white/98" />
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <span
+                      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-extrabold text-white shadow-2xs"
+                      style={{ backgroundColor: displayBuilding.color }}
+                    >
+                      <displayBuilding.icon className="h-3 w-3" />
+                      {displayBuilding.name}
+                    </span>
+                    <span className="text-[9px] font-bold text-[#5B4CF5] uppercase tracking-wider">
+                      V Guide
+                    </span>
+                  </div>
+                  <p className="text-[10.5px] sm:text-[11px] leading-snug font-medium text-[#2D2A4A]">
+                    {displayBuilding.vIntro}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Mobile — tap cards below map */}
@@ -414,7 +417,7 @@ function BuildingPin({
         )}
       >
         <Link
-          to={locked ? "/courses" : building.route}
+          to={locked ? "/learning" : building.route}
           onClick={(e) => e.stopPropagation()}
           className={cn(
             "pointer-events-auto block rounded-xl border bg-white/98 p-3 shadow-[0_12px_40px_-12px_rgba(15,21,51,0.35)] backdrop-blur-md transition-transform hover:scale-[1.02]",
@@ -448,15 +451,15 @@ export function CampusMap({
   presentation = "default",
 }: CampusMapProps) {
   const isHero = presentation === "hero";
-  const { message, setMessage, setFloatingOpen } = useIlly();
+  const { message, setMessage, setFloatingOpen } = useV();
   const mapRef = useRef<HTMLDivElement>(null);
-  const illyHeroRef = useRef<HTMLButtonElement>(null);
-  const illyDefaultRef = useRef<HTMLDivElement>(null);
+  const vHeroRef = useRef<HTMLButtonElement>(null);
+  const vDefaultRef = useRef<HTMLDivElement>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
   const displayMessage = activeId
-    ? CAMPUS_MAP_AREAS.find((b) => b.id === activeId)?.illyIntro ?? message
+    ? CAMPUS_MAP_AREAS.find((b) => b.id === activeId)?.vIntro ?? message
     : message || DEFAULT_CAMPUS_MSG;
 
   useEffect(() => {
@@ -501,8 +504,8 @@ export function CampusMap({
         );
       }
 
-      if (illyDefaultRef.current && !isHero) {
-        gsap.from(illyDefaultRef.current, {
+      if (vDefaultRef.current && !isHero) {
+        gsap.from(vDefaultRef.current, {
           opacity: 0,
           scale: 0.9,
           duration: 0.7,
@@ -521,7 +524,7 @@ export function CampusMap({
 
   const handleActivate = (building: CampusMapArea) => {
     setActiveId(building.id);
-    setMessage(building.illyIntro, true, "point");
+    setMessage(building.vIntro, true, "point");
   };
 
   const scene = isHero ? (
@@ -533,12 +536,12 @@ export function CampusMap({
         setActiveId(null);
         setMessage(DEFAULT_CAMPUS_MSG, false, "stand");
       }}
-      onIllyClick={() => {
+      onVClick={() => {
         setActiveId(null);
         setMessage("Tap any building — I'll tell you what's inside!", true, "hi");
-        (window as Window & { focusIllyChat?: () => void }).focusIllyChat?.();
+        (window as Window & { focusVChat?: () => void }).focusVChat?.();
       }}
-      illyRef={illyHeroRef}
+      vRef={vHeroRef}
       setReady={setReady}
     />
   ) : (
@@ -549,7 +552,7 @@ export function CampusMap({
     >
       <img
         src={campusMapImg}
-        alt="Certily AI Campus — interactive 3D university with learning buildings"
+        alt="Certcia AI Campus — interactive 3D university with learning buildings"
         className="absolute inset-0 h-full w-full select-none object-cover object-center mix-blend-screen"
         width={1536}
         height={1024}
@@ -560,11 +563,11 @@ export function CampusMap({
 
       <div className="absolute inset-0">
         <div
-          ref={illyDefaultRef}
+          ref={vDefaultRef}
           className="absolute z-30 -translate-x-1/2 -translate-y-1/2"
-          style={{ top: ILLY_CENTER.top, left: ILLY_CENTER.left }}
+          style={{ top: V_CENTER.top, left: V_CENTER.left }}
         >
-          <IllyAvatar
+          <VAvatar
             size="statue"
             onLight
             interactive
@@ -573,7 +576,7 @@ export function CampusMap({
             onInteract={() => {
               setActiveId(null);
               setMessage("Tap any building pin — I'll tell you what's inside!", true, "hi");
-              (window as Window & { focusIllyChat?: () => void }).focusIllyChat?.();
+              (window as Window & { focusVChat?: () => void }).focusVChat?.();
             }}
           />
         </div>
@@ -606,9 +609,9 @@ export function CampusMap({
         <div className="mt-5 rounded-2xl border border-border/70 bg-[#FAFBFE] p-4 sm:p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center">
-              <IllyAvatar size="md" />
+              <VAvatar size="md" />
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-primary">Illy · Campus guide</p>
+                <p className="text-xs font-semibold text-primary">V · Campus guide</p>
                 <p className="mt-1 text-sm leading-relaxed text-foreground/80">{displayMessage}</p>
               </div>
             </div>
@@ -618,7 +621,7 @@ export function CampusMap({
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-white/80"
             >
               <MessageCircle className="h-4 w-4 text-primary" />
-              Ask Illy
+              Ask V
             </button>
           </div>
         </div>

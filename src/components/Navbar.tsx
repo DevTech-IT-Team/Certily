@@ -1,16 +1,15 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logoImg from "@/assets/logoo.png";
+import logoImg from "@/assets/logo/certicialogo.png";
 
 const LMS_LOGIN = "https://lmsathena.com/login";
 
 const NAV_LINKS = [
-  { to: "/courses", label: "Learning" },
+  { to: "/learning", label: "Learning" },
   { to: "/ai-lab", label: "AI Lab" },
-  { to: "/news", label: "Newsroom" },
-  { to: "/events", label: "Events" },
+  { to: "/life-in-certcia", label: "Life in Certcia" },
   { to: "/about", label: "About" },
 ] as const;
 
@@ -18,27 +17,27 @@ const MOBILE_GROUPS = [
   {
     label: "Platform",
     items: [
-      { to: "/courses", label: "Learning Pathways" },
+      { to: "/learning", label: "Learning Pathways" },
       { to: "/ai-lab", label: "AI Lab" },
-      { to: "/news", label: "Newsroom" },
       { to: "/certification-hall", label: "Certification Hall" },
     ],
   },
   {
     label: "More",
     items: [
-      { to: "/events", label: "Events" },
+      { to: "/life-in-certcia", label: "Life in Certcia" },
+      { to: "/about", label: "About" },
       { to: "/faqs", label: "Help Center" },
       { to: "/contact", label: "Contact" },
     ],
   },
-] as const;
+];
 
-function CertilyLogo({ className }: { className?: string }) {
+function CertciaLogo({ className }: { className?: string }) {
   return (
     <img
       src={logoImg}
-      alt="Certily AI Campus"
+      alt="Certcia AI Campus"
       className={cn("h-9 w-auto object-contain", className)}
       draggable={false}
     />
@@ -72,16 +71,8 @@ export function Navbar() {
             scrolled && "shadow-[0_12px_40px_-14px_rgba(15,21,51,0.16)]"
           )}
         >
-          <Link to="/" className="group flex shrink-0 items-center gap-2.5">
-            <CertilyLogo className="transition-transform duration-300 group-hover:scale-105" />
-            <span className="leading-none">
-              <span className="font-display text-lg font-bold tracking-tight text-foreground">
-                Certily
-              </span>
-              <span className="mt-0.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#5A5872]/80">
-                AI Campus
-              </span>
-            </span>
+          <Link to="/" className="group flex shrink-0 items-center">
+            <CertciaLogo className="h-10 transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
@@ -104,16 +95,7 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden flex-1 justify-center px-2 xl:flex xl:max-w-[15rem]">
-            <label className="relative w-full">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="search"
-                placeholder="Search campus..."
-                className="h-9 w-full rounded-xl border border-[#E4E2F0] bg-[#F7F8FC]/90 pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-[#5B4CF5]/40 focus:bg-white focus:ring-2 focus:ring-[#5B4CF5]/15"
-              />
-            </label>
-          </div>
+          {/* Spacer to keep nav and actions aligned if needed, though flex-1 on nav might be better. Let's just remove it and let justify-between handle spacing. */}
 
           <div className="flex items-center gap-1.5 sm:gap-2">
             <a

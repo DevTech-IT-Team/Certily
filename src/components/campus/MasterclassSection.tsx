@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
-import illyGif from "@/assets/OG1HSCVsWg.gif";
-import { IllyAvatar } from "./IllyAvatar";
+import vGif from "@/assets/OG1HSCVsWg.gif";
+import { VAvatar } from "./VAvatar";
 import { cn } from "@/lib/utils";
 
 const MASTERCLASS_TOPICS = [
   {
     id: "why",
-    title: "Who we are & why Certily exists",
+    title: "Who we are & why Certcia exists",
     points: [
       "These are not just trainings — they are need-of-the-hour certification outcomes.",
       "AI learning must be practical, guided, and outcome-based for students and parents.",
@@ -20,7 +20,7 @@ const MASTERCLASS_TOPICS = [
     points: [
       "Public: Learning Pathways, Newsroom, and AI Hall.",
       "Enrolled: My Classroom, AI Lab, AI Certification Hall, and Mission Control.",
-      "Illy guides you across the map, modules, labs, and your parent dashboard.",
+      "V guides you across the map, modules, labs, and your parent dashboard.",
     ],
   },
   {
@@ -42,7 +42,7 @@ export function MasterclassSection() {
   return (
     <section
       id="masterclass"
-      data-illy-section="masterclass"
+      data-v-section="masterclass"
       className="border-t border-border/60 bg-[#FAFBFE] py-16 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -52,27 +52,27 @@ export function MasterclassSection() {
             <div className="relative flex aspect-video flex-col items-center justify-center p-6 sm:p-8">
               <div className="relative">
                 <img
-                  src={illyGif}
-                  alt="Illy presenting the Certily AI Campus masterclass"
+                  src={vGif}
+                  alt="V presenting the Certcia AI Campus masterclass"
                   className="h-40 w-auto object-contain sm:h-52 md:h-56"
                 />
                 <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/95 px-4 py-1.5 text-xs font-semibold text-foreground shadow-lg">
                   <Play className="h-3.5 w-3.5 fill-primary text-primary" />
-                  24/7 with Illy
+                  24/7 with V
                 </div>
               </div>
               <p className="mt-8 text-center text-sm font-medium text-white/85 sm:text-base">
-                Masterclass-style intro — always on, always guided by Illy.
+                Masterclass-style intro — always on, always guided by V.
               </p>
             </div>
           </div>
 
           <div>
             <div className="flex items-center gap-3">
-              <IllyAvatar size="md" />
+              <VAvatar size="md" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                  Illy masterclass
+                  V masterclass
                 </p>
                 <h2 className="text-xl font-extrabold text-foreground sm:text-2xl md:text-3xl">
                   Your guide to the campus
@@ -80,7 +80,7 @@ export function MasterclassSection() {
               </div>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Illy walks new visitors through what Certily AI Campus is, how public and enrolled
+              V walks new visitors through what Certcia AI Campus is, how public and enrolled
               areas work, and how every course is validated for real outcomes.
             </p>
 

@@ -1,9 +1,9 @@
 import { Pause, Play } from "lucide-react";
 import { useRef, useState } from "react";
 import { Reveal } from "./Reveal";
-import { IllyAvatar } from "./IllyAvatar";
+import { VAvatar } from "./VAvatar";
 import campusBg from "@/assets/certbg.png";
-import certillyVideo from "@/assets/Certilly.mp4";
+import certciaVideo from "@/assets/Certcia.mp4";
 
 export function CampusExploreSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -24,7 +24,7 @@ export function CampusExploreSection() {
   return (
     <section
       id="explore-campus"
-      data-illy-section="explore-campus"
+      data-v-section="explore-campus"
       className="relative border-t border-border/30 bg-white py-16 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -32,7 +32,7 @@ export function CampusExploreSection() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
           <Reveal className="max-w-xl">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5B4CF5]">
-              90 seconds · Meet Certilly
+              90 seconds · Meet Certcia
             </p>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.06] tracking-tight text-[#0F1533] sm:text-5xl lg:text-[3.25rem]">
               See how your campus works.
@@ -42,7 +42,7 @@ export function CampusExploreSection() {
           <Reveal delay={0.08} className="max-w-sm shrink-0 sm:pb-1">
             <p className="text-sm leading-relaxed text-[#5A607A] sm:text-base">
               From choosing a pathway to shipping your first AI project — see
-              how every part of Certilly connects.
+              how every part of Certcia connects.
             </p>
           </Reveal>
         </div>
@@ -66,7 +66,7 @@ export function CampusExploreSection() {
             {/* Video — sits on top, hidden until playing */}
             <video
               ref={videoRef}
-              src={certillyVideo}
+              src={certciaVideo}
               className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-100" : "opacity-0"}`}
               playsInline
               preload="metadata"
@@ -96,7 +96,7 @@ export function CampusExploreSection() {
                 <span className="font-display text-xs font-black text-white">C</span>
               </span>
               <span className="font-display text-sm font-bold tracking-wide text-white/90">
-                certilly
+                certcia
               </span>
               <span className="ml-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/35">
                 · The Campus Tour
@@ -106,7 +106,7 @@ export function CampusExploreSection() {
             {/* ── Centre-left: hero copy ── */}
             <div className="absolute left-5 top-1/2 -translate-y-[55%] sm:left-7 lg:left-10">
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4CD1B0]">
-                Welcome to Certilly
+                Welcome to Certcia
               </p>
               <h3
                 className="mt-2.5 font-display font-extrabold leading-[1.06] text-white"
@@ -137,12 +137,12 @@ export function CampusExploreSection() {
               </div>
             </div>
 
-            {/* ── Illy on the right — visible only when video is playing ── */}
+            {/* ── V on the right — visible only when video is playing ── */}
             <div
               className={`absolute transition-opacity duration-500 ${playing ? "opacity-0 pointer-events-none" : "opacity-100"}`}
               style={{ bottom: "0%", right: "6%", transform: "translateX(0)" }}
             >
-              <IllyAvatar
+              <VAvatar
                 size="statue"
                 reaction="stand"
                 grounded

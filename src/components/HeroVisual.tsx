@@ -12,7 +12,7 @@ type Spot = {
 
 const spots: Spot[] = [
   {
-    to: "/courses",
+    to: "/learning",
     title: "Learning Tower",
     blurb: "Courses & certification paths",
     Icon: BookOpen,

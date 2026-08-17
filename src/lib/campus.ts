@@ -23,7 +23,7 @@ export type CampusBuilding = {
   icon: LucideIcon;
   /** Percent position on campus map */
   mapPosition: { top: string; left: string };
-  illyIntro: string;
+  vIntro: string;
   color: string;
 };
 
@@ -38,7 +38,7 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     access: "public",
     icon: GraduationCap,
     mapPosition: { top: "18%", left: "28%" },
-    illyIntro:
+    vIntro:
       "This is your first stop! Learning Pathways shows every certification track — from K–12 AI fundamentals to college-ready outcomes. Browse free, enroll when you're ready.",
     color: "#7B6CFF",
   },
@@ -47,13 +47,13 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     name: "My Classroom",
     tagline: "Your guided learning space",
     description:
-      "Self-paced lessons, knowledge checks, assignments, and Illy-guided progress tracking — all in one place once you enroll.",
+      "Self-paced lessons, knowledge checks, assignments, and V-guided progress tracking — all in one place once you enroll.",
     route: "/classroom",
     access: "enrolled",
     icon: BookOpen,
     mapPosition: { top: "62%", left: "26%" },
-    illyIntro:
-      "My Classroom is where your learning journey lives — structured lessons, quizzes, and Illy guiding you through every module. Enroll in a pathway to unlock it.",
+    vIntro:
+      "My Classroom is where your learning journey lives — structured lessons, quizzes, and V guiding you through every module. Enroll in a pathway to unlock it.",
     color: "#5B4FE0",
   },
   {
@@ -66,7 +66,7 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     access: "enrolled",
     icon: Beaker,
     mapPosition: { top: "16%", left: "72%" },
-    illyIntro:
+    vIntro:
       "The AI Lab is where learning becomes doing. You'll build real capstone projects that go straight into your portfolio. Enroll in a pathway to get in.",
     color: "#4CD1B0",
   },
@@ -75,12 +75,12 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     name: "Newsroom",
     tagline: "Why your skills matter now",
     description:
-      "AI news, industry updates, and plain-language explainers that connect today's trends directly to Certily certifications.",
+      "AI news, industry updates, and plain-language explainers that connect today's trends directly to Certcia certifications.",
     route: "/news",
     access: "public",
     icon: Newspaper,
     mapPosition: { top: "32%", left: "76%" },
-    illyIntro:
+    vIntro:
       "The Newsroom shows students and parents why AI skills matter right now — connecting industry headlines to the certifications we teach.",
     color: "#6366F1",
   },
@@ -94,7 +94,7 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     access: "enrolled",
     icon: Award,
     mapPosition: { top: "72%", left: "50%" },
-    illyIntro:
+    vIntro:
       "This is where you celebrate finishing a pathway! Every certificate you earn here is verifiable — share it with anyone, anywhere.",
     color: "#B8ABFF",
   },
@@ -108,7 +108,7 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     access: "enrolled",
     icon: LayoutDashboard,
     mapPosition: { top: "58%", left: "74%" },
-    illyIntro:
+    vIntro:
       "Mission Control keeps everyone on track — students see their progress, parents see the full picture. It unlocks with enrollment.",
     color: "#0F1533",
   },
@@ -138,7 +138,7 @@ export const AI_HALL = {
   icon: Sparkles,
   color: "#4CD1B0",
   mapPosition: { top: "20%", left: "58%" },
-  illyIntro:
+  vIntro:
     "AI Hall is our public playground — free activities, challenges, and events to explore AI before you enroll.",
 };
 

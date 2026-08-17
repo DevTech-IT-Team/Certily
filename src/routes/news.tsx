@@ -4,11 +4,11 @@ import { ArrowRight, BookOpen, Mail, TrendingUp } from "lucide-react";
 export const Route = createFileRoute("/news")({
   head: () => ({
     meta: [
-      { title: "Newsroom — Certily AI Campus" },
+      { title: "Newsroom — Certcia AI Campus" },
       {
         name: "description",
         content:
-          "AI news, industry updates, and plain-language explainers that connect today's trends to Certily certifications.",
+          "AI news, industry updates, and plain-language explainers that connect today's trends to Certcia certifications.",
       },
     ],
   }),
@@ -19,7 +19,7 @@ const FEATURED = {
   tag: "Industry",
   title: "Why AI literacy is the most in-demand skill of 2026",
   excerpt:
-    "From K–12 classrooms to Fortune 500 boardrooms — understanding AI is no longer optional. Here's what the data says, and how Certily pathways map directly to it.",
+    "From K–12 classrooms to Fortune 500 boardrooms — understanding AI is no longer optional. Here's what the data says, and how Certcia pathways map directly to it.",
   date: "May 14, 2026",
   readTime: "5 min read",
   img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1400&q=80",
@@ -28,7 +28,7 @@ const FEATURED = {
 const ARTICLES = [
   {
     tag: "Research",
-    title: "How Certily builds curriculum around real AI outcomes",
+    title: "How Certcia builds curriculum around real AI outcomes",
     excerpt: "Industry professionals and SMEs validate every course direction before it publishes.",
     date: "May 09, 2026",
     readTime: "4 min",
@@ -53,7 +53,7 @@ const ARTICLES = [
   {
     tag: "Industry",
     title: "Generative AI in K–12: what parents need to know",
-    excerpt: "A plain-language guide to how schools are responding — and how Certily prepares students.",
+    excerpt: "A plain-language guide to how schools are responding — and how Certcia prepares students.",
     date: "Apr 05, 2026",
     readTime: "6 min",
     img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
@@ -68,7 +68,7 @@ const ARTICLES = [
   },
   {
     tag: "Product",
-    title: "Illy now guides learners through capstone checkpoints",
+    title: "V now guides learners through capstone checkpoints",
     excerpt: "Our AI campus guide surfaces personalised tips at every project milestone.",
     date: "Mar 10, 2026",
     readTime: "3 min",
@@ -105,7 +105,7 @@ function NewsPage() {
     <div className="min-h-screen bg-white">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white pt-24 pb-14 sm:pt-28 sm:pb-16">
+      <section className="relative overflow-hidden bg-white pt-16 pb-12 sm:pt-20 sm:pb-14">
         <div
           className="pointer-events-none absolute inset-0"
           style={{ background: "radial-gradient(ellipse 80% 55% at 50% -10%, rgba(91,76,245,0.10) 0%, transparent 70%)" }}

@@ -4,7 +4,7 @@ import { ArrowRight, Calendar, CalendarDays, Mail, MapPin, PlayCircle, Users, Za
 export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
-      { title: "Events — Certily AI Campus" },
+      { title: "Events — Certcia AI Campus" },
       {
         name: "description",
         content: "Live workshops, AMAs, hackathons, and the AI Campus Summit — on campus and around the world.",
@@ -22,7 +22,7 @@ const UPCOMING = [
     tag: "Conference",
     seats: 1200,
     img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-    blurb: "Three days of keynotes, hands-on labs, and conversations with frontier AI builders. The flagship event of the Certily campus year.",
+    blurb: "Three days of keynotes, hands-on labs, and conversations with frontier AI builders. The flagship event of the Certcia campus year.",
     featured: true,
   },
   {
@@ -67,7 +67,7 @@ const PAST = [
     recap: "92 educators attended. Recording available.",
   },
   {
-    title: "Certily Campus Launch Day",
+    title: "Certcia Campus Launch Day",
     date: "Feb 01, 2026",
     loc: "Dallas · In person",
     tag: "Conference",
@@ -110,7 +110,7 @@ function EventsPage() {
     <div className="min-h-screen bg-white">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white pt-24 pb-14 sm:pt-28 sm:pb-16">
+      <section className="relative overflow-hidden bg-white pt-16 pb-12 sm:pt-20 sm:pb-14">
         <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 55% at 50% -10%, rgba(91,76,245,0.10) 0%, transparent 70%)" }} />
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.025]"

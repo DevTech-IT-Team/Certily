@@ -20,7 +20,7 @@ import { Section } from "@/components/Section";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Mission Control — Certily AI Campus" },
+      { title: "Mission Control — Certcia AI Campus" },
       { name: "description", content: "Student and parent dashboard for progress, assignments, certificates, and events." },
     ],
   }),
@@ -38,7 +38,7 @@ function Dashboard() {
         route="/dashboard"
         buildingName="Mission Control"
         description="Your student and parent dashboard — progress, assignments, certificates, payments, and events."
-        illyMessage="Mission Control keeps you and your parents in the loop — I'll send reminders for quizzes and capstones!"
+        vMessage="Mission Control keeps you and your parents in the loop — I'll send reminders for quizzes and capstones!"
       />
     );
   }

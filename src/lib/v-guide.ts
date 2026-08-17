@@ -8,14 +8,14 @@ import {
   Users,
 } from "lucide-react";
 
-export type IllyGuideTopic = {
+export type VGuideTopic = {
   id: string;
   label: string;
   message: string;
   href?: string;
 };
 
-export type IllyPersona = {
+export type VPersona = {
   id: string;
   title: string;
   description: string;
@@ -24,7 +24,7 @@ export type IllyPersona = {
   message: string;
 };
 
-export type IllyPopularPrompt = {
+export type VPopularPrompt = {
   id: string;
   command: string;
   label: string;
@@ -32,10 +32,10 @@ export type IllyPopularPrompt = {
   href?: string;
 };
 
-export const DEFAULT_ILLY_MESSAGE =
-  "Hey! I'm ILY — your guide on the Certilly campus. Tap a quick link below and I'll point you in the right direction.";
+export const DEFAULT_V_MESSAGE =
+  "Hey! I'm V — your guide on the Certcia campus. Tap a quick link below and I'll point you in the right direction.";
 
-export const ILLY_STARTER_PROMPTS = [
+export const V_STARTER_PROMPTS = [
   {
     id: "campus-tour",
     label: "Public vs enrolled areas",
@@ -65,7 +65,7 @@ export const ILLY_STARTER_PROMPTS = [
   },
 ] as const;
 
-export const ILLY_QUICK_TOPICS: IllyGuideTopic[] = [
+export const V_QUICK_TOPICS: VGuideTopic[] = [
   {
     id: "campus",
     label: "Campus map",
@@ -84,7 +84,7 @@ export const ILLY_QUICK_TOPICS: IllyGuideTopic[] = [
     id: "pillars",
     label: "How it works",
     message:
-      "Learn, Build, Grow, Connect, and Get Opportunities — that's how every Certily pathway is structured.",
+      "Learn, Build, Grow, Connect, and Get Opportunities — that's how every Certcia pathway is structured.",
     href: "/#pillars",
   },
   {
@@ -96,7 +96,7 @@ export const ILLY_QUICK_TOPICS: IllyGuideTopic[] = [
   },
 ];
 
-export const ILLY_PERSONAS: IllyPersona[] = [
+export const V_PERSONAS: VPersona[] = [
   {
     id: "guide",
     title: "Campus guide",
@@ -153,7 +153,7 @@ export const ILLY_PERSONAS: IllyPersona[] = [
   },
 ];
 
-export const ILLY_POPULAR_PROMPTS: IllyPopularPrompt[] = [
+export const V_POPULAR_PROMPTS: VPopularPrompt[] = [
   {
     id: "pathway",
     command: "/pick-pathway",
@@ -212,36 +212,36 @@ export const ILLY_POPULAR_PROMPTS: IllyPopularPrompt[] = [
     command: "/ai-news",
     label: "Why AI certifications matter",
     message:
-      "The Newsroom shows how today's AI landscape connects to Certily courses — updated for families.",
+      "The Newsroom shows how today's AI landscape connects to Certcia courses — updated for families.",
     href: "/news",
   },
 ];
 
-export const ILLY_SCROLL_TIPS: { target: string; message: string }[] = [
+export const V_SCROLL_TIPS: { target: string; message: string }[] = [
   {
-    target: '[data-illy-section="hero"]',
+    target: '[data-v-section="hero"]',
     message: "Ask me anything here — I'm your campus expert, just like having a guide on day one.",
   },
   {
-    target: '[data-illy-section="campus"]',
+    target: '[data-v-section="campus"]',
     message: "This is the interactive campus — hover a building and I'll tell you what's inside.",
   },
   {
-    target: '[data-illy-section="personas"]',
+    target: '[data-v-section="personas"]',
     message: "Pick a role and I'll help as your guide, advisor, project coach, or certification expert.",
   },
   {
-    target: '[data-illy-section="pillars"]',
+    target: '[data-v-section="pillars"]',
     message: "These five pillars show how you'll learn, build projects, and grow on campus.",
   },
   {
-    target: '[data-illy-section="stats"]',
+    target: '[data-v-section="stats"]',
     message: "Real numbers from real learners — courses, projects, and certificates earned here.",
   },
 ];
 
-export const ILLY_PAGE_MESSAGES: Record<string, string> = {
-  "/": DEFAULT_ILLY_MESSAGE,
+export const V_PAGE_MESSAGES: Record<string, string> = {
+  "/": DEFAULT_V_MESSAGE,
   "/courses":
     "Learning Pathways is where you browse every certification track — preview courses and enroll when you're ready.",
   "/classroom":
@@ -249,7 +249,7 @@ export const ILLY_PAGE_MESSAGES: Record<string, string> = {
   "/ai-lab":
     "The AI Lab is for hands-on capstones and projects. Enroll to unlock labs and submit your work.",
   "/news":
-    "The Newsroom keeps you current on AI trends and shows why Certily certifications matter today.",
+    "The Newsroom keeps you current on AI trends and shows why Certcia certifications matter today.",
   "/ai-hall":
     "AI Hall is open to everyone — free activities, challenges, and events to explore before you enroll.",
   "/certification-hall":
@@ -257,7 +257,7 @@ export const ILLY_PAGE_MESSAGES: Record<string, string> = {
   "/dashboard":
     "Mission Control tracks your goals, assignments, certificates, and parent views in one place.",
   "/events":
-    "Campus events, webinars, and workshops — great ways to learn with the Certily community.",
+    "Campus events, webinars, and workshops — great ways to learn with the Certcia community.",
   "/faqs": "Got questions? I can help you find answers about pathways, enrollment, and certificates.",
   "/contact": "Need to reach our team? Use this page — we're here for students and parents.",
 };
@@ -289,19 +289,19 @@ const KEYWORD_RESPONSES: { keys: string[]; message: string }[] = [
       "Complete a pathway to earn verifiable certificates in the Certification Hall — share links with anyone.",
   },
   {
-    keys: ["illy", "hello", "hi", "hey", "help"],
+    keys: ["v", "hello", "hi", "hey", "help"],
     message:
       "I'm your campus guide — tap a quick link below to explore pathways, buildings, and enrollment.",
   },
 ];
 
-export function getIllyMessageForPath(pathname: string): string {
-  return ILLY_PAGE_MESSAGES[pathname] ?? DEFAULT_ILLY_MESSAGE;
+export function getVMessageForPath(pathname: string): string {
+  return V_PAGE_MESSAGES[pathname] ?? DEFAULT_V_MESSAGE;
 }
 
-export type IllyReaction = "hi" | "point" | "stand" | "stare" | "think";
+export type VReaction = "hi" | "point" | "stand" | "stare" | "think";
 
-export function matchIllyResponse(input: string): { message: string; reaction: IllyReaction } {
+export function matchVResponse(input: string): { message: string; reaction: VReaction } {
   const q = input.trim().toLowerCase();
   if (!q) {
     return {
@@ -313,7 +313,7 @@ export function matchIllyResponse(input: string): { message: string; reaction: I
   // Greetings
   if (q === "hi" || q === "hello" || q === "hey" || q.includes("who are you") || q.startsWith("hello") || q.startsWith("hi ")) {
     return {
-      message: "Hey there! I'm ILY, your Certily AI campus guide. I can show you around, explain public vs. locked zones, or recommend the best certification pathway for your goals. Ask me anything!",
+      message: "Hey there! I'm V, your Certcia AI campus guide. I can show you around, explain public vs. locked zones, or recommend the best certification pathway for your goals. Ask me anything!",
       reaction: "hi"
     };
   }
@@ -337,7 +337,7 @@ export function matchIllyResponse(input: string): { message: string; reaction: I
   // AI Lab
   if (q.includes("lab") || q.includes("project") || q.includes("capstone") || q.includes("build")) {
     return {
-      message: "The AI Lab is where you put theory into practice! Enrolled students build real-world AI projects, work on capstones, and compile a portfolio that is shareable with colleges and employers. It's a key part of every Certily pathway.",
+      message: "The AI Lab is where you put theory into practice! Enrolled students build real-world AI projects, work on capstones, and compile a portfolio that is shareable with colleges and employers. It's a key part of every Certcia pathway.",
       reaction: "point"
     };
   }
@@ -345,7 +345,7 @@ export function matchIllyResponse(input: string): { message: string; reaction: I
   // Certification Hall
   if (q.includes("cert") || q.includes("credential") || q.includes("hall") || q.includes("verify")) {
     return {
-      message: "The Certification Hall houses all of your completed credentials! Every Certily certification you earn comes with a secure, verifiable link that you can share with colleges, parents, and employers to prove your AI capabilities.",
+      message: "The Certification Hall houses all of your completed credentials! Every Certcia certification you earn comes with a secure, verifiable link that you can share with colleges, parents, and employers to prove your AI capabilities.",
       reaction: "point"
     };
   }
@@ -361,7 +361,7 @@ export function matchIllyResponse(input: string): { message: string; reaction: I
   // Newsroom
   if (q.includes("news") || q.includes("trend") || q.includes("why learn") || q.includes("why ai")) {
     return {
-      message: "The Newsroom is where we connect today's AI trends with what you learn in Certily. It's a great place for parents and students to see why AI skills are so valuable in today's landscape and what careers are emerging.",
+      message: "The Newsroom is where we connect today's AI trends with what you learn in Certcia. It's a great place for parents and students to see why AI skills are so valuable in today's landscape and what careers are emerging.",
       reaction: "point"
     };
   }
@@ -383,21 +383,21 @@ export function matchIllyResponse(input: string): { message: string; reaction: I
   }
 
   // Fallback keyword search
-  const slash = ILLY_POPULAR_PROMPTS.find((p) => p.command === q || q.startsWith(p.command));
+  const slash = V_POPULAR_PROMPTS.find((p) => p.command === q || q.startsWith(p.command));
   if (slash) {
-    let reaction: IllyReaction = "stand";
+    let reaction: VReaction = "stand";
     if (slash.message.toLowerCase().includes("pathway") || slash.message.toLowerCase().includes("map")) {
       reaction = "point";
     }
     return { message: slash.message, reaction };
   }
 
-  const topic = ILLY_QUICK_TOPICS.find((t) => q.includes(t.label.toLowerCase()));
+  const topic = V_QUICK_TOPICS.find((t) => q.includes(t.label.toLowerCase()));
   if (topic) {
     return { message: topic.message, reaction: "point" };
   }
 
-  const persona = ILLY_PERSONAS.find(
+  const persona = V_PERSONAS.find(
     (p) => q.includes(p.title.toLowerCase()) || q.includes(p.prompt.toLowerCase())
   );
   if (persona) {

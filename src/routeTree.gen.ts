@@ -10,10 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as LifeInCertciaRouteImport } from './routes/life-in-certcia'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ClassroomRouteImport } from './routes/classroom'
 import { Route as CertificationHallRouteImport } from './routes/certification-hall'
@@ -21,10 +21,17 @@ import { Route as AiLabRouteImport } from './routes/ai-lab'
 import { Route as AiHallRouteImport } from './routes/ai-hall'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LearningIndexRouteImport } from './routes/learning.index'
+import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
 
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LifeInCertciaRoute = LifeInCertciaRouteImport.update({
+  id: '/life-in-certcia',
+  path: '/life-in-certcia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsRoute = FaqsRouteImport.update({
@@ -40,11 +47,6 @@ const EventsRoute = EventsRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoursesRoute = CoursesRouteImport.update({
-  id: '/courses',
-  path: '/courses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -82,6 +84,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearningIndexRoute = LearningIndexRouteImport.update({
+  id: '/learning/',
+  path: '/learning/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningPathwayIdRoute = LearningPathwayIdRouteImport.update({
+  id: '/learning/$pathwayId',
+  path: '/learning/$pathwayId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -91,11 +103,13 @@ export interface FileRoutesByFullPath {
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
+  '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
+  '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/learning/': typeof LearningIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -105,11 +119,13 @@ export interface FileRoutesByTo {
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
+  '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
+  '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/learning': typeof LearningIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -120,11 +136,13 @@ export interface FileRoutesById {
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRoute
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
+  '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
+  '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/learning/': typeof LearningIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -136,11 +154,13 @@ export interface FileRouteTypes {
     | '/certification-hall'
     | '/classroom'
     | '/contact'
-    | '/courses'
     | '/dashboard'
     | '/events'
     | '/faqs'
+    | '/life-in-certcia'
     | '/news'
+    | '/learning/$pathwayId'
+    | '/learning/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -150,11 +170,13 @@ export interface FileRouteTypes {
     | '/certification-hall'
     | '/classroom'
     | '/contact'
-    | '/courses'
     | '/dashboard'
     | '/events'
     | '/faqs'
+    | '/life-in-certcia'
     | '/news'
+    | '/learning/$pathwayId'
+    | '/learning'
   id:
     | '__root__'
     | '/'
@@ -164,11 +186,13 @@ export interface FileRouteTypes {
     | '/certification-hall'
     | '/classroom'
     | '/contact'
-    | '/courses'
     | '/dashboard'
     | '/events'
     | '/faqs'
+    | '/life-in-certcia'
     | '/news'
+    | '/learning/$pathwayId'
+    | '/learning/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -179,11 +203,13 @@ export interface RootRouteChildren {
   CertificationHallRoute: typeof CertificationHallRoute
   ClassroomRoute: typeof ClassroomRoute
   ContactRoute: typeof ContactRoute
-  CoursesRoute: typeof CoursesRoute
   DashboardRoute: typeof DashboardRoute
   EventsRoute: typeof EventsRoute
   FaqsRoute: typeof FaqsRoute
+  LifeInCertciaRoute: typeof LifeInCertciaRoute
   NewsRoute: typeof NewsRoute
+  LearningPathwayIdRoute: typeof LearningPathwayIdRoute
+  LearningIndexRoute: typeof LearningIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -193,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/life-in-certcia': {
+      id: '/life-in-certcia'
+      path: '/life-in-certcia'
+      fullPath: '/life-in-certcia'
+      preLoaderRoute: typeof LifeInCertciaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs': {
@@ -214,13 +247,6 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/courses': {
-      id: '/courses'
-      path: '/courses'
-      fullPath: '/courses'
-      preLoaderRoute: typeof CoursesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -272,6 +298,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learning/': {
+      id: '/learning/'
+      path: '/learning'
+      fullPath: '/learning/'
+      preLoaderRoute: typeof LearningIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learning/$pathwayId': {
+      id: '/learning/$pathwayId'
+      path: '/learning/$pathwayId'
+      fullPath: '/learning/$pathwayId'
+      preLoaderRoute: typeof LearningPathwayIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -283,11 +323,13 @@ const rootRouteChildren: RootRouteChildren = {
   CertificationHallRoute: CertificationHallRoute,
   ClassroomRoute: ClassroomRoute,
   ContactRoute: ContactRoute,
-  CoursesRoute: CoursesRoute,
   DashboardRoute: DashboardRoute,
   EventsRoute: EventsRoute,
   FaqsRoute: FaqsRoute,
+  LifeInCertciaRoute: LifeInCertciaRoute,
   NewsRoute: NewsRoute,
+  LearningPathwayIdRoute: LearningPathwayIdRoute,
+  LearningIndexRoute: LearningIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

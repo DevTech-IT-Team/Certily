@@ -14,11 +14,11 @@ import { Section } from "@/components/Section";
 export const Route = createFileRoute("/ai-hall")({
   head: () => ({
     meta: [
-      { title: "AI Hall — Certily AI Campus" },
+      { title: "AI Hall — Certcia AI Campus" },
       {
         name: "description",
         content:
-          "Free AI activities, mini-projects, demos, quiz challenges, and community events at Certily AI Campus.",
+          "Free AI activities, mini-projects, demos, quiz challenges, and community events at Certcia AI Campus.",
       },
     ],
   }),

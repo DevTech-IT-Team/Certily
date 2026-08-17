@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { IllyAvatar } from "./IllyAvatar";
+import { VAvatar } from "./VAvatar";
 import { cn } from "@/lib/utils";
 
-type IllyGuideProps = {
+type VGuideProps = {
   message: string;
   title?: string;
   className?: string;
@@ -12,13 +12,13 @@ type IllyGuideProps = {
   interactive?: boolean;
 };
 
-export function IllyGuide({
+export function VGuide({
   message,
-  title = "Hi, I'm Illy!",
+  title = "Hi, I'm V!",
   className,
   variant = "card",
   interactive = false,
-}: IllyGuideProps) {
+}: VGuideProps) {
   const bubbleRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const prevMessage = useRef(message);
@@ -57,7 +57,7 @@ export function IllyGuide({
   if (variant === "inline") {
     return (
       <div className={cn("flex items-start gap-3", className)}>
-        <IllyAvatar size="md" grounded />
+        <VAvatar size="md" grounded />
         <div ref={bubbleRef} className="min-w-0 flex-1">
           <p className="text-xs font-semibold text-primary">{title}</p>
           <p className="mt-0.5 text-sm leading-snug text-muted-foreground">{message}</p>
@@ -83,7 +83,7 @@ export function IllyGuide({
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_80%,rgba(123,108,255,0.15),transparent_65%)]"
             />
-            <IllyAvatar size="hero" grounded animate className="relative z-10" />
+            <VAvatar size="hero" grounded animate className="relative z-10" />
           </div>
           <div ref={bubbleRef} className="flex min-w-0 flex-1 flex-col justify-center px-4 py-4 sm:px-5 sm:py-5">
             <p className="text-sm font-bold text-foreground sm:text-[15px]">
@@ -98,7 +98,7 @@ export function IllyGuide({
                     <span className="h-1 w-1 animate-bounce rounded-full bg-primary [animation-delay:150ms]" />
                     <span className="h-1 w-1 animate-bounce rounded-full bg-primary [animation-delay:300ms]" />
                   </span>
-                  Illy is typing
+                  V is typing
                 </>
               ) : (
                 "Your campus guide"
@@ -119,7 +119,7 @@ export function IllyGuide({
     >
       <div className="flex items-stretch">
         <div className="flex w-24 shrink-0 items-end justify-center bg-white px-2 pb-3 pt-3">
-          <IllyAvatar size="lg" grounded />
+          <VAvatar size="lg" grounded />
         </div>
         <div ref={bubbleRef} className="min-w-0 flex-1 px-4 py-4">
           <p className="text-sm font-bold text-foreground">

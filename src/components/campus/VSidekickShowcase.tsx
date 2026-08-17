@@ -1,19 +1,19 @@
 import { Link } from "@tanstack/react-router";
-import { IllyAvatar } from "./IllyAvatar";
-import { useIlly } from "./IllyContext";
-import { ILLY_STARTER_PROMPTS } from "@/lib/illy-guide";
+import { VAvatar } from "./VAvatar";
+import { useV } from "./VContext";
+import { V_STARTER_PROMPTS } from "@/lib/v-guide";
 import { cn } from "@/lib/utils";
 
 type DockProps = { className?: string; embedded?: boolean; compact?: boolean };
 
 /** Mascot tip dock — sits under the campus map */
-export function IllyChatDock({ className, embedded = false, compact = false }: DockProps) {
-  const { message, showTip } = useIlly();
+export function VChatDock({ className, embedded = false, compact = false }: DockProps) {
+  const { message, showTip } = useV();
 
   return (
     <div
-      id="illy-hero"
-      data-illy-section="illy-panel"
+      id="v-hero"
+      data-v-section="v-panel"
       className={cn(
         embedded
           ? "scroll-mt-24 mt-0 w-full px-0"
@@ -28,15 +28,15 @@ export function IllyChatDock({ className, embedded = false, compact = false }: D
         )}
       >
         {!compact && (
-          <IllyAvatar size="md" reaction="stand" className="shrink-0 bg-[#0F1533] p-0.5 rounded-full" />
+          <VAvatar size="md" reaction="stand" className="shrink-0 bg-[#0F1533] p-0.5 rounded-full" />
         )}
 
         <div className="min-w-0 flex-1 text-left">
-          <p className="text-xs font-semibold text-primary">ILY · Your guide</p>
+          <p className="text-xs font-semibold text-primary">V · Your guide</p>
           <p className="mt-2 max-w-[42ch] text-sm leading-[1.65] text-foreground/90">{message}</p>
 
           <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">
-            {ILLY_STARTER_PROMPTS.slice(0, compact ? 2 : 4).map((p) => {
+            {V_STARTER_PROMPTS.slice(0, compact ? 2 : 4).map((p) => {
               const chip = (
                 <button
                   type="button"
@@ -62,5 +62,5 @@ export function IllyChatDock({ className, embedded = false, compact = false }: D
   );
 }
 
-/** @deprecated use IllyChatDock */
-export const IllySidekickShowcase = IllyChatDock;
+/** @deprecated use VChatDock */
+export const VSidekickShowcase = VChatDock;

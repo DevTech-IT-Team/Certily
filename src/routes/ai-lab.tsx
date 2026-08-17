@@ -11,12 +11,12 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import { IllyAvatar } from "@/components/campus/IllyAvatar";
+import { VAvatar } from "@/components/campus/VAvatar";
 
 export const Route = createFileRoute("/ai-lab")({
   head: () => ({
     meta: [
-      { title: "AI Lab — Certily AI Campus" },
+      { title: "AI Lab — Certcia AI Campus" },
       {
         name: "description",
         content:
@@ -59,7 +59,7 @@ const CAPSTONES = [
     icon: Rocket,
     level: "College",
     title: "AI Product Prototype",
-    desc: "Ideate, prototype, and pitch an AI-powered product concept with Illy's guidance.",
+    desc: "Ideate, prototype, and pitch an AI-powered product concept with V's guidance.",
     outcome: "AI Builder portfolio project",
     duration: "5 sessions",
     img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
@@ -77,7 +77,7 @@ const STEPS = [
     n: "02",
     icon: Beaker,
     title: "Start your guided build",
-    desc: "Illy walks you through every step — templates, checkpoints, and real-time feedback.",
+    desc: "V walks you through every step — templates, checkpoints, and real-time feedback.",
   },
   {
     n: "03",
@@ -92,7 +92,7 @@ function AILabPage() {
     <div className="min-h-screen bg-[#F7F8FC]">
 
       {/* ── HERO ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <section className="relative overflow-hidden bg-white pt-16 pb-12 sm:pt-20 sm:pb-16">
         {/* Very subtle purple gradient at top */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_-10%,rgba(91,76,245,0.08),transparent_60%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#F7F8FC] to-transparent" />
@@ -117,14 +117,14 @@ function AILabPage() {
 
               <p className="mt-5 max-w-lg text-base leading-relaxed text-[#5A607A] sm:text-lg">
                 The AI Lab is your hands-on workspace. Guided capstone projects,
-                Illy at every checkpoint, and verifiable certificates you can
+                V at every checkpoint, and verifiable certificates you can
                 share with colleges and employers.
               </p>
 
               <ul className="mt-7 space-y-3">
                 {[
                   "Guided capstone project per pathway",
-                  "Illy mentorship at every step",
+                  "V mentorship at every step",
                   "Portfolio-ready project output",
                   "Verifiable certificate on completion",
                 ].map((item) => (
@@ -137,7 +137,7 @@ function AILabPage() {
 
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
-                  to="/courses"
+                  to="/learning"
                   className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-[#5B4CF5] px-8 text-sm font-bold text-white shadow-[0_8px_28px_-6px_rgba(91,76,245,0.45)] transition-all hover:scale-[1.03] hover:bg-[#4A3BE8] active:scale-[0.98]"
                 >
                   Explore pathways to enroll
@@ -164,7 +164,7 @@ function AILabPage() {
                     <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
                     <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
                   </div>
-                  <span className="mx-auto font-mono text-[11px] text-[#8892A4]">certily.ai / ai-lab</span>
+                  <span className="mx-auto font-mono text-[11px] text-[#8892A4]">Certcia.ai / ai-lab</span>
                 </div>
 
                 <div className="p-5">
@@ -210,12 +210,12 @@ function AILabPage() {
                     })}
                   </div>
 
-                  {/* Illy tip */}
+                  {/* V tip */}
                   <div className="mt-4 rounded-xl border border-[#EDE9FF] bg-[#F5F3FF] px-4 py-3">
                     <div className="flex items-start gap-2.5">
-                      <IllyAvatar size="sm" reaction="hi" className="mt-0.5 shrink-0" />
+                      <VAvatar size="sm" reaction="hi" className="mt-0.5 shrink-0" />
                       <p className="text-[11px] leading-relaxed text-[#5A607A]">
-                        <span className="font-bold text-[#5B4CF5]">Illy says:</span>{" "}
+                        <span className="font-bold text-[#5B4CF5]">V says:</span>{" "}
                         You're on step 2 of your chatbot build — keep going!
                       </p>
                     </div>
@@ -291,7 +291,7 @@ function AILabPage() {
               </p>
             </div>
             <Link
-              to="/courses"
+              to="/learning"
               className="group hidden shrink-0 items-center gap-2 rounded-full border border-[#E8EAF4] bg-[#F7F8FC] px-5 py-2.5 text-sm font-semibold text-[#5A607A] transition-all hover:border-[#5B4CF5]/30 hover:text-[#5B4CF5] sm:inline-flex"
             >
               Browse pathways
@@ -364,10 +364,10 @@ function AILabPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Zap,          title: "Step-by-step guidance", desc: "Clear steps and Illy checkpoints — you're never left guessing." },
+              { icon: Zap,          title: "Step-by-step guidance", desc: "Clear steps and V checkpoints — you're never left guessing." },
               { icon: Award,        title: "Portfolio output",      desc: "Every capstone produces a real shareable project." },
               { icon: CheckCircle2, title: "Verifiable credentials",desc: "Earn a certificate in the Certification Hall on completion." },
-              { icon: Sparkles,     title: "Illy mentorship",       desc: "Illy checks in at every stage so you understand what you built." },
+              { icon: Sparkles,     title: "V mentorship",       desc: "V checks in at every stage so you understand what you built." },
             ].map((f) => {
               const Icon = f.icon;
               return (
@@ -390,20 +390,20 @@ function AILabPage() {
       <section className="border-t border-[#E8EAF4] bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <div className="mb-6 flex justify-center">
-            <IllyAvatar size="xl" reaction="hi" animate />
+            <VAvatar size="xl" reaction="hi" animate />
           </div>
 
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0F1533] sm:text-4xl">
             Ready to build something real?
           </h2>
           <p className="mx-auto mt-4 max-w-md text-base text-[#5A607A]">
-            Pick a learning pathway, complete your modules, and Illy guides
+            Pick a learning pathway, complete your modules, and V guides
             you from first step to shareable credential.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              to="/courses"
+              to="/learning"
               className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-[#5B4CF5] px-8 text-sm font-bold text-white shadow-[0_8px_28px_-6px_rgba(91,76,245,0.45)] transition-all hover:scale-[1.03] hover:bg-[#4A3BE8] active:scale-[0.98]"
             >
               Explore learning pathways
@@ -423,7 +423,7 @@ function AILabPage() {
             <span className="h-1 w-1 rounded-full bg-[#C7CAD9]" />
             <span>200+ certificates earned</span>
             <span className="h-1 w-1 rounded-full bg-[#C7CAD9]" />
-            <span>Guided by Illy</span>
+            <span>Guided by V</span>
           </div>
         </div>
       </section>

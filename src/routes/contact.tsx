@@ -6,8 +6,8 @@ import { PageHero, Section } from "@/components/Section";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Certily AI Campus" },
-      { name: "description", content: "Reach the Certily AI Campus team — partnerships, learner support, and press enquiries." },
+      { title: "Contact — Certcia AI Campus" },
+      { name: "description", content: "Reach the Certcia AI Campus team — partnerships, learner support, and press enquiries." },
     ],
   }),
   component: Contact,

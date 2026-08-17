@@ -51,7 +51,7 @@ export function CampusAccessSection() {
   return (
     <section
       id="campus-access"
-      data-illy-section="campus-access"
+      data-v-section="campus-access"
       className="border-t border-border/60 bg-white py-12 sm:py-16 md:py-20"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -116,7 +116,7 @@ export function CampusAccessSection() {
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Link
-            to="/courses"
+            to="/learning"
             className="inline-flex h-10 items-center rounded-full bg-foreground px-6 text-sm font-semibold text-white"
           >
             Browse learning pathways

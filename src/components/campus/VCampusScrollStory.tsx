@@ -1,21 +1,21 @@
 /**
- * IllyCampusScrollStory
+ * VCampusScrollStory
  *
  * WOW Launch Animation:
- * 1. Initial State (Section 2 - Meet Illy & Certily):
- *    - Left: "Meet Illy 👋" (About Illy - AI Mentor & Guide).
- *    - Center: Illy Mascot with glowing spotlight pedestal.
- *    - Right: "Certily AI Campus" (About Certily - Real skills, Real impact).
+ * 1. Initial State (Section 2 - Meet V & Certcia):
+ *    - Left: "Meet V 👋" (About V - AI Mentor & Guide).
+ *    - Center: V Mascot with glowing spotlight pedestal.
+ *    - Right: "Certcia AI Campus" (About Certcia - Real skills, Real impact).
  *
  * 2. Scroll Stage (Landing on Campus):
  *    - Left & Right glassmorphic cards slide out gracefully.
- *    - 3D Campus image rises UP from bottom under Illy.
- *    - Illy lands cleanly on the central plaza.
+ *    - 3D Campus image rises UP from bottom under V.
+ *    - V lands cleanly on the central plaza.
  *    - Building badges pop into position around the campus.
  *
  * 3. Final State (Natural Page Scroll):
  *    - Pin releases cleanly.
- *    - The complete assembled campus (Image + Illy + Badges) stays 100% solid and scrolls naturally!
+ *    - The complete assembled campus (Image + V + Badges) stays 100% solid and scrolls naturally!
  */
 
 import { useEffect, useRef } from "react";
@@ -24,7 +24,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, BookOpen, FlaskConical, Lock, ShieldCheck, Sparkles, Trophy } from "lucide-react";
 
 import ilyStand from "@/assets/avatars/stand.png";
-import campusBg from "@/assets/certilybgupdate.png";
+import campusBg from "@/assets/certciabgupdate.png";
 import aboutBg from "@/assets/aboutbg.webp";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,42 +36,42 @@ const TAGS: {
   icon: "arrow" | "lock";
   style: React.CSSProperties;
 }[] = [
-  {
-    id: "learning-pathways",
-    label: "LEARNING PATHWAYS",
-    body: "Explore self-paced courses and structured learning paths.",
-    icon: "arrow",
-    style: { top: "12%", left: "8%" },
-  },
-  {
-    id: "my-classroom",
-    label: "MY CLASSROOM",
-    body: "Access your courses, assignments and learning progress.",
-    icon: "lock",
-    style: { top: "-12%", left: "38%" },
-  },
-  {
-    id: "ai-lab",
-    label: "AI LAB",
-    body: "Hands-on projects, capstone courses and AI tools to build.",
-    icon: "lock",
-    style: { top: "12%", right: "8%" },
-  },
-  {
-    id: "newsroom",
-    label: "NEWSROOM",
-    body: "Stay updated with AI news, industry insights and announcements.",
-    icon: "arrow",
-    style: { top: "48%", right: "6%" },
-  },
-  {
-    id: "hall-of-fame",
-    label: "HALL OF FAME",
-    body: "Celebrate achievements, certifications and learner milestones.",
-    icon: "lock",
-    style: { top: "48%", left: "6%" },
-  },
-];
+    {
+      id: "learning-pathways",
+      label: "LEARNING PATHWAYS",
+      body: "Explore self-paced courses and structured learning paths.",
+      icon: "arrow",
+      style: { top: "12%", left: "8%" },
+    },
+    {
+      id: "my-classroom",
+      label: "MY CLASSROOM",
+      body: "Access your courses, assignments and learning progress.",
+      icon: "lock",
+      style: { top: "-12%", left: "38%" },
+    },
+    {
+      id: "ai-lab",
+      label: "AI LAB",
+      body: "Hands-on projects, capstone courses and AI tools to build.",
+      icon: "lock",
+      style: { top: "12%", right: "8%" },
+    },
+    {
+      id: "newsroom",
+      label: "NEWSROOM",
+      body: "Stay updated with AI news, industry insights and announcements.",
+      icon: "arrow",
+      style: { top: "48%", right: "6%" },
+    },
+    {
+      id: "hall-of-fame",
+      label: "HALL OF FAME",
+      body: "Celebrate achievements, certifications and learner milestones.",
+      icon: "lock",
+      style: { top: "48%", left: "6%" },
+    },
+  ];
 
 function TagCard({
   label,
@@ -158,7 +158,7 @@ export function PartnerLogos() {
   );
 }
 
-export function IllyCampusScrollStory() {
+export function VCampusScrollStory() {
   const triggerRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
@@ -188,7 +188,7 @@ export function IllyCampusScrollStory() {
         return;
       }
 
-      // Initial State: Text cards & Illy side-by-side on aboutbg pedestal, Campus down below
+      // Initial State: Text cards & V side-by-side on aboutbg pedestal, Campus down below
       gsap.set([left, right], { opacity: 1, x: 0 });
       gsap.set(aboutBgEl, { opacity: 1, scale: 1 });
       gsap.set(bottomBar, { opacity: 1, y: 0 });
@@ -207,10 +207,10 @@ export function IllyCampusScrollStory() {
       tl.to(aboutBgEl, { opacity: 0, ease: "power2.inOut", duration: 30 }, 0);
       tl.to(bottomBar, { opacity: 0, y: 30, ease: "power2.inOut", duration: 25 }, 0);
 
-      // 2. 3D Campus rises UP from bottom into place under Illy
+      // 2. 3D Campus rises UP from bottom into place under V
       tl.to(campus, { opacity: 1, y: 0, scale: 1, ease: "power2.out", duration: 45 }, 10);
 
-      // 2.1 Scale Illy down to 0.50 and shift left (x: -8, y: -10) to sit centered on campus map
+      // 2.1 Scale V down to 0.50 and shift left (x: -8, y: -10) to sit centered on campus map
       tl.to(ily, { scale: 0.50, x: -8, y: -10, ease: "power2.out", duration: 45 }, 10);
 
       // 3. Building cards pop into position around the campus
@@ -222,7 +222,7 @@ export function IllyCampusScrollStory() {
         );
       });
 
-      // Keep campus & Illy solid
+      // Keep campus & V solid
       tl.to(campus, { opacity: 1, duration: 100 }, 0);
       tl.to(ily, { opacity: 1, duration: 100 }, 0);
 
@@ -250,7 +250,7 @@ export function IllyCampusScrollStory() {
   return (
     <div
       ref={triggerRef}
-      id="meet-illy"
+      id="meet-v"
       className="relative w-full overflow-hidden bg-[#EEEEF8]"
     >
       {/* Viewport Stage Frame — Shifted down with pt-20 sm:pt-28 pb-8 for hero spacing */}
@@ -263,7 +263,7 @@ export function IllyCampusScrollStory() {
         >
           <img
             src={aboutBg}
-            alt="Certily AI Campus Background"
+            alt="Certcia AI Campus Background"
             className="h-full w-full object-cover object-[center_38%] select-none"
             draggable={false}
           />
@@ -276,14 +276,14 @@ export function IllyCampusScrollStory() {
 
         {/* ── Stage 1: Top Section Typography Row (Pure Unboxed Text) ── */}
         <div className="relative z-[30] flex w-full max-w-[1240px] items-start justify-between px-6 sm:px-10 pt-2">
-          
-          {/* LEFT SIDE: ABOUT ILLY */}
+
+          {/* LEFT SIDE: ABOUT V */}
           <div
             ref={leftRef}
             className="w-[280px] sm:w-[320px] md:w-[350px] select-none text-left"
           >
             <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/95 px-3.5 py-1 text-xs font-bold tracking-wide text-[#0F1533] shadow-xs backdrop-blur-sm">
-              <span>👋</span> MEET <span className="text-[#5B4CF5]">ILLY</span>
+              <span>👋</span> MEET <span className="text-[#5B4CF5]">V</span>
             </span>
 
             <h2 className="mt-3 font-display text-[1.85rem] sm:text-[2.2rem] md:text-[2.45rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
@@ -293,7 +293,7 @@ export function IllyCampusScrollStory() {
             </h2>
 
             <p className="mt-3 text-[13.5px] sm:text-[14.5px] leading-relaxed font-medium text-[#0F1533]/85 max-w-[320px]">
-              Illy guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
+              V guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
             </p>
 
             {/* CTAs */}
@@ -301,7 +301,7 @@ export function IllyCampusScrollStory() {
               <button
                 type="button"
                 onClick={() =>
-                  document.getElementById("meet-illy")?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById("meet-v")?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="group inline-flex h-11 items-center gap-2 rounded-full bg-[#5B4CF5] px-6 text-xs sm:text-sm font-bold text-white shadow-[0_8px_25px_-6px_rgba(91,76,245,0.5)] transition-all hover:bg-[#4A3BE0] hover:scale-105 active:scale-95"
               >
@@ -311,7 +311,7 @@ export function IllyCampusScrollStory() {
             </div>
           </div>
 
-          {/* Center Spacer for Illy Mascot */}
+          {/* Center Spacer for V Mascot */}
           <div className="w-[120px] sm:w-[170px] shrink-0" />
 
           {/* RIGHT SIDE: ABOUT CERTILY */}
@@ -320,7 +320,7 @@ export function IllyCampusScrollStory() {
             className="w-[280px] sm:w-[320px] md:w-[350px] select-none text-left"
           >
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#5B4CF5]/20 bg-[#EDE9FF]/90 px-3.5 py-1 text-xs font-bold tracking-wider text-[#5B4CF5] shadow-2xs backdrop-blur-sm">
-              ✦ CERTILY AI CAMPUS
+              ✦ CERTCIA AI CAMPUS
             </span>
 
             <h3 className="mt-3 font-display text-[1.85rem] sm:text-[2.2rem] md:text-[2.45rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
@@ -329,13 +329,13 @@ export function IllyCampusScrollStory() {
             </h3>
 
             <p className="mt-3 text-[13.5px] sm:text-[14.5px] leading-relaxed font-medium text-[#0F1533]/85 max-w-[320px]">
-              Certily is an interactive AI-powered learning environment with structured pathways, hands-on labs, and real credentials.
+              Certcia is an interactive AI-powered learning environment with structured pathways, hands-on labs, and real credentials.
             </p>
           </div>
 
         </div>
 
-        {/* ── Illy Mascot (Standing on pedestal in aboutbg) ── */}
+        {/* ── V Mascot (Standing on pedestal in aboutbg) ── */}
         <div
           ref={ilyRef}
           className="absolute z-[25] transition-transform duration-300"
@@ -347,16 +347,16 @@ export function IllyCampusScrollStory() {
           }}
         >
           <div className="pointer-events-none absolute -inset-6 rounded-full bg-[#5B4CF5]/15 blur-2xl opacity-60" />
-          
+
           <img
             src={ilyStand}
-            alt="Illy — Certily AI Campus Guide"
+            alt="V — Certcia AI Campus Guide"
             className="relative h-auto w-full drop-shadow-[0_18px_40px_rgba(91,76,245,0.28)] select-none"
             draggable={false}
           />
         </div>
 
-        {/* ── Stage 2: 3D Campus Visual (Rises UP from bottom under Illy on scroll) ── */}
+        {/* ── Stage 2: 3D Campus Visual (Rises UP from bottom under V on scroll) ── */}
         <div
           ref={campusRef}
           className="absolute inset-0 z-[10] flex items-center justify-center px-4 pt-24 pb-2 pointer-events-none"
@@ -364,7 +364,7 @@ export function IllyCampusScrollStory() {
           <div className="relative w-full max-w-[1050px] xl:max-w-[1120px] flex items-center justify-center mt-6">
             <img
               src={campusBg}
-              alt="Certily 3D AI Campus"
+              alt="Certcia 3D AI Campus"
               className="h-auto w-full max-h-[68vh] object-contain select-none"
               draggable={false}
               loading="eager"
@@ -397,7 +397,7 @@ export function IllyCampusScrollStory() {
           {/* Feature Pillars Card */}
           <div className="w-full rounded-3xl border border-white/90 bg-white/95 p-4 sm:p-5 shadow-[0_20px_48px_-12px_rgba(15,21,51,0.09)] backdrop-blur-lg">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 divide-y lg:divide-y-0 lg:divide-x divide-[#E4E2F0]/60">
-              
+
               {/* Item 1 */}
               <div className="flex items-center gap-3.5 pt-2 lg:pt-0 lg:px-4 first:pt-0">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#EDE9FF]">

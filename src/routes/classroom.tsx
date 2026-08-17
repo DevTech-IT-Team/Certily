@@ -7,7 +7,7 @@ import { canAccessBuilding } from "@/lib/enrollment";
 
 export const Route = createFileRoute("/classroom")({
   head: () => ({
-    meta: [{ title: "My Classroom — Certily AI Campus" }],
+    meta: [{ title: "My Classroom — Certcia AI Campus" }],
   }),
   component: ClassroomPage,
 });
@@ -36,7 +36,7 @@ function ClassroomPage() {
         route="/classroom"
         buildingName="My Classroom"
         description="Your guided learning environment — lessons, assignments, quizzes, and resources."
-        illyMessage="Once you're enrolled, I'll walk you through every lesson and keep you on track with reminders!"
+        vMessage="Once you're enrolled, I'll walk you through every lesson and keep you on track with reminders!"
       />
     );
   }
@@ -67,7 +67,7 @@ function ClassroomPage() {
           <div>
             <h2 className="text-lg font-bold text-foreground">Enrolled courses</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Short Illy-led nuggets, resources, assignments, and quizzes — not a generic LMS page.
+              Short V-led nuggets, resources, assignments, and quizzes — not a generic LMS page.
             </p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               {ENROLLED_COURSES.map((course) => (
