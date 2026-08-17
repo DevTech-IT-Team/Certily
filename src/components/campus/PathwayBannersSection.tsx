@@ -100,9 +100,9 @@ export function PathwayBannersSection() {
         {/* Header */}
         <div className="text-center">
           <Reveal>
-            <span className="inline-flex items-center rounded-full border border-primary/15 bg-white/90 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm">
+            {/* <span className="inline-flex items-center rounded-full border border-primary/15 bg-white/90 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm">
               Learning Pathways
-            </span>
+            </span> */}
           </Reveal>
           <Reveal delay={0.06} className="mt-4">
             <h2 className="mx-auto max-w-4xl font-display text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
@@ -144,10 +144,6 @@ export function PathwayBannersSection() {
                     {/* Inner highlight */}
                     <div className="pointer-events-none absolute top-0 inset-x-0 h-12 opacity-20" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, transparent 100%)" }} />
 
-                    {/* Badge */}
-                    <span className="relative text-[9px] font-bold tracking-[0.15em] text-white/60 uppercase">
-                      {banner.badge}
-                    </span>
 
                     {/* Icon */}
                     <div className="relative mt-8 flex h-14 w-14 items-center justify-center rounded-full transition-transform group-hover:scale-105" style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.3)" }}>
