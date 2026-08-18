@@ -302,7 +302,7 @@ function HeroCampusFrame({
           {HERO_BUILDING_ZONES.map((zone) => renderBuildingHit(zone))}
         </div>
 
-        {/* V — centre plaza overlay */}
+        {/* V — centre plaza overlay (Empty now since bubble moved to buildings) */}
         <div
           className="absolute z-[25] flex items-end justify-center overflow-visible bg-transparent aspect-[4/5]"
           style={{
@@ -311,39 +311,58 @@ function HeroCampusFrame({
             width: V_HERO_PLAZA.size,
             transform: "translate(-54%, -56%)",
           }}
-        >
-          {/* Building Explanation Speech Bubble — floating above V ONLY when a building is hovered */}
-          <div
-            className={cn(
-              "pointer-events-none absolute bottom-[180%] lg:bottom-[200%] left-1/2 z-30 w-52 sm:w-60 -translate-x-1/2 transition-opacity duration-200",
-              activeBuilding ? "opacity-100" : "opacity-0"
-            )}
-          >
-            {displayBuilding && (
-              <div className="relative rounded-2xl border border-[#5B4CF5]/40 bg-white/98 p-2.5 sm:p-3 shadow-[0_14px_36px_-6px_rgba(15,21,51,0.35)] backdrop-blur-md text-left ring-2 ring-[#5B4CF5]/20">
-                {/* Pointer triangle pointing down to V (removed or made longer if needed? Let's just remove the triangle since it's floating high now, or keep it. I will keep it for now) */}
-                <div className="absolute -bottom-2 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rotate-45 border-b border-r border-[#5B4CF5]/30 bg-white/98" />
+        />
 
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between gap-1 mb-1">
-                    <span
-                      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-extrabold text-white shadow-2xs"
-                      style={{ backgroundColor: displayBuilding.color }}
-                    >
-                      <displayBuilding.icon className="h-3 w-3" />
-                      {displayBuilding.name}
-                    </span>
-                    <span className="text-[9px] font-bold text-[#5B4CF5] uppercase tracking-wider">
-                      V Guide
-                    </span>
+        {/* Dynamic Speech Bubbles floating over their respective buildings */}
+        <div className="pointer-events-none absolute inset-0 z-30 hidden overflow-visible sm:block">
+          {HERO_BUILDING_ZONES.map((zone) => {
+            const active = activeId === zone.id;
+            const building = byId(zone.id);
+            if (!building) return null;
+
+            return (
+              <div
+                key={`bubble-${zone.id}`}
+                className={cn(
+                  "absolute z-30 w-52 sm:w-60 transition-all duration-300 ease-out",
+                  active
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-4 scale-95"
+                )}
+                style={{
+                  top: zone.label.top,
+                  left: zone.label.left,
+                  bottom: zone.label.bottom,
+                }}
+              >
+                <div className="relative rounded-2xl border border-[#5B4CF5]/40 bg-white/98 p-3 shadow-[0_20px_40px_-6px_rgba(15,21,51,0.25)] backdrop-blur-md text-left ring-2 ring-[#5B4CF5]/20">
+                  {/* Decorative pointer pointing towards the building center */}
+                  <div className="absolute top-1/2 -right-1.5 h-3 w-3 -translate-y-1/2 rotate-45 border-t border-r border-[#5B4CF5]/30 bg-white/98 hidden" />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-1 mb-2">
+                      <span
+                        className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-extrabold text-white shadow-sm"
+                        style={{ backgroundColor: building.color }}
+                      >
+                        <building.icon className="h-3 w-3" />
+                        {building.name}
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <img src={avatarHi} alt="V" className="h-4 w-4 drop-shadow-sm" />
+                        <span className="text-[9px] font-bold text-[#5B4CF5] uppercase tracking-wider">
+                          V Guide
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-[11px] leading-snug font-medium text-[#2D2A4A]">
+                      {building.vIntro}
+                    </p>
                   </div>
-                  <p className="text-[10.5px] sm:text-[11px] leading-snug font-medium text-[#2D2A4A]">
-                    {displayBuilding.vIntro}
-                  </p>
                 </div>
               </div>
-            )}
-          </div>
+            );
+          })}
         </div>
       </div>
 

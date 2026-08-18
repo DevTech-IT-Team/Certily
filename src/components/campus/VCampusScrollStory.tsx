@@ -229,6 +229,7 @@ export function VCampusScrollStory() {
       ScrollTrigger.refresh();
 
       // Pinned Launch Trigger
+      /*
       const st = ScrollTrigger.create({
         trigger: trigger,
         start: "top top",
@@ -237,9 +238,10 @@ export function VCampusScrollStory() {
         scrub: 1,
         animation: tl,
       });
+      */
 
       return () => {
-        st.kill();
+        // st.kill();
         tl.kill();
       };
     });
