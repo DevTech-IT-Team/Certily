@@ -99,11 +99,11 @@ export function PathwayBannersSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div className="text-center">
-          <Reveal>
-            {/* <span className="inline-flex items-center rounded-full border border-primary/15 bg-white/90 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm">
+          {/* <Reveal>
+            <span className="inline-flex items-center rounded-full border border-primary/15 bg-white/90 px-4 py-1.5 text-sm font-medium text-primary shadow-sm backdrop-blur-sm">
               Learning Pathways
-            </span> */}
-          </Reveal>
+            </span>
+          </Reveal> */}
           <Reveal delay={0.06} className="mt-4">
             <h2 className="mx-auto max-w-4xl font-display text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
               Every learner has a path.{" "}

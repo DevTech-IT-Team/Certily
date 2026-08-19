@@ -31,7 +31,7 @@ export function HeroSection() {
       <section
         ref={sectionRef}
         data-v-section="hero"
-        className="relative overflow-visible bg-[#EEEEF8] pb-6 pt-24 sm:pt-28 md:pt-32 lg:pt-36 xl:pt-40"
+        className="relative overflow-visible bg-[#EEEEF8] pb-6 pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32"
       >
         {/* Soft ambient background glows */}
         <div className="pointer-events-none absolute left-1/4 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#5B4CF5]/10 blur-3xl" />
