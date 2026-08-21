@@ -10,7 +10,7 @@ const DEFAULT_GREETING =
   "Hover over any building on the campus map to explore what's inside — or tap me anytime to chat!";
 
 export function VHeroCard() {
-  const { reaction, activeBuildingId, isInitialWelcome, setFloatingOpen } = useV();
+  const { reaction, activeBuildingId, setFloatingOpen } = useV();
   const activeBuilding = CAMPUS_MAP_AREAS.find((b) => b.id === activeBuildingId);
 
   return (
@@ -31,7 +31,7 @@ export function VHeroCard() {
         >
           <VAvatar
             size="md"
-            reaction={activeBuilding ? reaction : isInitialWelcome ? "hi" : reaction}
+            reaction="hi"
             className="bg-[#0F1533] p-0.5 rounded-full ring-2 ring-[#5B4CF5]/20 transition-transform group-hover:scale-105"
           />
         </button>
@@ -66,28 +66,6 @@ export function VHeroCard() {
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
                 </Link>
               </div>
-            </div>
-          ) : isInitialWelcome ? (
-            <div className="animate-fadeIn">
-              <div className="flex items-center gap-1.5 mb-1">
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#5B4CF5] px-2.5 py-0.5 text-[11px] font-extrabold text-white shadow-xs">
-                  Hi 👋
-                </span>
-                <span className="text-xs font-extrabold text-[#5B4CF5] uppercase tracking-wider">
-                  Welcome to Certcia!
-                </span>
-              </div>
-              <p className="text-xs leading-relaxed text-[#2D2A4A] font-medium sm:text-sm">
-                I'm <span className="font-display font-bold text-[#5B4CF5]">V</span> — your campus guide. Hover over any building on the map to explore what's inside!
-              </p>
-              <button
-                type="button"
-                onClick={() => setFloatingOpen(true)}
-                className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-[#5B4CF5] hover:underline"
-              >
-                <span>Ask V a question</span>
-                <ArrowRight className="h-3 w-3" />
-              </button>
             </div>
           ) : (
             <div>

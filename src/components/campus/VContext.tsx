@@ -15,7 +15,6 @@ type VContextValue = {
   message: string;
   reaction: VReaction;
   activeBuildingId: string | null;
-  isInitialWelcome: boolean;
   setActiveBuildingId: (id: string | null) => void;
   setMessage: (message: string, pin?: boolean, reaction?: VReaction) => void;
   showTip: (message: string, pin?: boolean, reaction?: VReaction) => void;
@@ -31,22 +30,11 @@ export function VProvider({ children }: { children: ReactNode }) {
   const [message, setMessageState] = useState(DEFAULT_V_MESSAGE);
   const [reaction, setReactionState] = useState<VReaction>("hi");
   const [activeBuildingId, setActiveBuildingIdState] = useState<string | null>(null);
-  const [isInitialWelcome, setIsInitialWelcome] = useState(true);
   const [floatingOpen, setFloatingOpen] = useState(false);
   const pinnedUntil = useRef(0);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitialWelcome(false);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const setActiveBuildingId = useCallback((id: string | null) => {
     setActiveBuildingIdState(id);
-    if (id) {
-      setIsInitialWelcome(false);
-    }
   }, []);
 
   const isPinned = useCallback(() => Date.now() < pinnedUntil.current, []);
@@ -80,7 +68,6 @@ export function VProvider({ children }: { children: ReactNode }) {
         message,
         reaction,
         activeBuildingId,
-        isInitialWelcome,
         setActiveBuildingId,
         setMessage,
         showTip,

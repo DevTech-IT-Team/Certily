@@ -6,7 +6,7 @@ export function Preloader() {
   const [show, setShow] = useState(() => {
     // Check synchronously so the preloader renders on frame 0, preventing the page from flashing before it.
     if (typeof window !== "undefined") {
-      return !sessionStorage.getItem("certcia_preloader_v6");
+      return !sessionStorage.getItem("certcia_preloader_v7");
     }
     return false;
   });
@@ -18,15 +18,7 @@ export function Preloader() {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
 
-      const tl = gsap.timeline({
-        onComplete: () => {
-          setTimeout(() => {
-            setShow(false);
-            document.body.style.overflow = "unset";
-            sessionStorage.setItem("certcia_preloader_v6", "true");
-          }, 400);
-        },
-      });
+      const tl = gsap.timeline();
 
       // Animate Background Orbs
       gsap.to(".orb-1", { rotation: 360, transformOrigin: "center", duration: 15, repeat: -1, ease: "linear" });
@@ -54,25 +46,34 @@ export function Preloader() {
         1.5
       );
 
-      // Exit Animation 
-      tl.to(
-        ".preloader-content",
-        { opacity: 0, y: -40, scale: 0.95, duration: 0.6, ease: "power3.inOut" },
-        3.0
-      );
-
-      tl.to(
-        containerRef.current,
-        { yPercent: -100, duration: 0.8, ease: "power4.inOut", borderBottomLeftRadius: "20%", borderBottomRightRadius: "20%" },
-        3.2
-      );
-
       return () => {
         tl.kill();
         document.body.style.overflow = "unset";
       };
     }
-  }, []);
+  }, [show]);
+
+  const handleEnter = () => {
+    const exitTl = gsap.timeline({
+      onComplete: () => {
+        setShow(false);
+        document.body.style.overflow = "unset";
+        sessionStorage.setItem("certcia_preloader_v7", "true");
+      },
+    });
+
+    exitTl.to(
+      ".preloader-content",
+      { opacity: 0, y: -40, scale: 0.95, duration: 0.6, ease: "power3.inOut" },
+      0
+    );
+
+    exitTl.to(
+      containerRef.current,
+      { yPercent: -100, duration: 0.8, ease: "power4.inOut", borderBottomLeftRadius: "20%", borderBottomRightRadius: "20%" },
+      0.2
+    );
+  };
 
   if (!show) return null;
 
@@ -98,19 +99,14 @@ export function Preloader() {
           />
         </div>
 
-        <h1 className="preloader-text font-sans text-4xl sm:text-5xl md:text-6xl font-extrabold text-text-primary tracking-tight mb-4 drop-shadow-sm text-balance">
-          Hi! Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B4CF5] to-[#4CD1B0]">Certcia</span>
-        </h1>
-
-        <p className="preloader-text text-text-secondary text-lg sm:text-xl font-medium max-w-[450px] leading-relaxed mb-10">
-          Start your learning journey now.
-        </p>
-
-        {/* Elegant pulsing dots replacing the old loading bar */}
+        {/* Enter button replacing the old loading dots */}
         <div className="preloader-text flex gap-3 items-center justify-center mt-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#5B4CF5] shadow-[0_0_10px_rgba(91,76,245,0.8)] animate-pulse" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#4CD1B0] shadow-[0_0_10px_rgba(76,209,176,0.8)] animate-pulse delay-75" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#5B4CF5] shadow-[0_0_10px_rgba(91,76,245,0.8)] animate-pulse delay-150" />
+          <button
+            onClick={handleEnter}
+            className="px-8 py-3.5 bg-gradient-to-r from-[#5B4CF5] to-[#4CD1B0] hover:scale-105 active:scale-95 transition-all duration-300 rounded-full text-white font-bold shadow-[0_0_20px_rgba(91,76,245,0.4)] text-lg"
+          >
+            Enter Campus
+          </button>
         </div>
 
       </div>

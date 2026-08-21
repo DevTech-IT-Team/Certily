@@ -223,10 +223,10 @@ function HeroCampusFrame({
   vRef: RefObject<HTMLButtonElement | null>;
   setReady: (v: boolean) => void;
 }) {
-  const { reaction, isInitialWelcome } = useV();
+  const { reaction } = useV();
   const byId = (id: string) => visibleAreas.find((b) => b.id === id);
   const activeBuilding = activeId ? byId(activeId) : null;
-  const activeReaction = activeBuilding ? reaction : isInitialWelcome ? "hi" : reaction;
+  const activeReaction = reaction;
   
   // Keep the last active building so the DOM doesn't get destroyed/recreated on hover, which causes layout fluctuation
   const [lastActiveId, setLastActiveId] = useState<string | null>(null);
