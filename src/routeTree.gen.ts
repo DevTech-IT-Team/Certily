@@ -17,12 +17,15 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ClassroomRouteImport } from './routes/classroom'
 import { Route as CertificationHallRouteImport } from './routes/certification-hall'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as AiLabRouteImport } from './routes/ai-lab'
 import { Route as AiHallRouteImport } from './routes/ai-hall'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LearningIndexRouteImport } from './routes/learning.index'
+import { Route as TopicTopicIdRouteImport } from './routes/topic.$topicId'
 import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
+import { Route as CourseCourseIdRouteImport } from './routes/course.$courseId'
 
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
@@ -64,6 +67,11 @@ const CertificationHallRoute = CertificationHallRouteImport.update({
   path: '/certification-hall',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AiLabRoute = AiLabRouteImport.update({
   id: '/ai-lab',
   path: '/ai-lab',
@@ -89,9 +97,19 @@ const LearningIndexRoute = LearningIndexRouteImport.update({
   path: '/learning/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TopicTopicIdRoute = TopicTopicIdRouteImport.update({
+  id: '/topic/$topicId',
+  path: '/topic/$topicId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LearningPathwayIdRoute = LearningPathwayIdRouteImport.update({
   id: '/learning/$pathwayId',
   path: '/learning/$pathwayId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseCourseIdRoute = CourseCourseIdRouteImport.update({
+  id: '/course/$courseId',
+  path: '/course/$courseId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -100,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
+  '/cart': typeof CartRoute
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
@@ -108,7 +127,9 @@ export interface FileRoutesByFullPath {
   '/faqs': typeof FaqsRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/topic/$topicId': typeof TopicTopicIdRoute
   '/learning/': typeof LearningIndexRoute
 }
 export interface FileRoutesByTo {
@@ -116,6 +137,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
+  '/cart': typeof CartRoute
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
@@ -124,7 +146,9 @@ export interface FileRoutesByTo {
   '/faqs': typeof FaqsRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/topic/$topicId': typeof TopicTopicIdRoute
   '/learning': typeof LearningIndexRoute
 }
 export interface FileRoutesById {
@@ -133,6 +157,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
+  '/cart': typeof CartRoute
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
@@ -141,7 +166,9 @@ export interface FileRoutesById {
   '/faqs': typeof FaqsRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/topic/$topicId': typeof TopicTopicIdRoute
   '/learning/': typeof LearningIndexRoute
 }
 export interface FileRouteTypes {
@@ -151,6 +178,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/ai-hall'
     | '/ai-lab'
+    | '/cart'
     | '/certification-hall'
     | '/classroom'
     | '/contact'
@@ -159,7 +187,9 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/life-in-certcia'
     | '/news'
+    | '/course/$courseId'
     | '/learning/$pathwayId'
+    | '/topic/$topicId'
     | '/learning/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -167,6 +197,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/ai-hall'
     | '/ai-lab'
+    | '/cart'
     | '/certification-hall'
     | '/classroom'
     | '/contact'
@@ -175,7 +206,9 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/life-in-certcia'
     | '/news'
+    | '/course/$courseId'
     | '/learning/$pathwayId'
+    | '/topic/$topicId'
     | '/learning'
   id:
     | '__root__'
@@ -183,6 +216,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/ai-hall'
     | '/ai-lab'
+    | '/cart'
     | '/certification-hall'
     | '/classroom'
     | '/contact'
@@ -191,7 +225,9 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/life-in-certcia'
     | '/news'
+    | '/course/$courseId'
     | '/learning/$pathwayId'
+    | '/topic/$topicId'
     | '/learning/'
   fileRoutesById: FileRoutesById
 }
@@ -200,6 +236,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AiHallRoute: typeof AiHallRoute
   AiLabRoute: typeof AiLabRoute
+  CartRoute: typeof CartRoute
   CertificationHallRoute: typeof CertificationHallRoute
   ClassroomRoute: typeof ClassroomRoute
   ContactRoute: typeof ContactRoute
@@ -208,7 +245,9 @@ export interface RootRouteChildren {
   FaqsRoute: typeof FaqsRoute
   LifeInCertciaRoute: typeof LifeInCertciaRoute
   NewsRoute: typeof NewsRoute
+  CourseCourseIdRoute: typeof CourseCourseIdRoute
   LearningPathwayIdRoute: typeof LearningPathwayIdRoute
+  TopicTopicIdRoute: typeof TopicTopicIdRoute
   LearningIndexRoute: typeof LearningIndexRoute
 }
 
@@ -270,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CertificationHallRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ai-lab': {
       id: '/ai-lab'
       path: '/ai-lab'
@@ -305,11 +351,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearningIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/topic/$topicId': {
+      id: '/topic/$topicId'
+      path: '/topic/$topicId'
+      fullPath: '/topic/$topicId'
+      preLoaderRoute: typeof TopicTopicIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/learning/$pathwayId': {
       id: '/learning/$pathwayId'
       path: '/learning/$pathwayId'
       fullPath: '/learning/$pathwayId'
       preLoaderRoute: typeof LearningPathwayIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/$courseId': {
+      id: '/course/$courseId'
+      path: '/course/$courseId'
+      fullPath: '/course/$courseId'
+      preLoaderRoute: typeof CourseCourseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -320,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AiHallRoute: AiHallRoute,
   AiLabRoute: AiLabRoute,
+  CartRoute: CartRoute,
   CertificationHallRoute: CertificationHallRoute,
   ClassroomRoute: ClassroomRoute,
   ContactRoute: ContactRoute,
@@ -328,7 +389,9 @@ const rootRouteChildren: RootRouteChildren = {
   FaqsRoute: FaqsRoute,
   LifeInCertciaRoute: LifeInCertciaRoute,
   NewsRoute: NewsRoute,
+  CourseCourseIdRoute: CourseCourseIdRoute,
   LearningPathwayIdRoute: LearningPathwayIdRoute,
+  TopicTopicIdRoute: TopicTopicIdRoute,
   LearningIndexRoute: LearningIndexRoute,
 }
 export const routeTree = rootRouteImport

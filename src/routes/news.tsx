@@ -1,37 +1,30 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Mail, TrendingUp } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, BookOpen, Calendar, MapPin, Users, Zap, PlayCircle, Mail } from "lucide-react";
+import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 
 export const Route = createFileRoute("/news")({
   head: () => ({
     meta: [
-      { title: "Newsroom — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "AI news, industry updates, and plain-language explainers that connect today's trends to Certcia certifications.",
-      },
+      { title: "Life in Certcia — AI Campus" },
+      { name: "description", content: "Stay connected to the Certcia community with the latest news, updates, and upcoming events." },
     ],
   }),
   component: NewsPage,
 });
 
-const FEATURED = {
-  tag: "Industry",
-  title: "Why AI literacy is the most in-demand skill of 2026",
-  excerpt:
-    "From K–12 classrooms to Fortune 500 boardrooms — understanding AI is no longer optional. Here's what the data says, and how Certcia pathways map directly to it.",
-  date: "May 14, 2026",
-  readTime: "5 min read",
-  img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1400&q=80",
-};
-
-const ARTICLES = [
+const LATEST_NEWS = [
+  {
+    tag: "Industry",
+    title: "Why AI literacy is the most in-demand skill of 2026",
+    excerpt: "From K–12 classrooms to Fortune 500 boardrooms — understanding AI is no longer optional. Here's what the data says.",
+    date: "May 14, 2026",
+    img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=800&q=80",
+  },
   {
     tag: "Research",
     title: "How Certcia builds curriculum around real AI outcomes",
     excerpt: "Industry professionals and SMEs validate every course direction before it publishes.",
     date: "May 09, 2026",
-    readTime: "4 min",
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
   },
   {
@@ -39,202 +32,127 @@ const ARTICLES = [
     title: "Capstone projects now ship with shareable portfolio links",
     excerpt: "Every AI Lab submission produces a verifiable, linkable portfolio artifact.",
     date: "Apr 28, 2026",
-    readTime: "3 min",
     img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
   },
+];
+
+const UPCOMING_EVENTS = [
   {
-    tag: "Community",
-    title: "Cohort 2026 enrollments cross 400 learners",
-    excerpt: "Students from across the US are now building their first AI certifications on campus.",
-    date: "Apr 18, 2026",
-    readTime: "2 min",
-    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+    title: "AI Campus Summit 2026",
+    date: "Sep 18 – 20, 2026",
+    loc: "San Francisco · Hybrid",
+    tag: "Conference",
+    seats: 1200,
+    img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
+    blurb: "Three days of keynotes, hands-on labs, and conversations with frontier AI builders.",
   },
   {
-    tag: "Industry",
-    title: "Generative AI in K–12: what parents need to know",
-    excerpt: "A plain-language guide to how schools are responding — and how Certcia prepares students.",
-    date: "Apr 05, 2026",
-    readTime: "6 min",
-    img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
+    title: "Global Hackathon: Build with Agents",
+    date: "Jul 02 – 04",
+    loc: "Online · Worldwide",
+    tag: "Hackathon",
+    seats: 5000,
+    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+    blurb: "48-hour sprint with mentors, compute credits, and a live demo day with prize bounties.",
   },
-  {
-    tag: "Research",
-    title: "The skills gap starts in high school",
-    excerpt: "Students who engage with AI tools before college are 3× more likely to land technical internships.",
-    date: "Mar 22, 2026",
-    readTime: "5 min",
-    img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    tag: "Product",
-    title: "V now guides learners through capstone checkpoints",
-    excerpt: "Our AI campus guide surfaces personalised tips at every project milestone.",
-    date: "Mar 10, 2026",
-    readTime: "3 min",
-    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-  },
-] as const;
-
-const TAG_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
-  Industry:  { bg: "#EFF6FF", text: "#2563EB", dot: "#3B82F6" },
-  Research:  { bg: "#F5F3FF", text: "#7C3AED", dot: "#8B5CF6" },
-  Product:   { bg: "#EEF2FF", text: "#5B4CF5", dot: "#5B4CF5" },
-  Community: { bg: "#F0FDF4", text: "#16A34A", dot: "#22C55E" },
-};
-
-const TICKER_ITEMS = [ARTICLES[0], ARTICLES[1], ARTICLES[2]] as const;
-
-function TagPill({ tag }: { tag: string }) {
-  const s = TAG_COLORS[tag] ?? { bg: "#F7F8FC", text: "#5A607A", dot: "#8892A4" };
-  return (
-    <span
-      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-      style={{ background: s.bg, color: s.text }}
-    >
-      <span className="h-1.5 w-1.5 rounded-full" style={{ background: s.dot }} />
-      {tag}
-    </span>
-  );
-}
-
-const BLUE_OVERLAY = "linear-gradient(160deg, rgba(15,12,50,0.62) 0%, rgba(59,76,245,0.32) 55%, rgba(15,21,51,0.48) 100%)";
+];
 
 function NewsPage() {
+  // Injecting some explicitly lighter, brighter images into the marquee
+  const LIGHT_IMAGES = [
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
+  ];
+
+  const marqueeImages = [
+    ...LIGHT_IMAGES,
+    ...LATEST_NEWS.map(n => n.img),
+    ...UPCOMING_EVENTS.map(e => e.img)
+  ];
+
+  const handleExploreClick = () => {
+    document.getElementById("latest-news")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-white">
-
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white pt-16 pb-12 sm:pt-20 sm:pb-14">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 80% 55% at 50% -10%, rgba(91,76,245,0.10) 0%, transparent 70%)" }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%235B4CF5' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1.5'/%3E%3Ccircle cx='23' cy='3' r='1.5'/%3E%3Ccircle cx='3' cy='23' r='1.5'/%3E%3Ccircle cx='23' cy='23' r='1.5'/%3E%3C/g%3E%3C/svg%3E\")",
-          }}
-        />
+      <AnimatedMarqueeHero
+        tagline="Life in Certcia"
+        title={
+          <>
+            Stay connected to
+            <br />
+            the <span style={{ background: "linear-gradient(90deg, #5B4CF5 0%, #3B82F6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>community.</span>
+          </>
+        }
+        description="Discover the latest campus news, read updates from the AI industry, and RSVP to upcoming hackathons and workshops."
+        ctaText="Explore Campus"
+        onCtaClick={handleExploreClick}
+        images={marqueeImages}
+        className="border-b border-[#E8EAF4]"
+      />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid items-start gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
-
-            {/* Left */}
-            <div className="pt-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#5B4CF5]/20 bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#5B4CF5]">
-                <TrendingUp className="h-3.5 w-3.5" />
-                Newsroom
-              </span>
-              <h1 className="mt-5 font-display text-5xl font-extrabold leading-[1.04] tracking-tight text-[#0F1533] sm:text-6xl lg:text-[4rem]">
-                Stay informed.
-                <br />
-                <span style={{ background: "linear-gradient(90deg, #5B4CF5 0%, #3B82F6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  AI moves fast.
-                </span>
-              </h1>
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-[#5A607A]">
-                AI news, research, and plain-language explainers — connecting what's
-                happening in the world to what you're learning on campus.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-2">
-                {(["Industry", "Research", "Product", "Community"] as const).map((tag) => {
-                  const s = TAG_COLORS[tag];
-                  return (
-                    <span key={tag} className="cursor-default rounded-full px-3 py-1 text-xs font-semibold" style={{ background: s.bg, color: s.text }}>
-                      {tag}
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Right — ticker widget */}
-            <div className="rounded-2xl border border-[#E8EAF4] bg-[#F7F8FC] p-5">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#8892A4]">Latest from the newsroom</span>
-                <BookOpen className="h-3.5 w-3.5 text-[#5B4CF5]" />
-              </div>
-              <div className="flex flex-col divide-y divide-[#E8EAF4]">
-                {TICKER_ITEMS.map((a) => (
-                  <a key={a.title} href="#" className="group flex flex-col gap-2 py-4 first:pt-0 last:pb-0">
-                    <div className="flex items-center justify-between gap-3">
-                      <TagPill tag={a.tag} />
-                      <span className="text-[10px] text-[#8892A4]">{a.date}</span>
-                    </div>
-                    <p className="text-sm font-semibold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5]">{a.title}</p>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#5B4CF5]">
-                      {a.readTime} read <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURED ─────────────────────────────────────────── */}
-      <section className="bg-[#F7F8FC] py-16 sm:py-20">
+      {/* ── LATEST NEWS: LIGHT BENTO GRID ──────────────────────── */}
+      <section id="latest-news" className="py-16 sm:py-24 bg-[#FAFBFC]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <p className="mb-6 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8892A4]">Featured story</p>
-          <a
-            href="#"
-            className="group grid overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5B4CF5]/20 hover:shadow-[0_24px_56px_-16px_rgba(91,76,245,0.14)] lg:grid-cols-[1fr_480px]"
-          >
-            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
-              <TagPill tag={FEATURED.tag} />
-              <h2 className="mt-4 font-display text-2xl font-extrabold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5] sm:text-3xl lg:text-[2rem]">
-                {FEATURED.title}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-[#5A607A]">{FEATURED.excerpt}</p>
-              <div className="mt-6 flex items-center gap-5">
-                <span className="text-sm text-[#8892A4]">{FEATURED.date} · {FEATURED.readTime}</span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#5B4CF5] px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_24px_-6px_rgba(91,76,245,0.40)] transition-all group-hover:bg-[#4A3BE8]">
-                  Read article <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                </span>
+          <div className="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#5B4CF5]/20 bg-[#EEF2FF] px-3 py-1 text-xs font-bold text-[#5B4CF5] mb-4">
+                <BookOpen className="h-3.5 w-3.5" /> Campus News
               </div>
+              <h2 className="font-display text-4xl font-extrabold text-[#0F1533] tracking-tight">The Latest Wire</h2>
             </div>
-            <div className="relative aspect-[16/10] overflow-hidden bg-[#EEF2FF] lg:aspect-auto lg:min-h-[340px]">
-              <img src={FEATURED.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="eager" />
-              <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
-            </div>
-          </a>
-        </div>
-      </section>
-
-      {/* ── ARTICLE GRID ─────────────────────────────────────── */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4 text-[#5B4CF5]" />
-              <h2 className="font-display text-2xl font-extrabold text-[#0F1533]">Latest articles</h2>
-            </div>
-            <span className="rounded-full border border-[#E8EAF4] bg-[#F7F8FC] px-3 py-1 text-xs font-semibold text-[#5A607A]">{ARTICLES.length} articles</span>
+            <Link to="/news" className="inline-flex items-center gap-2 text-sm font-bold text-[#5B4CF5] hover:text-[#4A3BE8] transition-colors group">
+              View all dispatches <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {ARTICLES.map((a) => (
-              <a
-                key={a.title}
-                href="#"
-                className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5B4CF5]/20 hover:shadow-[0_20px_48px_-16px_rgba(91,76,245,0.14)]"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#EEF2FF]">
-                  <img src={a.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" decoding="async" />
-                  <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
-                  <div className="absolute bottom-3 left-3"><TagPill tag={a.tag} /></div>
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="flex-1 font-display text-base font-bold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5]">{a.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#5A607A]">{a.excerpt}</p>
-                  <div className="mt-4 flex items-center justify-between border-t border-[#F0F1F8] pt-4">
-                    <span className="text-xs text-[#8892A4]">{a.date} · {a.readTime}</span>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#5B4CF5] transition-all group-hover:gap-1.5">
-                      Read <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Featured Article (Spans 2 columns on desktop) */}
+            {LATEST_NEWS[0] && (
+              <a href="/news" className="group relative overflow-hidden rounded-[32px] lg:col-span-2 lg:row-span-2 flex flex-col justify-end min-h-[400px] lg:min-h-[500px] shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(91,76,245,0.2)] transition-all duration-500">
+                <img src={LATEST_NEWS[0].img} alt={LATEST_NEWS[0].title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1533] via-[#0F1533]/40 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
+                
+                <div className="relative z-10 p-8 sm:p-12">
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-sm">
+                      {LATEST_NEWS[0].tag}
                     </span>
+                    <span className="text-sm font-medium text-white/80">{LATEST_NEWS[0].date}</span>
                   </div>
+                  <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white mb-4 group-hover:text-[#EEF2FF] transition-colors drop-shadow-md">
+                    {LATEST_NEWS[0].title}
+                  </h3>
+                  <p className="text-white/90 text-lg max-w-2xl line-clamp-2 drop-shadow-sm font-medium">
+                    {LATEST_NEWS[0].excerpt}
+                  </p>
+                </div>
+              </a>
+            )}
+
+            {/* Sidebar Articles */}
+            {LATEST_NEWS.slice(1).map((news) => (
+              <a key={news.title} href="/news" className="group relative overflow-hidden rounded-[32px] bg-white border border-[#E8EAF4] shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(91,76,245,0.15)] hover:border-[#5B4CF5]/30 transition-all duration-500 flex flex-col h-[240px]">
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[#F7F8FC] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative z-10 p-8 flex flex-col h-full justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-bold uppercase tracking-widest text-[#5B4CF5]">
+                        {news.tag}
+                      </span>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F7F8FC] transition-colors group-hover:bg-[#EEF2FF]">
+                        <ArrowRight className="h-4 w-4 text-[#8892A4] group-hover:text-[#5B4CF5] transition-colors" />
+                      </div>
+                    </div>
+                    <h3 className="font-display text-xl font-bold leading-tight text-[#0F1533] group-hover:text-[#5B4CF5] transition-colors line-clamp-3">
+                      {news.title}
+                    </h3>
+                  </div>
+                  <span className="text-sm font-semibold text-[#8892A4]">{news.date}</span>
                 </div>
               </a>
             ))}
@@ -242,29 +160,121 @@ function NewsPage() {
         </div>
       </section>
 
-      {/* ── NEWSLETTER ───────────────────────────────────────── */}
-      <section className="border-t border-[#E8EAF4] bg-[#F7F8FC] py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm">
-            <div className="p-8 text-center sm:p-12">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#5B4CF5]/20 bg-[#EEF2FF] px-4 py-1.5 text-sm font-semibold text-[#5B4CF5]">
-                <Mail className="h-3.5 w-3.5" />
-                Weekly digest
-              </span>
-              <h2 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-[#0F1533] sm:text-3xl">Stay ahead of AI trends</h2>
-              <p className="mt-2 text-base text-[#5A607A]">New articles every week — connecting industry news to the skills you're building on campus.</p>
-              <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                <input type="email" placeholder="Your email address" className="h-12 w-full rounded-full border border-[#E8EAF4] bg-[#F7F8FC] px-5 text-sm text-[#0F1533] outline-none transition focus:border-[#5B4CF5]/40 focus:bg-white focus:ring-2 focus:ring-[#5B4CF5]/15 sm:w-72" />
-                <button type="button" className="inline-flex h-12 shrink-0 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_8px_24px_-6px_rgba(91,76,245,0.40)] transition-all hover:bg-[#4A3BE8] hover:scale-[1.02] active:scale-[0.98]">
-                  Subscribe <ArrowRight className="h-4 w-4" />
-                </button>
+      {/* ── UPCOMING EVENTS: VIP PASSES (Commented out for now) ── */}
+      {false && (
+      <section className="bg-white py-20 sm:py-32 relative overflow-hidden">
+        {/* Subtle background mesh to make the white passes pop */}
+        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-[#F7F8FC] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#EEF2FF] rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+          <div className="mb-16 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#5B4CF5]/20 bg-[#EEF2FF] px-4 py-1.5 text-xs font-bold text-[#5B4CF5] mb-4 uppercase tracking-widest">
+              <Zap className="h-3.5 w-3.5" /> Live & Virtual
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#0F1533] tracking-tight">Upcoming Events</h2>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-2">
+            {UPCOMING_EVENTS.map((event) => {
+              const dateParts = event.date.split(" ");
+              const month = dateParts[0];
+              const days = dateParts.slice(1).join(" ");
+              
+              return (
+                <div key={event.title} className="group relative rounded-[32px] bg-white border border-[#E8EAF4] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col sm:flex-row transition-all duration-500 hover:border-[#5B4CF5]/50 hover:shadow-[0_20px_50px_-12px_rgba(91,76,245,0.25)] hover:-translate-y-2">
+                  
+                  {/* Date Tear-off (Left side of VIP pass) */}
+                  <div className="bg-gradient-to-br from-[#F7F8FC] to-white sm:w-40 p-8 flex sm:flex-col items-center justify-center border-b sm:border-b-0 sm:border-r-[2px] border-dashed border-[#E8EAF4] gap-2 sm:gap-0 relative">
+                    {/* Fake ticket cutouts */}
+                    <div className="hidden sm:block absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full shadow-inner" />
+                    <div className="hidden sm:block absolute -bottom-4 -right-4 w-8 h-8 bg-white rounded-full shadow-inner" />
+                    
+                    <span className="text-[#5B4CF5] text-sm font-bold uppercase tracking-widest">{month}</span>
+                    <span className="text-[#0F1533] text-5xl font-display font-extrabold tracking-tighter my-1">{days.split(" ")[0].replace(',', '')}</span>
+                    {days.includes("–") && <span className="text-[#8892A4] text-xs font-bold mt-1 uppercase tracking-wider">{days.split(" ")[1]} {days.split(" ")[2]}</span>}
+                  </div>
+                  
+                  {/* Ticket Details */}
+                  <div className="flex-1 p-8 sm:p-10 flex flex-col relative">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="rounded-full bg-[#EEF2FF] border border-[#5B4CF5]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#5B4CF5]">
+                        {event.tag}
+                      </span>
+                      <span className="text-[#8892A4] text-xs font-semibold flex items-center gap-1.5">
+                        <Users className="h-3.5 w-3.5" /> {event.seats} seats
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold leading-tight text-[#0F1533] mb-3 group-hover:text-[#5B4CF5] transition-colors">{event.title}</h3>
+                    <p className="text-base text-[#5A607A] mb-8 flex-1 font-medium leading-relaxed">{event.blurb}</p>
+                    
+                    <div className="flex items-center justify-between mt-auto">
+                      <span className="flex items-center gap-2 text-sm font-bold text-[#8892A4]">
+                        <MapPin className="h-4 w-4 text-[#5B4CF5]" />{event.loc.split("·")[0]?.trim()}
+                      </span>
+                      <Link to="/events" className="inline-flex items-center justify-center rounded-full bg-[#0F1533] px-6 py-2.5 text-sm font-bold text-white transition-all group-hover:bg-[#5B4CF5] group-hover:shadow-[0_8px_20px_-6px_rgba(91,76,245,0.5)]">
+                        RSVP
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          
+          <div className="mt-16 text-center">
+            <Link to="/events" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#E8EAF4] bg-white px-8 py-3.5 text-sm font-bold text-[#0F1533] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
+              Browse full calendar <ArrowRight className="h-4 w-4 text-[#5B4CF5]" />
+            </Link>
+          </div>
+        </div>
+      </section>
+      )}
+
+      {/* ── NEWSLETTER CTA: PREMIUM HORIZONTAL ───────────────── */}
+      <section className="bg-white py-12 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0F1533] shadow-[0_20px_40px_-15px_rgba(91,76,245,0.3)] p-8 sm:p-12">
+            {/* Elegant Background Glows */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+              <div className="absolute -left-40 -top-40 w-96 h-96 bg-[#5B4CF5]/30 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute -right-40 -bottom-40 w-96 h-96 bg-[#3B82F6]/20 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
+            </div>
+            
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="lg:max-w-md text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/10 px-3 py-1 text-xs font-bold text-[#A5B4FC] mb-4">
+                  <Mail className="h-3.5 w-3.5" /> Weekly Digest
+                </div>
+                <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+                  Stay in the loop.
+                </h2>
+                <p className="text-white/70 font-medium leading-relaxed">
+                  Get the latest campus news, exclusive event invites, and AI curriculum updates straight to your inbox.
+                </p>
               </div>
-              <p className="mt-3 text-xs text-[#8892A4]">No spam. Unsubscribe any time.</p>
+              
+              <div className="w-full lg:w-auto flex-1 max-w-md">
+                <div className="flex flex-col sm:flex-row items-center gap-2 w-full bg-white/5 p-1.5 rounded-full border border-white/10 shadow-inner focus-within:border-[#5B4CF5]/50 focus-within:ring-4 focus-within:ring-[#5B4CF5]/20 transition-all">
+                  <input 
+                    type="email" 
+                    placeholder="name@example.com" 
+                    className="h-12 w-full flex-1 rounded-full border-none bg-transparent px-5 text-white placeholder:text-white/40 focus:outline-none focus:ring-0 text-base font-medium" 
+                  />
+                  <button className="h-12 w-full sm:w-auto shrink-0 rounded-full bg-[#5B4CF5] px-8 text-sm font-bold text-white transition-all hover:bg-[#4A3BE8] hover:shadow-[0_8px_20px_-6px_rgba(91,76,245,0.4)]">
+                    Subscribe
+                  </button>
+                </div>
+                <p className="text-xs text-white/40 mt-3 text-center lg:text-left px-4">
+                  No spam. Unsubscribe anytime.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
     </div>
   );
 }

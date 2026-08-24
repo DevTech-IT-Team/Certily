@@ -191,10 +191,9 @@
 @layer base {
   * { border-color: var(--color-border); }
   html {
-    overflow-x: hidden;
+    /* Removed overflow-x: hidden to allow position: sticky to work */
   }
   body {
-    overflow-x: hidden;
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);

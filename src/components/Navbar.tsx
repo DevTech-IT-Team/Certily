@@ -1,15 +1,18 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logoImg from "@/assets/logo/certicialogo.png";
+import { useCart } from "@/lib/CartContext";
 
 const LMS_LOGIN = "https://lmsathena.com/login";
 
 const NAV_LINKS = [
-  { to: "/learning", label: "Learning" },
-  { to: "/ai-lab", label: "AI Lab" },
-  { to: "/life-in-certcia", label: "Life in Certcia" },
+  { to: "/", label: "Home" },
+  { to: "/learning", label: "Explore Pathways" },
+  { to: "/certcia-way", label: "Certcia Way" },
+  { to: "/for-enterprises", label: "For Enterprises" },
+  { to: "/news", label: "News" },
   { to: "/about", label: "About" },
 ] as const;
 
@@ -17,15 +20,17 @@ const MOBILE_GROUPS = [
   {
     label: "Platform",
     items: [
-      { to: "/learning", label: "Learning Pathways" },
-      { to: "/ai-lab", label: "AI Lab" },
+      { to: "/", label: "Home" },
+      { to: "/learning", label: "Explore Pathways" },
+      { to: "/certcia-way", label: "Certcia Way" },
+      { to: "/for-enterprises", label: "For Enterprises" },
       { to: "/certification-hall", label: "Certification Hall" },
     ],
   },
   {
     label: "More",
     items: [
-      { to: "/life-in-certcia", label: "Life in Certcia" },
+      { to: "/news", label: "News" },
       { to: "/about", label: "About" },
       { to: "/faqs", label: "Help Center" },
       { to: "/contact", label: "Contact" },
@@ -48,6 +53,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const { cartCount } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -95,9 +101,21 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Spacer to keep nav and actions aligned if needed, though flex-1 on nav might be better. Let's just remove it and let justify-between handle spacing. */}
-
           <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Shopping Cart Icon */}
+            <Link 
+              to="/cart" 
+              className="relative rounded-full p-2 text-[#5A5872] transition-colors hover:bg-[#F7F8FC] hover:text-[#1C1D1F]"
+              aria-label="Shopping Cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {cartCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#5B4CF5] text-[10px] font-bold text-white shadow-sm">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+
             <a
               href={LMS_LOGIN}
               target="_blank"

@@ -14,6 +14,7 @@ import { Footer } from "../components/Footer";
 import { PageEnter } from "../components/campus/PageEnter";
 import { VProvider } from "../components/campus/VContext";
 import { VChatFloating } from "../components/campus/VChatbot";
+import { CartProvider } from "../lib/CartContext";
 
 function NotFoundComponent() {
   return (
@@ -131,18 +132,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <VProvider>
-        <div className="min-h-screen flex flex-col overflow-x-clip">
-          <Navbar />
-          <main className="flex-1">
-            <PageEnter>
-              <Outlet />
-            </PageEnter>
-          </main>
-          <Footer />
-          <VChatFloating />
-        </div>
-      </VProvider>
+      <CartProvider>
+        <VProvider>
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1">
+              <PageEnter>
+                <Outlet />
+              </PageEnter>
+            </main>
+            <Footer />
+            <VChatFloating />
+          </div>
+        </VProvider>
+      </CartProvider>
     </QueryClientProvider>
   );
 }
