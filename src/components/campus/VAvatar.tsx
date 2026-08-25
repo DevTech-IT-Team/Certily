@@ -29,6 +29,7 @@ type VAvatarProps = {
   onInteract?: () => void;
   showHint?: boolean;
   reaction?: VReaction;
+  customImageSrc?: string;
 };
 
 const sizes = {
@@ -51,6 +52,7 @@ export function VAvatar({
   onInteract,
   showHint = false,
   reaction,
+  customImageSrc,
 }: VAvatarProps) {
   const useOrb = variant === "orb";
   const hideMatte = onLight && !useOrb;
@@ -62,7 +64,7 @@ export function VAvatar({
   const contextReaction: VReaction = vCtx?.reaction ?? "stand";
 
   const activeReaction = reaction || contextReaction;
-  const imageSrc = ILY_AVATARS[activeReaction] || avatarStand;
+  const imageSrc = customImageSrc || ILY_AVATARS[activeReaction] || avatarStand;
 
   const bounce = useCallback(() => {
     const el = rootRef.current;

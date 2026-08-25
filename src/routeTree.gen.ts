@@ -17,6 +17,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ClassroomRouteImport } from './routes/classroom'
 import { Route as CertificationHallRouteImport } from './routes/certification-hall'
+import { Route as CertciaWayRouteImport } from './routes/certcia-way'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AiLabRouteImport } from './routes/ai-lab'
 import { Route as AiHallRouteImport } from './routes/ai-hall'
@@ -65,6 +66,11 @@ const ClassroomRoute = ClassroomRouteImport.update({
 const CertificationHallRoute = CertificationHallRouteImport.update({
   id: '/certification-hall',
   path: '/certification-hall',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertciaWayRoute = CertciaWayRouteImport.update({
+  id: '/certcia-way',
+  path: '/certcia-way',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
   '/cart': typeof CartRoute
+  '/certcia-way': typeof CertciaWayRoute
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
   '/cart': typeof CartRoute
+  '/certcia-way': typeof CertciaWayRoute
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/ai-hall': typeof AiHallRoute
   '/ai-lab': typeof AiLabRoute
   '/cart': typeof CartRoute
+  '/certcia-way': typeof CertciaWayRoute
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/ai-hall'
     | '/ai-lab'
     | '/cart'
+    | '/certcia-way'
     | '/certification-hall'
     | '/classroom'
     | '/contact'
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/ai-hall'
     | '/ai-lab'
     | '/cart'
+    | '/certcia-way'
     | '/certification-hall'
     | '/classroom'
     | '/contact'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/ai-hall'
     | '/ai-lab'
     | '/cart'
+    | '/certcia-way'
     | '/certification-hall'
     | '/classroom'
     | '/contact'
@@ -237,6 +249,7 @@ export interface RootRouteChildren {
   AiHallRoute: typeof AiHallRoute
   AiLabRoute: typeof AiLabRoute
   CartRoute: typeof CartRoute
+  CertciaWayRoute: typeof CertciaWayRoute
   CertificationHallRoute: typeof CertificationHallRoute
   ClassroomRoute: typeof ClassroomRoute
   ContactRoute: typeof ContactRoute
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       path: '/certification-hall'
       fullPath: '/certification-hall'
       preLoaderRoute: typeof CertificationHallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certcia-way': {
+      id: '/certcia-way'
+      path: '/certcia-way'
+      fullPath: '/certcia-way'
+      preLoaderRoute: typeof CertciaWayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -381,6 +401,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiHallRoute: AiHallRoute,
   AiLabRoute: AiLabRoute,
   CartRoute: CartRoute,
+  CertciaWayRoute: CertciaWayRoute,
   CertificationHallRoute: CertificationHallRoute,
   ClassroomRoute: ClassroomRoute,
   ContactRoute: ContactRoute,

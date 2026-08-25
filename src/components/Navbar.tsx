@@ -7,16 +7,16 @@ import { useCart } from "@/lib/CartContext";
 
 const LMS_LOGIN = "https://lmsathena.com/login";
 
-const NAV_LINKS = [
+const NAV_LINKS: { to: any; label: string }[] = [
   { to: "/", label: "Home" },
   { to: "/learning", label: "Explore Pathways" },
   { to: "/certcia-way", label: "Certcia Way" },
   { to: "/for-enterprises", label: "For Enterprises" },
   { to: "/news", label: "News" },
   { to: "/about", label: "About" },
-] as const;
+];
 
-const MOBILE_GROUPS = [
+const MOBILE_GROUPS: { label: string; items: { to: any; label: string }[] }[] = [
   {
     label: "Platform",
     items: [
