@@ -10,7 +10,7 @@ const LMS_LOGIN = "https://lmsathena.com/login";
 const NAV_LINKS: { to: any; label: string }[] = [
   { to: "/", label: "Home" },
   { to: "/learning", label: "Explore Pathways" },
-  { to: "/certcia-way", label: "Certcia Way" },
+  { to: "/certcia-way", label: "Why Certcia" },
   { to: "/for-enterprises", label: "For Enterprises" },
   { to: "/news", label: "News" },
   { to: "/about", label: "About" },
@@ -22,7 +22,7 @@ const MOBILE_GROUPS: { label: string; items: { to: any; label: string }[] }[] = 
     items: [
       { to: "/", label: "Home" },
       { to: "/learning", label: "Explore Pathways" },
-      { to: "/certcia-way", label: "Certcia Way" },
+      { to: "/certcia-way", label: "Why Certcia" },
       { to: "/for-enterprises", label: "For Enterprises" },
       { to: "/certification-hall", label: "Certification Hall" },
     ],
@@ -103,8 +103,8 @@ export function Navbar() {
 
           <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Shopping Cart Icon */}
-            <Link 
-              to="/cart" 
+            <Link
+              to="/cart"
               className="relative rounded-full p-2 text-[#5A5872] transition-colors hover:bg-[#F7F8FC] hover:text-[#1C1D1F]"
               aria-label="Shopping Cart"
             >

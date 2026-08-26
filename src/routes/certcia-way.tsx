@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { JourneyTimelineSection } from "@/components/certcia-way/JourneyTimelineSection";
-import { AILabSection } from "@/components/certcia-way/AILabSection";
+import { JourneyHeader, JourneyTimeline } from "@/components/certcia-way/JourneyTimelineSection";
+import { AILabFeatures, AISandbox } from "@/components/certcia-way/AILabSection";
 import { WhyWeBuiltCertcia } from "@/components/about/WhyWeBuiltCertcia";
 import { PlatformImpactStats } from "@/components/about/PlatformImpactStats";
 
@@ -17,10 +17,12 @@ export const Route = createFileRoute("/certcia-way")({
 function CertciaWay() {
   return (
     <div className="bg-background pt-24 pb-16 overflow-x-hidden">
-      <JourneyTimelineSection />
+      <JourneyHeader />
       <WhyWeBuiltCertcia />
+      <AILabFeatures />
       <PlatformImpactStats />
-      <AILabSection />
+      <JourneyTimeline />
+      <AISandbox />
     </div>
   );
 }

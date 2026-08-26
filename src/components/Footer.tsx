@@ -1,27 +1,26 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, Linkedin, Twitter, Youtube } from "lucide-react";
-import { cn } from "@/lib/utils";
 import certLogo from "@/assets/logo/certtt.png";
 
-const platform = [
+const exploreLinks = [
   { label: "Learning Pathways", to: "/learning" },
   { label: "AI Lab", to: "/ai-lab" },
-  { label: "Newsroom", to: "/news" },
   { label: "Certification Hall", to: "/certification-hall" },
+  { label: "Why Certcia", to: "/certcia-way" },
 ];
 
-const company = [
-  { label: "About", to: "/about" },
-  { label: "Blog", to: "/news" },
-  { label: "Careers", to: "/contact" },
-  { label: "Partnerships", to: "/contact" },
+const communityLinks = [
+  { label: "About Us", to: "/about" },
+  { label: "Newsroom", to: "/news" },
+  { label: "Events", to: "/events" },
+  { label: "Life in Certcia", to: "/life-in-certcia" },
 ];
 
-const support = [
-  { label: "Help Center", to: "/faqs" },
-  { label: "Contact", to: "/contact" },
-  { label: "Privacy Policy", to: "/contact" },
-  { label: "Terms", to: "/contact" },
+const supportLinks = [
+  { label: "Contact Us", to: "/contact" },
+  { label: "FAQs", to: "/faqs" },
+  { label: "My Classroom", to: "/classroom" },
+  { label: "Dashboard", to: "/dashboard" },
 ];
 
 function FooterLink({ label, to }: { label: string; to: string }) {
@@ -43,7 +42,7 @@ export function Footer() {
     <footer className="relative mt-0 border-t border-white/10 bg-[#0F0E1A] text-white">
       <div className="relative mx-auto max-w-6xl px-4 py-10 md:py-12">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+          <div className="lg:pr-8">
             <Link to="/" className="inline-flex items-center">
               <img src={certLogo} alt="Certcia Logo" className="-mb-2 -ml-4 h-16 w-auto object-contain" />
             </Link>
@@ -51,43 +50,43 @@ export function Footer() {
               Your AI-powered learning campus — credible certifications, real projects, and V
               mentorship for students, parents, and professionals.
             </p>
-            <div className="mt-4 flex items-center gap-2">
+            <div className="mt-6 flex items-center gap-3">
               {[Twitter, Linkedin, Youtube].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-[#5B4CF5] hover:text-white"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-[#5B4CF5] hover:bg-[#5B4CF5]/10 hover:text-white"
                   aria-label="Social"
                 >
-                  <Icon className="h-3.5 w-3.5" />
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          <nav aria-label="Platform">
-            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Platform</p>
-            <ul className="mt-3 space-y-2">
-              {platform.map((item) => (
+          <nav aria-label="Explore">
+            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Explore</p>
+            <ul className="mt-4 space-y-3">
+              {exploreLinks.map((item) => (
                 <FooterLink key={item.to} {...item} />
               ))}
             </ul>
           </nav>
 
-          <nav aria-label="Company">
-            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Company</p>
-            <ul className="mt-3 space-y-2">
-              {company.map((item) => (
-                <FooterLink key={item.label} {...item} />
+          <nav aria-label="Community">
+            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Community</p>
+            <ul className="mt-4 space-y-3">
+              {communityLinks.map((item) => (
+                <FooterLink key={item.to} {...item} />
               ))}
             </ul>
           </nav>
 
           <nav aria-label="Support">
             <p className="text-xs font-bold uppercase tracking-wider text-white/90">Support</p>
-            <ul className="mt-3 space-y-2">
-              {support.map((item) => (
-                <FooterLink key={item.label} {...item} />
+            <ul className="mt-4 space-y-3">
+              {supportLinks.map((item) => (
+                <FooterLink key={item.to} {...item} />
               ))}
             </ul>
           </nav>

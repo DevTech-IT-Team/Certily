@@ -276,10 +276,12 @@ export function VChatFloating() {
           style={{ animationDuration: "4s" }}
           aria-hidden
         />
-        <span className="relative flex items-center gap-2.5 rounded-full border border-[#E4E2F0] bg-white py-1.5 pl-1.5 pr-5 shadow-[0_12px_40px_-12px_rgba(91,76,245,0.35)] transition-all group-hover:scale-[1.03]">
-          <VAvatar size="sm" reaction="hi" className="bg-[#0F1533] p-0.5 rounded-full shrink-0" />
-          <span className="font-display text-sm font-semibold tracking-wide text-[#5B4CF5]">
-            V
+        <span className="relative flex items-center gap-3 rounded-full border border-white/60 bg-white/95 py-2 pl-2 pr-6 shadow-[0_10px_35px_-8px_rgba(91,76,245,0.35)] backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_18px_45px_-10px_rgba(91,76,245,0.45)] group-active:scale-95">
+          <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0F1533]">
+            <VAvatar size="md" reaction="hi" className="scale-[0.8]" />
+          </div>
+          <span className="font-display text-[15px] font-bold tracking-wide text-[#0F1533]">
+            Ask <span className="text-[#5B4CF5]">V</span>
           </span>
         </span>
       </button>

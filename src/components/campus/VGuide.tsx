@@ -87,7 +87,7 @@ export function VGuide({
           </div>
           <div ref={bubbleRef} className="flex min-w-0 flex-1 flex-col justify-center px-4 py-4 sm:px-5 sm:py-5">
             <p className="text-sm font-bold text-foreground sm:text-[15px]">
-              {title} <span aria-hidden>👋</span>
+              {title}
             </p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{message}</p>
             <p className="mt-3 flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-primary/70">
@@ -123,7 +123,7 @@ export function VGuide({
         </div>
         <div ref={bubbleRef} className="min-w-0 flex-1 px-4 py-4">
           <p className="text-sm font-bold text-foreground">
-            {title} <span aria-hidden>👋</span>
+            {title}
           </p>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{message}</p>
         </div>

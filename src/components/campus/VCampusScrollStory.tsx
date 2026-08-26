@@ -3,7 +3,7 @@
  *
  * WOW Launch Animation:
  * 1. Initial State (Section 2 - Meet V & Certcia):
- *    - Left: "Meet V 👋" (About V - AI Mentor & Guide).
+ *    - Left: "Meet V " (About V - AI Mentor & Guide).
  *    - Center: V Mascot with glowing spotlight pedestal.
  *    - Right: "Certcia AI Campus" (About Certcia - Real skills, Real impact).
  *
@@ -285,7 +285,7 @@ export function VCampusScrollStory() {
             className="w-[280px] sm:w-[320px] md:w-[350px] select-none text-left"
           >
             <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/95 px-3.5 py-1 text-xs font-bold tracking-wide text-[#0F1533] shadow-xs backdrop-blur-sm">
-              <span>👋</span> MEET <span className="text-[#5B4CF5]">V</span>
+              MEET <span className="text-[#5B4CF5]">V</span>
             </span>
 
             <h2 className="mt-3 font-display text-[1.85rem] sm:text-[2.2rem] md:text-[2.45rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">

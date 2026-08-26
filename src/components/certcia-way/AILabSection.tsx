@@ -64,43 +64,8 @@ const QUESTIONS = [
   }
 ];
 
-export function AILabSection() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
-  const [score, setScore] = useState(0);
-  const [shake, setShake] = useState(false);
+export function AILabFeatures() {
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
-
-  const handleSelect = (id: string) => {
-    if (selectedAnswer || isFinished) return;
-    
-    setSelectedAnswer(id);
-    const correct = QUESTIONS[currentQuestion].correct === id;
-    
-    if (correct) {
-      setScore(s => s + 1);
-    } else {
-      setShake(true);
-      setTimeout(() => setShake(false), 500);
-    }
-
-    setTimeout(() => {
-      if (currentQuestion < QUESTIONS.length - 1) {
-        setCurrentQuestion(c => c + 1);
-        setSelectedAnswer(null);
-      } else {
-        setIsFinished(true);
-      }
-    }, 1500);
-  };
-
-  const resetSandbox = () => {
-    setCurrentQuestion(0);
-    setSelectedAnswer(null);
-    setIsFinished(false);
-    setScore(0);
-  };
 
   return (
     <section className="relative px-4 py-24 sm:px-6 lg:px-8 bg-[#F7F8FC] overflow-hidden font-sans border-t border-slate-200">
@@ -226,7 +191,51 @@ export function AILabSection() {
             );
           })}
         </div>
+      </div>
+    </section>
+  );
+}
 
+export function AISandbox() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [isFinished, setIsFinished] = useState(false);
+  const [score, setScore] = useState(0);
+  const [shake, setShake] = useState(false);
+
+  const handleSelect = (id: string) => {
+    if (selectedAnswer || isFinished) return;
+    
+    setSelectedAnswer(id);
+    const correct = QUESTIONS[currentQuestion].correct === id;
+    
+    if (correct) {
+      setScore(s => s + 1);
+    } else {
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+    }
+
+    setTimeout(() => {
+      if (currentQuestion < QUESTIONS.length - 1) {
+        setCurrentQuestion(c => c + 1);
+        setSelectedAnswer(null);
+      } else {
+        setIsFinished(true);
+      }
+    }, 1500);
+  };
+
+  const resetSandbox = () => {
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setIsFinished(false);
+    setScore(0);
+  };
+
+  return (
+    <section className="relative px-4 pb-24 sm:px-6 lg:px-8 bg-[#F7F8FC] overflow-hidden font-sans">
+      <div className="max-w-6xl mx-auto relative z-10">
         <Reveal delay={0.1}>
           <div className="relative z-10 flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             

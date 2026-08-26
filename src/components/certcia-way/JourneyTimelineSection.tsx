@@ -116,50 +116,7 @@ const TIMELINE_STEPS: TimelineStep[] = [
   }
 ];
 
-export function JourneyTimelineSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end 90%"] // Finishes drawing line when the bottom is still fully visible
-  });
-
-  // Smooth out the scroll progress to eliminate jitter/shaking on the avatar's movement
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-  
-  // Create a separate scroll progress for visibility
-  const { scrollYProgress: visibilityProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 85%", "end 80%"] // Fades out exactly as the user scrolls past the bottom of the track
-  });
-
-  const smoothVisibility = useSpring(visibilityProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  // Fade in immediately, fade out exactly at the end
-  const trackOpacity = useTransform(smoothVisibility, [0, 0.05, 0.9, 1], [0, 1, 1, 0]);
-  const avatarScale = useTransform(smoothVisibility, [0, 0.05, 0.9, 1], [0.8, 1, 1, 0.8]);
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // Update active step calculation for 6 steps
-    if (latest < 0.16) setCurrentStepIndex(0);
-    else if (latest < 0.33) setCurrentStepIndex(1);
-    else if (latest < 0.5) setCurrentStepIndex(2);
-    else if (latest < 0.66) setCurrentStepIndex(3);
-    else if (latest < 0.83) setCurrentStepIndex(4);
-    else setCurrentStepIndex(5);
-  });
-
+export function JourneyHeader() {
   return (
     <section className="relative px-4 pt-8 pb-10 sm:px-6 lg:px-8 bg-[#F7F8FC] overflow-hidden font-sans border-t border-slate-200">
       
@@ -251,7 +208,54 @@ export function JourneyTimelineSection() {
             </div>
           </div>
         </Reveal>
+      </div>
+    </section>
+  );
+}
 
+export function JourneyTimeline() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end 90%"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  
+  const { scrollYProgress: visibilityProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 85%", "end 80%"]
+  });
+
+  const smoothVisibility = useSpring(visibilityProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const trackOpacity = useTransform(smoothVisibility, [0, 0.05, 0.9, 1], [0, 1, 1, 0]);
+  const avatarScale = useTransform(smoothVisibility, [0, 0.05, 0.9, 1], [0.8, 1, 1, 0.8]);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (latest < 0.16) setCurrentStepIndex(0);
+    else if (latest < 0.33) setCurrentStepIndex(1);
+    else if (latest < 0.5) setCurrentStepIndex(2);
+    else if (latest < 0.66) setCurrentStepIndex(3);
+    else if (latest < 0.83) setCurrentStepIndex(4);
+    else setCurrentStepIndex(5);
+  });
+
+  return (
+    <section className="relative px-4 pb-10 sm:px-6 lg:px-8 bg-[#F7F8FC] overflow-hidden font-sans">
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Timeline Layout */}
         <div className="relative mt-12 pb-4" ref={containerRef}>
           

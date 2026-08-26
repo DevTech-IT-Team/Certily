@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import vVideo from "@/assets/certcia.webm";
 import avatarStand from "@/assets/avatars/stand.png";
+import aboutBg from "@/assets/vbg.png";
 import { VAvatar } from "./VAvatar";
 import { useV } from "./VContext";
 import { Reveal } from "./Reveal";
@@ -288,42 +289,40 @@ export function VMentorSection() {
     <section
       id="meet-v"
       data-v-section="v-mentor"
-      className="relative overflow-visible border-t border-border/40 bg-white py-16 sm:py-20"
+      className="relative overflow-visible border-t border-border/40 bg-[#EEEEF8] py-16 sm:py-20"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(91,76,245,0.05),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+        <img
+          src={aboutBg}
+          alt=""
+          className="h-full w-full object-cover object-[center_38%] select-none"
+          draggable={false}
+        />
+        {/* Ambient Lighting & Soft Vignette Overlays for High Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#EEEEF8]/45 via-transparent to-[#EEEEF8]/35" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_85%_85%_at_50%_42%,transparent_35%,rgba(238,238,248,0.45)_100%)]" />
+        <div className="absolute -left-36 top-10 h-[500px] w-[500px] rounded-full bg-[#5B4CF5]/[0.07] blur-3xl" />
+        <div className="absolute -right-28 bottom-10 h-[450px] w-[450px] rounded-full bg-[#00C9A7]/[0.06] blur-3xl" />
+      </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(91,76,245,0.05),transparent_55%)] z-[1]" />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
         <Reveal>
           <div className="max-w-xl">
-            <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B4CF5]">
-              <Sparkles className="h-4 w-4" strokeWidth={2} />
-              Meet V — your campus guide
-            </p>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/95 px-3.5 py-1 text-xs font-bold tracking-wide text-[#0F1533] shadow-xs backdrop-blur-sm">
+              MEET <span className="text-[#5B4CF5]">V</span>
+            </span>
 
-            <h2 className="mt-4 font-display text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl lg:text-[2.65rem]">
-              Guided at every step of your journey
+            <h2 className="mt-4 font-display text-[2.2rem] md:text-[2.65rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
+              Your 24/7<br />
+              <span className="text-[#5B4CF5]">AI Campus</span><br />
+              Guide & Mentor
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              V is built into the campus — not just a chatbot. She helps you find the right
-              pathway, understand what each building does, track your progress, and know
-              exactly what to do next.
+              V guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
             </p>
-
-            <ul className="mt-6 space-y-2.5 text-sm text-foreground/80">
-              <li className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-[#5B4CF5]">
-                  <MapPin className="h-3.5 w-3.5" />
-                </span>
-                Navigate pathways, buildings, and what's public vs enrolled
-              </li>
-              <li className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#4CD1B0]/15 text-[#00A88A]">
-                  <Compass className="h-3.5 w-3.5" />
-                </span>
-                Personalised guidance for students and parents alike
-              </li>
-            </ul>
 
             <button
               type="button"

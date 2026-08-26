@@ -6,7 +6,7 @@ import { PathwayBannersSection } from "@/components/campus/PathwayBannersSection
 import { MasterclassSection } from "@/components/campus/MasterclassSection";
 import { HomeStatsSection } from "@/components/campus/HomeStatsSection";
 import { TrustLogosMarquee } from "@/components/campus/TrustLogosMarquee";
-import { Preloader } from "@/components/Preloader";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <div className="overflow-x-visible bg-[#F7F8FC]">
-      <Preloader />
+
       <HeroSection />
       <CampusExploreSection />
       <VMentorSection />

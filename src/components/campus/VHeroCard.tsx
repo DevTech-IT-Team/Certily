@@ -70,8 +70,7 @@ export function VHeroCard() {
           ) : (
             <div>
               <p className="text-sm font-bold text-[#0F1533] sm:text-base">
-                Meet <span className="font-display tracking-wide text-[#5B4CF5]">V</span> — your campus guide{" "}
-                <span aria-hidden>👋</span>
+                Meet <span className="font-display tracking-wide text-[#5B4CF5]">V</span> — your campus guide
               </p>
               <p className="mt-1 text-xs leading-relaxed text-[#5A607A] sm:text-sm">
                 {DEFAULT_GREETING}
