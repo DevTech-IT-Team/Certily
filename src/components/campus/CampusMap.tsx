@@ -1,22 +1,10 @@
-import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { ArrowRight, Lock, MessageCircle } from "lucide-react";
-import campusMapImg from "@/assets/certicia.png";
+import campusMapImg from "@/assets/Certcia_Campus_Map.png";
 import { CAMPUS_MAP_AREAS, type CampusMapArea } from "@/lib/campus";
 import avatarHi from "@/assets/avatars/hi.png";
-import avatarPoint from "@/assets/avatars/point.png";
-import avatarStand from "@/assets/avatars/stand.png";
-import avatarStare from "@/assets/avatars/stare.png";
-import avatarThink from "@/assets/avatars/think.png";
-
-const ILY_AVATARS = {
-  hi: avatarHi,
-  point: avatarPoint,
-  stand: avatarStand,
-  stare: avatarStare,
-  think: avatarThink,
-};
 import { canAccessBuilding } from "@/lib/enrollment";
 import { useV } from "./VContext";
 import { VAvatar } from "./VAvatar";
@@ -212,7 +200,6 @@ function HeroCampusFrame({
   onActivate,
   onDeactivate,
   onVClick,
-  vRef,
   setReady,
 }: {
   visibleAreas: CampusMapArea[];
@@ -220,16 +207,14 @@ function HeroCampusFrame({
   onActivate: (b: CampusMapArea) => void;
   onDeactivate: () => void;
   onVClick: () => void;
-  vRef: RefObject<HTMLButtonElement | null>;
   setReady: (v: boolean) => void;
 }) {
-  const { reaction } = useV();
   const byId = (id: string) => visibleAreas.find((b) => b.id === id);
   const activeBuilding = activeId ? byId(activeId) : null;
-  const activeReaction = reaction;
-  
+
   // Keep the last active building so the DOM doesn't get destroyed/recreated on hover, which causes layout fluctuation
   const [lastActiveId, setLastActiveId] = useState<string | null>(null);
+  const [vHovered, setVHovered] = useState(false);
   useEffect(() => {
     if (activeId) setLastActiveId(activeId);
   }, [activeId]);
@@ -292,6 +277,10 @@ function HeroCampusFrame({
           onLoad={() => setReady(true)}
           draggable={false}
           decoding="sync"
+          style={{
+            maskImage: "radial-gradient(50% 50% at 50% 50%, black 95%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(50% 50% at 50% 50%, black 95%, transparent 100%)"
+          }}
         />
 
         {/* Building hit zones — interactive previews without floating badges */}
@@ -302,16 +291,33 @@ function HeroCampusFrame({
           {HERO_BUILDING_ZONES.map((zone) => renderBuildingHit(zone))}
         </div>
 
-        {/* V — centre plaza overlay (Empty now since bubble moved to buildings) */}
-        <div
-          className="absolute z-[25] flex items-end justify-center overflow-visible bg-transparent aspect-[4/5]"
+        {/* Hover the V already in the campus image — no extra floating avatar */}
+        <button
+          type="button"
+          className="absolute z-[25] cursor-pointer border-0 bg-transparent p-0"
           style={{
             top: V_HERO_PLAZA.top,
             left: V_HERO_PLAZA.left,
             width: V_HERO_PLAZA.size,
-            transform: "translate(-54%, -56%)",
+            aspectRatio: "4 / 5",
+            transform: "translate(-54%, -72%)",
           }}
-        />
+          onMouseEnter={() => setVHovered(true)}
+          onMouseLeave={() => setVHovered(false)}
+          onClick={onVClick}
+          aria-label="Hi, I'm V — how can I help you?"
+        >
+          {vHovered && (
+            <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-1 w-max max-w-[13rem] -translate-x-1/2 sm:max-w-[15rem]">
+              <div className="rounded-2xl border border-[#5B4CF5]/25 bg-white/95 px-3 py-2 text-center shadow-[0_10px_28px_-12px_rgba(15,21,51,0.35)] backdrop-blur-md">
+                <p className="text-[11px] font-bold leading-snug text-[#0F1533] sm:text-xs">
+                  Hi, I'm V — how can I help you?
+                </p>
+              </div>
+              <div className="mx-auto h-2 w-2 -translate-y-1 rotate-45 border-b border-r border-[#5B4CF5]/25 bg-white/95" />
+            </div>
+          )}
+        </button>
 
         {/* Dynamic Speech Bubbles floating over their respective buildings */}
         <div className="pointer-events-none absolute inset-0 z-30 hidden overflow-visible sm:block">
@@ -472,10 +478,10 @@ export function CampusMap({
   const isHero = presentation === "hero";
   const { message, setMessage, setFloatingOpen } = useV();
   const mapRef = useRef<HTMLDivElement>(null);
-  const vHeroRef = useRef<HTMLButtonElement>(null);
   const vDefaultRef = useRef<HTMLDivElement>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
+  const [defaultVHovered, setDefaultVHovered] = useState(false);
 
   const displayMessage = activeId
     ? CAMPUS_MAP_AREAS.find((b) => b.id === activeId)?.vIntro ?? message
@@ -560,7 +566,6 @@ export function CampusMap({
         setMessage("Tap any building — I'll tell you what's inside!", true, "hi");
         (window as Window & { focusVChat?: () => void }).focusVChat?.();
       }}
-      vRef={vHeroRef}
       setReady={setReady}
     />
   ) : (
@@ -583,21 +588,32 @@ export function CampusMap({
       <div className="absolute inset-0">
         <div
           ref={vDefaultRef}
-          className="absolute z-30 -translate-x-1/2 -translate-y-1/2"
-          style={{ top: V_CENTER.top, left: V_CENTER.left }}
+          className="absolute z-30 -translate-x-1/2 -translate-y-[80%]"
+          style={{ top: V_CENTER.top, left: V_CENTER.left, width: "12%" }}
         >
-          <VAvatar
-            size="statue"
-            onLight
-            interactive
-            showHint
-            className="scale-[0.45] sm:scale-[0.58] md:scale-[0.65] lg:scale-[0.72]"
-            onInteract={() => {
+          <button
+            type="button"
+            className="relative aspect-[4/5] w-full cursor-pointer border-0 bg-transparent p-0"
+            onMouseEnter={() => setDefaultVHovered(true)}
+            onMouseLeave={() => setDefaultVHovered(false)}
+            onClick={() => {
               setActiveId(null);
               setMessage("Tap any building pin — I'll tell you what's inside!", true, "hi");
               (window as Window & { focusVChat?: () => void }).focusVChat?.();
             }}
-          />
+            aria-label="Hi, I'm V — how can I help you?"
+          >
+            {defaultVHovered && (
+              <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-1 w-max max-w-[13rem] -translate-x-1/2">
+                <div className="rounded-2xl border border-[#5B4CF5]/25 bg-white/95 px-3 py-2 text-center shadow-[0_10px_28px_-12px_rgba(15,21,51,0.35)] backdrop-blur-md">
+                  <p className="text-[11px] font-bold leading-snug text-[#0F1533] sm:text-xs">
+                    Hi, I'm V — how can I help you?
+                  </p>
+                </div>
+                <div className="mx-auto h-2 w-2 -translate-y-1 rotate-45 border-b border-r border-[#5B4CF5]/25 bg-white/95" />
+              </div>
+            )}
+          </button>
         </div>
 
         {visibleAreas.map((building) => (

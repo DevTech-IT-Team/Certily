@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useState, type RefObject } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import { VContext, type VReaction } from "./VContext";
@@ -30,6 +30,8 @@ type VAvatarProps = {
   showHint?: boolean;
   reaction?: VReaction;
   customImageSrc?: string;
+  /** Fill the parent box instead of a fixed size */
+  fill?: boolean;
 };
 
 const sizes = {
@@ -53,6 +55,7 @@ export function VAvatar({
   showHint = false,
   reaction,
   customImageSrc,
+  fill = false,
 }: VAvatarProps) {
   const useOrb = variant === "orb";
   const hideMatte = onLight && !useOrb;
@@ -65,14 +68,24 @@ export function VAvatar({
 
   const activeReaction = reaction || contextReaction;
   const imageSrc = customImageSrc || ILY_AVATARS[activeReaction] || avatarStand;
+  const [shownSrc, setShownSrc] = useState(imageSrc);
+  const [outgoingSrc, setOutgoingSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (imageSrc === shownSrc) return;
+    setOutgoingSrc(shownSrc);
+    setShownSrc(imageSrc);
+    const timer = window.setTimeout(() => setOutgoingSrc(null), 380);
+    return () => window.clearTimeout(timer);
+  }, [imageSrc, shownSrc]);
 
   const bounce = useCallback(() => {
     const el = rootRef.current;
     if (!el) return;
     gsap.fromTo(
       el,
-      { scale: 1 },
-      { scale: 1.06, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }
+      { scale: 1, rotate: 0 },
+      { scale: 1.08, rotate: 2, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
     );
   }, []);
 
@@ -91,7 +104,7 @@ export function VAvatar({
           aria-hidden
           className={cn(
             "absolute bottom-0 left-1/2 z-0 h-2 w-[70%] -translate-x-1/2 rounded-full bg-primary/15 blur-md",
-            hovered && interactive && "h-2.5 w-[80%] bg-primary/25"
+            hovered && interactive && "h-2.5 w-[80%] bg-primary/25",
           )}
         />
       )}
@@ -106,20 +119,33 @@ export function VAvatar({
       <div
         className={cn(
           "relative flex items-end justify-center overflow-visible",
-          useOrb && "overflow-hidden rounded-full bg-gradient-to-b from-[#2B2650] to-[#12101F] p-[8%] ring-1 ring-black/5",
-          sizes[size],
-          interactive && hovered && "ring-2 ring-primary/25 rounded-full",
-          wiggle && "scale-105"
+          useOrb &&
+            "overflow-hidden rounded-full bg-gradient-to-b from-[#2B2650] to-[#12101F] p-[8%] ring-1 ring-black/5",
+          fill ? "h-full w-full" : sizes[size],
+          interactive && hovered && "rounded-full ring-2 ring-primary/25",
+          wiggle && "scale-105",
         )}
       >
+        {outgoingSrc && (
+          <img
+            src={outgoingSrc}
+            alt=""
+            aria-hidden
+            className={cn(
+              "absolute inset-0 z-10 h-full w-full object-contain object-bottom opacity-0 transition-opacity duration-300",
+              hideMatte && "mix-blend-lighten",
+            )}
+            draggable={false}
+          />
+        )}
         <img
-          src={imageSrc}
+          src={shownSrc}
           alt="V, your AI campus guide"
           className={cn(
             "relative z-10 h-full w-full object-contain object-bottom transition-transform duration-300",
             hideMatte && "mix-blend-lighten",
             !useOrb && "drop-shadow-[0_8px_24px_rgba(123,108,255,0.22)]",
-            interactive && hovered && "scale-105"
+            interactive && hovered && "scale-105",
           )}
           draggable={false}
         />
@@ -131,7 +157,8 @@ export function VAvatar({
     "relative shrink-0",
     animate && "animate-float",
     interactive && "cursor-pointer",
-    className
+    fill && "h-full w-full",
+    className,
   );
 
   if (interactive) {
@@ -144,7 +171,7 @@ export function VAvatar({
         className={cn(
           shellClass,
           "border-0 bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
-          size === "statue" || size === "hero" ? "rounded-2xl" : "rounded-full"
+          size === "statue" || size === "hero" || fill ? "rounded-2xl" : "rounded-full",
         )}
         onClick={handleClick}
         onMouseEnter={() => setHovered(true)}

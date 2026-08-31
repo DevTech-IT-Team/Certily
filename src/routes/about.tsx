@@ -5,6 +5,7 @@ import { Section } from "@/components/Section";
 import { MeetOurTeam } from "@/components/about/MeetOurTeam";
 import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { GatewaySection } from "@/components/ui/gateway-section";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -38,6 +39,13 @@ function About() {
 
 
 
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Exact Replicated Section (Gateway)                                 */}
+      {/* ------------------------------------------------------------------ */}
+      <Reveal>
+        <GatewaySection />
+      </Reveal>
 
       {/* ------------------------------------------------------------------ */}
       {/* Meet Our Team Component                                              */}
