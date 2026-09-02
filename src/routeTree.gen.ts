@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as LifeInCertciaRouteImport } from './routes/life-in-certcia'
+import { Route as ForEnterprisesRouteImport } from './routes/for-enterprises'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -36,6 +37,11 @@ const NewsRoute = NewsRouteImport.update({
 const LifeInCertciaRoute = LifeInCertciaRouteImport.update({
   id: '/life-in-certcia',
   path: '/life-in-certcia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForEnterprisesRoute = ForEnterprisesRouteImport.update({
+  id: '/for-enterprises',
+  path: '/for-enterprises',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsRoute = FaqsRouteImport.update({
@@ -132,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
+  '/for-enterprises': typeof ForEnterprisesRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
+  '/for-enterprises': typeof ForEnterprisesRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
@@ -173,6 +181,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
+  '/for-enterprises': typeof ForEnterprisesRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/news': typeof NewsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/faqs'
+    | '/for-enterprises'
     | '/life-in-certcia'
     | '/news'
     | '/course/$courseId'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/faqs'
+    | '/for-enterprises'
     | '/life-in-certcia'
     | '/news'
     | '/course/$courseId'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/events'
     | '/faqs'
+    | '/for-enterprises'
     | '/life-in-certcia'
     | '/news'
     | '/course/$courseId'
@@ -256,6 +268,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   EventsRoute: typeof EventsRoute
   FaqsRoute: typeof FaqsRoute
+  ForEnterprisesRoute: typeof ForEnterprisesRoute
   LifeInCertciaRoute: typeof LifeInCertciaRoute
   NewsRoute: typeof NewsRoute
   CourseCourseIdRoute: typeof CourseCourseIdRoute
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/life-in-certcia'
       fullPath: '/life-in-certcia'
       preLoaderRoute: typeof LifeInCertciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-enterprises': {
+      id: '/for-enterprises'
+      path: '/for-enterprises'
+      fullPath: '/for-enterprises'
+      preLoaderRoute: typeof ForEnterprisesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs': {
@@ -408,6 +428,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   EventsRoute: EventsRoute,
   FaqsRoute: FaqsRoute,
+  ForEnterprisesRoute: ForEnterprisesRoute,
   LifeInCertciaRoute: LifeInCertciaRoute,
   NewsRoute: NewsRoute,
   CourseCourseIdRoute: CourseCourseIdRoute,

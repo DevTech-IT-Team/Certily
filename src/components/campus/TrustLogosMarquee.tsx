@@ -1,4 +1,10 @@
-export function TrustLogosMarquee() {
+export function TrustLogosMarquee({
+  heading = "Built for learners partnering with",
+  className,
+}: {
+  heading?: string | null;
+  className?: string;
+}) {
   const COLORFUL_LOGOS = [
     // Google
     <span className="font-display text-2xl font-extrabold tracking-tight text-[#4285F4]">
@@ -49,20 +55,22 @@ export function TrustLogosMarquee() {
   const logos = [...COLORFUL_LOGOS, ...COLORFUL_LOGOS, ...COLORFUL_LOGOS];
 
   return (
-    <section className="border-t border-border/60 bg-white py-12 sm:py-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="text-center text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-          Built for learners partnering with
-        </p>
-      </div>
-      <div className="relative mt-10 overflow-hidden">
+    <section className={`${heading ? "border-t border-border/60 bg-white py-12 sm:py-14" : "bg-white pb-12 sm:pb-14"} ${className ?? ""}`}>
+      {heading ? (
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <p className="text-center text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+            {heading}
+          </p>
+        </div>
+      ) : null}
+      <div className={heading ? "relative mt-10 overflow-hidden" : "relative overflow-hidden"}>
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
-        <div className="flex w-max animate-marquee items-center gap-16 px-8">
+        <div className="flex w-max animate-marquee items-center gap-16 px-8 py-3">
           {logos.map((logo, i) => (
             <div
               key={i}
-              className="shrink-0 flex items-center justify-center grayscale-[0.2] transition-all duration-300 hover:grayscale-0 hover:scale-105"
+              className="flex h-12 shrink-0 items-center justify-center grayscale-[0.2] transition-all duration-300 hover:grayscale-0 hover:scale-105"
             >
               {logo}
             </div>
