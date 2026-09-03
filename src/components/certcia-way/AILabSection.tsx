@@ -68,7 +68,7 @@ export function AILabFeatures() {
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
 
   return (
-    <section className="relative px-4 py-24 sm:px-6 lg:px-8 bg-[#F7F8FC] overflow-hidden font-sans border-t border-slate-200">
+    <section id="ai-lab" className="relative px-4 py-24 sm:px-6 lg:px-8 bg-[#F7F8FC] overflow-hidden font-sans border-t border-slate-200">
       
       {/* Super minimal abstract background */}
       <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:32px_32px] opacity-30 pointer-events-none" />
@@ -243,7 +243,7 @@ export function AISandbox() {
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200/60 bg-white/50 text-[#5B4CF5] text-[10px] font-bold uppercase tracking-widest mb-8 backdrop-blur-sm shadow-sm">
                 <Sparkles className="w-3 h-3" />
-                Live AI Sandbox
+                Live AI Lab
               </div>
               
               <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-[#0F1533] mb-6">

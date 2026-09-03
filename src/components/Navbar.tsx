@@ -8,11 +8,10 @@ import { useCart } from "@/lib/CartContext";
 const LMS_LOGIN = "https://lmsathena.com/login";
 
 const NAV_LINKS: { to: any; label: string }[] = [
-  { to: "/", label: "Home" },
-  { to: "/learning", label: "Explore Pathways" },
   { to: "/certcia-way", label: "Why Certcia" },
-  { to: "/for-enterprises", label: "For Enterprises" },
-  { to: "/news", label: "News" },
+  { to: "/learning", label: "Explore Pathways" },
+  { to: "/for-enterprises", label: "Enterprise solutions" },
+  { to: "/news", label: "Latest News" },
   { to: "/about", label: "About" },
 ];
 
@@ -20,17 +19,16 @@ const MOBILE_GROUPS: { label: string; items: { to: any; label: string }[] }[] = 
   {
     label: "Platform",
     items: [
-      { to: "/", label: "Home" },
-      { to: "/learning", label: "Explore Pathways" },
       { to: "/certcia-way", label: "Why Certcia" },
-      { to: "/for-enterprises", label: "For Enterprises" },
+      { to: "/learning", label: "Explore Pathways" },
+      { to: "/for-enterprises", label: "Enterprise solutions" },
       { to: "/certification-hall", label: "Certification Hall" },
     ],
   },
   {
     label: "More",
     items: [
-      { to: "/news", label: "News" },
+      { to: "/news", label: "Latest News" },
       { to: "/about", label: "About" },
       { to: "/faqs", label: "Help Center" },
       { to: "/contact", label: "Contact" },

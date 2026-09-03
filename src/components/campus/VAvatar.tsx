@@ -32,6 +32,8 @@ type VAvatarProps = {
   customImageSrc?: string;
   /** Fill the parent box instead of a fixed size */
   fill?: boolean;
+  /** Scale / glow on hover. Default true when interactive. */
+  hoverEffect?: boolean;
 };
 
 const sizes = {
@@ -56,6 +58,7 @@ export function VAvatar({
   reaction,
   customImageSrc,
   fill = false,
+  hoverEffect = true,
 }: VAvatarProps) {
   const useOrb = variant === "orb";
   const hideMatte = onLight && !useOrb;
@@ -91,9 +94,11 @@ export function VAvatar({
 
   const handleClick = () => {
     if (!interactive) return;
-    setWiggle(true);
-    bounce();
-    window.setTimeout(() => setWiggle(false), 400);
+    if (hoverEffect) {
+      setWiggle(true);
+      bounce();
+      window.setTimeout(() => setWiggle(false), 400);
+    }
     onInteract?.();
   };
 
@@ -104,7 +109,7 @@ export function VAvatar({
           aria-hidden
           className={cn(
             "absolute bottom-0 left-1/2 z-0 h-2 w-[70%] -translate-x-1/2 rounded-full bg-primary/15 blur-md",
-            hovered && interactive && "h-2.5 w-[80%] bg-primary/25",
+            hovered && interactive && hoverEffect && "h-2.5 w-[80%] bg-primary/25",
           )}
         />
       )}
@@ -122,7 +127,6 @@ export function VAvatar({
           useOrb &&
             "overflow-hidden rounded-full bg-gradient-to-b from-[#2B2650] to-[#12101F] p-[8%] ring-1 ring-black/5",
           fill ? "h-full w-full" : sizes[size],
-          interactive && hovered && "rounded-full ring-2 ring-primary/25",
           wiggle && "scale-105",
         )}
       >
@@ -145,7 +149,7 @@ export function VAvatar({
             "relative z-10 h-full w-full object-contain object-bottom transition-transform duration-300",
             hideMatte && "mix-blend-lighten",
             !useOrb && "drop-shadow-[0_8px_24px_rgba(123,108,255,0.22)]",
-            interactive && hovered && "scale-105",
+            interactive && hovered && hoverEffect && "scale-105",
           )}
           draggable={false}
         />
@@ -170,7 +174,8 @@ export function VAvatar({
         type="button"
         className={cn(
           shellClass,
-          "border-0 bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+          "border-0 bg-transparent p-0 outline-none",
+          hoverEffect && "focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
           size === "statue" || size === "hero" || fill ? "rounded-2xl" : "rounded-full",
         )}
         onClick={handleClick}
