@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as LifeInCertciaRouteImport } from './routes/life-in-certcia'
 import { Route as ForEnterprisesRouteImport } from './routes/for-enterprises'
 import { Route as FaqsRouteImport } from './routes/faqs'
@@ -29,9 +31,19 @@ import { Route as TopicTopicIdRouteImport } from './routes/topic.$topicId'
 import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
 import { Route as CourseCourseIdRouteImport } from './routes/course.$courseId'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LifeInCertciaRoute = LifeInCertciaRouteImport.update({
@@ -140,7 +152,9 @@ export interface FileRoutesByFullPath {
   '/faqs': typeof FaqsRoute
   '/for-enterprises': typeof ForEnterprisesRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
+  '/login': typeof LoginRoute
   '/news': typeof NewsRoute
+  '/signup': typeof SignupRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
@@ -161,7 +175,9 @@ export interface FileRoutesByTo {
   '/faqs': typeof FaqsRoute
   '/for-enterprises': typeof ForEnterprisesRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
+  '/login': typeof LoginRoute
   '/news': typeof NewsRoute
+  '/signup': typeof SignupRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
@@ -183,7 +199,9 @@ export interface FileRoutesById {
   '/faqs': typeof FaqsRoute
   '/for-enterprises': typeof ForEnterprisesRoute
   '/life-in-certcia': typeof LifeInCertciaRoute
+  '/login': typeof LoginRoute
   '/news': typeof NewsRoute
+  '/signup': typeof SignupRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
@@ -206,7 +224,9 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/for-enterprises'
     | '/life-in-certcia'
+    | '/login'
     | '/news'
+    | '/signup'
     | '/course/$courseId'
     | '/learning/$pathwayId'
     | '/topic/$topicId'
@@ -227,7 +247,9 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/for-enterprises'
     | '/life-in-certcia'
+    | '/login'
     | '/news'
+    | '/signup'
     | '/course/$courseId'
     | '/learning/$pathwayId'
     | '/topic/$topicId'
@@ -248,7 +270,9 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/for-enterprises'
     | '/life-in-certcia'
+    | '/login'
     | '/news'
+    | '/signup'
     | '/course/$courseId'
     | '/learning/$pathwayId'
     | '/topic/$topicId'
@@ -270,7 +294,9 @@ export interface RootRouteChildren {
   FaqsRoute: typeof FaqsRoute
   ForEnterprisesRoute: typeof ForEnterprisesRoute
   LifeInCertciaRoute: typeof LifeInCertciaRoute
+  LoginRoute: typeof LoginRoute
   NewsRoute: typeof NewsRoute
+  SignupRoute: typeof SignupRoute
   CourseCourseIdRoute: typeof CourseCourseIdRoute
   LearningPathwayIdRoute: typeof LearningPathwayIdRoute
   TopicTopicIdRoute: typeof TopicTopicIdRoute
@@ -279,11 +305,25 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news': {
       id: '/news'
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/life-in-certcia': {
@@ -430,7 +470,9 @@ const rootRouteChildren: RootRouteChildren = {
   FaqsRoute: FaqsRoute,
   ForEnterprisesRoute: ForEnterprisesRoute,
   LifeInCertciaRoute: LifeInCertciaRoute,
+  LoginRoute: LoginRoute,
   NewsRoute: NewsRoute,
+  SignupRoute: SignupRoute,
   CourseCourseIdRoute: CourseCourseIdRoute,
   LearningPathwayIdRoute: LearningPathwayIdRoute,
   TopicTopicIdRoute: TopicTopicIdRoute,

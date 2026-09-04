@@ -9,6 +9,7 @@ import { PlatformImpactStats } from "@/components/about/PlatformImpactStats";
 import { GatewaySection } from "@/components/ui/gateway-section";
 import { WhereSkillsGoNext } from "@/components/certcia-way/WhereSkillsGoNext";
 import { PreparesAchievement } from "@/components/certcia-way/PreparesAchievement";
+import { WhyCertciaCTA } from "@/components/certcia-way/WhyCertciaCTA";
 import { Reveal } from "@/components/campus/Reveal";
 
 export const Route = createFileRoute("/certcia-way")({
@@ -40,7 +41,10 @@ function CertciaWay() {
       {/* <AILabFeatures /> */}
       <PlatformImpactStats />
       <JourneyTimeline />
-      <AISandbox />
+      <Reveal>
+        <WhyCertciaCTA />
+      </Reveal>
+      {/* <AISandbox /> */}
     </div>
   );
 }

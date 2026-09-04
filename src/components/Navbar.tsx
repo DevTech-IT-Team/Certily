@@ -5,8 +5,6 @@ import { cn } from "@/lib/utils";
 import logoImg from "@/assets/logo/certicialogo.png";
 import { useCart } from "@/lib/CartContext";
 
-const LMS_LOGIN = "https://lmsathena.com/login";
-
 const NAV_LINKS: { to: any; label: string }[] = [
   { to: "/certcia-way", label: "Why Certcia" },
   { to: "/learning", label: "Explore Pathways" },
@@ -114,22 +112,18 @@ export function Navbar() {
               )}
             </Link>
 
-            <a
-              href={LMS_LOGIN}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/login"
               className="hidden rounded-lg px-3 py-2 text-sm font-semibold text-[#5A5872] transition-colors hover:bg-[#F7F8FC] hover:text-foreground sm:inline"
             >
               Log in
-            </a>
-            <a
-              href={LMS_LOGIN}
-              target="_blank"
-              rel="noopener noreferrer"
+            </Link>
+            <Link
+              to="/signup"
               className="hidden h-9 items-center rounded-full bg-[#5B4CF5] px-5 text-sm font-bold text-white shadow-[0_8px_24px_-10px_rgba(91,76,245,0.55)] transition-all hover:bg-[#4A3BE8] hover:scale-[1.02] active:scale-[0.98] sm:inline-flex"
             >
               Sign Up
-            </a>
+            </Link>
             <button
               type="button"
               className="rounded-lg p-2 text-foreground/80 transition-colors hover:bg-[#F7F8FC] lg:hidden"
@@ -160,22 +154,18 @@ export function Navbar() {
               </div>
             ))}
             <div className="mt-2 grid grid-cols-2 gap-2 border-t border-border/60 pt-3">
-              <a
-                href={LMS_LOGIN}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/login"
                 className="flex h-11 items-center justify-center rounded-full border border-[#E4E2F0] text-sm font-semibold text-foreground"
               >
                 Log in
-              </a>
-              <a
-                href={LMS_LOGIN}
-                target="_blank"
-                rel="noopener noreferrer"
+              </Link>
+              <Link
+                to="/signup"
                 className="flex h-11 items-center justify-center rounded-full bg-[#5B4CF5] text-sm font-bold text-white"
               >
                 Sign Up
-              </a>
+              </Link>
             </div>
           </div>
         )}
