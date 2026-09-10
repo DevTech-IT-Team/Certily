@@ -2,6 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EnterpriseHero } from "@/components/enterprise/EnterpriseHero";
 import { EnterprisePartners } from "@/components/enterprise/EnterprisePartners";
 import { EnterpriseSolutions } from "@/components/enterprise/EnterpriseSolutions";
+import { EnterpriseDiagnostic } from "@/components/enterprise/EnterpriseDiagnostic";
+import { EnterpriseLifecycle } from "@/components/enterprise/EnterpriseLifecycle";
+import { EnterpriseDecisionPack } from "@/components/enterprise/EnterpriseDecisionPack";
+import { EnterpriseWorkstreams } from "@/components/enterprise/EnterpriseWorkstreams";
+import { CommercialFlexibility } from "@/components/enterprise/CommercialFlexibility";
+import { MeasureWhatChanges } from "@/components/enterprise/MeasureWhatChanges";
+import { ImplementationMap } from "@/components/enterprise/ImplementationMap";
 import { EnterpriseTestimonials } from "@/components/enterprise/EnterpriseTestimonials";
 import { EnterpriseAcademy } from "@/components/enterprise/EnterpriseAcademy";
 import { EnterpriseExecutivePrograms } from "@/components/enterprise/EnterpriseExecutivePrograms";
@@ -30,13 +37,20 @@ function Enterprise() {
       <EnterpriseHero />
       <EnterprisePartners />
       <EnterpriseSolutions />
-      <EnterpriseTestimonials />
-      <EnterpriseAcademy />
-      <EnterpriseExecutivePrograms />
-      <EnterpriseCustomPrograms />
-      <EnterpriseSuccessStories />
-      <EnterpriseDomains />
-      <EnterpriseBusinessBanner />
+      <EnterpriseDiagnostic />
+      <EnterpriseLifecycle />
+      <EnterpriseDecisionPack />
+      <EnterpriseWorkstreams />
+      <CommercialFlexibility />
+      <MeasureWhatChanges />
+      <ImplementationMap />
+      {/* <EnterpriseTestimonials /> */}
+      {/* <EnterpriseAcademy />
+      <EnterpriseExecutivePrograms /> */}
+      {/* <EnterpriseCustomPrograms /> */}
+      {/* <EnterpriseSuccessStories /> */}
+      {/* <EnterpriseDomains /> */}
+      {/* <EnterpriseBusinessBanner /> */}
     </div>
   );
 }

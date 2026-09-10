@@ -75,17 +75,17 @@ export function EnterpriseHero() {
 
           {/* Right Column: The Model Graphic */}
           <div className="relative z-10 perspective-1000">
-            <div className="relative w-full rounded-[2.5rem] bg-gradient-to-br from-[#0F1533] to-[#1A1F3D] p-8 shadow-[0_30px_60px_-15px_rgba(15,21,51,0.4)] sm:p-10 overflow-hidden border border-white/10 group">
+            <div className="relative w-full rounded-[2.5rem] bg-[#11142A] p-8 shadow-[0_40px_80px_-20px_rgba(11,14,33,0.5)] sm:p-10 overflow-hidden border border-white/5 group">
               {/* Animated Glow in background of card */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#5B4CF5]/10 via-transparent to-[#4CD1B0]/10 opacity-50 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#5B4CF5]/10 via-transparent to-transparent opacity-50 transition-opacity duration-700 group-hover:opacity-100" />
 
               <div className="relative z-10">
-                <div className="inline-block rounded-lg bg-white/5 border border-white/10 px-3 py-1 mb-4 backdrop-blur-md">
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#A5ACCE]">
+                <div className="inline-block rounded-full bg-[#1C203B] border border-white/10 px-3.5 py-1.5 mb-5 backdrop-blur-md">
+                  <h3 className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#A5ACCE]">
                     The Certcia Enterprise Model
                   </h3>
                 </div>
-                <p className="text-3xl font-display font-bold leading-tight text-white max-w-sm drop-shadow-sm">
+                <p className="text-3xl font-display font-bold leading-tight text-white max-w-sm drop-shadow-sm tracking-tight sm:text-[2rem] sm:leading-[1.1]">
                   Your business becomes the curriculum blueprint.
                 </p>
               </div>
@@ -95,10 +95,10 @@ export function EnterpriseHero() {
                 {/* SVG Connecting Lines with animated dashes */}
                 <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 380">
                   <defs>
-                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#5B4CF5" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#4CD1B0" stopOpacity="0.2" />
-                    </linearGradient>
+                    <radialGradient id="lineGrad" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#5B4CF5" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#5B4CF5" stopOpacity="0.1" />
+                    </radialGradient>
                     <style>
                       {`
                         @keyframes dash {
@@ -130,14 +130,18 @@ export function EnterpriseHero() {
                 </svg>
 
                 {/* Central Capability Blueprint Node */}
-                <div className="relative z-20 flex h-36 w-36 items-center justify-center rounded-full bg-[#0F1533] p-1 shadow-[0_0_80px_rgba(91,76,245,0.4)] transition-transform duration-500 hover:scale-105">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#5B4CF5] to-[#4A3BE0] animate-[spin_4s_linear_infinite] [mask-image:linear-gradient(transparent,white)] opacity-70" />
-                  <div className="relative flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#1C234A] to-[#0F1533] border border-[#5B4CF5]/40 text-center">
-                    <div className="absolute inset-0 rounded-full bg-[#5B4CF5]/10 blur-md" />
-                    <span className="relative font-display font-extrabold text-white text-sm leading-snug tracking-wide">
+                <div className="relative z-20 flex h-[140px] w-[140px] items-center justify-center rounded-full transition-transform duration-500 hover:scale-105 group/center">
+                  {/* Outer glow */}
+                  <div className="absolute inset-0 rounded-full bg-[#5B4CF5] opacity-20 blur-xl transition-opacity group-hover/center:opacity-40" />
+                  {/* Border ring */}
+                  <div className="absolute inset-0 rounded-full border border-[#5B4CF5]/60 shadow-[0_0_30px_rgba(91,76,245,0.4)]" />
+                  <div className="absolute inset-1 rounded-full border-[3px] border-[#20254A] bg-[#161A36]" />
+                  {/* Inner text container */}
+                  <div className="relative flex h-full w-full items-center justify-center rounded-full text-center">
+                    <span className="relative font-display font-extrabold text-white text-[13px] leading-[1.3] tracking-widest">
                       CAPABILITY
                       <br />
-                      <span className="text-[#A5ACCE]">BLUEPRINT</span>
+                      <span className="text-[#A5ACCE] font-bold text-[11px]">BLUEPRINT</span>
                     </span>
                   </div>
                 </div>
@@ -182,23 +186,19 @@ export function EnterpriseHero() {
               </div>
 
               {/* Bottom Flow Sequence */}
-              <div className="mt-8 relative">
+              <div className="mt-14 relative pb-2 px-1">
                 {/* Connection line behind pills */}
-                <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                <div className="absolute left-0 right-4 top-1/2 h-px -translate-y-1/2 bg-white/10" />
+                <ArrowRight className="absolute right-0 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/30" />
 
-                <div className="relative flex flex-wrap justify-between gap-2 border-t border-white/10 pt-6">
-                  {["Audit", "Gap map", "RFP", "Build", "Run", "Optimize"].map((step, index) => (
-                    <div
+                <div className="relative flex justify-between gap-1 sm:gap-2">
+                  {["Audit", "Gap map", "RFP", "Build", "Run", "Optimize"].map((step) => (
+                    <span
                       key={step}
-                      className="flex flex-col items-center gap-2 group cursor-default"
+                      className="relative z-10 flex h-7 items-center justify-center rounded-full bg-[#5849F5] px-3 sm:px-4 text-[9px] uppercase tracking-widest font-bold text-white shadow-[0_0_15px_rgba(88,73,245,0.5)] transition-all duration-300 hover:scale-105 cursor-default whitespace-nowrap"
                     >
-                      <span className="flex h-6 items-center rounded-full border border-white/10 bg-[#1A2142] px-3 text-[9px] uppercase tracking-widest font-bold text-[#A5ACCE] transition-all duration-300 group-hover:bg-[#5B4CF5] group-hover:text-white group-hover:border-[#5B4CF5] group-hover:shadow-[0_0_15px_rgba(91,76,245,0.5)]">
-                        {step}
-                      </span>
-                      {index !== 5 && (
-                        <ArrowRight className="absolute -right-3 top-1/2 -translate-y-1/2 h-3 w-3 text-white/20 hidden sm:block" />
-                      )}
-                    </div>
+                      {step}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -223,13 +223,13 @@ function DiagramNode({
 }) {
   return (
     <div
-      className="absolute left-1/2 top-1/2 z-10 flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/10 hover:border-white/30 cursor-default"
+      className="absolute left-1/2 top-1/2 z-10 flex items-center gap-2.5 rounded-full border border-white/5 bg-[#1C203B] px-4 py-1.5 shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 hover:border-[#5B4CF5]/40 hover:bg-[#20254A] cursor-default"
       style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
     >
-      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-black/20 shadow-inner">
+      <div className="flex items-center justify-center opacity-90 drop-shadow-md">
         {icon}
       </div>
-      <span className="text-xs font-semibold text-white whitespace-nowrap">{label}</span>
+      <span className="text-[11px] font-bold text-[#E2E8F0] whitespace-nowrap tracking-wide">{label}</span>
     </div>
   );
 }
