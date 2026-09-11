@@ -47,7 +47,7 @@ const SOURCES = [
 
 export function EnterpriseDiagnostic() {
   return (
-    <section className="relative overflow-hidden bg-[#F8F9FE] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <section id="audit" className="relative scroll-mt-24 overflow-hidden bg-[#F8F9FE] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       {/* Subtle Background Mesh */}
       <div className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] -translate-x-1/3 -translate-y-1/3 rounded-full bg-[#5B4CF5]/[0.03] blur-[100px]" />
       

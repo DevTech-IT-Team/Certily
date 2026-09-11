@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -129,6 +130,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAuth = pathname === "/login" || pathname === "/signup";
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -141,8 +144,8 @@ function RootComponent() {
                 <Outlet />
               </PageEnter>
             </main>
-            <Footer />
-            <VChatFloating />
+            {!isAuth && <Footer />}
+            {!isAuth && <VChatFloating />}
           </div>
         </VProvider>
       </CartProvider>

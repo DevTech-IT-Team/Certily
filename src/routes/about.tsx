@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { VCampusScrollStory } from "@/components/campus/VCampusScrollStory";
+// import { VCampusScrollStory } from "@/components/campus/VCampusScrollStory";
 import { Reveal } from "@/components/campus/Reveal";
-import { Section } from "@/components/Section";
 import { MeetOurTeam } from "@/components/about/MeetOurTeam";
-import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
+import { AboutVisionHero } from "@/components/about/AboutVisionHero";
+import { AboutThreeVoices } from "@/components/about/AboutThreeVoices";
+import { AboutFoundingLeadership } from "@/components/about/AboutFoundingLeadership";
+import { AboutLearnUseProve } from "@/components/about/AboutLearnUseProve";
+import { AboutCampusWithoutBorders } from "@/components/about/AboutCampusWithoutBorders";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { GatewaySection } from "@/components/ui/gateway-section";
 
 export const Route = createFileRoute("/about")({
@@ -14,31 +17,29 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Meet V and explore the Certcia AI Campus — a guided learning world with structured pathways, hands-on AI projects, and meaningful certifications.",
+          "Born from a vision. Built for what comes next. Meet Certcia — industry-led, educator-shaped, and built so future readiness is something a learner can prove.",
       },
     ],
   }),
   component: About,
 });
+
 const HERO_HIGHLIGHTS = [
   "Structured Pathways",
   "Verifiable Credentials",
   "24/7 AI Mentorship with V",
 ];
 
-// ---------------------------------------------------------------------------
-// Page component
-// ---------------------------------------------------------------------------
 function About() {
   return (
     <div className="overflow-x-clip bg-[#EEEEF8]">
+      <AboutVisionHero />
+      <AboutThreeVoices />
+
       {/* ------------------------------------------------------------------ */}
       {/* 3D AI CAMPUS HERO & SCROLL STORY                                   */}
       {/* ------------------------------------------------------------------ */}
-      <VCampusScrollStory />
-
-
-
+      {/* <VCampusScrollStory /> */}
 
       {/* ------------------------------------------------------------------ */}
       {/* Exact Replicated Section (Gateway)                                 */}
@@ -47,10 +48,14 @@ function About() {
         <GatewaySection />
       </Reveal>
 
+      <AboutFoundingLeadership />
+      <AboutLearnUseProve />
+      <AboutCampusWithoutBorders />
+
       {/* ------------------------------------------------------------------ */}
       {/* Meet Our Team Component                                              */}
       {/* ------------------------------------------------------------------ */}
-      <MeetOurTeam />
+      {/* <MeetOurTeam /> */}
 
       {/* ------------------------------------------------------------------ */}
       {/* Light & Compact Start Your Journey CTA Section                     */}
@@ -58,7 +63,6 @@ function About() {
       <Reveal>
         <section className="px-4 py-12 sm:px-6 sm:py-16">
           <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-[#D6D8F5] bg-gradient-to-br from-[#EAEBFE] via-[#E4E6FA] to-[#DFDDF3] p-8 text-center shadow-[0_15px_40px_-15px_rgba(91,76,245,0.2)] sm:p-12">
-            {/* Ambient subtle light glows */}
             <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[#5B4CF5]/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-[#4CD1B0]/20 blur-3xl" />
 
@@ -81,7 +85,6 @@ function About() {
                 </Link>
               </div>
 
-              {/* Value checklist badges */}
               <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-[#E4E1F8] pt-6 text-xs font-semibold text-[#5A607A] sm:text-sm">
                 {HERO_HIGHLIGHTS.map((item) => (
                   <div key={item} className="flex items-center gap-2">
@@ -97,5 +100,3 @@ function About() {
     </div>
   );
 }
-
-

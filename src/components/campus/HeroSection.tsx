@@ -50,9 +50,9 @@ export function HeroSection() {
                 data-hero-line
                 className="font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem]"
               >
-                <span className="block">Real skills. Real impact.</span>
+                <span className="block">Real skills  Real impact</span>
                 <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">
-                  Built for the future.
+                  Built for the future
                 </span>
               </h1>
 
