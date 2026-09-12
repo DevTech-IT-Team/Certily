@@ -138,6 +138,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(-360deg); }
 }
+@keyframes lifecycle-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
 
 :root {
   --radius: 1rem;
