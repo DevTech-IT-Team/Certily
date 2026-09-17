@@ -16,6 +16,7 @@ import { PageEnter } from "../components/campus/PageEnter";
 import { VProvider } from "../components/campus/VContext";
 import { VChatFloating } from "../components/campus/VChatbot";
 import { CartProvider } from "../lib/CartContext";
+import { CurrencyProvider } from "../lib/CurrencyContext";
 
 function NotFoundComponent() {
   return (
@@ -135,6 +136,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CurrencyProvider>
       <CartProvider>
         <VProvider>
           <div className="min-h-screen flex flex-col">
@@ -149,6 +151,7 @@ function RootComponent() {
           </div>
         </VProvider>
       </CartProvider>
+      </CurrencyProvider>
     </QueryClientProvider>
   );
 }

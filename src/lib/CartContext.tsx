@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { COURSES_DATA, type CourseDetails } from "./courses";
+import { useCurrency } from "./CurrencyContext";
 
 interface CartContextType {
   cartItems: CourseDetails[];
@@ -91,6 +92,7 @@ import { Link } from "@tanstack/react-router";
 import { X, Check, Plus } from "lucide-react";
 function AddedToCartModal({ isOpen, onClose, courseId }: { isOpen: boolean, onClose: () => void, courseId: string | null }) {
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
   
   if (!courseId) return null;
   const course = COURSES_DATA.find(c => c.id === courseId);
@@ -136,7 +138,7 @@ function AddedToCartModal({ isOpen, onClose, courseId }: { isOpen: boolean, onCl
               <div className="text-[13px] text-[#6A6F73]">
                 By {course.author}
               </div>
-              <div className="font-black text-[15px] sm:text-[16px] text-[#1C1D1F] mt-1.5">{course.price}</div>
+              <div className="font-black text-[15px] sm:text-[16px] text-[#1C1D1F] mt-1.5">{formatPrice(course.price)}</div>
             </div>
           </div>
 
@@ -170,8 +172,8 @@ function AddedToCartModal({ isOpen, onClose, courseId }: { isOpen: boolean, onCl
                       {related.title}
                     </div>
                     <div className="flex items-center gap-1.5 mt-1">
-                      <span className="font-black text-[#1C1D1F] text-[14px]">{related.price}</span>
-                      <span className="text-[#6A6F73] line-through text-[11px]">{related.originalPrice}</span>
+                      <span className="font-black text-[#1C1D1F] text-[14px]">{formatPrice(related.price)}</span>
+                      <span className="text-[#6A6F73] line-through text-[11px]">{formatPrice(related.originalPrice)}</span>
                     </div>
                   </div>
                   <button 

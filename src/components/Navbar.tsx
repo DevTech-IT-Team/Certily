@@ -4,6 +4,7 @@ import { Menu, X, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logoImg from "@/assets/logo/certicialogo.png";
 import { useCart } from "@/lib/CartContext";
+import { useCurrency } from "@/lib/CurrencyContext";
 
 const NAV_LINKS: { to: any; label: string }[] = [
   { to: "/certcia-way", label: "Why Certcia" },
@@ -50,6 +51,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
   const { cartCount } = useCart();
+  const { currency } = useCurrency();
+  const region = currency === "INR" ? { code: "IN", flag: "in", name: "India" } : { code: "US", flag: "us", name: "United States" };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -98,6 +101,19 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-1.5 sm:gap-2">
+            <div
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#E4E2F0] bg-[#F7F8FC] px-2.5 py-1"
+              title={`Prices shown for ${region.name}`}
+            >
+              <img
+                src={`https://flagcdn.com/w40/${region.flag}.png`}
+                alt=""
+                width={16}
+                height={12}
+                className="h-3 w-4 rounded-[2px] object-cover"
+              />
+              <span className="text-[11px] font-bold tracking-wide text-[#0F1533]">{region.code}</span>
+            </div>
             {/* Shopping Cart Icon */}
             <Link
               to="/cart"

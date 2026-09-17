@@ -3,12 +3,14 @@ import { Link } from "@tanstack/react-router";
 import { Star, Check } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { useCart } from "@/lib/CartContext";
+import { useCurrency } from "@/lib/CurrencyContext";
 import type { CourseDetails } from "@/lib/courses";
 import { CourseHoverThumbnail } from "./CourseHoverThumbnail";
 
 export function CourseCatalogCard({ course }: { course: CourseDetails }) {
   const [hovered, setHovered] = useState(false);
   const { addToCart, isInCart } = useCart();
+  const { formatPrice } = useCurrency();
 
   return (
     <HoverCard openDelay={300} closeDelay={100}>
@@ -57,10 +59,10 @@ export function CourseCatalogCard({ course }: { course: CourseDetails }) {
 
             <div className="mt-auto flex items-center gap-2 pt-4">
               <span className="text-[17px] font-bold text-[#1C1D1F]">
-                {course.price}
+                {formatPrice(course.price)}
               </span>
               <span className="text-[15px] text-[#6A6F73] line-through">
-                {course.originalPrice}
+                {formatPrice(course.originalPrice)}
               </span>
             </div>
           </div>

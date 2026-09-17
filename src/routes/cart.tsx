@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCart } from "@/lib/CartContext";
+import { useCurrency } from "@/lib/CurrencyContext";
 import { COURSES_DATA } from "@/lib/courses";
 import { Star, Trash2, Plus } from "lucide-react";
 
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { cartItems, cartCount, cartTotal, removeFromCart } = useCart();
+  const { formatPrice, formatAmount } = useCurrency();
   const cartCourses = cartItems;
   const totalPrice = cartTotal;
   const totalOriginalPrice = cartTotal * (1 / 0.17);
@@ -76,8 +78,8 @@ function CartPage() {
                         Remove
                       </button>
                       <div className="text-right">
-                        <div className="font-bold text-[16px] sm:text-[18px] text-[#5B4CF5]">{course.price}</div>
-                        <div className="text-[14px] text-[#6A6F73] line-through">{course.originalPrice}</div>
+                        <div className="font-bold text-[16px] sm:text-[18px] text-[#5B4CF5]">{formatPrice(course.price)}</div>
+                        <div className="text-[14px] text-[#6A6F73] line-through">{formatPrice(course.originalPrice)}</div>
                       </div>
                     </div>
                   </div>
@@ -89,8 +91,8 @@ function CartPage() {
             <div className="lg:col-span-1">
               <div className="bg-indigo-50/30 border border-indigo-100 rounded-2xl p-6 lg:sticky lg:top-24">
                 <div className="text-[16px] font-bold text-[#6A6F73] mb-2">Total:</div>
-                <div className="text-4xl font-bold text-[#1C1D1F] mb-1 tracking-tight">₹{totalPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
-                <div className="text-[16px] text-[#6A6F73] line-through mb-6">₹{totalOriginalPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                <div className="text-4xl font-bold text-[#1C1D1F] mb-1 tracking-tight">{formatAmount(totalPrice)}</div>
+                <div className="text-[16px] text-[#6A6F73] line-through mb-6">{formatAmount(totalOriginalPrice)}</div>
                 <div className="text-sm text-indigo-700 font-medium mb-6 bg-indigo-100/50 px-3 py-2 rounded-lg inline-block">
                   84% off
                 </div>
@@ -133,8 +135,8 @@ function CartPage() {
                     </div>
                     <div className="mt-auto flex items-end justify-between">
                       <div>
-                        <div className="font-bold text-[16px] text-[#1C1D1F]">{course.price}</div>
-                        <div className="text-[12px] text-[#6A6F73] line-through">{course.originalPrice}</div>
+                        <div className="font-bold text-[16px] text-[#1C1D1F]">{formatPrice(course.price)}</div>
+                        <div className="text-[12px] text-[#6A6F73] line-through">{formatPrice(course.originalPrice)}</div>
                       </div>
                     </div>
                   </div>

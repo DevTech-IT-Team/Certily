@@ -4,6 +4,8 @@ import { Star, Check, PlayCircle, Monitor, FileText, Download, Award, ChevronRig
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/CartContext";
+import { useCurrency } from "@/lib/CurrencyContext";
+import { parseInrAmount } from "@/lib/pricing";
 import certciaVideo from "@/assets/certcia.mp4";
 
 export const Route = createFileRoute("/course/$courseId")({
@@ -17,6 +19,7 @@ function CourseLandingPage() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isHoveringVideo, setIsHoveringVideo] = useState(false);
   const { addToCart, isInCart } = useCart();
+  const { formatPrice, formatAmount } = useCurrency();
 
   if (!course) {
     return (
@@ -284,7 +287,7 @@ function CourseLandingPage() {
                 <div className="border-2 border-[#5B4CF5] bg-[#F7F8FC] rounded-lg p-3 mb-2 relative cursor-pointer">
                   <div className="text-[11px] text-[#424446] font-bold mb-0.5">Subscription - Bundle</div>
                   <div className="flex items-end gap-1">
-                    <span className="text-xl font-bold text-[#1C1D1F] tracking-tight">{course.price}</span>
+                    <span className="text-xl font-bold text-[#1C1D1F] tracking-tight">{formatPrice(course.price)}</span>
                     <span className="text-xs text-gray-500 mb-1">/ month</span>
                   </div>
                 </div>
@@ -293,7 +296,7 @@ function CourseLandingPage() {
                 <div className="border border-gray-200 rounded-lg p-3 mb-4 hover:border-gray-300 transition-colors cursor-pointer opacity-70">
                   <div className="text-[11px] text-[#424446] font-medium mb-0.5">Individual Course</div>
                   <div className="flex items-end gap-1">
-                    <span className="text-lg font-bold text-[#1C1D1F] tracking-tight">₹{(parseFloat(course.price.replace(/[^0-9.]/g, '')) * 3).toLocaleString('en-IN')}</span>
+                    <span className="text-lg font-bold text-[#1C1D1F] tracking-tight">{formatAmount((parseInrAmount(course.originalPrice) ?? 999) * 3)}</span>
                     <span className="text-[10px] text-gray-500 mb-1">/ one-time payment</span>
                   </div>
                 </div>
@@ -302,13 +305,13 @@ function CourseLandingPage() {
                 <div className="mb-4 bg-[#F8FAFC] border border-blue-100 rounded-xl p-4">
                   <div className="text-[15px] font-bold text-[#1C1D1F] mb-1">Subscription - Bundle</div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="text-gray-400 line-through text-sm">{course.originalPrice}</span>
+                    <span className="text-gray-400 line-through text-sm">{formatPrice(course.originalPrice)}</span>
                     <span className="bg-orange-100 text-orange-800 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
                       🔥 10% off
                     </span>
                   </div>
                   <div className="flex items-end gap-1 mb-3">
-                    <span className="text-2xl font-bold text-[#1C1D1F] tracking-tight">{course.price}</span>
+                    <span className="text-2xl font-bold text-[#1C1D1F] tracking-tight">{formatPrice(course.price)}</span>
                     <span className="text-xs text-gray-500 mb-1">/ month</span>
                   </div>
                   
