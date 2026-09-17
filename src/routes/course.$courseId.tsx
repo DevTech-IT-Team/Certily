@@ -35,62 +35,61 @@ function CourseLandingPage() {
     );
   };
 
-  return (
-    <div className="min-h-screen bg-white font-sans text-[#1C1D1F] relative">
-      
-      {/* Full-width dark background for hero */}
-      <div className="absolute top-0 left-0 right-0 h-[480px] bg-gradient-to-br from-slate-950 via-[#0F1533] to-slate-900 overflow-hidden z-0">
-        <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none" />
-      </div>
+  const moduleCount = course.curriculum.length;
+  const lessonCount = course.curriculum.reduce(
+    (acc, curr) => acc + (curr.lessons?.length ?? curr.lectures),
+    0,
+  );
+  const projectCount = course.curriculum.filter(
+    (section) =>
+      section.duration === "Capstone" ||
+      /capstone/i.test(section.sectionTitle),
+  ).length;
 
-      {/* Unified Grid Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pb-20 pt-28 md:pt-32 relative z-10">
-        
-        {/* Left Column (Hero Content + Main Content) */}
-        <div className="lg:col-span-2">
-          
-          {/* --- HERO CONTENT (White text on dark bg) --- */}
-          <div className="pb-16 md:pb-24">
-            {/* Breadcrumbs */}
-            <div className="flex items-center gap-2 text-sm text-indigo-200/80 mb-6 font-medium w-fit px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-              <Link to="/learning" className="hover:text-white cursor-pointer transition-colors">Explore Pathways</Link>
+  return (
+    <div className="min-h-screen bg-white font-sans text-[#1C1D1F]">
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-[#0F1533] to-slate-900 pt-28 pb-20 md:pt-32 md:pb-24">
+        <div className="pointer-events-none absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-12 rounded-full bg-indigo-500/20 blur-[100px]" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl lg:pr-8">
+            <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm font-medium text-indigo-200/80 backdrop-blur-sm">
+              <Link to="/learning" className="cursor-pointer transition-colors hover:text-white">Explore Pathways</Link>
               <ChevronRight className="h-4 w-4" />
-              <span className="hover:text-white cursor-pointer transition-colors">{course.category}</span>
+              <span>{course.category}</span>
               <ChevronRight className="h-4 w-4" />
-              <span className="hover:text-white cursor-pointer transition-colors text-white">{course.title.split(":")[0]}</span>
+              <span className="text-white">{course.title.split(":")[0]}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 max-w-3xl tracking-tight">
+            <h1 className="mb-6 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
               {course.title}
             </h1>
-            
-            <p className="text-[18px] text-indigo-100/90 leading-relaxed max-w-3xl font-medium">
+            <p className="max-w-3xl text-[18px] font-medium leading-relaxed text-indigo-100/90">
               {course.subtitle}
             </p>
           </div>
+        </div>
+      </div>
 
-          {/* --- MAIN CONTENT (Dark text on white bg) --- */}
-          <div className="pt-8">
-            
-            {/* Meta Info Box (Half-centered over the boundary) */}
-            <div className="flex items-center gap-4 text-sm text-[#424446] mb-12 p-4 bg-white shadow-xl shadow-black/5 rounded-xl border border-gray-200 overflow-x-auto whitespace-nowrap scrollbar-hide relative z-20 -mt-10 md:-mt-16">
-              <div className="flex items-center gap-2 bg-orange-50 text-orange-700 border border-orange-200 font-bold px-2.5 py-1 text-xs rounded-md shrink-0">
-                <Award className="h-4 w-4" /> Nanodegree Program
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 pb-20 sm:px-6 lg:grid-cols-3 lg:gap-12 lg:px-8">
+        <div className="lg:col-span-2">
+            <div className="relative z-20 -mt-10 mb-12 flex items-center gap-4 overflow-x-auto whitespace-nowrap rounded-xl border border-gray-200 bg-white p-4 text-sm text-[#424446] shadow-xl shadow-black/5 scrollbar-hide md:-mt-12">
+              <div className="flex shrink-0 items-center gap-2 rounded-md border border-[#D8D4F5] bg-[#EDE9FF] px-2.5 py-1 text-xs font-bold text-[#5B4CF5]">
+                <Award className="h-4 w-4" /> Certcia Program
               </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <Monitor className="h-4 w-4 text-gray-500" /> 
-                <span>Intermediate</span>
+              <div className="flex shrink-0 items-center gap-1.5">
+                <Monitor className="h-4 w-4 text-gray-500" />
+                <span>{course.levels}</span>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <div className="h-4 w-4 rounded-full border border-gray-300 flex items-center justify-center text-[10px] text-gray-500">L</div>
+              <div className="flex shrink-0 items-center gap-1.5">
+                <div className="flex h-4 w-4 items-center justify-center rounded-full border border-gray-300 text-[10px] text-gray-500">L</div>
                 <span>{course.hours} hours</span>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <Star className="h-4 w-4 fill-orange-400 text-orange-400" />
+              <div className="flex shrink-0 items-center gap-1.5">
+                <Star className="h-4 w-4 fill-[#5B4CF5] text-[#5B4CF5]" />
                 <span className="font-bold text-[#1C1D1F]">{course.rating}</span>
-                <span className="text-[#5B4CF5] hover:underline cursor-pointer">({course.ratingCount})</span>
+                <span className="cursor-pointer text-[#5B4CF5] hover:underline">({course.ratingCount})</span>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0">
+              <div className="flex shrink-0 items-center gap-1.5">
                 <FileText className="h-4 w-4 text-gray-500" />
                 <span>Updated: {course.updatedDate}</span>
               </div>
@@ -100,20 +99,14 @@ function CourseLandingPage() {
           <div className="mb-14">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-[#1C1D1F]">Skills you'll learn</h2>
-              <span className="text-sm text-gray-500 flex items-center gap-1"><Award className="h-4 w-4" /> {course.whatYouWillLearn.length + 3} skills</span>
+              <span className="flex items-center gap-1 text-sm text-gray-500"><Award className="h-4 w-4" /> {course.whatYouWillLearn.length} skills</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {course.whatYouWillLearn.map((item, i) => (
-                <div key={i} className="px-3 py-1.5 bg-[#F7F9FA] border border-black/5 rounded-md text-[13px] text-[#424446] font-medium hover:bg-gray-100 transition-colors">
-                  {item.split(" ").slice(0, 4).join(" ")}...
+                <div key={i} className="rounded-md border border-black/5 bg-[#F7F9FA] px-3 py-1.5 text-[13px] font-medium text-[#424446]">
+                  {item}
                 </div>
               ))}
-              <div className="px-3 py-1.5 bg-[#F7F9FA] border border-black/5 rounded-md text-[13px] text-[#424446] font-medium hover:bg-gray-100 transition-colors">Generative AI</div>
-              <div className="px-3 py-1.5 bg-[#F7F9FA] border border-black/5 rounded-md text-[13px] text-[#424446] font-medium hover:bg-gray-100 transition-colors">Machine Learning</div>
-              <div className="px-3 py-1.5 bg-[#F7F9FA] border border-black/5 rounded-md text-[13px] text-[#424446] font-medium hover:bg-gray-100 transition-colors">Data Analysis</div>
-              <button className="px-3 py-1.5 text-[13px] text-[#5B4CF5] font-bold hover:underline">
-                +4 More
-              </button>
             </div>
           </div>
 
@@ -124,15 +117,12 @@ function CourseLandingPage() {
               <span className="text-sm text-gray-500 flex items-center gap-1"><Check className="h-4 w-4" /> {course.requirements.length} prerequisites</span>
             </div>
             <p className="text-[14px] text-[#424446] mb-4">Prior to enrolling, you should have the following knowledge:</p>
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               {course.requirements.map((req, i) => (
-                <div key={i} className="px-3 py-1.5 bg-blue-50 border border-blue-100 text-blue-700 rounded-md text-[13px] font-bold hover:bg-blue-100 transition-colors">
-                  {req.split(" ").slice(0, 3).join(" ")}
+                <div key={i} className="rounded-md border border-blue-100 bg-blue-50 px-3 py-1.5 text-[13px] font-bold text-blue-700">
+                  {req}
                 </div>
               ))}
-              <button className="px-3 py-1.5 text-[13px] text-[#5B4CF5] font-bold hover:underline">
-                +1 More
-              </button>
             </div>
             <p className="text-[14px] text-[#424446]">You will also need to be able to communicate fluently and professionally in <strong>written and spoken English</strong>.</p>
           </div>
@@ -142,9 +132,9 @@ function CourseLandingPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <h2 className="text-2xl font-bold text-[#1C1D1F]">Program Outline</h2>
               <div className="flex items-center gap-4 text-sm text-[#424446] font-medium">
-                <span className="flex items-center gap-1.5"><Monitor className="h-4 w-4" /> {course.curriculum.length} courses</span>
-                <span className="flex items-center gap-1.5"><FileText className="h-4 w-4" /> {course.curriculum.reduce((acc, curr) => acc + curr.lectures, 0)} lessons</span>
-                <span className="flex items-center gap-1.5"><Award className="h-4 w-4" /> 4 projects</span>
+                <span className="flex items-center gap-1.5"><Monitor className="h-4 w-4" /> {moduleCount} {moduleCount === 1 ? "module" : "modules"}</span>
+                <span className="flex items-center gap-1.5"><FileText className="h-4 w-4" /> {lessonCount} {lessonCount === 1 ? "lesson" : "lessons"}</span>
+                <span className="flex items-center gap-1.5"><Award className="h-4 w-4" /> {projectCount} {projectCount === 1 ? "project" : "projects"}</span>
               </div>
             </div>
             
@@ -158,7 +148,7 @@ function CourseLandingPage() {
                       className="w-full flex items-center justify-between p-5 bg-[#F8FAFC] hover:bg-[#F1F5F9] transition-colors text-left"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-gray-500">Course {idx + 1}:</span>
+                        <span className="text-sm font-medium text-gray-500">Module {idx + 1}:</span>
                         <span className="font-bold text-[16px] text-[#1C1D1F]">{section.sectionTitle}</span>
                       </div>
                       <div className="flex items-center gap-4">
@@ -181,14 +171,16 @@ function CourseLandingPage() {
                             {idx === 0 ? course.longDescription.slice(0, 150) + "..." : "Master advanced techniques and build robust solutions with hands-on projects and expert feedback loops designed to solve complex problems."}
                           </p>
                           <div className="space-y-0">
-                            {Array.from({ length: Math.min(3, section.lectures) }).map((_, lIdx) => (
+                            {(section.lessons ?? Array.from({ length: Math.min(3, section.lectures) }, (_, i) =>
+                              i === 0 ? section.sectionTitle : "Implementing Advanced Patterns"
+                            )).map((lessonTitle, lIdx) => (
                               <div key={lIdx} className="group flex flex-col sm:flex-row items-start py-4 border-t border-gray-100 gap-4 text-[14px]">
                                 <div className="flex items-start gap-4 sm:w-1/3">
                                   <div className="mt-0.5 h-6 w-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px] font-bold shrink-0">
                                     L{lIdx + 1}
                                   </div>
                                   <span className="font-bold text-[#1C1D1F]">
-                                    {lIdx === 0 ? "Introduction to Concepts and Planning" : "Implementing Advanced Patterns"}
+                                    {lessonTitle}
                                   </span>
                                 </div>
                                 <div className="sm:w-2/3 text-[#424446] leading-relaxed">
@@ -245,11 +237,10 @@ function CourseLandingPage() {
               <p>{course.longDescription}</p>
             </div>
           </div>
-          </div>
         </div>
 
         {/* ── STICKY SIDEBAR (Right Column) ─────────────────────────────────── */}
-        <div className="hidden lg:block lg:col-span-1 relative z-20">
+        <div className="relative z-20 hidden lg:col-span-1 lg:-mt-56 lg:block">
           {/* Sticky Sidebar */}
           <div className="sticky top-24 pb-10">
             <div className="bg-white border border-gray-200 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] rounded-xl overflow-hidden">

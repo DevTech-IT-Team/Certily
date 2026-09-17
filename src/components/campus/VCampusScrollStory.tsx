@@ -326,8 +326,8 @@ export function VCampusScrollStory() {
             </span>
 
             <h3 className="mt-3 font-display text-[1.85rem] sm:text-[2.2rem] md:text-[2.45rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
-              Real skills.<br />
-              Real <span className="text-[#5B4CF5]">impact.</span>
+              Real skills<br />
+              Real <span className="text-[#5B4CF5]">impact</span>
             </h3>
 
             <p className="mt-3 text-[13.5px] sm:text-[14.5px] leading-relaxed font-medium text-[#0F1533]/85 max-w-[320px]">

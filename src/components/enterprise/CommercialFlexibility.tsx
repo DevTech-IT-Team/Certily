@@ -56,7 +56,7 @@ export function CommercialFlexibility() {
               COMMERCIAL FLEXIBILITY
             </h4>
             <h2 className="font-display text-[32px] sm:text-[40px] font-bold leading-[1.1] tracking-tight text-[#0F1533] max-w-4xl">
-              Scale learning capacity with the business - not against it.
+              Scale learning capacity with the business — not against it
             </h2>
             <p className="mt-4 text-base sm:text-lg text-[#5A607A] max-w-3xl leading-relaxed">
               Enterprise demand changes. The operating model should let clients increase or reduce learner volume, services, delivery days and content maintenance without rebuilding the entire contract.

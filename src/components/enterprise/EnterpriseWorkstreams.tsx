@@ -53,9 +53,9 @@ export function EnterpriseWorkstreams() {
               Six Specialist Workstreams
             </h4>
             <h2 className="font-display text-[36px] sm:text-[48px] lg:text-[60px] font-bold leading-[1.1] tracking-tight text-[#0F1533] max-w-4xl">
-              One transformation partner. <br />
+              One transformation partner <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B4CF5] to-[#8C84F9]">
-                Zero fragmented vendors.
+                Zero fragmented vendors
               </span>
             </h2>
             <p className="mt-6 text-lg text-[#5A607A] max-w-2xl font-light leading-relaxed">

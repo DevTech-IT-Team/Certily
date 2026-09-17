@@ -118,8 +118,8 @@ export const PUBLIC_AREAS = CAMPUS_BUILDINGS.filter((b) => b.access === "public"
 export const ENROLLED_AREAS = CAMPUS_BUILDINGS.filter((b) => b.access === "enrolled");
 
 export const CAMPUS_POSITIONING = {
-  headline: "Your Campus.",
-  subhead: "Your Future.",
+  headline: "Your Campus",
+  subhead: "Your Future",
   lead: "Self-paced learning, real AI projects, and a personal AI mentor to help you build skills that actually matter.",
   supporting:
     "Explore public pathways and news, then unlock your classroom, AI Lab, Certification Hall, and Mission Control when you enroll.",

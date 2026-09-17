@@ -141,8 +141,8 @@ export function JourneyHeader() {
               
               {/* STRICTLY 2-LINE TYPOGRAPHY */}
               <h2 className="font-display text-4xl md:text-[56px] font-bold leading-[1.15] text-[#0F1533] tracking-tight mb-6">
-                Learning for <span className="text-[#5B4CF5]">every</span> stage.<br />
-                Growth for <span className="text-[#5B4CF5]">every</span> future.
+                Learning for <span className="text-[#5B4CF5]">every</span> stage<br />
+                Growth for <span className="text-[#5B4CF5]">every</span> future
               </h2>
               
               <p className="max-w-lg text-[15px] md:text-[17px] leading-relaxed text-[#5A607A] font-medium mx-auto md:mx-0">

@@ -1,6 +1,5 @@
 import { type PathwayLevelId, PATHWAY_LEVELS } from "@/lib/pathways";
 import { PremiumPathwayView } from "./PremiumPathwayView";
-import { ElementaryView } from "./ElementaryView";
 
 type PathwayContentSwitcherProps = {
   activeLevel: PathwayLevelId | "all";
@@ -17,14 +16,6 @@ export function PathwayContentSwitcher({
             <PremiumPathwayView levelId={level.id} />
           </div>
         ))}
-      </div>
-    );
-  }
-
-  if (activeLevel === "elementary") {
-    return (
-      <div id="dedicated-pathway-view" className="scroll-mt-24">
-        <ElementaryView />
       </div>
     );
   }

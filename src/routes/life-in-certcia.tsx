@@ -85,7 +85,7 @@ function LifeInCertciaPage() {
           <>
             Stay connected to
             <br />
-            the <span style={{ background: "linear-gradient(90deg, #5B4CF5 0%, #3B82F6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>community.</span>
+            the <span style={{ background: "linear-gradient(90deg, #5B4CF5 0%, #3B82F6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>community</span>
           </>
         }
         description="Discover the latest campus news, read updates from the AI industry, and RSVP to upcoming hackathons and workshops."
@@ -249,7 +249,7 @@ function LifeInCertciaPage() {
                   <Mail className="h-3.5 w-3.5" /> Weekly Digest
                 </div>
                 <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-                  Stay in the loop.
+                  Stay in the loop
                 </h2>
                 <p className="text-white/70 font-medium leading-relaxed">
                   Get the latest campus news, exclusive event invites, and AI curriculum updates straight to your inbox.

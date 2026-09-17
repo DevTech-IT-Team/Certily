@@ -400,9 +400,9 @@ export function LearningPathwaysSection({
                 !isPage && "mx-auto max-w-2xl"
               )}
             >
-              Every learner has a pathway.{" "}
+              Every learner has a pathway —{" "}
               <span className="bg-gradient-to-r from-[#5B4CF5] to-[#3B82F6] bg-clip-text text-transparent">
-                Find yours.
+                find yours
               </span>
             </h2>
           </Reveal>

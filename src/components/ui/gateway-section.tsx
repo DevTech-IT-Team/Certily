@@ -13,7 +13,7 @@ export function GatewaySection() {
         </div>
 
         <h2 className="font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem]">
-          Our Global <span className="text-[#5B4CF5]">Presence.</span>
+          Our Global <span className="text-[#5B4CF5]">Presence</span>
         </h2>
 
         <p className="mx-auto mt-5 max-w-xl text-base font-medium leading-relaxed text-[#5A607A] sm:mt-6 sm:text-lg lg:text-[1.05rem]">

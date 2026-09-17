@@ -79,8 +79,8 @@ export function WhyCertciaHero() {
               data-hero-line
               className="font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem]"
             >
-              <span className="block">We don’t train.</span>
-              <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">We certify.</span>
+              <span className="block">We don’t train</span>
+              <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">We certify</span>
             </h1>
 
             <p

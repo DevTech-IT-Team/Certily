@@ -97,7 +97,6 @@ export function ElementaryView() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-6">
-            {/* Track 1 (Larger) */}
             <div className="lg:col-span-7 group relative overflow-hidden rounded-[24px] bg-[#1A1A1A] shadow-sm transition-shadow hover:shadow-md border border-gray-200 flex flex-col h-[280px]">
               <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80" alt="Robotics" className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D1F]/95 via-[#0A0D1F]/40 to-transparent" />
@@ -127,7 +126,6 @@ export function ElementaryView() {
               </div>
             </div>
 
-            {/* Track 2 (Smaller) */}
             <div className="lg:col-span-5 group relative overflow-hidden rounded-[24px] bg-white shadow-sm transition-shadow hover:shadow-md border border-gray-200 flex flex-col h-[280px]">
               <div className="h-[42%] relative overflow-hidden bg-gray-100 shrink-0">
                 <img src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=600&q=80" alt="Robot Hand" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -284,7 +282,7 @@ export function ElementaryView() {
               </div>
               <div className="flex flex-col justify-center pt-1">
                 <h2 className="text-[16px] md:text-[18px] font-extrabold text-[#0F1533] mb-1.5 tracking-tight">
-                  Preparing young minds today for the innovators of tomorrow.
+                  Preparing young minds today for the innovators of tomorrow
                 </h2>
                 <p className="text-[#5A607A] font-medium text-[13px]">
                   Empower curiosity. Build confidence. Create the future.

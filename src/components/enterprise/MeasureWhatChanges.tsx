@@ -45,7 +45,7 @@ export function MeasureWhatChanges() {
                 MEASURE WHAT CHANGES
               </h4>
               <h2 className="font-display text-[32px] sm:text-[40px] font-bold leading-[1.1] tracking-tight text-[#0F1533]">
-                Completion is a signal. Capability and business performance are the outcome.
+                Completion is a signal — capability and business performance are the outcome
               </h2>
             </div>
             <div className="max-w-xs lg:text-right pb-2">
@@ -82,7 +82,7 @@ export function MeasureWhatChanges() {
           <div className="bg-[#0F1533] rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
             <div>
               <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
-                Don't start with a training catalogue. Start with the business problem.
+                Don't start with a training catalogue — start with the business problem
               </h3>
               <p className="text-[#A5ACCE] text-sm">
                 Book a working session to define the scope of your Enterprise Capability Audit.

@@ -80,7 +80,7 @@ export function AILabFeatures() {
         <div className="text-center max-w-3xl mx-auto mb-20">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem] font-extrabold leading-[1.12] tracking-[-0.03em] text-[#0F1533] mb-6">
-              Where learning becomes <span className="text-[#5B4CF5]">an experiment</span>.
+              Where learning becomes <span className="text-[#5B4CF5]">an experiment</span>
             </h2>
             <p className="max-w-2xl text-base sm:text-lg lg:text-[1.05rem] leading-relaxed text-[#5A607A] font-medium mx-auto">
               Step into the AI Lab, our experimental playground. Discover interactive clickers, immersive games, and global hackathons designed to put your skills to the test.
@@ -247,8 +247,8 @@ export function AISandbox() {
               </div>
               
               <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-[#0F1533] mb-6">
-                Stop reading. <br/>
-                <span className="text-[#5B4CF5]">Start experimenting.</span>
+                Stop reading <br/>
+                <span className="text-[#5B4CF5]">Start experimenting</span>
               </h2>
               
               <p className="text-base sm:text-lg leading-relaxed text-[#5A607A] font-medium mb-10 max-w-md">

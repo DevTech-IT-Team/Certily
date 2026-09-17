@@ -79,10 +79,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Certcia AI Campus — Your Campus. Your Future." },
+      { title: "Certcia AI Campus — Your Campus, Your Future" },
       { name: "description", content: "Outcome-driven AI learning campus with certification pathways, V mentorship, and shareable credentials for students and parents." },
       { name: "author", content: "Certcia" },
-      { property: "og:title", content: "Certcia AI Campus — Learn. Build. Certify." },
+      { property: "og:title", content: "Certcia AI Campus — Learn, Build, Certify" },
       { property: "og:description", content: "Explore certification pathways, AI Lab projects, and guided learning with V your AI mentor." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -1,15 +1,23 @@
-import { ArrowRight, Star, Clock, Users, CheckCircle2 } from "lucide-react";
-import { type PathwayLevelId, PATHWAY_LEVELS, coursesForLevel } from "@/lib/pathways";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { type PathwayLevelId, PATHWAY_LEVELS } from "@/lib/pathways";
+import { COURSES_DATA } from "@/lib/courses";
+import { CourseCatalogCard } from "@/components/campus/CourseCatalogCard";
+
+const LEVEL_CATEGORY: Partial<Record<PathwayLevelId, string>> = {
+  elementary: "Elementary",
+  middle: "Middle School",
+  high: "High School",
+  college: "College",
+  professional: "Professional",
+  career: "Career",
+};
 
 export function PremiumPathwayView({ levelId }: { levelId: PathwayLevelId }) {
   // We fall back to the first level if something goes wrong
   const levelData = PATHWAY_LEVELS.find((p) => p.id === levelId) || PATHWAY_LEVELS[0];
-  const courses = coursesForLevel(levelId);
-
-  // Split courses for bento layout (first is featured/large, rest are smaller)
-  const featuredCourse = courses[0];
-  const standardCourses = courses.slice(1);
+  const catalogCourses = COURSES_DATA.filter(
+    (c) => LEVEL_CATEGORY[levelId] && c.category === LEVEL_CATEGORY[levelId],
+  );
 
   return (
     <div className="w-full space-y-8 pb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -95,93 +103,24 @@ export function PremiumPathwayView({ levelId }: { levelId: PathwayLevelId }) {
             </p>
           </div>
           <div className="text-sm font-bold px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-slate-600">
-            {courses.length} Courses Available
+            {catalogCourses.length} Courses Available
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-12">
-          {/* Featured Large Card (Left side) */}
-          {featuredCourse && (
-            <div 
-              className="group relative lg:col-span-8 flex flex-col overflow-hidden rounded-3xl bg-white shadow-lg transition-all hover:shadow-2xl border border-slate-200 min-h-[300px] lg:min-h-[400px]"
-              style={{ '--hover-color': levelData.theme.cardHoverBorder } as React.CSSProperties}
-            >
-              <div className="absolute inset-0 w-full h-full">
-                <img src={featuredCourse.img} alt={featuredCourse.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent opacity-90" />
-              </div>
-              
-              <div className="relative h-full flex flex-col justify-end p-5 sm:p-8 z-10">
-                <div className="flex gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 px-2.5 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide">
-                    {featuredCourse.category}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 px-2.5 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide">
-                    <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                    {featuredCourse.rating}
-                  </span>
-                </div>
-                <h4 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
-                  {featuredCourse.title}
-                </h4>
-                <p className="text-white/80 font-medium max-w-xl text-xs sm:text-sm line-clamp-2 mb-6">
-                  {featuredCourse.preview}
-                </p>
-                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/20 pt-4 mt-auto">
-                  <div className="flex gap-4 text-white/70 text-[11px] font-semibold tracking-wide">
-                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {featuredCourse.duration}</span>
-                    <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" /> {featuredCourse.learners.toLocaleString()} learners</span>
-                  </div>
-                  <button className="rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-900 transition-colors group-hover:bg-slate-100 flex items-center gap-1.5">
-                    View Course <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-              {/* Animated Hover Border */}
-              <div className="absolute inset-0 border-2 border-transparent transition-colors duration-300 rounded-3xl group-hover:border-[var(--hover-color)] pointer-events-none" />
-            </div>
-          )}
-
-          {/* Standard Cards (Right side, stacked vertically) */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            {standardCourses.map((course) => (
-              <div 
-                key={course.id}
-                className="group relative flex flex-col flex-1 overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm transition-all hover:shadow-xl"
-                style={{ '--hover-color': levelData.theme.cardHoverBorder } as React.CSSProperties}
-              >
-                <div className="h-28 sm:h-32 relative overflow-hidden shrink-0">
-                  <img src={course.img} alt={course.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                  <span className="absolute bottom-2 left-3 inline-flex items-center rounded-md bg-white/20 backdrop-blur-md border border-white/20 px-1.5 py-0.5 text-[9px] font-bold text-white uppercase tracking-wide">
-                    {course.category}
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-4">
-                  <h4 className="font-display text-base font-bold text-slate-900 line-clamp-2 leading-snug">
-                    {course.title}
-                  </h4>
-                  <p className="mt-1.5 text-[11px] font-medium text-slate-500 line-clamp-2">
-                    {course.preview}
-                  </p>
-                  <div className="mt-auto pt-3 flex items-center justify-between">
-                    <div className="flex items-start gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5" style={{ color: levelData.theme.accent }} />
-                      <span className="text-[10px] font-bold text-slate-700 max-w-[130px] leading-tight">
-                        {course.outcome}
-                      </span>
-                    </div>
-                    <button className="shrink-0 h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 transition-colors group-hover:bg-slate-200" style={{ color: levelData.theme.accent }}>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  </div>
-                </div>
-                {/* Animated Hover Border */}
-                <div className="absolute inset-0 border-2 border-transparent transition-colors duration-300 rounded-3xl group-hover:border-[var(--hover-color)] pointer-events-none" />
-              </div>
+        {catalogCourses.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {catalogCourses.map((course) => (
+              <CourseCatalogCard key={course.id} course={course} />
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="rounded-3xl border border-slate-200 bg-white py-16 text-center">
+            <p className="text-lg font-semibold text-[#1C1D1F]">Coming Soon</p>
+            <p className="mt-2 text-sm text-[#6A6F73]">
+              We are actively building the curriculum for this pathway.
+            </p>
+          </div>
+        )}
       </section>
     </div>
   );

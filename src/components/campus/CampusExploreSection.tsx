@@ -35,7 +35,7 @@ export function CampusExploreSection() {
               90 seconds · Meet Certcia
             </p>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.06] tracking-tight text-[#0F1533] sm:text-5xl lg:text-[3.25rem]">
-              See how your campus works.
+              See how your campus works
             </h2>
           </Reveal>
 
@@ -112,7 +112,7 @@ export function CampusExploreSection() {
                 className="mt-2.5 font-display font-extrabold leading-[1.06] text-white"
                 style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}
               >
-                One campus.<br />Every possibility.
+                One campus<br />Every possibility
               </h3>
             </div>
 

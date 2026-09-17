@@ -10,9 +10,9 @@ export function VPersonas() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
           <h2 className="text-3xl font-extrabold tracking-tight text-[#0F1533] md:text-4xl md:leading-tight">
-            Meet V.
+            Meet V
             <br />
-            <span className="text-muted-foreground">Navigator, mentor, and campus guide.</span>
+            <span className="text-muted-foreground">Navigator, mentor, and campus guide</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
             V guides visitors through public areas, explains what unlocks after enrollment, and

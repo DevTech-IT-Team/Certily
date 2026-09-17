@@ -62,7 +62,7 @@ export function EnterpriseDiagnostic() {
                 </span>
               </div>
               <h2 className="font-display text-3xl font-extrabold leading-[1.15] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem]">
-                Before we recommend a single course, we learn how your organization actually works.
+                Before we recommend a single course, we learn how your organization actually works
               </h2>
             </div>
             <div className="lg:mt-14">

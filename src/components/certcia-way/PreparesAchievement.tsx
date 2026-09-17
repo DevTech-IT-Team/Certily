@@ -143,7 +143,7 @@ export function PreparesAchievement() {
       <div className="relative mx-auto max-w-7xl px-4 font-sans sm:px-6 lg:px-8">
         <h2 className="mx-auto max-w-3xl text-center font-display text-[1.65rem] font-extrabold leading-[1.15] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem]">
           <span className="block">Certcia prepares, validates, and</span>
-          <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">showcases achievement.</span>
+          <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">showcases achievement</span>
         </h2>
 
         <LayoutGroup>

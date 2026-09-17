@@ -55,7 +55,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "K–2",
     subLabel: "Kindergarten",
     badgeLabel: "🧸 K-2 PATHWAY",
-    themeTagline: "Learn. Play. Grow with AI!",
+    themeTagline: "Learn, Play, Grow with AI",
     description:
       "Fun learning adventures for little minds. Build curiosity, creativity & confidence with safe, friendly AI tools.",
     focus: "launch",

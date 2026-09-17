@@ -130,7 +130,7 @@ function EventsPage() {
                 Join the AI
                 <br />
                 <span style={{ background: "linear-gradient(90deg, #5B4CF5 0%, #3B82F6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  community.
+                  community
                 </span>
               </h1>
               <p className="mt-5 max-w-lg text-lg leading-relaxed text-[#5A607A]">

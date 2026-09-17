@@ -11,7 +11,7 @@ import { TrustLogosMarquee } from "@/components/campus/TrustLogosMarquee";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Certcia AI Campus — Learn AI. Build Skills. Earn Outcomes." },
+      { title: "Certcia AI Campus — Learn AI, Build Skills, Earn Outcomes" },
       {
         name: "description",
         content:
@@ -29,7 +29,7 @@ function Home() {
       <HeroSection />
       <CampusExploreSection />
       <VMentorSection />
-      <PathwayBannersSection />
+      <PathwayBannersSection previewLimit={4} />
       {/* <MasterclassSection /> */}
       <HomeStatsSection />
       <TrustLogosMarquee />

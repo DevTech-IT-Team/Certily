@@ -16,7 +16,11 @@ const TABS = [
   "Free Courses",
 ] as const;
 
-export function PathwayBannersSection() {
+export function PathwayBannersSection({
+  previewLimit,
+}: {
+  previewLimit?: number;
+}) {
   const [activeTab, setActiveTab] = useState<string>("All");
 
   const filteredCourses = COURSES_DATA.filter((p) => {
@@ -25,13 +29,17 @@ export function PathwayBannersSection() {
     return p.category === activeTab;
   });
 
+  const visibleCourses = previewLimit
+    ? filteredCourses.slice(0, previewLimit)
+    : filteredCourses;
+
   return (
-    <section className="min-h-screen bg-white py-8 font-sans sm:py-12 md:py-16">
+    <section className={cn("bg-white py-8 font-sans sm:py-12 md:py-16", !previewLimit && "min-h-screen")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-[#1C1D1F] sm:text-4xl">
-              Every learner has a path. Find yours.
+              Every learner has a path — find yours
             </h2>
             <p className="mt-3 text-base leading-relaxed text-[#6A6F73] sm:text-lg">
               K–12 and college pathways are open now. Professional and career
@@ -60,10 +68,10 @@ export function PathwayBannersSection() {
         </Reveal>
 
         <div className="mt-6 min-h-[400px]">
-          {filteredCourses.length > 0 ? (
+          {visibleCourses.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {filteredCourses.slice(0, 4).map((course, i) => (
-                <Reveal key={course.id} delay={0.1 + i * 0.05}>
+              {visibleCourses.map((course, i) => (
+                <Reveal key={course.id} delay={0.05 + Math.min(i, 8) * 0.03}>
                   <CourseCatalogCard course={course} />
                 </Reveal>
               ))}
@@ -77,20 +85,32 @@ export function PathwayBannersSection() {
             </div>
           )}
 
+          {previewLimit ? (
+            <div className="mt-10">
+              <Link
+                to="/learning"
+                className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
+              >
+                View all courses
+                <span className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
+          ) : activeTab !== "All" ? (
           <div className="mt-10">
             <Link
               to="/topic/$topicId"
               params={{ topicId: getTopicSlug(activeTab) }}
               className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
             >
-              {activeTab === "All"
-                ? "Show all courses"
-                : `Show all ${activeTab} courses`}
+              {`Show all ${activeTab} courses`}
               <span className="transition-transform group-hover:translate-x-1">
                 →
               </span>
             </Link>
           </div>
+          ) : null}
         </div>
       </div>
     </section>

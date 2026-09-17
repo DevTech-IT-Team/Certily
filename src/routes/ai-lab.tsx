@@ -108,10 +108,10 @@ function AILabPage() {
               </span>
 
               <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.06] tracking-tight text-[#0F1533] sm:text-5xl lg:text-[3.25rem]">
-                Build real AI projects.
+                Build real AI projects
                 <br />
                 <span className="bg-gradient-to-r from-[#5B4CF5] to-[#3B82F6] bg-clip-text text-transparent">
-                  Earn real credentials.
+                  Earn real credentials
                 </span>
               </h1>
 
@@ -237,7 +237,7 @@ function AILabPage() {
               How it works
             </span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-[#0F1533] sm:text-4xl">
-              Learn. Build. Earn.
+              Learn, Build, Earn
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-base text-[#5A607A]">
               Every enrolled learner follows the same clear path — from lesson to project to certificate.

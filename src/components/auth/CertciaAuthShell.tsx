@@ -88,9 +88,9 @@ export function CertciaAuthShell({
             />
           </Link>
           <p className="relative z-10 mt-4 max-w-[16rem] text-center text-[11px] font-semibold uppercase leading-relaxed tracking-[0.18em] text-[#8A90A8]">
-            Real skills. Real impact.
+            Real skills · Real impact
             <br />
-            Built for the future.
+            Built for the future
           </p>
 
           <div className="relative z-10 mt-6 w-[13.5rem]">

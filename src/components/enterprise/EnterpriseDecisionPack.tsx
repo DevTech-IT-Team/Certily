@@ -36,7 +36,7 @@ export function EnterpriseDecisionPack() {
               </h2>
             </div>
             <h2 className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.02em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem]">
-              The audit ends with a decision pack - not a sales pitch.
+              The audit ends with a decision pack — not a sales pitch
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-[#5A607A]">
               The output should be usable by executives, L&D, technology and procurement even if the client chooses another implementation partner.
@@ -129,10 +129,10 @@ export function EnterpriseDecisionPack() {
               <div className="flex flex-col gap-4 rounded-[24px] border border-[#5B4CF5]/10 bg-[#F8F9FE] p-6 shadow-sm transition-all duration-300 hover:border-[#5B4CF5]/30 hover:shadow-md sm:flex-row sm:items-center sm:p-8 mt-auto">
                 <div className="shrink-0">
                   <h4 className="font-display text-[15px] font-extrabold text-[#0F1533]">
-                    No forced bundle.
+                    No forced bundle
                   </h4>
                   <h4 className="font-display text-[15px] font-extrabold text-[#5B4CF5]">
-                    No vendor lock-in.
+                    No vendor lock-in
                   </h4>
                 </div>
                 <div className="h-px w-full bg-gray-200 sm:h-12 sm:w-px" />
