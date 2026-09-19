@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
 import {
-  Award,
-  BookOpen,
   Briefcase,
   Gamepad2,
   GraduationCap,
@@ -20,24 +18,16 @@ type NavbarTabsProps = {
 
 const TAB_CONFIGS = [
   {
-    id: "k2" as const,
-    title: "K–2",
-    sub: "Kindergarten",
+    id: "k5" as const,
+    title: "K–5",
+    sub: "Grades K–5",
     icon: Sparkles,
-    gradient: "from-[#6366F1] via-[#7C3AED] to-[#8B5CF6]",
-    inactiveIconBg: "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100/80",
-  },
-  {
-    id: "elementary" as const,
-    title: "Elementary",
-    sub: "Grades 3–5",
-    icon: BookOpen,
-    gradient: "from-[#3B82F6] via-[#4F46E5] to-[#6366F1]",
-    inactiveIconBg: "bg-blue-50 text-blue-600 group-hover:bg-blue-100/80",
+    gradient: "from-[#F59E0B] via-[#F97316] to-[#EA580C]",
+    inactiveIconBg: "bg-amber-50 text-amber-600 group-hover:bg-amber-100/80",
   },
   {
     id: "middle" as const,
-    title: "Middle School",
+    title: "Middle school",
     sub: "Grades 6–8",
     icon: Gamepad2,
     gradient: "from-[#0284C7] via-[#2563EB] to-[#4F46E5]",
@@ -45,7 +35,7 @@ const TAB_CONFIGS = [
   },
   {
     id: "high" as const,
-    title: "High School",
+    title: "High school",
     sub: "Grades 9–12",
     icon: Rocket,
     gradient: "from-[#059669] via-[#10B981] to-[#06B6D4]",
@@ -53,32 +43,24 @@ const TAB_CONFIGS = [
   },
   {
     id: "college" as const,
-    title: "College",
-    sub: "Undergraduate",
+    title: "University / college",
+    sub: "University",
     icon: GraduationCap,
     gradient: "from-[#2563EB] via-[#4F46E5] to-[#7C3AED]",
     inactiveIconBg: "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100/80",
   },
   {
-    id: "career" as const,
-    title: "Career",
-    sub: "Job Ready",
-    icon: Briefcase,
-    gradient: "from-[#D97706] via-[#EA580C] to-[#E11D48]",
-    inactiveIconBg: "bg-amber-50 text-amber-600 group-hover:bg-amber-100/80",
-  },
-  {
     id: "professional" as const,
-    title: "Professional",
-    sub: "For Experts",
-    icon: Award,
+    title: "Working professionals",
+    sub: "Career",
+    icon: Briefcase,
     gradient: "from-[#7C3AED] via-[#C084FC] to-[#DB2777]",
     inactiveIconBg: "bg-purple-50 text-purple-600 group-hover:bg-purple-100/80",
   },
   {
     id: "all" as const,
-    title: "All Pathways",
-    sub: "Explore All",
+    title: "All certifications",
+    sub: "Explore all",
     icon: Layers,
     gradient: "from-[#5B4CF5] via-[#8B5CF6] to-[#EC4899]",
     inactiveIconBg: "bg-violet-50 text-violet-600 group-hover:bg-violet-100/80",

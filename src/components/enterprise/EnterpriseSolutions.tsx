@@ -4,7 +4,7 @@ import { Reveal } from "@/components/campus/Reveal";
 const SOLUTIONS = [
   {
     id: "subscription",
-    // n: "01",
+    n: "01",
     title: "Certcia for Business",
     copy: "A single subscription for certificate programs across AI, Data, and Tech — for the whole team.",
     image:
@@ -12,7 +12,7 @@ const SOLUTIONS = [
   },
   {
     id: "genai",
-    // n: "02",
+    n: "02",
     title: "GenAI Academy",
     copy: "Learn by doing: prompts, workflows, and GenAI applied to the work your teams already do.",
     image:
@@ -20,7 +20,7 @@ const SOLUTIONS = [
   },
   {
     id: "custom",
-    // n: "03",
+    n: "03",
     title: "Custom Learning Solutions",
     copy: "Industry-specific journeys designed around your roles, tools, and rollout plan.",
     image:

@@ -276,7 +276,7 @@ function PageLayout({
         {PATHWAY_LEVELS.map((pathway, i) => {
           const id = PATHWAY_IDENTITY[i % PATHWAY_IDENTITY.length];
           const Icon = pathway.icon;
-          const isActive = pathway.id === (selectedLevel || "k12");
+          const isActive = pathway.id === (selectedLevel || "k5");
           const soon = pathway.focus === "later";
 
           return (
@@ -414,8 +414,8 @@ export function LearningPathwaysSection({
                 !isPage && "mx-auto max-w-xl"
               )}
             >
-              K–12 and college pathways are open now. Professional and career tracks are
-              coming as the campus grows.
+              K–5 through working professionals — each certification holds
+              courses, and each course holds modules with a capstone.
             </p>
           </Reveal>
         </div>

@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
 import {
-  Award,
-  BookOpen,
   Briefcase,
   ChevronRight,
   Gamepad2,
@@ -21,35 +19,22 @@ type LearningPathwayFlowProps = {
 
 export const FLOW_STAGES = [
   {
-    id: "k2" as const,
+    id: "k5" as const,
     step: 1,
-    title: "K–2",
-    sub: "Kindergarten",
+    title: "K–5",
+    sub: "Grades K–5",
     icon: Sparkles,
-    badgeText: "K2",
-    gradient: "from-[#6366F1] via-[#7C3AED] to-[#8B5CF6]",
-    activeBg: "bg-gradient-to-tr from-[#6366F1] via-[#7C3AED] to-[#A855F7]",
-    inactiveIconColor: "text-indigo-600",
-    inactiveChipBg: "bg-indigo-50/80 border-indigo-100",
-    glowShadow: "shadow-[0_10px_25px_-2px_rgba(99,102,241,0.45)]",
-  },
-  {
-    id: "elementary" as const,
-    step: 2,
-    title: "Elementary",
-    sub: "Grades 3–5",
-    icon: BookOpen,
-    badgeText: "G3-5",
-    gradient: "from-[#3B82F6] via-[#4F46E5] to-[#6366F1]",
-    activeBg: "bg-gradient-to-tr from-[#3B82F6] via-[#2563EB] to-[#6366F1]",
-    inactiveIconColor: "text-blue-600",
-    inactiveChipBg: "bg-blue-50/80 border-blue-100",
-    glowShadow: "shadow-[0_10px_25px_-2px_rgba(59,130,246,0.45)]",
+    badgeText: "K-5",
+    gradient: "from-[#F59E0B] via-[#F97316] to-[#EA580C]",
+    activeBg: "bg-gradient-to-tr from-[#F59E0B] via-[#F97316] to-[#EA580C]",
+    inactiveIconColor: "text-amber-600",
+    inactiveChipBg: "bg-amber-50/80 border-amber-100",
+    glowShadow: "shadow-[0_10px_25px_-2px_rgba(245,158,11,0.45)]",
   },
   {
     id: "middle" as const,
-    step: 3,
-    title: "Middle School",
+    step: 2,
+    title: "Middle school",
     sub: "Grades 6–8",
     icon: Gamepad2,
     badgeText: "G6-8",
@@ -61,8 +46,8 @@ export const FLOW_STAGES = [
   },
   {
     id: "high" as const,
-    step: 4,
-    title: "High School",
+    step: 3,
+    title: "High school",
     sub: "Grades 9–12",
     icon: Rocket,
     badgeText: "G9-12",
@@ -74,11 +59,11 @@ export const FLOW_STAGES = [
   },
   {
     id: "college" as const,
-    step: 5,
-    title: "College",
-    sub: "Undergraduate",
+    step: 4,
+    title: "University / college",
+    sub: "University",
     icon: GraduationCap,
-    badgeText: "HEd",
+    badgeText: "Uni",
     gradient: "from-[#2563EB] via-[#4F46E5] to-[#7C3AED]",
     activeBg: "bg-gradient-to-tr from-[#2563EB] via-[#4F46E5] to-[#7C3AED]",
     inactiveIconColor: "text-blue-700",
@@ -86,25 +71,12 @@ export const FLOW_STAGES = [
     glowShadow: "shadow-[0_10px_25px_-2px_rgba(37,99,235,0.45)]",
   },
   {
-    id: "career" as const,
-    step: 6,
-    title: "Career",
-    sub: "Job Ready",
-    icon: Briefcase,
-    badgeText: "Job",
-    gradient: "from-[#D97706] via-[#EA580C] to-[#E11D48]",
-    activeBg: "bg-gradient-to-tr from-[#D97706] via-[#EA580C] to-[#E11D48]",
-    inactiveIconColor: "text-amber-600",
-    inactiveChipBg: "bg-amber-50/80 border-amber-100",
-    glowShadow: "shadow-[0_10px_25px_-2px_rgba(217,119,6,0.45)]",
-  },
-  {
     id: "professional" as const,
-    step: 7,
-    title: "Professional",
-    sub: "For Experts",
-    icon: Award,
-    badgeText: "Exp",
+    step: 5,
+    title: "Working professionals",
+    sub: "Career",
+    icon: Briefcase,
+    badgeText: "Work",
     gradient: "from-[#7C3AED] via-[#C084FC] to-[#DB2777]",
     activeBg: "bg-gradient-to-tr from-[#7C3AED] via-[#C084FC] to-[#DB2777]",
     inactiveIconColor: "text-purple-600",
@@ -137,7 +109,7 @@ export function LearningPathwayFlow({
       <div className="flex items-center justify-end mb-1 px-2">
         <button
           type="button"
-          onClick={() => handleSelect(activeLevel === "all" ? "k2" : "all")}
+          onClick={() => handleSelect(activeLevel === "all" ? "k5" : "all")}
           className={cn(
             "group inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-extrabold transition-all duration-300 outline-none border shadow-xs",
             activeLevel === "all"
@@ -153,7 +125,7 @@ export function LearningPathwayFlow({
 
       {/* ── UNCLUTTERED NO-CLIPPING STEPPER TRACK ── */}
       <div className="relative w-full overflow-x-auto py-6 scrollbar-none">
-        <div className="relative mx-auto min-w-[760px] max-w-[1300px] px-8">
+        <div className="relative mx-auto min-w-[640px] max-w-[1100px] px-8">
           
           {/* CONTINUOUS PROGRESS LINE (BEHIND NODES) */}
           <div className="absolute top-[52px] left-12 right-12 h-2 rounded-full bg-slate-200/80 shadow-inner overflow-hidden pointer-events-none z-0">

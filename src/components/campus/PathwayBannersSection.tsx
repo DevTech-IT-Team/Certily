@@ -2,49 +2,65 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
-import { COURSES_DATA, getTopicSlug } from "@/lib/courses";
+import { COURSES_DATA, coursesForBand, getTopicSlug } from "@/lib/courses";
 import { CourseCatalogCard } from "./CourseCatalogCard";
+import {
+  LEVEL_CATEGORY,
+  PATHWAY_LEVELS,
+  type PathwayLevelId,
+} from "@/lib/pathways";
 
 const TABS = [
   "All",
-  "Elementary",
+  "K–5",
   "Middle School",
   "High School",
-  "College",
-  "Professional",
-  "Career",
-  "Free Courses",
+  "University / College",
+  "Working Professionals",
 ] as const;
+
+const LEVEL_TO_TAB: Record<PathwayLevelId, string> = LEVEL_CATEGORY;
 
 export function PathwayBannersSection({
   previewLimit,
 }: {
   previewLimit?: number;
 }) {
-  const [activeTab, setActiveTab] = useState<string>("All");
+  const [activeTab, setActiveTab] = useState<string>("K–5");
+  const [activeLevel, setActiveLevel] = useState<PathwayLevelId | "all">("k5");
 
-  const filteredCourses = COURSES_DATA.filter((p) => {
-    if (activeTab === "All") return true;
-    if (activeTab === "Free Courses") return p.price === "Free";
-    return p.category === activeTab;
-  });
+  const handleSelectTab = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === "All") {
+      setActiveLevel("all");
+      return;
+    }
+    const match = (Object.entries(LEVEL_TO_TAB) as [PathwayLevelId, string][]).find(
+      ([, label]) => label === tab,
+    );
+    if (match) setActiveLevel(match[0]);
+  };
+
+  const filteredCourses =
+    activeLevel === "all" ? COURSES_DATA : coursesForBand(activeLevel);
 
   const visibleCourses = previewLimit
     ? filteredCourses.slice(0, previewLimit)
     : filteredCourses;
 
   return (
-    <section className={cn("bg-white py-8 font-sans sm:py-12 md:py-16", !previewLimit && "min-h-screen")}>
+    <section
+      className={cn(
+        "bg-white py-8 font-sans sm:py-12 md:py-16",
+        !previewLimit && "min-h-screen",
+      )}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div className="max-w-3xl">
             <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-[#1C1D1F] sm:text-4xl">
               Every learner has a path — find yours
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-[#6A6F73] sm:text-lg">
-              K–12 and college pathways are open now. Professional and career
-              tracks coming as the campus grows.
-            </p>
           </div>
         </Reveal>
 
@@ -53,7 +69,8 @@ export function PathwayBannersSection({
             {TABS.map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                type="button"
+                onClick={() => handleSelectTab(tab)}
                 className={cn(
                   "whitespace-nowrap border-b-2 px-1 pb-3 text-sm font-bold transition-colors",
                   activeTab === tab
@@ -68,10 +85,32 @@ export function PathwayBannersSection({
         </Reveal>
 
         <div className="mt-6 min-h-[400px]">
-          {visibleCourses.length > 0 ? (
+          {activeLevel === "all" && !previewLimit ? (
+            <div className="space-y-12">
+              {PATHWAY_LEVELS.map((band) => {
+                const bandCourses = coursesForBand(band.id);
+                return (
+                  <div key={band.id}>
+                    <div className="mb-4">
+                      <h3 className="font-display text-xl font-bold text-[#0F1533]">
+                        {band.shortLabel}
+                      </h3>
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                      {bandCourses.map((course, i) => (
+                        <Reveal key={course.id} className="h-full" delay={0.03 + Math.min(i, 8) * 0.02}>
+                          <CourseCatalogCard course={course} />
+                        </Reveal>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : visibleCourses.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {visibleCourses.map((course, i) => (
-                <Reveal key={course.id} delay={0.05 + Math.min(i, 8) * 0.03}>
+                <Reveal key={course.id} className="h-full" delay={0.05 + Math.min(i, 8) * 0.03}>
                   <CourseCatalogCard course={course} />
                 </Reveal>
               ))}
@@ -91,25 +130,25 @@ export function PathwayBannersSection({
                 to="/learning"
                 className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
               >
-                View all courses
+                View all certifications
                 <span className="transition-transform group-hover:translate-x-1">
                   →
                 </span>
               </Link>
             </div>
           ) : activeTab !== "All" ? (
-          <div className="mt-10">
-            <Link
-              to="/topic/$topicId"
-              params={{ topicId: getTopicSlug(activeTab) }}
-              className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
-            >
-              {`Show all ${activeTab} courses`}
-              <span className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-          </div>
+            <div className="mt-10">
+              <Link
+                to="/topic/$topicId"
+                params={{ topicId: getTopicSlug(activeTab) }}
+                className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
+              >
+                {`Show all ${activeTab} certifications`}
+                <span className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
           ) : null}
         </div>
       </div>

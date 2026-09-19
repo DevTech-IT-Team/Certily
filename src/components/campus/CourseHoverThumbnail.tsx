@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import fallbackPreview from "@/assets/certcia.mp4";
 
@@ -8,6 +8,8 @@ type CourseHoverThumbnailProps = {
   videoUrl?: string;
   badgeLogo?: string;
   hovered: boolean;
+  className?: string;
+  children?: ReactNode;
 };
 
 export function CourseHoverThumbnail({
@@ -16,6 +18,8 @@ export function CourseHoverThumbnail({
   videoUrl,
   badgeLogo,
   hovered,
+  className,
+  children,
 }: CourseHoverThumbnailProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -42,13 +46,14 @@ export function CourseHoverThumbnail({
   }, [hovered]);
 
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100">
+    <div className={cn("relative aspect-[16/9] w-full overflow-hidden bg-gray-100", className)}>
       <img
         src={image}
         alt={alt}
         className={cn(
-          "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
+          "absolute inset-0 h-full w-full object-cover transition-transform duration-700",
           playing ? "opacity-0" : "opacity-100",
+          hovered && !playing ? "scale-105" : "scale-100",
         )}
       />
       <video
@@ -70,6 +75,7 @@ export function CourseHoverThumbnail({
           </span>
         </div>
       ) : null}
+      {children}
     </div>
   );
 }

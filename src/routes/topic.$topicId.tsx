@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { COURSES_DATA, TOPICS_META } from "@/lib/courses";
+import { COURSES_DATA, TOPICS_META, getTopicSlug } from "@/lib/courses";
 import { Star, HelpCircle } from "lucide-react";
 import { Reveal } from "@/components/campus/Reveal";
 import { CourseCatalogCard } from "@/components/campus/CourseCatalogCard";
@@ -23,7 +23,7 @@ function TopicPage() {
   const courses = COURSES_DATA.filter(course => {
     if (topicId === "all") return true;
     if (topicId === "free-courses") return course.category === "Free Courses";
-    return course.category.toLowerCase().replace(/\s+/g, '-') === topicId;
+    return getTopicSlug(course.category) === topicId;
   });
 
   return (
@@ -45,7 +45,7 @@ function TopicPage() {
             <div className="text-2xl font-bold text-[#1C1D1F]">{topicMeta.learnersCount}</div>
           </div>
           <div>
-            <div className="text-[12px] font-bold text-[#6A6F73] mb-1">Number of courses</div>
+            <div className="text-[12px] font-bold text-[#6A6F73] mb-1">Number of certifications</div>
             <div className="text-2xl font-bold text-[#1C1D1F]">{topicMeta.coursesCount}</div>
           </div>
           <div>

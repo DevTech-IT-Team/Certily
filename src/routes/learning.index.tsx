@@ -9,7 +9,7 @@ export const Route = createFileRoute("/learning/")({
       {
         name: "description",
         content:
-          "Browse K–12, Elementary, Middle School, High School, College, Career, and Professional certification pathways with clear outcomes.",
+          "Browse K–5, middle school, high school, university, and professional certification tracks. Each track has multiple certifications, with modules and lessons inside.",
       },
     ],
   }),

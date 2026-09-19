@@ -1,22 +1,17 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  Award,
-  BookOpen,
   Briefcase,
   Gamepad2,
   GraduationCap,
   Rocket,
   Smile,
-  Sparkles,
 } from "lucide-react";
 
 export type PathwayLevelId =
-  | "k2"
-  | "elementary"
+  | "k5"
   | "middle"
   | "high"
   | "college"
-  | "career"
   | "professional";
 
 export type PathwayLevel = {
@@ -29,6 +24,12 @@ export type PathwayLevel = {
   description: string;
   focus: "launch" | "later";
   icon: LucideIcon;
+  audience: string;
+  outcomeCount: number;
+  modulesPerOutcome: number;
+  hoursPerOutcome: number;
+  deliveryModel: string;
+  badge: string;
   outcomes: string[];
   theme: {
     gradientFrom: string;
@@ -50,55 +51,27 @@ export type PathwayLevel = {
 
 export const PATHWAY_LEVELS: PathwayLevel[] = [
   {
-    id: "k2",
-    label: "K–2 Kindergarten Pathway",
-    shortLabel: "K–2",
-    subLabel: "Kindergarten",
-    badgeLabel: "🧸 K-2 PATHWAY",
-    themeTagline: "Learn, Play, Grow with AI",
+    id: "k5",
+    label: "K–5 Certification",
+    shortLabel: "K–5",
+    subLabel: "Grades K–5",
+    badgeLabel: "📚 K–5 CERTIFICATION",
+    themeTagline: "Discover AI through play, stories, and first programs",
     description:
-      "Fun learning adventures for little minds. Build curiosity, creativity & confidence with safe, friendly AI tools.",
+      "Age-right AI certifications for elementary learners — start with AI Superkids: Discover AI and grow into creator, genius, game, and robot tracks.",
     focus: "launch",
     icon: Smile,
+    audience: "Ages 5–11 / elementary",
+    outcomeCount: 5,
+    modulesPerOutcome: 5,
+    hoursPerOutcome: 20,
+    deliveryModel: "Guided studio + family showcase",
+    badge: "Explorer / Creator",
     outcomes: [
       "AI literacy & safe exploration",
-      "Interactive mini games & puzzles",
+      "ScratchJr and block coding",
+      "Storybook and helper capstones",
       "Parent-guided discovery modules",
-      "Basic logic & creativity badges",
-    ],
-    theme: {
-      gradientFrom: "#EC4899",
-      gradientTo: "#8B5CF6",
-      glow: "rgba(236,72,153,0.30)",
-      accent: "#D946EF",
-      accentLight: "#FDF4FF",
-      accentText: "#A21CAF",
-      darkBg: "#1F0429",
-      heroGradient: "linear-gradient(135deg, #1F0429 0%, #701A75 50%, #C026D3 100%)",
-      pageBg: "linear-gradient(180deg, #FDF4FF 0%, #FAE8FF 25%, #F7F8FC 100%)",
-      cardBorder: "#F5D0FE",
-      cardHoverBorder: "#D946EF",
-      cardHoverGlow: "rgba(217,70,239,0.22)",
-      pillBg: "#FAE8FF",
-      badgeStyle: "bg-fuchsia-600 text-white shadow-fuchsia-200",
-    },
-  },
-  {
-    id: "elementary",
-    label: "Elementary Pathway",
-    shortLabel: "Elementary",
-    subLabel: "Grades 3–5",
-    badgeLabel: "📖 ELEMENTARY · GRADES 3–5",
-    themeTagline: "Discover, Experiment & Create with AI",
-    description:
-      "Hands-on STEM and creative projects for young learners building digital skills, coding basics, and critical thinking.",
-    focus: "launch",
-    icon: BookOpen,
-    outcomes: [
-      "Coding & Scratch AI block basics",
-      "Creative digital storytelling",
-      "Safe AI web exploration",
-      "McKinney Steam Academy starter tracks",
     ],
     theme: {
       gradientFrom: "#F59E0B",
@@ -119,7 +92,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "middle",
-    label: "Middle School Pathway",
+    label: "Middle School Certification",
     shortLabel: "Middle School",
     subLabel: "Grades 6–8",
     badgeLabel: "🎮 MIDDLE SCHOOL · GRADES 6–8",
@@ -128,6 +101,12 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
       "Interactive game creation, Python fundamentals, and generative AI tools for middle school students.",
     focus: "launch",
     icon: Gamepad2,
+    audience: "Ages 11–14 / grades 6–8",
+    outcomeCount: 5,
+    modulesPerOutcome: 6,
+    hoursPerOutcome: 30,
+    deliveryModel: "Guided lab + independent build",
+    badge: "Builder",
     outcomes: [
       "Python programming fundamentals",
       "GenAI prompt engineering for teens",
@@ -153,7 +132,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "high",
-    label: "High School Pathway",
+    label: "High School Certification",
     shortLabel: "High School",
     subLabel: "Grades 9–12",
     badgeLabel: "🚀 HIGH SCHOOL · GRADES 9–12",
@@ -162,6 +141,12 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
       "Advanced portfolio tracks, machine learning basics, and college application boosters for high schoolers.",
     focus: "launch",
     icon: Rocket,
+    audience: "Ages 14–18 / grades 9–12",
+    outcomeCount: 10,
+    modulesPerOutcome: 8,
+    hoursPerOutcome: 40,
+    deliveryModel: "Project studio + portfolio review",
+    badge: "Developer",
     outcomes: [
       "Machine Learning & Data Science 101",
       "College portfolio project build",
@@ -187,15 +172,21 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "college",
-    label: "College & Academic Pathway",
-    shortLabel: "College",
-    subLabel: "Undergraduates",
-    badgeLabel: "🎓 COLLEGE · UNDERGRADUATES",
+    label: "University / College Certification",
+    shortLabel: "University",
+    subLabel: "University / college",
+    badgeLabel: "🎓 UNIVERSITY / COLLEGE",
     themeTagline: "Authentic University Standards & Capstone Credit",
     description:
       "College-ready certification outcomes with practical projects, knowledge checks, and credentials for admissions and portfolios.",
     focus: "launch",
     icon: GraduationCap,
+    audience: "Age 18+ / degree learners",
+    outcomeCount: 10,
+    modulesPerOutcome: 10,
+    hoursPerOutcome: 50,
+    deliveryModel: "Applied lab + technical report",
+    badge: "Engineer",
     outcomes: [
       "Entry-level outcome courses",
       "Capstone-ready skill tracks",
@@ -220,55 +211,27 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     },
   },
   {
-    id: "career",
-    label: "Career Growth Pathway",
-    shortLabel: "Career",
-    subLabel: "Job Ready",
-    badgeLabel: "💼 CAREER · JOB READY",
-    themeTagline: "Executive AI Literacy & Shareable Credentials",
-    description:
-      "Career advancement certifications for working professionals — introduced after core school and college strategy matures.",
-    focus: "later",
-    icon: Briefcase,
-    outcomes: [
-      "Career-readiness outcomes",
-      "Shareable LinkedIn credentials",
-      "Mentor-supported progression",
-      "High-ticket advanced offerings",
-    ],
-    theme: {
-      gradientFrom: "#0EA5E9",
-      gradientTo: "#0284C7",
-      glow: "rgba(14,165,233,0.30)",
-      accent: "#0284C7",
-      accentLight: "#F0F9FF",
-      accentText: "#0369A1",
-      darkBg: "#031520",
-      heroGradient: "linear-gradient(135deg, #031520 0%, #075985 50%, #0EA5E9 100%)",
-      pageBg: "linear-gradient(180deg, #F0F9FF 0%, #E0F2FE 25%, #F7F8FC 100%)",
-      cardBorder: "#BAE6FD",
-      cardHoverBorder: "#0EA5E9",
-      cardHoverGlow: "rgba(14,165,233,0.22)",
-      pillBg: "#E0F2FE",
-      badgeStyle: "bg-sky-600 text-white shadow-sky-200",
-    },
-  },
-  {
     id: "professional",
-    label: "Advanced Professional Pathway",
-    shortLabel: "Professional",
-    subLabel: "For Experts",
-    badgeLabel: "👩‍🏫 PROFESSIONAL · FOR EXPERTS",
-    themeTagline: "High-Tech Engineering & Enterprise Standards",
+    label: "Working Professionals Certification",
+    shortLabel: "Professionals",
+    subLabel: "Working professionals",
+    badgeLabel: "💼 WORKING PROFESSIONALS",
+    themeTagline: "Apply AI at work — leadership, product, and production systems",
     description:
-      "Premium professional-grade tracks with industry validation — launching in a later phase after K–12 and college trust is established.",
-    focus: "later",
-    icon: Award,
+      "Certifications for people already in the workforce: lead AI adoption, ship LLM workflows, and design production-ready systems.",
+    focus: "launch",
+    icon: Briefcase,
+    audience: "Age 21+ / career learners",
+    outcomeCount: 10,
+    modulesPerOutcome: 10,
+    hoursPerOutcome: 50,
+    deliveryModel: "Workplace case + production evidence",
+    badge: "Professional / Architect",
     outcomes: [
-      "Industry-validated topics",
-      "Guest lectures & SME review",
-      "Longer capstone-heavy formats",
-      "Institutional partnerships",
+      "Executive AI literacy",
+      "Shareable workplace credentials",
+      "Production ML and LLM tracks",
+      "Architecture and product strategy",
     ],
     theme: {
       gradientFrom: "#8B5CF6",
@@ -309,7 +272,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "ai-fundamentals-k12",
     title: "AI Explorers: First Steps",
-    level: "k2",
+    level: "k5",
     category: "AI Literacy",
     duration: "6 weeks",
     rating: 4.9,
@@ -323,7 +286,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "k2-creative-play",
     title: "Creative Play with AI",
-    level: "k2",
+    level: "k5",
     category: "Creativity",
     duration: "4 weeks",
     rating: 4.8,
@@ -336,7 +299,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "k2-robot-logic",
     title: "Robot Logic & Puzzles",
-    level: "k2",
+    level: "k5",
     category: "Logic",
     duration: "4 weeks",
     rating: 4.9,
@@ -351,7 +314,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "msa-steam-intro",
     title: "Block Coding & AI Robotics",
-    level: "elementary",
+    level: "k5",
     category: "Programming",
     duration: "8 weeks",
     rating: 4.8,
@@ -365,7 +328,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "elementary-storytelling",
     title: "Digital Storytelling with AI",
-    level: "elementary",
+    level: "k5",
     category: "Creative Arts",
     duration: "6 weeks",
     rating: 4.9,
@@ -378,7 +341,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "elementary-capstone",
     title: "MSA Elementary STEM Bridge",
-    level: "elementary",
+    level: "k5",
     category: "MSA Programs",
     duration: "10 weeks",
     rating: 4.9,
@@ -519,7 +482,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "career-ai-leadership",
     title: "AI Leadership for Career Growth",
-    level: "career",
+    level: "professional",
     category: "Career Growth",
     duration: "10 weeks",
     rating: 4.8,
@@ -533,7 +496,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "career-ai-product",
     title: "AI Product Management",
-    level: "career",
+    level: "professional",
     category: "Product",
     duration: "8 weeks",
     rating: 4.9,
@@ -546,7 +509,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
   {
     id: "career-ai-marketing",
     title: "AI for Growth & Marketing",
-    level: "career",
+    level: "professional",
     category: "Marketing",
     duration: "6 weeks",
     rating: 4.7,
@@ -604,5 +567,58 @@ export function coursesForLevel(level: PathwayLevelId | "all") {
 }
 
 export function countCoursesForLevel(level: PathwayLevelId | "all") {
-  return coursesForLevel(level).length;
+  if (level === "all") {
+    return PATHWAY_LEVELS.reduce((sum, band) => sum + band.outcomeCount, 0);
+  }
+  return getPathwayLevel(level).outcomeCount;
+}
+
+export function normalizePathwayParam(pathwayId: string): PathwayLevelId | null {
+  const map: Record<string, PathwayLevelId> = {
+    k2: "k5",
+    elementary: "k5",
+    k5: "k5",
+    middle: "middle",
+    "middle-school": "middle",
+    high: "high",
+    "high-school": "high",
+    college: "college",
+    university: "college",
+    "university-college": "college",
+    career: "professional",
+    professional: "professional",
+    "working-professionals": "professional",
+  };
+  return map[pathwayId] ?? null;
+}
+
+export function pathwayToRouteId(id: PathwayLevelId): string {
+  if (id === "middle") return "middle-school";
+  if (id === "high") return "high-school";
+  return id;
+}
+
+export const LEVEL_CATEGORY: Record<PathwayLevelId, string> = {
+  k5: "K–5",
+  middle: "Middle School",
+  high: "High School",
+  college: "University / College",
+  professional: "Working Professionals",
+};
+
+export const CATALOG_TOTALS = {
+  outcomes: 40,
+  modules: 335,
+  hours: 1650,
+  stack: "Explorer → Architect",
+} as const;
+
+export function getPathwayLevel(id: PathwayLevelId) {
+  return PATHWAY_LEVELS.find((level) => level.id === id) ?? PATHWAY_LEVELS[0];
+}
+
+export function categoryToLevel(category: string): PathwayLevelId | undefined {
+  return (Object.entries(LEVEL_CATEGORY) as [PathwayLevelId, string][]).find(
+    ([, label]) => label === category,
+  )?.[0];
 }

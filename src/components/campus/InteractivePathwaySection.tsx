@@ -4,7 +4,7 @@ import { PathwayContentSwitcher } from "@/components/learning-pathway/PathwayCon
 import { LearningPathwayFlow } from "@/components/learning-pathway/LearningPathwayFlow";
 
 export function InteractivePathwaySection() {
-  const [activeLevel, setActiveLevel] = useState<PathwayLevelId | "all">("k2");
+  const [activeLevel, setActiveLevel] = useState<PathwayLevelId | "all">("k5");
 
   return (
     <section id="pathways-interactive" className="relative py-8 sm:py-12 bg-gradient-to-b from-[#F3F2FF] via-[#F7F8FC] to-[#F0F2F8] overflow-hidden">
@@ -15,7 +15,7 @@ export function InteractivePathwaySection() {
         {/* ── 1. INTERACTIVE LEARNING PATHWAY FLOW MAP ───────────────────────── */}
         <LearningPathwayFlow activeLevel={activeLevel} onSelectLevel={setActiveLevel} />
 
-        {/* ── 2. PATHWAY VIEW CONTENT (K-2, Elementary, Middle, etc.) ─────────── */}
+        {/* ── 2. CERTIFICATION CONTENT (K–5 through working professionals) ─────────── */}
         <PathwayContentSwitcher activeLevel={activeLevel} />
       </div>
     </section>
