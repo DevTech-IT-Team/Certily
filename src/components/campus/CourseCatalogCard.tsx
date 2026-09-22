@@ -44,33 +44,35 @@ function CartAction({
 }
 
 export function CourseCatalogCard({ course }: { course: CourseDetails }) {
-  const [hovered, setHovered] = useState(false);
+  const [previewPlaying, setPreviewPlaying] = useState(false);
+  const [hoverOpen, setHoverOpen] = useState(false);
   const navigate = useNavigate();
   const { addToCart, isInCart } = useCart();
   const { formatPrice } = useCurrency();
   const inCart = isInCart(course.id);
 
   return (
-    <HoverCard openDelay={300} closeDelay={100}>
+    <HoverCard
+      open={!previewPlaying && hoverOpen}
+      onOpenChange={setHoverOpen}
+      openDelay={300}
+      closeDelay={100}
+    >
       <HoverCardTrigger asChild>
-        <div
-          className="group flex h-full flex-col overflow-hidden rounded-xl border border-black/5 bg-white outline-none transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
+        <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-black/5 bg-white outline-none transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <CourseHoverThumbnail
+            image={course.image}
+            alt={course.title}
+            videoUrl={course.previewVideoUrl}
+            badgeLogo={course.badgeLogo}
+            onPlayingChange={setPreviewPlaying}
+          />
+
           <Link
             to="/course/$courseId"
             params={{ courseId: course.id }}
             className="flex flex-1 flex-col outline-none"
           >
-            <CourseHoverThumbnail
-              image={course.image}
-              alt={course.title}
-              videoUrl={course.previewVideoUrl}
-              badgeLogo={course.badgeLogo}
-              hovered={hovered}
-            />
-
             <div className="flex flex-1 flex-col p-5 pt-7 pb-0">
               <span className="mb-2 inline-flex min-h-[22px] w-fit items-center rounded-full bg-[#EDE9FF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#5B4CF5]">
                 {course.pathwayLabel}
