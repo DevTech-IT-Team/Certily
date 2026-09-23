@@ -10,18 +10,17 @@ import {
 } from "lucide-react";
 import { CampusBuildingHeader } from "@/components/campus/CampusBuildingHeader";
 import { Section } from "@/components/Section";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/ai-hall")({
-  head: () => ({
-    meta: [
-      { title: "AI Hall — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "Free AI activities, mini-projects, demos, quiz challenges, and community events at Certcia AI Campus.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "AI Hall",
+      description:
+        "Free AI activities, mini-projects, demos, quiz challenges, and community events at Certcia AI Campus.",
+      path: "/ai-hall",
+      noIndex: true,
+    }),
   component: AIHallPage,
 });
 

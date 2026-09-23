@@ -3,16 +3,32 @@ import { COURSES_DATA, TOPICS_META, getTopicSlug } from "@/lib/courses";
 import { Star, HelpCircle } from "lucide-react";
 import { Reveal } from "@/components/campus/Reveal";
 import { CourseCatalogCard } from "@/components/campus/CourseCatalogCard";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/topic/$topicId")({
-  component: TopicPage,
   loader: ({ params }) => {
     const topicMeta = TOPICS_META[params.topicId];
     if (!topicMeta) {
       throw notFound();
     }
     return { topicMeta };
-  }
+  },
+  head: ({ params }) => {
+    const topicMeta = TOPICS_META[params.topicId];
+    if (!topicMeta) {
+      return pageHead({
+        title: "Topic not found",
+        path: `/topic/${params.topicId}`,
+        noIndex: true,
+      });
+    }
+    return pageHead({
+      title: topicMeta.title,
+      description: topicMeta.description,
+      path: `/topic/${params.topicId}`,
+    });
+  },
+  component: TopicPage,
 });
 
 function TopicPage() {

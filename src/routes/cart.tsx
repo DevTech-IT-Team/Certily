@@ -3,8 +3,15 @@ import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { COURSES_DATA } from "@/lib/courses";
 import { Star, Trash2, Plus } from "lucide-react";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/cart")({
+  head: () =>
+    pageHead({
+      title: "Cart",
+      path: "/cart",
+      noIndex: true,
+    }),
   component: CartPage,
 });
 

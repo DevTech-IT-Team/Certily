@@ -2,14 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Send, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { PageHero, Section } from "@/components/Section";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — Certcia AI Campus" },
-      { name: "description", content: "Reach the Certcia AI Campus team — partnerships, learner support, and press enquiries." },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Contact",
+      description:
+        "Reach the Certcia AI Campus team — partnerships, learner support, and press enquiries.",
+      path: "/contact",
+    }),
   component: Contact,
 });
 

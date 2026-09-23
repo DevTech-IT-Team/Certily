@@ -38,31 +38,43 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
     const fromTz = currencyFromTimezone();
     if (fromTz) setCurrencyState(fromTz);
 
-    let cancelled = false;
-    currencyFromIp().then((fromIp) => {
-      if (cancelled || !fromIp) return;
-      setCurrencyState(fromIp);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
     const cached = readCachedFx();
     if (cached) setInrPerUsd(cached);
 
     let cancelled = false;
-    const loadRate = async () => {
-      const live = await fetchLiveInrPerUsd();
-      if (cancelled || !live) return;
-      setInrPerUsd(live);
-      writeCachedFx(live);
+    let idleId = 0;
+    let timeoutId = 0;
+    const startNetwork = () => {
+      if (cancelled) return;
+      currencyFromIp().then((fromIp) => {
+        if (cancelled || !fromIp) return;
+        setCurrencyState(fromIp);
+      });
+      fetchLiveInrPerUsd().then((live) => {
+        if (cancelled || !live) return;
+        setInrPerUsd(live);
+        writeCachedFx(live);
+      });
     };
-    loadRate();
-    const id = window.setInterval(loadRate, 15 * 60 * 1000);
+
+    if (typeof window.requestIdleCallback === "function") {
+      idleId = window.requestIdleCallback(startNetwork, { timeout: 2500 });
+    } else {
+      timeoutId = window.setTimeout(startNetwork, 1200);
+    }
+
+    const id = window.setInterval(() => {
+      fetchLiveInrPerUsd().then((live) => {
+        if (cancelled || !live) return;
+        setInrPerUsd(live);
+        writeCachedFx(live);
+      });
+    }, 15 * 60 * 1000);
+
     return () => {
       cancelled = true;
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
       window.clearInterval(id);
     };
   }, []);

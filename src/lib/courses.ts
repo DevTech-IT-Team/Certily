@@ -16,6 +16,7 @@ import {
   getPathwayLevel,
   type PathwayLevelId,
 } from "@/lib/pathways";
+import { optimizeImageUrl } from "@/lib/media";
 
 export type CourseDetails = {
   id: string;
@@ -517,7 +518,7 @@ function coursesFromModules(
       ratingCount: "1,204",
       price: `₹${listed.price + bump * 200}`,
       originalPrice: `₹${listed.original + bump * 400}`,
-      image: mod.image,
+      image: optimizeImageUrl(mod.image, 640),
       updatedDate: "August 2026",
       hours: String(band.hoursPerOutcome),
       levels: certLevel,

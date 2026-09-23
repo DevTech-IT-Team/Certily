@@ -43,7 +43,13 @@ function CartAction({
   );
 }
 
-export function CourseCatalogCard({ course }: { course: CourseDetails }) {
+export function CourseCatalogCard({
+  course,
+  priority = false,
+}: {
+  course: CourseDetails;
+  priority?: boolean;
+}) {
   const [previewPlaying, setPreviewPlaying] = useState(false);
   const [hoverOpen, setHoverOpen] = useState(false);
   const navigate = useNavigate();
@@ -66,6 +72,7 @@ export function CourseCatalogCard({ course }: { course: CourseDetails }) {
             videoUrl={course.previewVideoUrl}
             badgeLogo={course.badgeLogo}
             onPlayingChange={setPreviewPlaying}
+            priority={priority}
           />
 
           <Link

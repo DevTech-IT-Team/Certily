@@ -1,19 +1,32 @@
 import { Pause, Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./Reveal";
 import { VAvatar } from "./VAvatar";
-import campusBg from "@/assets/certbg.png";
-import certciaVideo from "@/assets/certcia.mp4";
+import campusBg from "@/assets/certbg.webp";
 
 export function CampusExploreSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [armed, setArmed] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string>();
 
-  const togglePlay = () => {
+  useEffect(() => {
+    if (!armed || !videoSrc) return;
+    const video = videoRef.current;
+    if (!video) return;
+    void video.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+  }, [armed, videoSrc]);
+
+  const togglePlay = async () => {
+    if (!armed) {
+      setArmed(true);
+      void import("@/lib/preview-video").then((mod) => setVideoSrc(mod.PREVIEW_VIDEO));
+      return;
+    }
     const v = videoRef.current;
     if (!v) return;
     if (v.paused) {
-      v.play();
+      await v.play();
       setPlaying(true);
     } else {
       v.pause();
@@ -58,20 +71,28 @@ export function CampusExploreSection() {
               src={campusBg}
               alt=""
               aria-hidden
+              width={1400}
+              height={933}
+              loading="lazy"
+              decoding="async"
               className={`absolute inset-0 h-full w-full object-cover scale-[1.08] transition-opacity duration-500 ${playing ? "opacity-0" : "opacity-100"}`}
               style={{ objectPosition: "52% 38%" }}
               draggable={false}
             />
 
-            {/* Video — sits on top, hidden until playing */}
-            <video
-              ref={videoRef}
-              src={certciaVideo}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-100" : "opacity-0"}`}
-              playsInline
-              preload="metadata"
-              onEnded={() => setPlaying(false)}
-            />
+            {armed && videoSrc ? (
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                autoPlay
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${playing ? "opacity-100" : "opacity-0"}`}
+                playsInline
+                preload="none"
+                onPlay={() => setPlaying(true)}
+                onPause={() => setPlaying(false)}
+                onEnded={() => setPlaying(false)}
+              />
+            ) : null}
 
             {/* Dark navy overlay — always present for text legibility */}
             <div

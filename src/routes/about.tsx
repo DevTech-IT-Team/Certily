@@ -9,18 +9,16 @@ import { AboutLearnUseProve } from "@/components/about/AboutLearnUseProve";
 import { AboutCampusWithoutBorders } from "@/components/about/AboutCampusWithoutBorders";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { GatewaySection } from "@/components/ui/gateway-section";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "Born from a vision. Built for what comes next. Meet Certcia — industry-led, educator-shaped, and built so future readiness is something a learner can prove.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "About",
+      description:
+        "Born from a vision. Built for what comes next. Meet Certcia — industry-led, educator-shaped, and built so future readiness is something a learner can prove.",
+      path: "/about",
+    }),
   component: About,
 });
 

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, Linkedin, Twitter, Youtube } from "lucide-react";
-import certLogo from "@/assets/logo/certtt.png";
+import certLogo from "@/assets/logo/certicialogo.webp";
 
 const exploreLinks = [
   { label: "Learning Pathways", to: "/learning" },
@@ -44,7 +44,15 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:pr-8">
             <Link to="/" className="inline-flex items-center">
-              <img src={certLogo} alt="Certcia Logo" className="-mb-2 -ml-4 h-16 w-auto object-contain" />
+              <img
+                src={certLogo}
+                alt="Certcia Logo"
+                width={180}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="-mb-2 -ml-4 h-16 w-auto object-contain"
+              />
             </Link>
             <p className="mt-1 text-sm leading-relaxed text-white/65">
               Your AI-powered learning campus — credible certifications, real projects, and V

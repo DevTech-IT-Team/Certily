@@ -4,11 +4,15 @@ import { EnrollGate } from "@/components/campus/EnrollGate";
 import { CampusBuildingHeader } from "@/components/campus/CampusBuildingHeader";
 import { Section } from "@/components/Section";
 import { canAccessBuilding } from "@/lib/enrollment";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/classroom")({
-  head: () => ({
-    meta: [{ title: "My Classroom — Certcia AI Campus" }],
-  }),
+  head: () =>
+    pageHead({
+      title: "My Classroom",
+      path: "/classroom",
+      noIndex: true,
+    }),
   component: ClassroomPage,
 });
 

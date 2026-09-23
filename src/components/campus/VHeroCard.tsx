@@ -31,6 +31,7 @@ export function VHeroCard() {
         >
           <VAvatar
             size="md"
+            priority
             className="bg-[#0F1533] p-0.5 rounded-full ring-2 ring-[#5B4CF5]/20 transition-transform group-hover:scale-105"
           />
         </button>

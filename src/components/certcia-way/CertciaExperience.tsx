@@ -125,7 +125,7 @@ export function CertciaExperience() {
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="none"
                 poster={avatarStand}
                 className="absolute inset-0 h-full w-full object-cover object-[center_22%]"
               />

@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { ArrowRight, Lock, MessageCircle } from "lucide-react";
-import campusMapImg from "@/assets/Certcia_Campus_Map.png";
+import campusMapImg from "@/assets/certcia-campus-map.webp";
 import { CAMPUS_MAP_AREAS, type CampusMapArea } from "@/lib/campus";
-import avatarHi from "@/assets/avatars/hi.png";
+import avatarHi from "@/assets/avatars/hi.webp";
 import { canAccessBuilding } from "@/lib/enrollment";
 import { useV } from "./VContext";
 import { VAvatar } from "./VAvatar";
@@ -276,7 +276,9 @@ function HeroCampusFrame({
           height={1024}
           onLoad={() => setReady(true)}
           draggable={false}
-          decoding="sync"
+          decoding="async"
+          fetchPriority="high"
+          loading="eager"
           style={{
             maskImage: "radial-gradient(50% 50% at 50% 50%, black 95%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(50% 50% at 50% 50%, black 95%, transparent 100%)"
@@ -582,7 +584,8 @@ export function CampusMap({
         height={1024}
         onLoad={() => setReady(true)}
         draggable={false}
-        decoding="sync"
+        decoding="async"
+        loading="lazy"
       />
 
       <div className="absolute inset-0">

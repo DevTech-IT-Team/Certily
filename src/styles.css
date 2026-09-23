@@ -1,5 +1,24 @@
 @import "tailwindcss" source(none);
-@source "../src";
+@source "../src/routes";
+@source "../src/lib";
+@source "../src/hooks";
+@source "../src/components/about";
+@source "../src/components/auth";
+@source "../src/components/campus";
+@source "../src/components/cart";
+@source "../src/components/certcia-way";
+@source "../src/components/enterprise";
+@source "../src/components/learning-pathway";
+@source "../src/components/seo";
+@source "../src/components/Navbar.tsx";
+@source "../src/components/Footer.tsx";
+@source "../src/components/Section.tsx";
+@source "../src/components/HeroVisual.tsx";
+@source "../src/components/HeroMetrics.tsx";
+@source "../src/components/ui/hover-card.tsx";
+@source "../src/components/ui/dialog.tsx";
+@source "../src/components/ui/gateway-section.tsx";
+@source "../src/components/ui/hero-3.tsx";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));

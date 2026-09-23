@@ -16,14 +16,17 @@ import { EnrollGate } from "@/components/campus/EnrollGate";
 import { canAccessBuilding } from "@/lib/enrollment";
 import { CampusBuildingHeader } from "@/components/campus/CampusBuildingHeader";
 import { Section } from "@/components/Section";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({
-    meta: [
-      { title: "Mission Control — Certcia AI Campus" },
-      { name: "description", content: "Student and parent dashboard for progress, assignments, certificates, and events." },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Mission Control",
+      description:
+        "Student and parent dashboard for progress, assignments, certificates, and events.",
+      path: "/dashboard",
+      noIndex: true,
+    }),
   component: Dashboard,
 });
 

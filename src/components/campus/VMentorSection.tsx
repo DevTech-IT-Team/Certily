@@ -8,8 +8,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import vVideo from "@/assets/certcia.webm";
-import avatarStand from "@/assets/avatars/stand.png";
-import aboutBg from "@/assets/vbg.png";
+import avatarStand from "@/assets/avatars/stand.webp";
+import aboutBg from "@/assets/vbg.webp";
 import { VAvatar } from "./VAvatar";
 import { useV } from "./VContext";
 import { Reveal } from "./Reveal";
@@ -208,7 +208,7 @@ function VShowcaseScene() {
               loop
               muted
               playsInline
-              preload="auto"
+              preload="none"
               poster={avatarStand}
               className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[center_74%]"
               aria-label="V campus guide preview"
@@ -295,6 +295,10 @@ export function VMentorSection() {
         <img
           src={aboutBg}
           alt=""
+          width={1920}
+          height={1080}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover object-[center_38%] select-none"
           draggable={false}
         />

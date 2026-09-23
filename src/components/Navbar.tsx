@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logoImg from "@/assets/logo/certicialogo.png";
+import logoImg from "@/assets/logo/certicialogo.webp";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 
@@ -40,6 +40,9 @@ function CertciaLogo({ className }: { className?: string }) {
     <img
       src={logoImg}
       alt="Certcia AI Campus"
+      width={180}
+      height={40}
+      decoding="async"
       className={cn("h-9 w-auto object-contain", className)}
       draggable={false}
     />
@@ -110,6 +113,8 @@ export function Navbar() {
                 alt=""
                 width={16}
                 height={12}
+                loading="lazy"
+                decoding="async"
                 className="h-3 w-4 rounded-[2px] object-cover"
               />
               <span className="text-[11px] font-bold tracking-wide text-[#0F1533]">{region.code}</span>

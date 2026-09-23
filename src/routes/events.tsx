@@ -1,16 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Calendar, CalendarDays, Mail, MapPin, PlayCircle, Users, Zap } from "lucide-react";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/events")({
-  head: () => ({
-    meta: [
-      { title: "Events — Certcia AI Campus" },
-      {
-        name: "description",
-        content: "Live workshops, AMAs, hackathons, and the AI Campus Summit — on campus and around the world.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Events",
+      description:
+        "Live workshops, AMAs, hackathons, and the AI Campus Summit — on campus and around the world.",
+      path: "/events",
+    }),
   component: EventsPage,
 });
 

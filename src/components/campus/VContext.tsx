@@ -82,8 +82,22 @@ export function VProvider({ children }: { children: ReactNode }) {
   );
 }
 
+const SSR_V: VContextValue = {
+  message: DEFAULT_V_MESSAGE,
+  reaction: "hi",
+  activeBuildingId: null,
+  setActiveBuildingId: () => {},
+  setMessage: () => {},
+  showTip: () => {},
+  isPinned: () => false,
+  floatingOpen: false,
+  setFloatingOpen: () => {},
+  setReaction: () => {},
+};
+
 export function useV() {
   const ctx = useContext(VContext);
-  if (!ctx) throw new Error("useV must be used within VProvider");
-  return ctx;
+  if (ctx) return ctx;
+  if (typeof window === "undefined") return SSR_V;
+  throw new Error("useV must be used within VProvider");
 }

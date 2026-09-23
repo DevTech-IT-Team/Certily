@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
-import fallbackPreview from "@/assets/certcia.mp4";
 
 const activePreviews = new Set<HTMLVideoElement>();
 
@@ -13,7 +12,24 @@ type CourseHoverThumbnailProps = {
   className?: string;
   children?: ReactNode;
   onPlayingChange?: (playing: boolean) => void;
+  priority?: boolean;
 };
+
+async function playExclusive(video: HTMLVideoElement, muted: boolean) {
+  activePreviews.forEach((other) => {
+    if (other !== video) other.pause();
+  });
+  video.muted = muted;
+  video.volume = muted ? 0 : 1;
+  try {
+    await video.play();
+  } catch {
+    video.muted = true;
+    await video.play();
+    video.muted = false;
+    video.volume = 1;
+  }
+}
 
 export function CourseHoverThumbnail({
   image,
@@ -23,12 +39,24 @@ export function CourseHoverThumbnail({
   className,
   children,
   onPlayingChange,
+  priority = false,
 }: CourseHoverThumbnailProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [armed, setArmed] = useState(false);
   const [muted, setMuted] = useState(false);
-  const src = videoUrl || fallbackPreview;
+  const [src, setSrc] = useState(videoUrl);
+
+  useEffect(() => {
+    if (!armed || src) return;
+    let cancelled = false;
+    void import("@/lib/preview-video").then((mod) => {
+      if (!cancelled) setSrc(mod.PREVIEW_VIDEO);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [armed, src]);
 
   useEffect(() => {
     onPlayingChange?.(playing);
@@ -42,32 +70,31 @@ export function CourseHoverThumbnail({
     };
   }, [onPlayingChange]);
 
-  const togglePlayback = async () => {
+  useEffect(() => {
+    if (!armed || !src) return;
     const video = videoRef.current;
     if (!video) return;
+    void playExclusive(video, muted).catch(() => setPlaying(false));
+    // Play once when the player mounts after the first tap.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [armed, src]);
 
+  const togglePlayback = async () => {
+    if (!armed) {
+      setArmed(true);
+      return;
+    }
+
+    const video = videoRef.current;
+    if (!video) return;
     if (!video.paused) {
       video.pause();
       return;
     }
-
-    activePreviews.forEach((other) => {
-      if (other !== video) other.pause();
-    });
-
-    video.muted = muted;
-    video.volume = 1;
     try {
-      await video.play();
+      await playExclusive(video, muted);
     } catch {
-      video.muted = true;
-      try {
-        await video.play();
-        video.muted = false;
-        setMuted(false);
-      } catch {
-        setPlaying(false);
-      }
+      setPlaying(false);
     }
   };
 
@@ -75,10 +102,11 @@ export function CourseHoverThumbnail({
     event.preventDefault();
     event.stopPropagation();
     const video = videoRef.current;
-    if (!video) return;
     const next = !muted;
-    video.muted = next;
-    video.volume = next ? 0 : 1;
+    if (video) {
+      video.muted = next;
+      video.volume = next ? 0 : 1;
+    }
     setMuted(next);
   };
 
@@ -87,31 +115,34 @@ export function CourseHoverThumbnail({
       <img
         src={image}
         alt={alt}
+        width={640}
+        height={360}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={priority ? "high" : "low"}
         className={cn(
           "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
-          started ? "opacity-0" : "opacity-100",
+          armed ? "opacity-0" : "opacity-100",
         )}
       />
-      <video
-        ref={videoRef}
-        src={src}
-        loop
-        playsInline
-        preload="metadata"
-        onPlay={(event) => {
-          activePreviews.add(event.currentTarget);
-          setStarted(true);
-          setPlaying(true);
-        }}
-        onPause={(event) => {
-          activePreviews.delete(event.currentTarget);
-          setPlaying(false);
-        }}
-        className={cn(
-          "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
-          started ? "opacity-100" : "opacity-0",
-        )}
-      />
+      {armed && src ? (
+        <video
+          ref={videoRef}
+          src={src}
+          loop
+          playsInline
+          preload="none"
+          onPlay={(event) => {
+            activePreviews.add(event.currentTarget);
+            setPlaying(true);
+          }}
+          onPause={(event) => {
+            activePreviews.delete(event.currentTarget);
+            setPlaying(false);
+          }}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
 
       <div
         className={cn(

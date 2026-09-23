@@ -1,16 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CertciaAuthShell } from "@/components/auth/CertciaAuthShell";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/login")({
-  head: () => ({
-    meta: [
-      { title: "Log in — Certcia AI Campus" },
-      {
-        name: "description",
-        content: "Log in to Certcia to continue your certification pathways.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Log in",
+      description: "Log in to Certcia to continue your certification pathways.",
+      path: "/login",
+      noIndex: true,
+    }),
   component: LoginPage,
 });
 

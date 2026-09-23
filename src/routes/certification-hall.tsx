@@ -4,11 +4,16 @@ import { EnrollGate } from "@/components/campus/EnrollGate";
 import { CampusBuildingHeader } from "@/components/campus/CampusBuildingHeader";
 import { Section } from "@/components/Section";
 import { canAccessBuilding } from "@/lib/enrollment";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/certification-hall")({
-  head: () => ({
-    meta: [{ title: "AI Certification Hall — Certcia AI Campus" }],
-  }),
+  head: () =>
+    pageHead({
+      title: "AI Certification Hall",
+      description:
+        "View and share Certifier-powered credentials earned on Certcia AI Campus.",
+      path: "/certification-hall",
+    }),
   component: CertificationHallPage,
 });
 

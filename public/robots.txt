@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /login
+Disallow: /signup
+Disallow: /cart
+Disallow: /dashboard
+Disallow: /classroom
+Disallow: /ai-hall
+
+Sitemap: https://certcia.ai/sitemap.xml

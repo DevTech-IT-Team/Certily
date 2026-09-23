@@ -1,14 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Calendar, MapPin, Users, Zap, PlayCircle, Mail } from "lucide-react";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/life-in-certcia")({
-  head: () => ({
-    meta: [
-      { title: "Life in Certcia — AI Campus" },
-      { name: "description", content: "Stay connected to the Certcia community with the latest news, updates, and upcoming events." },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Life in Certcia",
+      description:
+        "Stay connected to the Certcia community with the latest news, updates, and upcoming events.",
+      path: "/life-in-certcia",
+    }),
   component: LifeInCertciaPage,
 });
 

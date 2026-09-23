@@ -12,18 +12,16 @@ import {
   Zap,
 } from "lucide-react";
 import { VAvatar } from "@/components/campus/VAvatar";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/ai-lab")({
-  head: () => ({
-    meta: [
-      { title: "AI Lab — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "Apply what you learn through guided capstone projects, hands-on AI builds, and portfolio-ready outcomes.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "AI Lab",
+      description:
+        "Apply what you learn through guided capstone projects, hands-on AI builds, and portfolio-ready outcomes.",
+      path: "/ai-lab",
+    }),
   component: AILabPage,
 });
 

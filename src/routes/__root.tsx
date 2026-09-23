@@ -9,14 +9,43 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
+import { lazy, Suspense, useEffect, useState } from "react";
 import appCss from "../styles.css?url";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { PageEnter } from "../components/campus/PageEnter";
 import { VProvider } from "../components/campus/VContext";
-import { VChatFloating } from "../components/campus/VChatbot";
 import { CartProvider } from "../lib/CartContext";
 import { CurrencyProvider } from "../lib/CurrencyContext";
+import { DeferredFonts } from "../components/seo/DeferredFonts";
+import { JsonLd } from "../components/seo/JsonLd";
+import { organizationJsonLd, pageHead, websiteJsonLd } from "../lib/seo";
+
+const VChatFloating = lazy(() =>
+  import("../components/campus/VChatbot").then((m) => ({ default: m.VChatFloating })),
+);
+
+function DeferredChat() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const enable = () => setReady(true);
+    const onInteract = () => enable();
+    window.addEventListener("pointerdown", onInteract, { once: true });
+    const id = window.setTimeout(enable, 4000);
+    return () => {
+      window.removeEventListener("pointerdown", onInteract);
+      window.clearTimeout(id);
+    };
+  }, []);
+
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <VChatFloating />
+    </Suspense>
+  );
+}
 
 function NotFoundComponent() {
   return (
@@ -76,39 +105,32 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Certcia AI Campus — Your Campus, Your Future" },
-      { name: "description", content: "Outcome-driven AI learning campus with certification pathways, V mentorship, and shareable credentials for students and parents." },
-      { name: "author", content: "Certcia" },
-      { property: "og:title", content: "Certcia AI Campus — Learn, Build, Certify" },
-      { property: "og:description", content: "Explore certification pathways, AI Lab projects, and guided learning with V your AI mentor." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-    ],
-    links: [
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
-      { rel: "apple-touch-icon", href: "/favicon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@600;700;800;900&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
+  head: () => {
+    const seo = pageHead({
+      title: "Certcia AI Campus — Learn AI, Build Skills, Earn Outcomes",
+      path: "/",
+    });
+    return {
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "theme-color", content: "#5B4CF5" },
+        ...seo.meta,
+      ],
+      links: [
+        { rel: "icon", href: "/favicon.png", type: "image/png" },
+        { rel: "apple-touch-icon", href: "/favicon.png" },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossOrigin: "anonymous",
+        },
+        { rel: "stylesheet", href: appCss },
+        ...seo.links,
+      ],
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -139,6 +161,8 @@ function RootComponent() {
       <CurrencyProvider>
       <CartProvider>
         <VProvider>
+          <DeferredFonts />
+          <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           <div className="min-h-screen flex flex-col">
             <Navbar />
             <main className="flex-1">
@@ -147,7 +171,7 @@ function RootComponent() {
               </PageEnter>
             </main>
             {!isAuth && <Footer />}
-            {!isAuth && <VChatFloating />}
+            {!isAuth && <DeferredChat />}
           </div>
         </VProvider>
       </CartProvider>

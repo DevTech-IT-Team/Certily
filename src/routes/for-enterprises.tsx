@@ -16,18 +16,16 @@ import { EnterpriseCustomPrograms } from "@/components/enterprise/EnterpriseCust
 import { EnterpriseSuccessStories } from "@/components/enterprise/EnterpriseSuccessStories";
 import { EnterpriseDomains } from "@/components/enterprise/EnterpriseDomains";
 import { EnterpriseBusinessBanner } from "@/components/enterprise/EnterpriseBusinessBanner";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/for-enterprises")({
-  head: () => ({
-    meta: [
-      { title: "For Enterprises — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "Corporate training for your workforce — Certcia for Business, GenAI Academy, and custom learning solutions in AI, Data, and Tech.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "For Enterprises",
+      description:
+        "Corporate training for your workforce — Certcia for Business, GenAI Academy, and custom learning solutions in AI, Data, and Tech.",
+      path: "/for-enterprises",
+    }),
   component: Enterprise,
 });
 

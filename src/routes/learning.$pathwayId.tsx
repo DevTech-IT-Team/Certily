@@ -2,13 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { normalizePathwayParam } from "@/lib/pathways";
 import { PathwayContentSwitcher } from "@/components/learning-pathway/PathwayContentSwitcher";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/learning/$pathwayId")({
-  head: () => ({
-    meta: [
-      { title: "Learning Pathway — Certcia AI Campus" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Learning Pathway",
+      path: "/learning",
+    }),
   component: LearningPathwayPage,
 });
 

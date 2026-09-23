@@ -99,7 +99,7 @@ export function PathwayBannersSection({
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                       {bandCourses.map((course, i) => (
                         <Reveal key={course.id} className="h-full" delay={0.03 + Math.min(i, 8) * 0.02}>
-                          <CourseCatalogCard course={course} />
+                          <CourseCatalogCard course={course} priority={i === 0} />
                         </Reveal>
                       ))}
                     </div>
@@ -111,7 +111,7 @@ export function PathwayBannersSection({
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {visibleCourses.map((course, i) => (
                 <Reveal key={course.id} className="h-full" delay={0.05 + Math.min(i, 8) * 0.03}>
-                  <CourseCatalogCard course={course} />
+                  <CourseCatalogCard course={course} priority={i === 0 && !previewLimit} />
                 </Reveal>
               ))}
             </div>

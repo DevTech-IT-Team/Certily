@@ -2,14 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ChevronDown, Search, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { PageHero, Section } from "@/components/Section";
+import { faqJsonLd, pageHead } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const Route = createFileRoute("/faqs")({
-  head: () => ({
-    meta: [
-      { title: "Help Center — Certcia AI Campus" },
-      { name: "description", content: "Answers to common questions about learning pathways, certifications, enrollment, and the Certcia AI Campus." },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Help Center",
+      description:
+        "Answers to common questions about learning pathways, certifications, enrollment, and the Certcia AI Campus.",
+      path: "/faqs",
+    }),
   component: FAQs,
 });
 
@@ -49,6 +52,13 @@ function FAQs() {
   const [q, setQ] = useState("");
   return (
     <>
+      <JsonLd
+        data={faqJsonLd(
+          GROUPS.flatMap((group) =>
+            group.items.map(([question, answer]) => ({ question, answer })),
+          ),
+        )}
+      />
       <PageHero
         className="pb-5 md:pb-6"
         title={

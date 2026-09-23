@@ -1,13 +1,12 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useContext, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { VContext, type VReaction } from "./VContext";
 
-import avatarHi from "@/assets/avatars/hi.png";
-import avatarPoint from "@/assets/avatars/point.png";
-import avatarStand from "@/assets/avatars/stand.png";
-import avatarStare from "@/assets/avatars/stare.png";
-import avatarThink from "@/assets/avatars/think.png";
+import avatarHi from "@/assets/avatars/hi.webp";
+import avatarPoint from "@/assets/avatars/point.webp";
+import avatarStand from "@/assets/avatars/stand.webp";
+import avatarStare from "@/assets/avatars/stare.webp";
+import avatarThink from "@/assets/avatars/think.webp";
 
 const ILY_AVATARS = {
   hi: avatarHi,
@@ -34,6 +33,7 @@ type VAvatarProps = {
   fill?: boolean;
   /** Scale / glow on hover. Default true when interactive. */
   hoverEffect?: boolean;
+  priority?: boolean;
 };
 
 const sizes = {
@@ -59,6 +59,7 @@ export function VAvatar({
   customImageSrc,
   fill = false,
   hoverEffect = true,
+  priority = false,
 }: VAvatarProps) {
   const useOrb = variant === "orb";
   const hideMatte = onLight && !useOrb;
@@ -82,21 +83,10 @@ export function VAvatar({
     return () => window.clearTimeout(timer);
   }, [imageSrc, shownSrc]);
 
-  const bounce = useCallback(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    gsap.fromTo(
-      el,
-      { scale: 1, rotate: 0 },
-      { scale: 1.08, rotate: 2, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-    );
-  }, []);
-
   const handleClick = () => {
     if (!interactive) return;
     if (hoverEffect) {
       setWiggle(true);
-      bounce();
       window.setTimeout(() => setWiggle(false), 400);
     }
     onInteract?.();
@@ -135,6 +125,8 @@ export function VAvatar({
             src={outgoingSrc}
             alt=""
             aria-hidden
+            loading="lazy"
+            decoding="async"
             className={cn(
               "absolute inset-0 z-10 h-full w-full object-contain object-bottom opacity-0 transition-opacity duration-300",
               hideMatte && "mix-blend-lighten",
@@ -145,6 +137,8 @@ export function VAvatar({
         <img
           src={shownSrc}
           alt="V, your AI campus guide"
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
           className={cn(
             "relative z-10 h-full w-full object-contain object-bottom transition-transform duration-300",
             hideMatte && "mix-blend-lighten",

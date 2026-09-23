@@ -6,7 +6,9 @@ import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { parseInrAmount } from "@/lib/pricing";
-import certciaVideo from "@/assets/certcia.mp4";
+import { PREVIEW_VIDEO } from "@/lib/preview-video";
+import { breadcrumbJsonLd, courseJsonLd, pageHead } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 type CurriculumSection = CourseDetails["curriculum"][number];
 
@@ -182,6 +184,22 @@ function OutlineRow({
 }
 
 export const Route = createFileRoute("/course/$courseId")({
+  head: ({ params }) => {
+    const course = COURSES_DATA.find((item) => item.id === params.courseId);
+    if (!course) {
+      return pageHead({
+        title: "Course not found",
+        path: `/course/${params.courseId}`,
+        noIndex: true,
+      });
+    }
+    return pageHead({
+      title: course.title,
+      description: course.description,
+      path: `/course/${course.id}`,
+      image: course.image,
+    });
+  },
   component: CourseLandingPage,
 });
 
@@ -261,6 +279,22 @@ function CourseLandingPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F8FC] font-sans text-[#1C1D1F]">
+      <JsonLd
+        data={[
+          courseJsonLd({
+            title: course.title,
+            description: course.description,
+            id: course.id,
+            image: course.image,
+            hours: course.hours,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Learning Pathways", path: "/learning" },
+            { name: course.title, path: `/course/${course.id}` },
+          ]),
+        ]}
+      />
       <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-[#0F1533] to-slate-900 pt-28 pb-20 md:pt-32 md:pb-24">
         <div className="pointer-events-none absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-12 rounded-full bg-indigo-500/20 blur-[100px]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -425,7 +459,7 @@ function CourseLandingPage() {
               >
                 {isHoveringVideo ? (
                   <video
-                    src={course.previewVideoUrl || certciaVideo}
+                    src={course.previewVideoUrl || PREVIEW_VIDEO}
                     autoPlay
                     muted
                     loop
@@ -436,6 +470,9 @@ function CourseLandingPage() {
                     <img
                       src={course.previewThumbnailUrl || course.image}
                       alt={course.title}
+                      width={640}
+                      height={360}
+                      decoding="async"
                       className="absolute inset-0 z-0 h-full w-full object-cover opacity-90"
                     />
                     <div className="absolute inset-0 z-10 bg-slate-900/40 mix-blend-multiply" />
@@ -574,7 +611,7 @@ function CourseLandingPage() {
             </div>
             <div className="aspect-video bg-black">
               <video
-                src={course.previewVideoUrl || certciaVideo}
+                src={course.previewVideoUrl || PREVIEW_VIDEO}
                 controls
                 autoPlay
                 controlsList="nodownload"

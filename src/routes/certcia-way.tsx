@@ -11,18 +11,16 @@ import { WhereSkillsGoNext } from "@/components/certcia-way/WhereSkillsGoNext";
 import { PreparesAchievement } from "@/components/certcia-way/PreparesAchievement";
 import { WhyCertciaCTA } from "@/components/certcia-way/WhyCertciaCTA";
 import { Reveal } from "@/components/campus/Reveal";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/certcia-way")({
-  head: () => ({
-    meta: [
-      { title: "Why Certcia — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "We don’t train. We certify. See how a Certcia certification is built — from research to the AI Lab to verified proof.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Why Certcia",
+      description:
+        "We don’t train. We certify. See how a Certcia certification is built — from research to the AI Lab to verified proof issued with Certifier.",
+      path: "/certcia-way",
+    }),
   component: CertciaWay,
 });
 

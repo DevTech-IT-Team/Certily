@@ -1,18 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PathwayBannersSection } from "@/components/campus/PathwayBannersSection";
 import { useEffect } from "react";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/learning/")({
-  head: () => ({
-    meta: [
-      { title: "Learning Pathways — Certcia AI Campus" },
-      {
-        name: "description",
-        content:
-          "Browse K–5, middle school, high school, university, and professional certification tracks. Each track has multiple certifications, with modules and lessons inside.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Learning Pathways",
+      description:
+        "Browse K–5, middle school, high school, university, and professional AI certification tracks. Each certification includes modules, labs, and a capstone.",
+      path: "/learning",
+    }),
   component: LearningIndex,
 });
 
