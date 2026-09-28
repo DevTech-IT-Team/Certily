@@ -52,10 +52,10 @@ export type PathwayLevel = {
 export const PATHWAY_LEVELS: PathwayLevel[] = [
   {
     id: "k5",
-    label: "K–5 Certification",
-    shortLabel: "K–5",
+    label: "Elementary Foundations",
+    shortLabel: "Elementary Foundations",
     subLabel: "Grades K–5",
-    badgeLabel: "📚 K–5 CERTIFICATION",
+    badgeLabel: "📚 ELEMENTARY FOUNDATIONS",
     themeTagline: "Discover AI through play, stories, and first programs",
     description:
       "Age-right AI certifications for elementary learners — start with AI Superkids: Discover AI and grow into creator, genius, game, and robot tracks.",
@@ -92,10 +92,10 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "middle",
-    label: "Middle School Certification",
+    label: "Middle School",
     shortLabel: "Middle School",
     subLabel: "Grades 6–8",
-    badgeLabel: "🎮 MIDDLE SCHOOL · GRADES 6–8",
+    badgeLabel: "🎮 MIDDLE SCHOOL",
     themeTagline: "Build Real Projects, Games & AI Models",
     description:
       "Interactive game creation, Python fundamentals, and generative AI tools for middle school students.",
@@ -132,10 +132,10 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "high",
-    label: "High School Certification",
+    label: "High School",
     shortLabel: "High School",
     subLabel: "Grades 9–12",
-    badgeLabel: "🚀 HIGH SCHOOL · GRADES 9–12",
+    badgeLabel: "🚀 HIGH SCHOOL",
     themeTagline: "Standout Portfolios, AP Prep & Advanced AI",
     description:
       "Advanced portfolio tracks, machine learning basics, and college application boosters for high schoolers.",
@@ -172,10 +172,10 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "college",
-    label: "University / College Certification",
-    shortLabel: "University",
-    subLabel: "University / college",
-    badgeLabel: "🎓 UNIVERSITY / COLLEGE",
+    label: "College & University",
+    shortLabel: "College & University",
+    subLabel: "College & University",
+    badgeLabel: "🎓 COLLEGE & UNIVERSITY",
     themeTagline: "Authentic University Standards & Capstone Credit",
     description:
       "College-ready certification outcomes with practical projects, knowledge checks, and credentials for admissions and portfolios.",
@@ -212,10 +212,10 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "professional",
-    label: "Working Professionals Certification",
-    shortLabel: "Professionals",
-    subLabel: "Working professionals",
-    badgeLabel: "💼 WORKING PROFESSIONALS",
+    label: "Professional & Executive",
+    shortLabel: "Professional & Executive",
+    subLabel: "Professional & Executive",
+    badgeLabel: "💼 PROFESSIONAL & EXECUTIVE",
     themeTagline: "Apply AI at work — leadership, product, and production systems",
     description:
       "Certifications for people already in the workforce: lead AI adoption, ship LLM workflows, and design production-ready systems.",
@@ -599,11 +599,11 @@ export function pathwayToRouteId(id: PathwayLevelId): string {
 }
 
 export const LEVEL_CATEGORY: Record<PathwayLevelId, string> = {
-  k5: "K–5",
+  k5: "Elementary Foundations",
   middle: "Middle School",
   high: "High School",
-  college: "University / College",
-  professional: "Working Professionals",
+  college: "College & University",
+  professional: "Professional & Executive",
 };
 
 export const CATALOG_TOTALS = {

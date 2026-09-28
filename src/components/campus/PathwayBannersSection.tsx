@@ -11,12 +11,12 @@ import {
 } from "@/lib/pathways";
 
 const TABS = [
-  "All",
-  "K–5",
+  "All Programs",
+  "Elementary Foundations",
   "Middle School",
   "High School",
-  "University / College",
-  "Working Professionals",
+  "College & University",
+  "Professional & Executive",
 ] as const;
 
 const LEVEL_TO_TAB: Record<PathwayLevelId, string> = LEVEL_CATEGORY;
@@ -26,12 +26,12 @@ export function PathwayBannersSection({
 }: {
   previewLimit?: number;
 }) {
-  const [activeTab, setActiveTab] = useState<string>("K–5");
-  const [activeLevel, setActiveLevel] = useState<PathwayLevelId | "all">("k5");
+  const [activeTab, setActiveTab] = useState<string>("All Programs");
+  const [activeLevel, setActiveLevel] = useState<PathwayLevelId | "all">("all");
 
   const handleSelectTab = (tab: string) => {
     setActiveTab(tab);
-    if (tab === "All") {
+    if (tab === "All Programs") {
       setActiveLevel("all");
       return;
     }
@@ -136,7 +136,7 @@ export function PathwayBannersSection({
                 </span>
               </Link>
             </div>
-          ) : activeTab !== "All" ? (
+          ) : activeTab !== "All Programs" ? (
             <div className="mt-10">
               <Link
                 to="/topic/$topicId"

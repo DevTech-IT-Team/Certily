@@ -2,47 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import type { CourseDetails } from "@/lib/courses";
 import { CourseHoverThumbnail } from "./CourseHoverThumbnail";
-
-function CartAction({
-  inCart,
-  onAdd,
-  className,
-}: {
-  inCart: boolean;
-  onAdd: () => void;
-  className?: string;
-}) {
-  if (inCart) {
-    return (
-      <Link
-        to="/cart"
-        onClick={(event) => event.stopPropagation()}
-        className={`flex w-full items-center justify-center rounded-lg bg-[#F7F8FC] py-2.5 text-[15px] font-bold text-[#5B4CF5] transition-colors hover:bg-[#EEF0F8] ${className ?? ""}`}
-      >
-        Go to cart
-      </Link>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={(event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        onAdd();
-      }}
-      className={`w-full rounded-lg bg-[#5B4CF5] py-2.5 text-[15px] font-bold text-white transition-all hover:bg-[#4A3BE8] hover:shadow-[0_8px_20px_-8px_rgba(91,76,245,0.6)] ${className ?? ""}`}
-    >
-      Add to cart
-    </button>
-  );
-}
-
 export function CourseCatalogCard({
   course,
   priority = false,
@@ -53,9 +15,7 @@ export function CourseCatalogCard({
   const [previewPlaying, setPreviewPlaying] = useState(false);
   const [hoverOpen, setHoverOpen] = useState(false);
   const navigate = useNavigate();
-  const { addToCart, isInCart } = useCart();
   const { formatPrice } = useCurrency();
-  const inCart = isInCart(course.id);
 
   return (
     <HoverCard
@@ -129,10 +89,13 @@ export function CourseCatalogCard({
           </Link>
 
           <div className="px-5 pb-5 pt-3">
-            <CartAction
-              inCart={inCart}
-              onAdd={() => addToCart(course.id)}
-            />
+            <Link
+              to="/course/$courseId"
+              params={{ courseId: course.id }}
+              className="flex w-full items-center justify-center rounded-lg bg-[#5B4CF5] py-2.5 text-[15px] font-bold text-white transition-all hover:bg-[#4A3BE8] hover:shadow-[0_8px_20px_-8px_rgba(91,76,245,0.6)]"
+            >
+              View Course
+            </Link>
           </div>
         </div>
       </HoverCardTrigger>
@@ -187,11 +150,13 @@ export function CourseCatalogCard({
           ))}
         </ul>
 
-        <CartAction
-          inCart={inCart}
-          onAdd={() => addToCart(course.id)}
-          className="mt-6"
-        />
+        <Link
+          to="/course/$courseId"
+          params={{ courseId: course.id }}
+          className="mt-6 flex w-full items-center justify-center rounded-lg bg-[#5B4CF5] py-2.5 text-[15px] font-bold text-white transition-all hover:bg-[#4A3BE8] hover:shadow-[0_8px_20px_-8px_rgba(91,76,245,0.6)]"
+        >
+          View Course
+        </Link>
       </HoverCardContent>
     </HoverCard>
   );

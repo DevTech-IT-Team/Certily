@@ -19,7 +19,7 @@ type NavbarTabsProps = {
 const TAB_CONFIGS = [
   {
     id: "k5" as const,
-    title: "K–5",
+    title: "Elementary Foundations",
     sub: "Grades K–5",
     icon: Sparkles,
     gradient: "from-[#F59E0B] via-[#F97316] to-[#EA580C]",
@@ -27,7 +27,7 @@ const TAB_CONFIGS = [
   },
   {
     id: "middle" as const,
-    title: "Middle school",
+    title: "Middle School",
     sub: "Grades 6–8",
     icon: Gamepad2,
     gradient: "from-[#0284C7] via-[#2563EB] to-[#4F46E5]",
@@ -35,7 +35,7 @@ const TAB_CONFIGS = [
   },
   {
     id: "high" as const,
-    title: "High school",
+    title: "High School",
     sub: "Grades 9–12",
     icon: Rocket,
     gradient: "from-[#059669] via-[#10B981] to-[#06B6D4]",
@@ -43,7 +43,7 @@ const TAB_CONFIGS = [
   },
   {
     id: "college" as const,
-    title: "University / college",
+    title: "College & University",
     sub: "University",
     icon: GraduationCap,
     gradient: "from-[#2563EB] via-[#4F46E5] to-[#7C3AED]",
@@ -51,7 +51,7 @@ const TAB_CONFIGS = [
   },
   {
     id: "professional" as const,
-    title: "Working professionals",
+    title: "Professional & Executive",
     sub: "Career",
     icon: Briefcase,
     gradient: "from-[#7C3AED] via-[#C084FC] to-[#DB2777]",
@@ -59,7 +59,7 @@ const TAB_CONFIGS = [
   },
   {
     id: "all" as const,
-    title: "All certifications",
+    title: "All Programs",
     sub: "Explore all",
     icon: Layers,
     gradient: "from-[#5B4CF5] via-[#8B5CF6] to-[#EC4899]",
