@@ -58,7 +58,7 @@ const GLOBE_CONFIG: COBEOptions = {
   theta: THETA,
   dark: 0,
   diffuse: 0.4,
-  mapSamples: 12000,
+  mapSamples: 6000,
   mapBrightness: 1.2,
   baseColor: [1, 1, 1],
   markerColor: [91 / 255, 76 / 255, 245 / 255],
@@ -146,20 +146,15 @@ export function Globe({
 
     const globe = createGlobe(canvas, {
       ...config,
-      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
-      width: Math.max(widthRef.current, 1) * 2,
-      height: Math.max(widthRef.current, 1) * 2,
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
+      width: 1000,
+      height: 1000,
     });
 
-    const onResize = () => {
-      widthRef.current = canvas.offsetWidth;
-      globe.update({
-        width: Math.max(widthRef.current, 1) * 2,
-        height: Math.max(widthRef.current, 1) * 2,
-      });
-    };
-    window.addEventListener("resize", onResize);
-    onResize();
+    // Force CSS scaling to override cobe's absolute inline pixel dimensions
+    // This perfectly centers the globe and makes it responsive
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
 
     const pins = labelsRef.current
       ? Array.from(labelsRef.current.querySelectorAll<HTMLElement>("[data-region]"))
@@ -192,7 +187,6 @@ export function Globe({
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      window.removeEventListener("resize", onResize);
       globe.destroy();
     };
   }, [config]);

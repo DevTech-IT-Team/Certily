@@ -22,8 +22,8 @@ export function GatewaySection() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-4 h-[300px] w-full overflow-hidden sm:mt-5 sm:h-[400px] lg:h-[460px]">
-        <div className="absolute left-1/2 top-0 aspect-square w-[min(100vw,820px)] -translate-x-1/2 sm:w-[940px] lg:w-[1040px]">
+      <div className="relative mx-auto mt-2 h-[350px] w-full overflow-hidden sm:mt-4 sm:h-[450px] lg:h-[500px]">
+        <div className="absolute left-1/2 top-0 aspect-square w-[min(150vw,1200px)] -translate-x-1/2 sm:w-[1200px] lg:w-[1600px]">
           <Globe className="top-0" />
         </div>
       </div>

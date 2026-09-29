@@ -21,7 +21,6 @@ const MOBILE_GROUPS: { label: string; items: { to: any; label: string }[] }[] = 
       { to: "/certcia-way", label: "Why Certcia" },
       { to: "/learning", label: "Explore Pathways" },
       { to: "/for-enterprises", label: "Enterprise solutions" },
-      { to: "/certification-hall", label: "Certification Hall" },
     ],
   },
   {

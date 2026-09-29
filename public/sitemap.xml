@@ -56,5 +56,7 @@
   <url><loc>https://certcia.ai/course/professional-ai-infrastructure-scaling</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://certcia.ai/course/professional-ai-product-manager</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://certcia.ai/course/professional-responsible-ai-ethics</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://certcia.ai/course/professional-ai-career-capstone-portfolio</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://certcia.ai/privacy-policy</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://certcia.ai/terms-and-conditions</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://certcia.ai/cookies</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
 </urlset>

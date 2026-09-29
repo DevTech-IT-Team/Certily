@@ -1,111 +1,163 @@
+import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronRight, Linkedin, Twitter, Youtube } from "lucide-react";
+import { motion, type Variants, useScroll, useTransform } from "framer-motion";
+import { cn } from "@/lib/utils";
 import certLogo from "@/assets/logo/certicialogo.webp";
+import { Linkedin, Twitter, Youtube, Mail, MapPin } from "lucide-react";
 
-const exploreLinks = [
-  { label: "Learning Pathways", to: "/learning" },
-  { label: "AI Lab", to: "/ai-lab" },
-  { label: "Certification Hall", to: "/certification-hall" },
-  { label: "Why Certcia", to: "/certcia-way" },
-];
-
-const communityLinks = [
-  { label: "About Us", to: "/about" },
-  { label: "Newsroom", to: "/news" },
-  { label: "Events", to: "/events" },
-  { label: "Life in Certcia", to: "/life-in-certcia" },
-];
-
-const supportLinks = [
-  { label: "Contact Us", to: "/contact" },
-  { label: "FAQs", to: "/faqs" },
-  { label: "My Classroom", to: "/classroom" },
-  { label: "Dashboard", to: "/dashboard" },
-];
-
-function FooterLink({ label, to }: { label: string; to: string }) {
-  return (
-    <li>
-      <Link
-        to={to}
-        className="group flex items-start gap-2 text-sm text-white/70 transition-colors hover:text-white"
-      >
-        <ChevronRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#00C9A7]" aria-hidden />
-        {label}
-      </Link>
-    </li>
-  );
+interface FooterColumn {
+  heading: string;
+  links: { text: string; url: string }[];
 }
 
+const defaultColumns: FooterColumn[] = [
+  {
+    heading: "Platform",
+    links: [
+      { text: "Why Certcia", url: "/certcia-way" },
+      { text: "Explore Pathways", url: "/learning" },
+      { text: "Enterprise solutions", url: "/for-enterprises" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { text: "Latest News", url: "/news" },
+      { text: "About", url: "/about" },
+    ],
+  },
+  {
+    heading: "Support",
+    links: [
+      { text: "Help Center", url: "/faqs" },
+      { text: "Contact", url: "/contact" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { text: "Privacy Policy", url: "/privacy-policy" },
+      { text: "Terms of Service", url: "/terms-and-conditions" },
+      { text: "Cookie Policy", url: "/cookies" },
+    ],
+  },
+];
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 export function Footer() {
+  const brandName = "Certcia";
+  const copyright = `© ${new Date().getFullYear()} Certcia AI Campus`;
+
   return (
-    <footer className="relative mt-0 border-t border-white/10 bg-[#0F0E1A] text-white">
-      <div className="relative mx-auto max-w-6xl px-4 py-10 md:py-12">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:pr-8">
-            <Link to="/" className="inline-flex items-center">
+    <footer className="relative w-full overflow-hidden bg-[#0A0914] px-8 pt-16 text-white">
+      {/* Decorative Top Gradient Border */}
+      <div className="absolute top-0 inset-x-0 h-[1px] w-full bg-gradient-to-r from-transparent via-[#5B4CF5]/40 to-transparent"></div>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="mx-auto grid max-w-7xl w-full grid-cols-1 gap-12 md:grid-cols-12 items-start text-sm text-white/50 z-10 relative"
+      >
+        <motion.div variants={itemVariants} className="md:col-span-5 lg:col-span-4 flex flex-col space-y-6">
+          <div className="flex">
+            <Link to="/" className="inline-block rounded-xl bg-white px-4 py-2 transition-transform hover:scale-105 shadow-[0_8px_32px_rgba(91,76,245,0.15)]">
               <img
                 src={certLogo}
                 alt="Certcia Logo"
-                width={180}
-                height={40}
+                width={140}
+                height={30}
                 loading="lazy"
                 decoding="async"
-                className="-mb-2 -ml-4 h-16 w-auto object-contain"
+                className="h-8 w-auto object-contain"
               />
             </Link>
-            <p className="mt-1 text-sm leading-relaxed text-white/65">
-              Your AI-powered learning campus — credible certifications, real projects, and V
-              mentorship for students, parents, and professionals.
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              {[Twitter, Linkedin, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-[#5B4CF5] hover:bg-[#5B4CF5]/10 hover:text-white"
-                  aria-label="Social"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
+          </div>
+
+          <div className="flex flex-col gap-3 text-sm text-white/50">
+            <div className="flex items-center gap-2 hover:text-white/80 transition-colors cursor-pointer">
+              <Mail className="h-4 w-4 text-[#5B4CF5]" />
+              <span>hello@certcia.com</span>
+            </div>
+            <div className="flex items-center gap-2 hover:text-white/80 transition-colors cursor-pointer">
+              <MapPin className="h-4 w-4 text-[#5B4CF5]" />
+              <span>San Francisco, CA</span>
             </div>
           </div>
 
-          <nav aria-label="Explore">
-            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Explore</p>
-            <ul className="mt-4 space-y-3">
-              {exploreLinks.map((item) => (
-                <FooterLink key={item.to} {...item} />
-              ))}
-            </ul>
-          </nav>
+          <div className="flex items-center gap-4">
+            {[Twitter, Linkedin, Youtube].map((Icon, i) => (
+              <a
+                key={i}
+                href="#"
+                className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 transition-all hover:border-[#5B4CF5] hover:bg-[#5B4CF5] hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(91,76,245,0.4)]"
+                aria-label="Social"
+              >
+                <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+              </a>
+            ))}
+          </div>
+          
+          <div className="pt-2 text-sm text-white/40">{copyright}. All rights reserved.</div>
+        </motion.div>
 
-          <nav aria-label="Community">
-            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Community</p>
-            <ul className="mt-4 space-y-3">
-              {communityLinks.map((item) => (
-                <FooterLink key={item.to} {...item} />
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Support">
-            <p className="text-xs font-bold uppercase tracking-wider text-white/90">Support</p>
-            <ul className="mt-4 space-y-3">
-              {supportLinks.map((item) => (
-                <FooterLink key={item.to} {...item} />
-              ))}
-            </ul>
-          </nav>
+        <div className="md:col-span-7 lg:col-span-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 w-full pt-2">
+          {defaultColumns.map((col, ci) => (
+            <motion.div
+              key={ci}
+              variants={itemVariants}
+              className="flex w-full flex-col justify-start space-y-6"
+            >
+              <p className="font-bold uppercase tracking-[0.2em] text-white/90">
+                {col.heading}
+              </p>
+              <ul className="list-none space-y-4 text-white/60 transition-colors">
+                {col.links.map((link, li) => (
+                  <li key={li} className="list-none">
+                    <Link
+                      className="transition-colors hover:text-white flex items-center gap-2 group"
+                      to={link.url}
+                    >
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">{link.text}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
-      </div>
+      </motion.div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-white/50 sm:flex-row">
-          <span>© {new Date().getFullYear()} Certcia AI Campus. All rights reserved.</span>
-        </div>
-      </div>
+      <motion.div className="pointer-events-none inset-x-0 mt-16 mb-8 flex justify-center overflow-hidden">
+        <motion.p
+          initial={{ y: 100, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: false, amount: 0 }}
+          style={{
+            fontSize: "clamp(5rem, 18vw, 16rem)",
+            lineHeight: 0.8,
+            WebkitTextStroke: "2px rgba(255, 255, 255, 0.9)",
+          }}
+          className="text-center font-display font-bold tracking-tight text-transparent relative z-0 pb-4"
+        >
+          {brandName}
+        </motion.p>
+      </motion.div>
     </footer>
   );
 }

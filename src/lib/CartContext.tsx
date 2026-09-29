@@ -82,6 +82,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     [catalog, cartIds],
   );
 
+  // Clean up invalid cart IDs once catalog is loaded
+  useEffect(() => {
+    if (catalog) {
+      const validIds = cartIds.filter((id) => catalog.some((course) => course.id === id));
+      if (validIds.length !== cartIds.length) {
+        setCartIds(validIds);
+      }
+    }
+  }, [catalog, cartIds]);
+
   const addToCart = (courseId: string) => {
     setCartIds((prev) => (prev.includes(courseId) ? prev : [...prev, courseId]));
     setLastAddedCourseId(courseId);

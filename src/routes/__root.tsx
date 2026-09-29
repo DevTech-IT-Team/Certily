@@ -21,31 +21,7 @@ import { DeferredFonts } from "../components/seo/DeferredFonts";
 import { JsonLd } from "../components/seo/JsonLd";
 import { organizationJsonLd, pageHead, websiteJsonLd } from "../lib/seo";
 
-const VChatFloating = lazy(() =>
-  import("../components/campus/VChatbot").then((m) => ({ default: m.VChatFloating })),
-);
-
-function DeferredChat() {
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const enable = () => setReady(true);
-    const onInteract = () => enable();
-    window.addEventListener("pointerdown", onInteract, { once: true });
-    const id = window.setTimeout(enable, 4000);
-    return () => {
-      window.removeEventListener("pointerdown", onInteract);
-      window.clearTimeout(id);
-    };
-  }, []);
-
-  if (!ready) return null;
-  return (
-    <Suspense fallback={null}>
-      <VChatFloating />
-    </Suspense>
-  );
-}
+// Removed VChatFloating and DeferredChat
 
 function NotFoundComponent() {
   return (
@@ -171,7 +147,6 @@ function RootComponent() {
               </PageEnter>
             </main>
             {!isAuth && <Footer />}
-            {!isAuth && <DeferredChat />}
           </div>
         </VProvider>
       </CartProvider>

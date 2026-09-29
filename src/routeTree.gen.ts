@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LifeInCertciaRouteImport } from './routes/life-in-certcia'
@@ -17,6 +19,7 @@ import { Route as ForEnterprisesRouteImport } from './routes/for-enterprises'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ClassroomRouteImport } from './routes/classroom'
 import { Route as CertificationHallRouteImport } from './routes/certification-hall'
@@ -31,9 +34,19 @@ import { Route as TopicTopicIdRouteImport } from './routes/topic.$topicId'
 import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
 import { Route as CourseCourseIdRouteImport } from './routes/course.$courseId'
 
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -69,6 +82,11 @@ const EventsRoute = EventsRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -147,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
@@ -154,7 +173,9 @@ export interface FileRoutesByFullPath {
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/signup': typeof SignupRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
@@ -170,6 +191,7 @@ export interface FileRoutesByTo {
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
@@ -177,7 +199,9 @@ export interface FileRoutesByTo {
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/signup': typeof SignupRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
@@ -194,6 +218,7 @@ export interface FileRoutesById {
   '/certification-hall': typeof CertificationHallRoute
   '/classroom': typeof ClassroomRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/faqs': typeof FaqsRoute
@@ -201,7 +226,9 @@ export interface FileRoutesById {
   '/life-in-certcia': typeof LifeInCertciaRoute
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/signup': typeof SignupRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
@@ -219,6 +246,7 @@ export interface FileRouteTypes {
     | '/certification-hall'
     | '/classroom'
     | '/contact'
+    | '/cookies'
     | '/dashboard'
     | '/events'
     | '/faqs'
@@ -226,7 +254,9 @@ export interface FileRouteTypes {
     | '/life-in-certcia'
     | '/login'
     | '/news'
+    | '/privacy-policy'
     | '/signup'
+    | '/terms-and-conditions'
     | '/course/$courseId'
     | '/learning/$pathwayId'
     | '/topic/$topicId'
@@ -242,6 +272,7 @@ export interface FileRouteTypes {
     | '/certification-hall'
     | '/classroom'
     | '/contact'
+    | '/cookies'
     | '/dashboard'
     | '/events'
     | '/faqs'
@@ -249,7 +280,9 @@ export interface FileRouteTypes {
     | '/life-in-certcia'
     | '/login'
     | '/news'
+    | '/privacy-policy'
     | '/signup'
+    | '/terms-and-conditions'
     | '/course/$courseId'
     | '/learning/$pathwayId'
     | '/topic/$topicId'
@@ -265,6 +298,7 @@ export interface FileRouteTypes {
     | '/certification-hall'
     | '/classroom'
     | '/contact'
+    | '/cookies'
     | '/dashboard'
     | '/events'
     | '/faqs'
@@ -272,7 +306,9 @@ export interface FileRouteTypes {
     | '/life-in-certcia'
     | '/login'
     | '/news'
+    | '/privacy-policy'
     | '/signup'
+    | '/terms-and-conditions'
     | '/course/$courseId'
     | '/learning/$pathwayId'
     | '/topic/$topicId'
@@ -289,6 +325,7 @@ export interface RootRouteChildren {
   CertificationHallRoute: typeof CertificationHallRoute
   ClassroomRoute: typeof ClassroomRoute
   ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
   DashboardRoute: typeof DashboardRoute
   EventsRoute: typeof EventsRoute
   FaqsRoute: typeof FaqsRoute
@@ -296,7 +333,9 @@ export interface RootRouteChildren {
   LifeInCertciaRoute: typeof LifeInCertciaRoute
   LoginRoute: typeof LoginRoute
   NewsRoute: typeof NewsRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SignupRoute: typeof SignupRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   CourseCourseIdRoute: typeof CourseCourseIdRoute
   LearningPathwayIdRoute: typeof LearningPathwayIdRoute
   TopicTopicIdRoute: typeof TopicTopicIdRoute
@@ -305,11 +344,25 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -359,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -465,6 +525,7 @@ const rootRouteChildren: RootRouteChildren = {
   CertificationHallRoute: CertificationHallRoute,
   ClassroomRoute: ClassroomRoute,
   ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
   DashboardRoute: DashboardRoute,
   EventsRoute: EventsRoute,
   FaqsRoute: FaqsRoute,
@@ -472,7 +533,9 @@ const rootRouteChildren: RootRouteChildren = {
   LifeInCertciaRoute: LifeInCertciaRoute,
   LoginRoute: LoginRoute,
   NewsRoute: NewsRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   SignupRoute: SignupRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   CourseCourseIdRoute: CourseCourseIdRoute,
   LearningPathwayIdRoute: LearningPathwayIdRoute,
   TopicTopicIdRoute: TopicTopicIdRoute,

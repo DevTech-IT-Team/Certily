@@ -74,6 +74,7 @@
   --animate-dash-flow: dash-flow 1.6s linear infinite;
   --animate-orbit-spin: orbit-spin 18s linear infinite;
   --animate-orbit-spin-rev: orbit-spin-rev 18s linear infinite;
+  --animate-wave: wave 12s linear infinite;
 }
 
 @keyframes float {
@@ -160,6 +161,10 @@
 @keyframes lifecycle-fill {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
+}
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 :root {

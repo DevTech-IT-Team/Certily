@@ -34,7 +34,7 @@ function CartPage() {
           {cartCourses.length} Course{cartCourses.length > 1 ? 's' : ''} in Cart
         </div>
 
-        {cartCount === 0 ? (
+        {cartCourses.length === 0 ? (
           <div className="border border-[#D1D7DC] rounded-lg p-12 text-center flex flex-col items-center justify-center bg-gray-50">
             <h2 className="text-xl font-bold mb-4">Your cart is empty — keep shopping to find a course</h2>
             <Link 

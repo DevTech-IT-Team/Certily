@@ -150,7 +150,7 @@ function EventsPage() {
               <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8892A4]">Flagship event</p>
               <div className="overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm">
                 <div className="relative aspect-[16/9] overflow-hidden bg-[#EEF2FF]">
-                  <img src={featuredEvent.img} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+                  <img src={featuredEvent.img} alt={featuredEvent.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" />
                   <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
                   <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 shadow-sm backdrop-blur-sm">
                     <span className="relative flex h-2 w-2">
@@ -200,7 +200,7 @@ function EventsPage() {
               className="group col-span-full flex flex-col overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5B4CF5]/20 hover:shadow-[0_24px_56px_-16px_rgba(91,76,245,0.14)] sm:flex-row"
             >
               <div className="relative aspect-[16/9] overflow-hidden bg-[#EEF2FF] sm:aspect-auto sm:w-80 sm:shrink-0 lg:w-[400px]">
-                <img src={featuredEvent.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" />
+                <img src={featuredEvent.img} alt={featuredEvent.title} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" />
                 <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
                 <div className="absolute left-3 top-3 flex items-center gap-2">
                   <Tag label={featuredEvent.tag} />
@@ -231,7 +231,7 @@ function EventsPage() {
                 className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5B4CF5]/20 hover:shadow-[0_20px_48px_-16px_rgba(91,76,245,0.14)]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#EEF2FF]">
-                  <img src={e.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" decoding="async" />
+                  <img src={e.img} alt={e.title} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" decoding="async" />
                   <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
                   <div className="absolute left-3 top-3"><Tag label={e.tag} /></div>
                 </div>
@@ -274,7 +274,7 @@ function EventsPage() {
                 className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8EAF4] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5B4CF5]/20 hover:shadow-[0_20px_48px_-16px_rgba(91,76,245,0.10)]"
               >
                 <div className="relative aspect-[16/9] overflow-hidden bg-[#F0F1F8]">
-                  <img src={e.img} alt="" className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-500 group-hover:opacity-90 group-hover:scale-[1.03]" loading="lazy" decoding="async" />
+                  <img src={e.img} alt={e.title} className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-500 group-hover:opacity-90 group-hover:scale-[1.03]" loading="lazy" decoding="async" />
                   <div className="absolute inset-0" style={{ background: BLUE_OVERLAY }} />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/40 backdrop-blur-sm transition-transform group-hover:scale-110">
