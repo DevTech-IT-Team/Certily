@@ -75,7 +75,7 @@ export function Footer() {
       >
         <motion.div variants={itemVariants} className="md:col-span-5 lg:col-span-4 flex flex-col space-y-6">
           <div className="flex">
-            <Link to="/" className="inline-block rounded-xl bg-white px-4 py-2 transition-transform hover:scale-105 shadow-[0_8px_32px_rgba(91,76,245,0.15)]">
+            <a href="/" className="inline-block rounded-xl bg-white px-4 py-2 transition-transform hover:scale-105 shadow-[0_8px_32px_rgba(91,76,245,0.15)]">
               <img
                 src={certLogo}
                 alt="Certcia Logo"
@@ -85,14 +85,14 @@ export function Footer() {
                 decoding="async"
                 className="h-8 w-auto object-contain"
               />
-            </Link>
+            </a>
           </div>
 
           <div className="flex flex-col gap-3 text-sm text-white/50">
-            <div className="flex items-center gap-2 hover:text-white/80 transition-colors cursor-pointer">
+            <a href="mailto:letsconnect@certcia.com" className="flex items-center gap-2 hover:text-white/80 transition-colors cursor-pointer">
               <Mail className="h-4 w-4 text-[#5B4CF5]" />
-              <span>hello@certcia.com</span>
-            </div>
+              <span>letsconnect@certcia.com</span>
+            </a>
             <div className="flex items-center gap-2 hover:text-white/80 transition-colors cursor-pointer">
               <MapPin className="h-4 w-4 text-[#5B4CF5]" />
               <span>San Francisco, CA</span>
@@ -111,7 +111,7 @@ export function Footer() {
               </a>
             ))}
           </div>
-          
+
           <div className="pt-2 text-sm text-white/40">{copyright}. All rights reserved.</div>
         </motion.div>
 
@@ -128,12 +128,12 @@ export function Footer() {
               <ul className="list-none space-y-4 text-white/60 transition-colors">
                 {col.links.map((link, li) => (
                   <li key={li} className="list-none">
-                    <Link
-                      className="transition-colors hover:text-white flex items-center gap-2 group"
-                      to={link.url}
+                    <a
+                      className="transition-colors hover:text-white flex items-center gap-2 group cursor-pointer"
+                      href={link.url}
                     >
                       <span className="transition-transform duration-300 group-hover:translate-x-1">{link.text}</span>
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -21,9 +21,28 @@ function CartPage() {
   const cartCourses = cartItems;
   const totalPrice = cartTotal;
   const totalOriginalPrice = cartTotal * (1 / 0.17);
-  
   // Recommended courses (not in cart)
   const recommendedCourses = COURSES_DATA.filter(c => !cartItems.some(item => item.id === c.id)).slice(0, 4);
+
+  const handleCheckout = () => {
+    console.log("Checkout clicked! Cart courses:", cartCourses);
+    if (cartCourses.length === 0) {
+      console.warn("Cart is empty, cannot checkout");
+      return;
+    }
+    
+    // Note: If you ever figure out how LMS Athena accepts cart items via URL, 
+    // you can pass them like this: `https://lmsathena.com/login?redirect=/checkout?items=${courseIds}`
+    const courseIds = cartCourses.map(course => course.id).join(',');
+    
+    // Per your request, strictly using this URL for now:
+    const finalUrl = `https://lmsathena.com/login`;
+    
+    console.log("Redirecting to:", finalUrl);
+
+    // 4. Redirect the user to the login page
+    window.location.href = finalUrl;
+  };
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#1C1D1F] pt-12 pb-24">
@@ -35,85 +54,91 @@ function CartPage() {
         </div>
 
         {cartCourses.length === 0 ? (
-          <div className="border border-[#D1D7DC] rounded-lg p-12 text-center flex flex-col items-center justify-center bg-gray-50">
-            <h2 className="text-xl font-bold mb-4">Your cart is empty — keep shopping to find a course</h2>
+          <div className="border border-gray-200 rounded-lg p-16 text-center flex flex-col items-center justify-center bg-white shadow-sm">
+            <h2 className="text-xl font-bold text-[#1C1D1F] mb-4">Your cart is empty</h2>
+            <p className="text-[#6A6F73] mb-8">Keep shopping to find a course and accelerate your career.</p>
             <Link 
               to="/learning"
-              className="bg-[#A435F0] hover:bg-[#8710D8] text-white px-6 py-3 font-bold text-[16px] transition-colors rounded-sm"
+              className="bg-[#5B4CF5] hover:bg-[#4A3BE8] text-white px-8 py-3.5 font-bold text-[15px] transition-all rounded-md shadow-sm"
             >
-              Keep shopping
+              Explore Pathways
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             
-            {/* Left Column: Cart Items */}
-            <div className="lg:col-span-3 space-y-4">
-              {cartCourses.map(course => (
-                <div key={course.id} className="flex gap-4 p-4 bg-white border border-black/5 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                  <Link to="/course/$courseId" params={{ courseId: course.id }} className="shrink-0 group">
-                    <img 
-                      src={course.image} 
-                      alt={course.title}
-                      className="w-[120px] h-[68px] sm:w-[160px] sm:h-[90px] object-cover rounded-lg"
-                    />
-                  </Link>
-                  <div className="flex flex-1 flex-col sm:flex-row gap-4">
-                    <div className="flex-1">
-                      <Link to="/course/$courseId" params={{ courseId: course.id }} className="font-bold text-[15px] sm:text-[16px] text-[#1C1D1F] leading-tight hover:text-[#5B4CF5] transition-colors line-clamp-2">
-                        {course.title}
-                      </Link>
-                      <p className="text-[12px] text-[#6A6F73] mt-1">By {course.author}</p>
-                      <div className="flex items-center gap-2 mt-1 flex-wrap">
-                        {course.bestseller && (
-                          <span className="bg-[#CCF0EB] px-1.5 py-0.5 text-[11px] font-bold text-[#115C52] rounded-sm">Bestseller</span>
-                        )}
-                        <div className="flex items-center text-[12px]">
-                          <span className="font-bold text-[#B4690E] mr-1">{course.rating}</span>
-                          <Star className="h-3 w-3 fill-[#B4690E] text-[#B4690E]" />
-                          <span className="text-[#6A6F73] ml-1">({course.ratingCount} ratings)</span>
+            {/* Left Column: Cart Items List */}
+            <div className="flex-1">
+              <div className="flex flex-col gap-6">
+                {cartCourses.map(course => (
+                  <div key={course.id} className="group flex flex-col sm:flex-row gap-4 pb-6 border-b border-gray-200 last:border-0">
+                    <Link to="/course/$courseId" params={{ courseId: course.id }} className="shrink-0 overflow-hidden rounded-md border border-black/5 bg-gray-50 h-fit">
+                      <img 
+                        src={course.image} 
+                        alt={course.title}
+                        className="w-[120px] sm:w-[140px] aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </Link>
+                    <div className="flex flex-1 flex-col sm:flex-row gap-4">
+                      <div className="flex-1">
+                        <Link to="/course/$courseId" params={{ courseId: course.id }} className="font-bold text-[16px] text-[#1C1D1F] leading-tight hover:text-[#5B4CF5] transition-colors line-clamp-2">
+                          {course.title}
+                        </Link>
+                        <p className="text-[13px] text-[#6A6F73] mt-1">By {course.author}</p>
+                        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                          {course.bestseller && (
+                            <span className="bg-[#ECEB98] px-1.5 py-0.5 text-[11px] font-bold text-[#3D3C0A] rounded-sm">Bestseller</span>
+                          )}
+                          <div className="flex items-center text-[13px] font-medium">
+                            <span className="text-[#B4690E] font-bold mr-1">{course.rating}</span>
+                            <Star className="h-3.5 w-3.5 fill-[#B4690E] text-[#B4690E]" />
+                            <span className="text-[#6A6F73] ml-1">({course.ratingCount} ratings)</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex flex-row sm:flex-col justify-between sm:justify-start items-center sm:items-end gap-4 sm:gap-2">
-                      <button 
-                        onClick={() => removeFromCart(course.id)}
-                        className="flex items-center gap-1 text-[13px] text-gray-500 hover:text-red-600 font-medium transition-colors"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                        Remove
-                      </button>
-                      <div className="text-right">
-                        <div className="font-bold text-[16px] sm:text-[18px] text-[#5B4CF5]">{formatPrice(course.price)}</div>
-                        <div className="text-[14px] text-[#6A6F73] line-through">{formatPrice(course.originalPrice)}</div>
+                      
+                      <div className="flex flex-row sm:flex-col justify-between sm:justify-start items-center sm:items-end gap-2 shrink-0 sm:w-[120px]">
+                        <div className="text-right">
+                          <div className="font-bold text-[18px] text-[#1C1D1F] leading-none mb-1">{formatPrice(course.price)}</div>
+                          <div className="text-[14px] text-[#6A6F73] line-through">{formatPrice(course.originalPrice)}</div>
+                        </div>
+                        <button 
+                          onClick={() => removeFromCart(course.id)}
+                          className="text-[13px] text-[#5B4CF5] hover:text-[#4A3BE8] font-semibold transition-colors sm:mt-2"
+                        >
+                          Remove
+                        </button>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Right Column: Checkout Sticky Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="bg-indigo-50/30 border border-indigo-100 rounded-2xl p-6 lg:sticky lg:top-24">
-                <div className="text-[16px] font-bold text-[#6A6F73] mb-2">Total:</div>
-                <div className="text-4xl font-bold text-[#1C1D1F] mb-1 tracking-tight">{formatAmount(totalPrice)}</div>
-                <div className="text-[16px] text-[#6A6F73] line-through mb-6">{formatAmount(totalOriginalPrice)}</div>
-                <div className="text-sm text-indigo-700 font-medium mb-6 bg-indigo-100/50 px-3 py-2 rounded-lg inline-block">
-                  84% off
-                </div>
-                <button className="w-full bg-[#5B4CF5] hover:bg-[#4A3BE8] hover:shadow-[0_8px_24px_-10px_rgba(91,76,245,0.6)] text-white py-4 font-bold text-[16px] rounded-xl transition-all">
-                  Checkout
-                </button>
-                <div className="mt-4 pt-4 border-t border-black/10">
-                  <div className="text-[14px] font-bold text-[#1C1D1F] mb-2">Promotions</div>
-                  <div className="flex items-center gap-2">
-                    <button className="text-[14px] text-[#5B4CF5] hover:text-[#4A3BE8] font-bold flex-1 text-left">
-                      Enter Coupon
-                    </button>
+            <div className="lg:w-[300px] shrink-0">
+              <div className="bg-white p-0 lg:sticky lg:top-24">
+                <div className="text-[14px] font-medium text-[#6A6F73] mb-1">Total:</div>
+                <div className="text-[1.75rem] font-bold text-[#1C1D1F] mb-1 tracking-tight leading-none">{formatAmount(totalPrice)}</div>
+                
+                <div className="flex items-center gap-2 mb-5 mt-1.5">
+                  <div className="text-[14px] text-[#6A6F73] line-through">
+                    {formatAmount(totalOriginalPrice)}
+                  </div>
+                  <div className="text-[14px] text-[#1C1D1F] font-medium">
+                    84% off
                   </div>
                 </div>
+
+                <a 
+                  href="https://lmsathena.com/login"
+                  className="w-full flex items-center justify-center bg-[#5B4CF5] hover:bg-[#4A3BE8] text-white py-3 font-semibold text-[15px] rounded-sm transition-all duration-300"
+                >
+                  Checkout
+                </a>
+                <p className="text-center text-[12px] text-[#6A6F73] mt-3">
+                  Please log in to complete your enrollment.
+                </p>
               </div>
             </div>
 

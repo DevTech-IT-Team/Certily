@@ -43,19 +43,17 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="overflow-x-visible bg-[#F7F8FC]">
+    <div className="overflow-x-hidden bg-[#F7F8FC]">
       <HeroSection />
       <Suspense fallback={null}>
         <CampusExploreSection />
       </Suspense>
-      <DeferredMount fallback={<div className="min-h-[28rem] bg-[#EEEEF8]" aria-hidden />}>
-        <Suspense fallback={null}>
-          <VMentorSection />
-          <PathwayBannersSection previewLimit={4} />
-          <HomeStatsSection />
-          <TrustLogosMarquee />
-        </Suspense>
-      </DeferredMount>
+      <Suspense fallback={<div className="min-h-screen bg-[#EEEEF8]" aria-hidden />}>
+        <VMentorSection />
+        <PathwayBannersSection previewLimit={4} />
+        <HomeStatsSection />
+        <TrustLogosMarquee />
+      </Suspense>
     </div>
   );
 }

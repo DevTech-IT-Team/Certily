@@ -19,7 +19,7 @@ import { CartProvider } from "../lib/CartContext";
 import { CurrencyProvider } from "../lib/CurrencyContext";
 import { DeferredFonts } from "../components/seo/DeferredFonts";
 import { JsonLd } from "../components/seo/JsonLd";
-import { organizationJsonLd, pageHead, websiteJsonLd } from "../lib/seo";
+import { GOOGLE_FONTS_HREF, organizationJsonLd, pageHead, websiteJsonLd } from "../lib/seo";
 
 // Removed VChatFloating and DeferredChat
 
@@ -102,6 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           href: "https://fonts.gstatic.com",
           crossOrigin: "anonymous",
         },
+        { rel: "stylesheet", href: GOOGLE_FONTS_HREF },
         { rel: "stylesheet", href: appCss },
         ...seo.links,
       ],
@@ -137,7 +138,6 @@ function RootComponent() {
       <CurrencyProvider>
       <CartProvider>
         <VProvider>
-          <DeferredFonts />
           <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           <div className="min-h-screen flex flex-col">
             <Navbar />

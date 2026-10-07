@@ -328,6 +328,22 @@ export function VMentorSection() {
               V guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
             </p>
 
+            <ul className="mt-8 space-y-4">
+              {[
+                "Personalized course & pathway recommendations.",
+                "Instant help with assignments and AI coding labs.",
+                "Keeps you on track with milestone celebrations.",
+                "24/7 answers to all your academic queries."
+              ].map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <div className="mt-1 shrink-0 rounded-full bg-[#5B4CF5]/10 p-1.5">
+                    <Sparkles className="h-4 w-4 text-[#5B4CF5]" />
+                  </div>
+                  <span className="text-[15px] font-medium text-[#1C1D1F]/90 leading-snug">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
             <button
               type="button"
               onClick={openGuide}

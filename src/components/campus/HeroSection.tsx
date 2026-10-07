@@ -44,8 +44,8 @@ export function HeroSection() {
         <div className="relative mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 overflow-visible lg:grid-cols-12 lg:gap-8 xl:gap-10">
             <div className="flex flex-col items-start justify-center pb-6 pt-0 text-left lg:col-span-5 lg:pb-10 xl:col-span-5">
-              <h1 className="font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem]">
-                <span className="block">Real skills  Real impact</span>
+              <h1 className="font-display text-3xl font-bold leading-[1.12] tracking-[-0.03em] text-[#0F1533] sm:text-4xl lg:text-[2.75rem] xl:text-[3.35rem]">
+                <span className="block">Real skills Real impact</span>
                 <span className="mt-1 block text-[#5B4CF5] sm:mt-1.5">
                   Built for the future
                 </span>

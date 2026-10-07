@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { Link } from "@tanstack/react-router";
 import { X, Check, Plus } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
@@ -23,8 +23,9 @@ export function AddedToCartModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[540px] p-0 border-0 overflow-hidden bg-white rounded-3xl gap-0 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.25)]">
+      <DialogContent aria-describedby={undefined} className="sm:max-w-[540px] p-0 border-0 overflow-hidden bg-white rounded-3xl gap-0 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.25)]">
         <DialogTitle className="sr-only">Added to cart</DialogTitle>
+        <DialogDescription className="sr-only">Course successfully added to your shopping cart.</DialogDescription>
 
         <DialogClose className="absolute right-4 top-4 rounded-full p-2 bg-gray-50 text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-all z-10 focus:outline-none">
           <X className="h-5 w-5" />
