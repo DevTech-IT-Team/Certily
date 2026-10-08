@@ -9,119 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as NewsRouteImport } from './routes/news'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as LifeInCertciaRouteImport } from './routes/life-in-certcia'
-import { Route as ForEnterprisesRouteImport } from './routes/for-enterprises'
-import { Route as FaqsRouteImport } from './routes/faqs'
-import { Route as EventsRouteImport } from './routes/events'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CookiesRouteImport } from './routes/cookies'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ClassroomRouteImport } from './routes/classroom'
-import { Route as CertificationHallRouteImport } from './routes/certification-hall'
-import { Route as CertciaWayRouteImport } from './routes/certcia-way'
-import { Route as CartRouteImport } from './routes/cart'
-import { Route as AiLabRouteImport } from './routes/ai-lab'
-import { Route as AiHallRouteImport } from './routes/ai-hall'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as LearningIndexRouteImport } from './routes/learning.index'
-import { Route as TopicTopicIdRouteImport } from './routes/topic.$topicId'
-import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AiHallRouteImport } from './routes/ai-hall'
+import { Route as AiLabRouteImport } from './routes/ai-lab'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as CertciaWayRouteImport } from './routes/certcia-way'
+import { Route as CertificationHallRouteImport } from './routes/certification-hall'
+import { Route as ClassroomRouteImport } from './routes/classroom'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as ForEnterprisesRouteImport } from './routes/for-enterprises'
+import { Route as LifeInCertciaRouteImport } from './routes/life-in-certcia'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as CourseCourseIdRouteImport } from './routes/course.$courseId'
+import { Route as LearningIndexRouteImport } from './routes/learning.index'
+import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
+import { Route as TopicTopicIdRouteImport } from './routes/topic.$topicId'
 
-const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
-  id: '/terms-and-conditions',
-  path: '/terms-and-conditions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NewsRoute = NewsRouteImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LifeInCertciaRoute = LifeInCertciaRouteImport.update({
-  id: '/life-in-certcia',
-  path: '/life-in-certcia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForEnterprisesRoute = ForEnterprisesRouteImport.update({
-  id: '/for-enterprises',
-  path: '/for-enterprises',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqsRoute = FaqsRouteImport.update({
-  id: '/faqs',
-  path: '/faqs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiesRoute = CookiesRouteImport.update({
-  id: '/cookies',
-  path: '/cookies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClassroomRoute = ClassroomRouteImport.update({
-  id: '/classroom',
-  path: '/classroom',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CertificationHallRoute = CertificationHallRouteImport.update({
-  id: '/certification-hall',
-  path: '/certification-hall',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CertciaWayRoute = CertciaWayRouteImport.update({
-  id: '/certcia-way',
-  path: '/certcia-way',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CartRoute = CartRouteImport.update({
-  id: '/cart',
-  path: '/cart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiLabRoute = AiLabRouteImport.update({
-  id: '/ai-lab',
-  path: '/ai-lab',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiHallRoute = AiHallRouteImport.update({
-  id: '/ai-hall',
-  path: '/ai-hall',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -129,9 +44,99 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AiHallRoute = AiHallRouteImport.update({
+  id: '/ai-hall',
+  path: '/ai-hall',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiLabRoute = AiLabRouteImport.update({
+  id: '/ai-lab',
+  path: '/ai-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertciaWayRoute = CertciaWayRouteImport.update({
+  id: '/certcia-way',
+  path: '/certcia-way',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertificationHallRoute = CertificationHallRouteImport.update({
+  id: '/certification-hall',
+  path: '/certification-hall',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClassroomRoute = ClassroomRouteImport.update({
+  id: '/classroom',
+  path: '/classroom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForEnterprisesRoute = ForEnterprisesRouteImport.update({
+  id: '/for-enterprises',
+  path: '/for-enterprises',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LifeInCertciaRoute = LifeInCertciaRouteImport.update({
+  id: '/life-in-certcia',
+  path: '/life-in-certcia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseCourseIdRoute = CourseCourseIdRouteImport.update({
+  id: '/course/$courseId',
+  path: '/course/$courseId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearningIndexRoute = LearningIndexRouteImport.update({
@@ -139,19 +144,14 @@ const LearningIndexRoute = LearningIndexRouteImport.update({
   path: '/learning/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TopicTopicIdRoute = TopicTopicIdRouteImport.update({
-  id: '/topic/$topicId',
-  path: '/topic/$topicId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LearningPathwayIdRoute = LearningPathwayIdRouteImport.update({
   id: '/learning/$pathwayId',
   path: '/learning/$pathwayId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CourseCourseIdRoute = CourseCourseIdRouteImport.update({
-  id: '/course/$courseId',
-  path: '/course/$courseId',
+const TopicTopicIdRoute = TopicTopicIdRouteImport.update({
+  id: '/topic/$topicId',
+  path: '/topic/$topicId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -344,130 +344,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms-and-conditions': {
-      id: '/terms-and-conditions'
-      path: '/terms-and-conditions'
-      fullPath: '/terms-and-conditions'
-      preLoaderRoute: typeof TermsAndConditionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news': {
-      id: '/news'
-      path: '/news'
-      fullPath: '/news'
-      preLoaderRoute: typeof NewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/life-in-certcia': {
-      id: '/life-in-certcia'
-      path: '/life-in-certcia'
-      fullPath: '/life-in-certcia'
-      preLoaderRoute: typeof LifeInCertciaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/for-enterprises': {
-      id: '/for-enterprises'
-      path: '/for-enterprises'
-      fullPath: '/for-enterprises'
-      preLoaderRoute: typeof ForEnterprisesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faqs': {
-      id: '/faqs'
-      path: '/faqs'
-      fullPath: '/faqs'
-      preLoaderRoute: typeof FaqsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookies': {
-      id: '/cookies'
-      path: '/cookies'
-      fullPath: '/cookies'
-      preLoaderRoute: typeof CookiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/classroom': {
-      id: '/classroom'
-      path: '/classroom'
-      fullPath: '/classroom'
-      preLoaderRoute: typeof ClassroomRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/certification-hall': {
-      id: '/certification-hall'
-      path: '/certification-hall'
-      fullPath: '/certification-hall'
-      preLoaderRoute: typeof CertificationHallRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/certcia-way': {
-      id: '/certcia-way'
-      path: '/certcia-way'
-      fullPath: '/certcia-way'
-      preLoaderRoute: typeof CertciaWayRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-lab': {
-      id: '/ai-lab'
-      path: '/ai-lab'
-      fullPath: '/ai-lab'
-      preLoaderRoute: typeof AiLabRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-hall': {
-      id: '/ai-hall'
-      path: '/ai-hall'
-      fullPath: '/ai-hall'
-      preLoaderRoute: typeof AiHallRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -477,11 +358,137 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/ai-hall': {
+      id: '/ai-hall'
+      path: '/ai-hall'
+      fullPath: '/ai-hall'
+      preLoaderRoute: typeof AiHallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-lab': {
+      id: '/ai-lab'
+      path: '/ai-lab'
+      fullPath: '/ai-lab'
+      preLoaderRoute: typeof AiLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certcia-way': {
+      id: '/certcia-way'
+      path: '/certcia-way'
+      fullPath: '/certcia-way'
+      preLoaderRoute: typeof CertciaWayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certification-hall': {
+      id: '/certification-hall'
+      path: '/certification-hall'
+      fullPath: '/certification-hall'
+      preLoaderRoute: typeof CertificationHallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/classroom': {
+      id: '/classroom'
+      path: '/classroom'
+      fullPath: '/classroom'
+      preLoaderRoute: typeof ClassroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-enterprises': {
+      id: '/for-enterprises'
+      path: '/for-enterprises'
+      fullPath: '/for-enterprises'
+      preLoaderRoute: typeof ForEnterprisesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/life-in-certcia': {
+      id: '/life-in-certcia'
+      path: '/life-in-certcia'
+      fullPath: '/life-in-certcia'
+      preLoaderRoute: typeof LifeInCertciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/$courseId': {
+      id: '/course/$courseId'
+      path: '/course/$courseId'
+      fullPath: '/course/$courseId'
+      preLoaderRoute: typeof CourseCourseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learning/': {
@@ -491,13 +498,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearningIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/topic/$topicId': {
-      id: '/topic/$topicId'
-      path: '/topic/$topicId'
-      fullPath: '/topic/$topicId'
-      preLoaderRoute: typeof TopicTopicIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/learning/$pathwayId': {
       id: '/learning/$pathwayId'
       path: '/learning/$pathwayId'
@@ -505,11 +505,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearningPathwayIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/course/$courseId': {
-      id: '/course/$courseId'
-      path: '/course/$courseId'
-      fullPath: '/course/$courseId'
-      preLoaderRoute: typeof CourseCourseIdRouteImport
+    '/topic/$topicId': {
+      id: '/topic/$topicId'
+      path: '/topic/$topicId'
+      fullPath: '/topic/$topicId'
+      preLoaderRoute: typeof TopicTopicIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

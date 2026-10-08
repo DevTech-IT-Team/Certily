@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { motion, type Variants, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import certLogo from "@/assets/logo/certicialogo.webp";
-import { Linkedin, Twitter, Youtube, Mail, MapPin } from "lucide-react";
+import { Linkedin, Youtube, Facebook, Instagram, Mail, MapPin } from "lucide-react";
 
 interface FooterColumn {
   heading: string;
@@ -100,14 +100,21 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            {[Twitter, Linkedin, Youtube].map((Icon, i) => (
+            {[
+              { icon: Linkedin, url: "https://www.linkedin.com/company/certcia-ai" },
+              { icon: Facebook, url: "https://www.facebook.com/profile.php?id=61595338161527" },
+              { icon: Youtube, url: "https://www.youtube.com/@certciai" },
+              { icon: Instagram, url: "https://www.instagram.com/certciai/" },
+            ].map((social, i) => (
               <a
                 key={i}
-                href="#"
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 transition-all hover:border-[#5B4CF5] hover:bg-[#5B4CF5] hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(91,76,245,0.4)]"
                 aria-label="Social"
               >
-                <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                <social.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
               </a>
             ))}
           </div>
