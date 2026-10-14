@@ -25,7 +25,7 @@ export const Route = createFileRoute("/about")({
 const HERO_HIGHLIGHTS = [
   "Structured Pathways",
   "Verifiable Credentials",
-  "24/7 AI Mentorship with V",
+  "24/7 AI Mentorship with NEO",
 ];
 
 function About() {
@@ -70,7 +70,7 @@ function About() {
               </h2>
 
               <p className="mt-3 text-sm leading-relaxed text-[#5A607A] sm:text-base">
-                Explore structured learning pathways, build real projects, and earn credentials with V by your side.
+                Explore structured learning pathways, build real projects, and earn credentials with NEO by your side.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3.5 sm:mt-7">

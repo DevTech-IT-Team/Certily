@@ -211,7 +211,7 @@ function VShowcaseScene() {
               preload="none"
               poster={avatarStand}
               className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[center_74%]"
-              aria-label="V campus guide preview"
+              aria-label="NEO campus guide preview"
             />
             <div
               className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#0F1533]/95 to-transparent"
@@ -287,7 +287,7 @@ export function VMentorSection() {
 
   return (
     <section
-      id="meet-v"
+      id="meet-neo"
       data-v-section="v-mentor"
       className="relative overflow-visible border-t border-border/40 bg-[#EEEEF8] py-16 sm:py-20"
     >
@@ -315,7 +315,7 @@ export function VMentorSection() {
         <Reveal>
           <div className="max-w-xl">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/95 px-3.5 py-1 text-xs font-bold tracking-wide text-[#0F1533] shadow-xs backdrop-blur-sm">
-              MEET <span className="text-[#5B4CF5]">V</span>
+              MEET <span className="text-[#5B4CF5]">NEO</span>
             </span>
 
             <h2 className="mt-4 font-display text-[2.2rem] md:text-[2.65rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
@@ -325,7 +325,7 @@ export function VMentorSection() {
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              V guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
+              NEO guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
             </p>
 
             <ul className="mt-8 space-y-4">
@@ -349,7 +349,7 @@ export function VMentorSection() {
               onClick={openGuide}
               className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_14px_40px_-14px_rgba(91,76,245,0.55)] transition-all hover:scale-[1.02] hover:bg-[#4A3BE8] active:scale-[0.98]"
             >
-              Ask V anything
+              Ask NEO anything
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>

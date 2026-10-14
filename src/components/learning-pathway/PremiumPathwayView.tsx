@@ -69,7 +69,7 @@ export function PremiumPathwayView({ levelId }: { levelId: PathwayLevelId }) {
             </h3>
             <p className="mt-1 text-sm text-slate-500">
               {levelData.outcomeCount} certifications · {levelData.modulesPerOutcome} modules
-              each · lessons inside every module
+              each · 20 hours · 6 weeks
             </p>
           </div>
         </div>

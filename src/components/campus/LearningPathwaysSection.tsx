@@ -276,7 +276,7 @@ function PageLayout({
         {PATHWAY_LEVELS.map((pathway, i) => {
           const id = PATHWAY_IDENTITY[i % PATHWAY_IDENTITY.length];
           const Icon = pathway.icon;
-          const isActive = pathway.id === (selectedLevel || "k5");
+          const isActive = pathway.id === (selectedLevel || "pre-elementary");
           const soon = pathway.focus === "later";
 
           return (

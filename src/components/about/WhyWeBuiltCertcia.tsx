@@ -16,7 +16,7 @@ const PILLARS = [
   {
     icon: Users,
     title: "Guided, not solo",
-    body: "V and a global peer community keep learners motivated — structured checkpoints replace the guesswork of self-directed study.",
+    body: "NEO and a global peer community keep learners motivated — structured checkpoints replace the guesswork of self-directed study.",
   },
   {
     icon: Zap,

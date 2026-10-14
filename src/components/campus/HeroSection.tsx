@@ -69,11 +69,11 @@ export function HeroSection() {
                 <button
                   type="button"
                   onClick={() =>
-                    document.getElementById("meet-v")?.scrollIntoView({ behavior: "smooth" })
+                    (document.getElementById("meet-neo") ?? document.getElementById("meet-v"))?.scrollIntoView({ behavior: "smooth" })
                   }
                   className="inline-flex h-12 items-center gap-2.5 rounded-full border border-[#D8D6EE] bg-white px-6 text-base font-semibold text-[#5A5872] shadow-xs transition-all hover:border-[#5B4CF5]/40 hover:text-[#5B4CF5] active:scale-[0.98]"
                 >
-                  Meet V
+                  Meet NEO
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-[#5B4CF5]">
                     <Play className="h-3 w-3 fill-[#5B4CF5]" />
                   </span>

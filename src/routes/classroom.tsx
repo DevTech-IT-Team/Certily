@@ -71,7 +71,7 @@ function ClassroomPage() {
           <div>
             <h2 className="text-lg font-bold text-foreground">Enrolled courses</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Short V-led nuggets, resources, assignments, and quizzes — not a generic LMS page.
+              Short NEO-led nuggets, resources, assignments, and quizzes — not a generic LMS page.
             </p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               {ENROLLED_COURSES.map((course) => (

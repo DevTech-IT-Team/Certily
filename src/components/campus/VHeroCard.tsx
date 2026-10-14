@@ -27,7 +27,7 @@ export function VHeroCard() {
           type="button"
           onClick={() => setFloatingOpen(true)}
           className="relative shrink-0 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-[#5B4CF5]"
-          title="Chat with V"
+          title="Chat with NEO"
         >
           <VAvatar
             size="md"
@@ -49,7 +49,7 @@ export function VHeroCard() {
                 </span>
                 <span className="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider text-[#5B4CF5] uppercase">
                   <Sparkles className="h-3 w-3 text-[#5B4CF5]" />
-                  V Explaining
+                  NEO Explaining
                 </span>
               </div>
 
@@ -70,7 +70,7 @@ export function VHeroCard() {
           ) : (
             <div>
               <p className="text-sm font-bold text-[#0F1533] sm:text-base">
-                Meet <span className="font-display tracking-wide text-[#5B4CF5]">V</span> — your campus guide
+                Meet <span className="font-display tracking-wide text-[#5B4CF5]">NEO</span> — your campus guide
               </p>
               <p className="mt-1 text-xs leading-relaxed text-[#5A607A] sm:text-sm">
                 {DEFAULT_GREETING}
@@ -80,7 +80,7 @@ export function VHeroCard() {
                 onClick={() => setFloatingOpen(true)}
                 className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-[#5B4CF5] hover:underline"
               >
-                <span>Ask V a question</span>
+                <span>Ask NEO a question</span>
                 <ArrowRight className="h-3 w-3" />
               </button>
             </div>

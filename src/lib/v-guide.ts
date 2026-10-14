@@ -33,7 +33,7 @@ export type VPopularPrompt = {
 };
 
 export const DEFAULT_V_MESSAGE =
-  "Hey! I'm V — your guide on the Certcia campus. Tap a quick link below and I'll point you in the right direction.";
+  "Hey! I'm NEO — your guide on the Certcia campus. Tap a quick link below and I'll point you in the right direction.";
 
 export const V_STARTER_PROMPTS = [
   {
@@ -289,7 +289,7 @@ const KEYWORD_RESPONSES: { keys: string[]; message: string }[] = [
       "Complete a pathway to earn verifiable certificates in the Certification Hall — share links with anyone.",
   },
   {
-    keys: ["v", "hello", "hi", "hey", "help"],
+    keys: ["neo", "v", "hello", "hi", "hey", "help"],
     message:
       "I'm your campus guide — tap a quick link below to explore pathways, buildings, and enrollment.",
   },
@@ -313,7 +313,7 @@ export function matchVResponse(input: string): { message: string; reaction: VRea
   // Greetings
   if (q === "hi" || q === "hello" || q === "hey" || q.includes("who are you") || q.startsWith("hello") || q.startsWith("hi ")) {
     return {
-      message: "Hey there! I'm V, your Certcia AI campus guide. I can show you around, explain public vs. locked zones, or recommend the best certification pathway for your goals. Ask me anything!",
+      message: "Hey there! I'm NEO, your Certcia AI campus guide. I can show you around, explain public vs. locked zones, or recommend the best certification pathway for your goals. Ask me anything!",
       reaction: "hi"
     };
   }

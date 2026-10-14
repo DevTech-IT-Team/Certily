@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, PlayCircle, Download, ChevronRight, ChevronDown, X, Layers } from "lucide-react";
-import { COURSES_DATA, type CourseDetails } from "@/lib/courses";
+import { Check, CheckCircle2, PlayCircle, Download, ChevronRight, ChevronDown, X, Layers, Award, FileText } from "lucide-react";
+import { COURSES_DATA, findCourseByIdOrCode, type CourseDetails } from "@/lib/courses";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
@@ -185,7 +185,7 @@ function OutlineRow({
 
 export const Route = createFileRoute("/course/$courseId")({
   head: ({ params }) => {
-    const course = COURSES_DATA.find((item) => item.id === params.courseId);
+    const course = findCourseByIdOrCode(params.courseId);
     if (!course) {
       return pageHead({
         title: "Course not found",
@@ -205,7 +205,7 @@ export const Route = createFileRoute("/course/$courseId")({
 
 function CourseLandingPage() {
   const { courseId } = Route.useParams();
-  const course = COURSES_DATA.find((c) => c.id === courseId);
+  const course = findCourseByIdOrCode(courseId);
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isHoveringVideo, setIsHoveringVideo] = useState(false);
@@ -232,48 +232,45 @@ function CourseLandingPage() {
     );
   };
 
-  const studyModules = course.curriculum.filter(
-    (section) =>
-      section.moduleCode !== "Capstone" &&
-      !/capstone/i.test(section.sectionTitle),
-  );
-  const capstoneSection = course.curriculum.find(
-    (section) =>
-      section.moduleCode === "Capstone" ||
-      /capstone/i.test(section.sectionTitle),
-  );
+  const studyModules = course.curriculum;
   const outlineExtras = [
     {
       key: "exam",
       code: "Exam",
-      title: "Knowledge check",
-      duration: "",
+      title: "Knowledge check & Concept review",
+      duration: "30 min",
       description:
-        "A short exam that confirms the skills from this certification before you submit the capstone.",
+        "A short concept check confirming core learning outcomes across Modules 1–4 before final assessment.",
+      lessons: [
+        "Core concept verification",
+        "Scenario-based problem solving",
+        "Responsible AI & ethics review",
+        "Immediate score & concept feedback",
+      ],
     },
     {
       key: "capstone",
-      code: "Capstone",
-      title: displayTitle(capstoneSection?.sectionTitle ?? "Capstone artifact"),
-      duration: shortDuration({
-        hours: capstoneSection?.hours,
-        videoMin: capstoneSection?.videoMin,
-        aiLabMin: capstoneSection?.aiLabMin,
-        duration: capstoneSection?.duration ?? "Capstone",
-      }),
-      description: capstoneSection?.description ?? course.artifact,
-      moduleCode: "Capstone",
-      sectionTitle: capstoneSection?.sectionTitle,
-      deliverable: capstoneSection?.deliverable,
-      evidence: capstoneSection?.evidence ?? course.evidenceBundle,
-      lessons: capstoneSection?.lessons,
+      code: "Project",
+      title: `Assessment Evidence: ${course.artifact}`,
+      duration: `${course.capstoneHours ?? 2} hours`,
+      description: `Verified submission and oral/practical evaluation of ${course.artifact}. Assessed using the 5-criterion rubric.`,
+      moduleCode: "Project",
+      sectionTitle: `Assessment Evidence: ${course.artifact}`,
+      deliverable: course.artifact,
+      evidence: course.evidenceBundle,
+      lessons: [
+        `Compile evidence portfolio: ${course.artifact}`,
+        "Teacher observation & verification checklist",
+        "Oral explanation & reflection review",
+        "Final evidence bundle submission",
+      ],
     },
     {
       key: "certificate",
       code: "Cert",
-      title: `Issued by ${course.certifier}`,
+      title: `Accredited Certification · Issued by ${course.certifier}`,
       duration: "",
-      description: `Complete the exam and capstone to earn this ${course.certLevel.toLowerCase()} certificate, powered by ${course.certifier}.`,
+      description: `Complete all 4 modules and the assessment evidence to earn this verifiable ${course.certLevel.toLowerCase()} credential.`,
     },
   ];
 
@@ -371,6 +368,68 @@ function CourseLandingPage() {
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 pb-20 sm:px-6 lg:grid-cols-3 lg:gap-12 lg:px-8">
         <div className="pt-10 lg:col-span-2">
+          {/* Learning Outcomes & Assessment Evidence Card */}
+          <div className="mb-8 rounded-2xl border border-black/5 bg-white p-6 shadow-sm sm:p-7">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-md bg-[#EDE9FF] px-2.5 py-0.5 text-xs font-black uppercase tracking-wider text-[#5B4CF5]">
+                {course.code} · {course.hours} Hours · {course.packageLength || "6 Weeks"}
+              </span>
+              <span className="rounded-md bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-700">
+                {course.category}
+              </span>
+              <span className="rounded-md bg-amber-50 px-2.5 py-0.5 text-xs font-bold text-amber-800">
+                Audience: {course.audience}
+              </span>
+            </div>
+
+            <h3 className="mt-4 text-xl font-bold tracking-tight text-[#1C1D1F]">
+              Learners will demonstrate
+            </h3>
+            <p className="mt-1 text-sm text-[#6A6F73]">
+              Core competencies verified through hands-on practice, human-check reflection, and instructor observation.
+            </p>
+
+            <ul className="mt-3.5 space-y-2">
+              {course.whatYouWillLearn.map((outcome, idx) => (
+                <li key={idx} className="flex items-start gap-2.5 text-sm text-[#1C1D1F]">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5B4CF5]" />
+                  <span className="font-medium">{outcome}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 grid gap-4 pt-5 border-t border-slate-100 sm:grid-cols-2">
+              <div className="rounded-xl bg-[#F8FAFC] p-4 border border-slate-200/70">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#6A6F73]">
+                  Assessment Evidence
+                </p>
+                <p className="mt-1 text-sm font-bold text-[#1C1D1F]">
+                  {course.artifact}
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-[#F8FAFC] p-4 border border-slate-200/70">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#6A6F73]">
+                  Prerequisites
+                </p>
+                <p className="mt-1 text-sm font-bold text-[#1C1D1F]">
+                  {course.prerequisite}
+                </p>
+              </div>
+            </div>
+
+            {course.syllabusAlignment && (
+              <div className="mt-4 rounded-xl bg-indigo-50/50 p-4 border border-indigo-100/70">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-900">
+                  Syllabus Alignment Intent
+                </p>
+                <p className="mt-1 text-xs font-medium text-indigo-950">
+                  {course.syllabusAlignment}
+                </p>
+              </div>
+            )}
+          </div>
+
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-[#1C1D1F]">
@@ -488,80 +547,42 @@ function CourseLandingPage() {
                 </div>
               </div>
 
-              <div className="p-4">
-                <button
-                  type="button"
-                  onClick={() => setSelectedPlan("bundle")}
-                  className={cn(
-                    "relative mb-2 w-full cursor-pointer rounded-lg p-3 text-left transition-colors",
-                    selectedPlan === "bundle"
-                      ? "border-2 border-[#5B4CF5] bg-[#F7F8FC]"
-                      : "border border-gray-200 opacity-70 hover:border-gray-300",
-                  )}
-                >
-                  <div className="mb-0.5 text-[11px] font-bold text-[#424446]">Subscription - Bundle</div>
-                  <div className="flex items-end gap-1">
-                    <span className="text-xl font-bold tracking-tight text-[#1C1D1F]">
-                      {formatPrice(course.price)}
+              <div className="p-5">
+                <div className="mb-4 rounded-xl border border-indigo-100 bg-gradient-to-br from-indigo-50/60 to-purple-50/30 p-4">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="rounded-md bg-[#EDE9FF] px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#5B4CF5]">
+                      {course.code} · {course.certLevel}
                     </span>
-                    <span className="mb-1 text-xs text-gray-500">/ month</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedPlan("individual")}
-                  className={cn(
-                    "mb-4 w-full cursor-pointer rounded-lg p-3 text-left transition-colors",
-                    selectedPlan === "individual"
-                      ? "border-2 border-[#5B4CF5] bg-[#F7F8FC]"
-                      : "border border-gray-200 opacity-70 hover:border-gray-300",
-                  )}
-                >
-                  <div className="mb-0.5 text-[11px] font-medium text-[#424446]">Individual Course</div>
-                  <div className="flex items-end gap-1">
-                    <span className="text-lg font-bold tracking-tight text-[#1C1D1F]">
-                      {formatAmount(individualPrice)}
-                    </span>
-                    <span className="mb-1 text-[10px] text-gray-500">/ one-time payment</span>
-                  </div>
-                </button>
-
-                <div className="mb-4 rounded-xl border border-blue-100 bg-[#F8FAFC] p-4">
-                  <div className="mb-1 text-[15px] font-bold text-[#1C1D1F]">
-                    {selectedPlan === "bundle" ? "Subscription - Bundle" : "Individual Course"}
-                  </div>
-                  <div className="mb-4 flex items-center gap-2">
-                    <span className="text-sm text-gray-400 line-through">
-                      {formatPrice(course.originalPrice)}
-                    </span>
-                    <span className="flex items-center gap-1 rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-bold text-orange-800">
-                      🔥 10% off
-                    </span>
-                  </div>
-                  <div className="mb-3 flex items-end gap-1">
-                    <span className="text-2xl font-bold tracking-tight text-[#1C1D1F]">
-                      {selectedPlan === "bundle" ? formatPrice(course.price) : formatAmount(individualPrice)}
-                    </span>
-                    <span className="mb-1 text-xs text-gray-500">
-                      {selectedPlan === "bundle" ? "/ month" : "/ one-time"}
+                    <span className="text-[11px] font-bold text-slate-500">
+                      {course.hours} Hours Total
                     </span>
                   </div>
 
-                  <ul className="space-y-2 text-[12px] text-[#424446]">
-                    <li className="flex items-start gap-3">
-                      <Check className="h-4 w-4 shrink-0 text-blue-600" /> Cancel Anytime
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="h-4 w-4 shrink-0 text-blue-600" /> Unlimited access to hundreds of top-rated courses
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="h-4 w-4 shrink-0 text-blue-600" /> Hands-on projects with expert feedback
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="h-4 w-4 shrink-0 text-blue-600" /> Program Certificates
-                    </li>
-                  </ul>
+                  <p className="text-base font-extrabold text-slate-900 leading-snug">
+                    Full Certification Package
+                  </p>
+                  <p className="mt-1 text-xs text-slate-600">
+                    {course.deliveryModel}
+                  </p>
+
+                  <div className="mt-3.5 space-y-2 text-[12px] text-slate-700 pt-3 border-t border-indigo-100/80">
+                    <div className="flex items-center gap-2">
+                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
+                      <span>Four 5-hour structured modules</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
+                      <span>Hands-on capstone assessment evidence</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
+                      <span>Verifiable digital badge & certificate</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
+                      <span>Tutor & mentor feedback included</span>
+                    </div>
+                  </div>
                 </div>
 
                 {isInCart(course.id) ? (

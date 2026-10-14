@@ -11,27 +11,38 @@ import {
 } from "@/lib/pathways";
 
 const TABS = [
-  "All Programs",
-  "Elementary Foundations",
+  "All Courses",
+  "Pre-elementary",
+  "Elementary",
   "Middle School",
   "High School",
-  "College & University",
-  "Professional & Executive",
+  "College & Universities",
+  "Professional Courses",
 ] as const;
 
-const LEVEL_TO_TAB: Record<PathwayLevelId, string> = LEVEL_CATEGORY;
+const LEVEL_TO_TAB: Record<PathwayLevelId, string> = {
+  "pre-elementary": "Pre-elementary",
+  elementary: "Elementary",
+  k5: "Elementary",
+  middle: "Middle School",
+  high: "High School",
+  college: "College & Universities",
+  professional: "Professional Courses",
+};
 
 export function PathwayBannersSection({
   previewLimit,
+  className,
 }: {
   previewLimit?: number;
+  className?: string;
 }) {
-  const [activeTab, setActiveTab] = useState<string>("All Programs");
+  const [activeTab, setActiveTab] = useState<string>("All Courses");
   const [activeLevel, setActiveLevel] = useState<PathwayLevelId | "all">("all");
 
   const handleSelectTab = (tab: string) => {
     setActiveTab(tab);
-    if (tab === "All Programs") {
+    if (tab === "All Courses") {
       setActiveLevel("all");
       return;
     }
@@ -51,8 +62,11 @@ export function PathwayBannersSection({
   return (
     <section
       className={cn(
-        "bg-white py-8 font-sans sm:py-12 md:py-16",
-        !previewLimit && "min-h-screen",
+        "bg-white font-sans",
+        previewLimit
+          ? "pt-6 pb-8 sm:pt-8 sm:pb-10"
+          : "pt-20 pb-8 sm:pt-24 sm:pb-10 lg:pt-28",
+        className,
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -124,11 +138,11 @@ export function PathwayBannersSection({
             </div>
           )}
 
-          {previewLimit ? (
-            <div className="mt-10">
+          {previewLimit && (
+            <div className="mt-8">
               <Link
                 to="/learning"
-                className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
+                className="group inline-flex items-center gap-2 text-[15px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
               >
                 View all certifications
                 <span className="transition-transform group-hover:translate-x-1">
@@ -136,20 +150,7 @@ export function PathwayBannersSection({
                 </span>
               </Link>
             </div>
-          ) : activeTab !== "All Programs" ? (
-            <div className="mt-10">
-              <Link
-                to="/topic/$topicId"
-                params={{ topicId: getTopicSlug(activeTab) }}
-                className="group inline-flex items-center gap-2 text-[16px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
-              >
-                {`Show all ${activeTab} certifications`}
-                <span className="transition-transform group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
-            </div>
-          ) : null}
+          )}
         </div>
       </div>
     </section>

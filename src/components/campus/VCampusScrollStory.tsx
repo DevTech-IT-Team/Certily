@@ -2,20 +2,20 @@
  * VCampusScrollStory
  *
  * WOW Launch Animation:
- * 1. Initial State (Section 2 - Meet V & Certcia):
- *    - Left: "Meet V " (About V - AI Mentor & Guide).
- *    - Center: V Mascot with glowing spotlight pedestal.
+ * 1. Initial State (Section 2 - Meet NEO & Certcia):
+ *    - Left: "Meet NEO" (About NEO - AI Mentor & Guide).
+ *    - Center: NEO Mascot with glowing spotlight pedestal.
  *    - Right: "Certcia AI Campus" (About Certcia - Real skills, Real impact).
  *
  * 2. Scroll Stage (Landing on Campus):
  *    - Left & Right glassmorphic cards slide out gracefully.
- *    - 3D Campus image rises UP from bottom under V.
- *    - V lands cleanly on the central plaza.
+ *    - 3D Campus image rises UP from bottom under NEO.
+ *    - NEO lands cleanly on the central plaza.
  *    - Building badges pop into position around the campus.
  *
  * 3. Final State (Natural Page Scroll):
  *    - Pin releases cleanly.
- *    - The complete assembled campus (Image + V + Badges) stays 100% solid and scrolls naturally!
+ *    - The complete assembled campus (Image + NEO + Badges) stays 100% solid and scrolls naturally!
  */
 
 import { useEffect, useRef } from "react";
@@ -188,7 +188,7 @@ export function VCampusScrollStory() {
         return;
       }
 
-      // Initial State: Text cards & V side-by-side on aboutbg pedestal, Campus down below
+      // Initial State: Text cards & NEO side-by-side on aboutbg pedestal, Campus down below
       gsap.set([left, right], { opacity: 1, x: 0 });
       gsap.set(aboutBgEl, { opacity: 1, scale: 1 });
       gsap.set(bottomBar, { opacity: 1, y: 0 });
@@ -207,10 +207,10 @@ export function VCampusScrollStory() {
       tl.to(aboutBgEl, { opacity: 0, ease: "power2.inOut", duration: 30 }, 0);
       tl.to(bottomBar, { opacity: 0, y: 30, ease: "power2.inOut", duration: 25 }, 0);
 
-      // 2. 3D Campus rises UP from bottom into place under V
+      // 2. 3D Campus rises UP from bottom into place under NEO
       tl.to(campus, { opacity: 1, y: 0, scale: 1, ease: "power2.out", duration: 45 }, 10);
 
-      // 2.1 Scale V down to 0.50 and shift left (x: -8, y: -10) to sit centered on campus map
+      // 2.1 Scale NEO down to 0.50 and shift left (x: -8, y: -10) to sit centered on campus map
       tl.to(ily, { scale: 0.50, x: -8, y: -10, ease: "power2.out", duration: 45 }, 10);
 
       // 3. Building cards pop into position around the campus
@@ -222,7 +222,7 @@ export function VCampusScrollStory() {
         );
       });
 
-      // Keep campus & V solid
+      // Keep campus & NEO solid
       tl.to(campus, { opacity: 1, duration: 100 }, 0);
       tl.to(ily, { opacity: 1, duration: 100 }, 0);
 
@@ -279,13 +279,13 @@ export function VCampusScrollStory() {
         {/* ── Stage 1: Top Section Typography Row (Pure Unboxed Text) ── */}
         <div className="relative z-[30] flex w-full max-w-[1240px] items-start justify-between px-6 sm:px-10 pt-2">
 
-          {/* LEFT SIDE: ABOUT V */}
+          {/* LEFT SIDE: ABOUT NEO */}
           <div
             ref={leftRef}
             className="w-[280px] sm:w-[320px] md:w-[350px] select-none text-left"
           >
             <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/95 px-3.5 py-1 text-xs font-bold tracking-wide text-[#0F1533] shadow-xs backdrop-blur-sm">
-              MEET <span className="text-[#5B4CF5]">V</span>
+              MEET <span className="text-[#5B4CF5]">NEO</span>
             </span>
 
             <h2 className="mt-3 font-display text-[1.85rem] sm:text-[2.2rem] md:text-[2.45rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
@@ -295,7 +295,7 @@ export function VCampusScrollStory() {
             </h2>
 
             <p className="mt-3 text-[13.5px] sm:text-[14.5px] leading-relaxed font-medium text-[#0F1533]/85 max-w-[320px]">
-              V guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
+              NEO guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
             </p>
 
             {/* CTAs */}
@@ -303,7 +303,7 @@ export function VCampusScrollStory() {
               <button
                 type="button"
                 onClick={() =>
-                  document.getElementById("meet-v")?.scrollIntoView({ behavior: "smooth" })
+                  (document.getElementById("meet-neo") ?? document.getElementById("meet-v"))?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="group inline-flex h-11 items-center gap-2 rounded-full bg-[#5B4CF5] px-6 text-xs sm:text-sm font-bold text-white shadow-[0_8px_25px_-6px_rgba(91,76,245,0.5)] transition-all hover:bg-[#4A3BE0] hover:scale-105 active:scale-95"
               >
@@ -313,7 +313,7 @@ export function VCampusScrollStory() {
             </div>
           </div>
 
-          {/* Center Spacer for V Mascot */}
+          {/* Center Spacer for NEO Mascot */}
           <div className="w-[120px] sm:w-[170px] shrink-0" />
 
           {/* RIGHT SIDE: ABOUT CERTILY */}
@@ -337,7 +337,7 @@ export function VCampusScrollStory() {
 
         </div>
 
-        {/* ── V Mascot (Standing on pedestal in aboutbg) ── */}
+        {/* ── NEO Mascot (Standing on pedestal in aboutbg) ── */}
         <div
           ref={ilyRef}
           className="absolute z-[25] transition-transform duration-300"
@@ -352,13 +352,13 @@ export function VCampusScrollStory() {
 
           <img
             src={ilyStand}
-            alt="V — Certcia AI Campus Guide"
+            alt="NEO — Certcia AI Campus Guide"
             className="relative h-auto w-full drop-shadow-[0_18px_40px_rgba(91,76,245,0.28)] select-none"
             draggable={false}
           />
         </div>
 
-        {/* ── Stage 2: 3D Campus Visual (Rises UP from bottom under V on scroll) ── */}
+        {/* ── Stage 2: 3D Campus Visual (Rises UP from bottom under NEO on scroll) ── */}
         <div
           ref={campusRef}
           className="absolute inset-0 z-[10] flex items-center justify-center px-4 pt-24 pb-2 pointer-events-none"

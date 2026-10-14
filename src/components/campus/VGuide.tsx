@@ -14,7 +14,7 @@ type VGuideProps = {
 
 export function VGuide({
   message,
-  title = "Hi, I'm V!",
+  title = "Hi, I'm NEO!",
   className,
   variant = "card",
   interactive = false,
@@ -98,7 +98,7 @@ export function VGuide({
                     <span className="h-1 w-1 animate-bounce rounded-full bg-primary [animation-delay:150ms]" />
                     <span className="h-1 w-1 animate-bounce rounded-full bg-primary [animation-delay:300ms]" />
                   </span>
-                  V is typing
+                  NEO is typing
                 </>
               ) : (
                 "Your campus guide"

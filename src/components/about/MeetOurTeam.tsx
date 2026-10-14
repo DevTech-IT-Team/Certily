@@ -15,7 +15,7 @@ const TEAM = [
     link: "#",
   },
   {
-    name: "V (AI Mentor)",
+    name: "NEO (AI Mentor)",
     role: "24/7 Guided Support",
     image: "https://imgs.search.brave.com/5k1WEwXq73bu0MzZeHHREJZg6LvIgvhV56WrzFRsExY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTE2/MDczMDM3Ni9waG90/by9pdHMtYS1nb29k/LWRheS10by1tYWtl/LXNvbWUtc21hcnQt/Y29ubmVjdGlvbnMu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PVF3Q1FtOU9BWHRT/NW1iQjduWko0OERu/YUVtSUptYzBoUm13/aUtyRS00R3c9",
     link: "#",

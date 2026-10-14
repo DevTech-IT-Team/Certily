@@ -20,7 +20,7 @@ const MASTERCLASS_TOPICS = [
     points: [
       "Public: Learning Pathways, Newsroom, and AI Hall.",
       "Enrolled: My Classroom, AI Lab, AI Certification Hall, and Mission Control.",
-      "V guides you across the map, modules, labs, and your parent dashboard.",
+      "NEO guides you across the map, modules, labs, and your parent dashboard.",
     ],
   },
   {
@@ -53,16 +53,16 @@ export function MasterclassSection() {
               <div className="relative">
                 <img
                   src={vGif}
-                  alt="V presenting the Certcia AI Campus masterclass"
+                  alt="NEO presenting the Certcia AI Campus masterclass"
                   className="h-40 w-auto object-contain sm:h-52 md:h-56"
                 />
                 <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/95 px-4 py-1.5 text-xs font-semibold text-foreground shadow-lg">
                   <Play className="h-3.5 w-3.5 fill-primary text-primary" />
-                  24/7 with V
+                  24/7 with NEO
                 </div>
               </div>
               <p className="mt-8 text-center text-sm font-medium text-white/85 sm:text-base">
-                Masterclass-style intro — always on, always guided by V.
+                Masterclass-style intro — always on, always guided by NEO.
               </p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export function MasterclassSection() {
               <VAvatar size="md" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                  V masterclass
+                  NEO masterclass
                 </p>
                 <h2 className="text-xl font-extrabold text-foreground sm:text-2xl md:text-3xl">
                   Your guide to the campus
@@ -80,7 +80,7 @@ export function MasterclassSection() {
               </div>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              V walks new visitors through what Certcia AI Campus is, how public and enrolled
+              NEO walks new visitors through what Certcia AI Campus is, how public and enrolled
               areas work, and how every course is validated for real outcomes.
             </p>
 

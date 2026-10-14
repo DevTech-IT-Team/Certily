@@ -32,7 +32,7 @@ export function VChatDock({ className, embedded = false, compact = false }: Dock
         )}
 
         <div className="min-w-0 flex-1 text-left">
-          <p className="text-xs font-semibold text-primary">V · Your guide</p>
+          <p className="text-xs font-semibold text-primary">NEO · Your guide</p>
           <p className="mt-2 max-w-[42ch] text-sm leading-[1.65] text-foreground/90">{message}</p>
 
           <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">

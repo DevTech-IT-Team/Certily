@@ -55,7 +55,7 @@ export function CertciaExperience() {
 
   const openV = () => {
     setMessage(
-      "Hey — I’m V. I can walk you through pathways, learning, the AI Lab, certificates, and the newsroom. What do you want to do?",
+      "Hey — I’m NEO. I can walk you through pathways, learning, the AI Lab, certificates, and the newsroom. What do you want to do?",
       true,
       "hi",
     );
@@ -133,7 +133,7 @@ export function CertciaExperience() {
 
               <div className="relative z-10 flex h-full min-h-[28rem] flex-col justify-end p-6 sm:min-h-[32rem] sm:p-8">
                 <p className="font-display text-4xl font-extrabold tracking-[-0.04em] text-white">
-                  Ask V
+                  Ask NEO
                 </p>
                 <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/80">
                   AI Companion. Get instant help, guidance, and personalized support.
@@ -143,7 +143,7 @@ export function CertciaExperience() {
                   onClick={openV}
                   className="group mt-5 inline-flex h-12 w-fit items-center gap-2 rounded-full bg-white px-7 text-[15px] font-bold text-[#5B4CF5] transition-transform hover:scale-[1.03] active:scale-[0.98]"
                 >
-                  Chat with V
+                  Chat with NEO
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </button>
               </div>

@@ -57,7 +57,7 @@ const CAPSTONES = [
     icon: Rocket,
     level: "College",
     title: "AI Product Prototype",
-    desc: "Ideate, prototype, and pitch an AI-powered product concept with V's guidance.",
+    desc: "Ideate, prototype, and pitch an AI-powered product concept with NEO's guidance.",
     outcome: "AI Builder portfolio project",
     duration: "5 sessions",
     img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
@@ -75,7 +75,7 @@ const STEPS = [
     n: "02",
     icon: Beaker,
     title: "Start your guided build",
-    desc: "V walks you through every step — templates, checkpoints, and real-time feedback.",
+    desc: "NEO walks you through every step — templates, checkpoints, and real-time feedback.",
   },
   {
     n: "03",
@@ -115,14 +115,14 @@ function AILabPage() {
 
               <p className="mt-5 max-w-lg text-base leading-relaxed text-[#5A607A] sm:text-lg">
                 The AI Lab is your hands-on workspace. Guided capstone projects,
-                V at every checkpoint, and verifiable certificates you can
+                NEO at every checkpoint, and verifiable certificates you can
                 share with colleges and employers.
               </p>
 
               <ul className="mt-7 space-y-3">
                 {[
                   "Guided capstone project per pathway",
-                  "V mentorship at every step",
+                  "NEO mentorship at every step",
                   "Portfolio-ready project output",
                   "Verifiable certificate on completion",
                 ].map((item) => (
@@ -208,12 +208,12 @@ function AILabPage() {
                     })}
                   </div>
 
-                  {/* V tip */}
+                  {/* NEO tip */}
                   <div className="mt-4 rounded-xl border border-[#EDE9FF] bg-[#F5F3FF] px-4 py-3">
                     <div className="flex items-start gap-2.5">
                       <VAvatar size="sm" reaction="hi" className="mt-0.5 shrink-0" />
                       <p className="text-[11px] leading-relaxed text-[#5A607A]">
-                        <span className="font-bold text-[#5B4CF5]">V says:</span>{" "}
+                        <span className="font-bold text-[#5B4CF5]">NEO says:</span>{" "}
                         You're on step 2 of your chatbot build — keep going!
                       </p>
                     </div>
@@ -362,10 +362,10 @@ function AILabPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Zap,          title: "Step-by-step guidance", desc: "Clear steps and V checkpoints — you're never left guessing." },
+              { icon: Zap,          title: "Step-by-step guidance", desc: "Clear steps and NEO checkpoints — you're never left guessing." },
               { icon: Award,        title: "Portfolio output",      desc: "Every capstone produces a real shareable project." },
               { icon: CheckCircle2, title: "Verifiable credentials",desc: "Earn a certificate in the Certification Hall on completion." },
-              { icon: Sparkles,     title: "V mentorship",       desc: "V checks in at every stage so you understand what you built." },
+              { icon: Sparkles,     title: "NEO mentorship",       desc: "NEO checks in at every stage so you understand what you built." },
             ].map((f) => {
               const Icon = f.icon;
               return (
@@ -395,7 +395,7 @@ function AILabPage() {
             Ready to build something real?
           </h2>
           <p className="mx-auto mt-4 max-w-md text-base text-[#5A607A]">
-            Pick a learning pathway, complete your modules, and V guides
+            Pick a learning pathway, complete your modules, and NEO guides
             you from first step to shareable credential.
           </p>
 
@@ -421,7 +421,7 @@ function AILabPage() {
             <span className="h-1 w-1 rounded-full bg-[#C7CAD9]" />
             <span>200+ certificates earned</span>
             <span className="h-1 w-1 rounded-full bg-[#C7CAD9]" />
-            <span>Guided by V</span>
+            <span>Guided by NEO</span>
           </div>
         </div>
       </section>

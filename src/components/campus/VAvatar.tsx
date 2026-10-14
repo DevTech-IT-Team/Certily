@@ -136,7 +136,7 @@ export function VAvatar({
         )}
         <img
           src={shownSrc}
-          alt="V, your AI campus guide"
+          alt="NEO, your AI campus guide"
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           className={cn(
@@ -177,7 +177,7 @@ export function VAvatar({
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
-        aria-label="Chat with V"
+        aria-label="Chat with NEO"
       >
         {inner}
       </button>

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Check } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { useCurrency } from "@/lib/CurrencyContext";
 import type { CourseDetails } from "@/lib/courses";
 import { CourseHoverThumbnail } from "./CourseHoverThumbnail";
+
 export function CourseCatalogCard({
   course,
   priority = false,
@@ -14,18 +14,16 @@ export function CourseCatalogCard({
 }) {
   const [previewPlaying, setPreviewPlaying] = useState(false);
   const [hoverOpen, setHoverOpen] = useState(false);
-  const navigate = useNavigate();
-  const { formatPrice } = useCurrency();
 
   return (
     <HoverCard
       open={!previewPlaying && hoverOpen}
       onOpenChange={setHoverOpen}
-      openDelay={300}
-      closeDelay={100}
+      openDelay={200}
+      closeDelay={120}
     >
       <HoverCardTrigger asChild>
-        <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-black/5 bg-white outline-none transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white outline-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(91,76,245,0.12)] hover:border-[#5B4CF5]/40">
           <CourseHoverThumbnail
             image={course.image}
             alt={course.title}
@@ -35,127 +33,155 @@ export function CourseCatalogCard({
             priority={priority}
           />
 
-          <Link
-            to="/course/$courseId"
-            params={{ courseId: course.id }}
-            className="flex flex-1 flex-col outline-none"
-          >
-            <div className="flex flex-1 flex-col p-5 pt-7 pb-0">
-              <span className="mb-2 inline-flex min-h-[22px] w-fit items-center rounded-full bg-[#EDE9FF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#5B4CF5]">
-                {course.pathwayLabel}
+          <div className="flex flex-1 flex-col p-5 pt-4 pb-0">
+            {/* Top program info pill */}
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <span className="inline-flex items-center rounded-md bg-[#EDE9FF] px-2 py-0.5 text-[10.5px] font-black uppercase tracking-wider text-[#5B4CF5]">
+                {course.code ? `${course.code} · ${course.hours}H` : course.pathwayLabel}
               </span>
-              <h3 className="min-h-[2.6em] line-clamp-2 text-[17px] font-bold leading-tight text-[#1C1D1F]">
-                {course.title}
-              </h3>
-              <p className="mt-1.5 min-h-[1.25em] text-[12px] font-bold uppercase tracking-wider text-[#5B4CF5]">
-                {course.certLevel}
-              </p>
-              <p className="mt-1.5 min-h-[2.5em] line-clamp-2 text-[13px] leading-snug text-[#6A6F73]">
-                {course.artifact}
-              </p>
-              <p className="mt-2 min-h-[1.25em] text-[12px] font-medium text-[#6A6F73]">
-                {course.modulesPerOutcome} modules · {course.hours} hours
-              </p>
-              {course.prerequisiteCourseId ? (
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    navigate({
-                      to: "/course/$courseId",
-                      params: { courseId: course.prerequisiteCourseId! },
-                    });
-                  }}
-                  className="mt-1 line-clamp-2 min-h-[2.5em] text-left text-[12px] leading-snug text-[#5B4CF5] hover:underline"
-                >
-                  {course.prerequisiteLabel}
-                </button>
-              ) : (
-                <p className="mt-1 line-clamp-2 min-h-[2.5em] text-[12px] leading-snug text-[#6A6F73]">
-                  {course.prerequisiteLabel}
-                </p>
-              )}
-
-              <div className="mt-auto flex items-baseline gap-2 pt-4">
-                <span className="text-[17px] font-bold text-[#1C1D1F]">
-                  {formatPrice(course.price)}
-                </span>
-                <span className="text-[13px] text-[#6A6F73] line-through">
-                  {formatPrice(course.originalPrice)}
-                </span>
-              </div>
+              <span className="text-[11px] font-medium text-slate-500">
+                {course.packageLength || "6 weeks"}
+              </span>
             </div>
-          </Link>
 
-          <div className="px-5 pb-5 pt-3">
+            {/* Course Title */}
             <Link
               to="/course/$courseId"
               params={{ courseId: course.id }}
-              className="flex w-full items-center justify-center rounded-lg bg-[#5B4CF5] py-2.5 text-[15px] font-bold text-white transition-all hover:bg-[#4A3BE8] hover:shadow-[0_8px_20px_-8px_rgba(91,76,245,0.6)]"
+              className="group-hover:text-[#5B4CF5] transition-colors"
             >
-              View Course
+              <h3 className="min-h-[2.5em] line-clamp-2 text-[16px] font-extrabold leading-snug text-slate-900 tracking-tight">
+                {course.title}
+              </h3>
+            </Link>
+
+            {/* Target Audience */}
+            <p className="mt-1 text-[11.5px] font-bold text-[#5B4CF5]">
+              {course.audience}
+            </p>
+
+            {/* Purpose / Tagline */}
+            <p className="mt-1.5 min-h-[2.6em] line-clamp-2 text-[12.5px] leading-relaxed text-slate-600">
+              {course.description}
+            </p>
+
+            {/* Metadata strip (replaces price) */}
+            <div className="mt-auto pt-3 pb-1 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-500">
+              <span className="font-medium text-slate-700">
+                Prereq: <span className="font-normal text-slate-600">{course.prerequisiteLabel}</span>
+              </span>
+              <span className="font-semibold text-slate-500">
+                4 Modules
+              </span>
+            </div>
+          </div>
+
+          {/* Action button */}
+          <div className="px-5 pb-5 pt-2.5">
+            <Link
+              to="/course/$courseId"
+              params={{ courseId: course.id }}
+              className="group/btn relative flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#5B4CF5] py-2.5 text-[13.5px] font-bold text-white transition-all duration-200 hover:bg-[#4A3BE8]"
+            >
+              <span>View Course</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
             </Link>
           </div>
         </div>
       </HoverCardTrigger>
 
+      {/* Hover card: Clean, compact, no scrollbar, beautiful typography */}
       <HoverCardContent
         side="right"
         align="start"
-        sideOffset={14}
-        className="group z-[100] w-[320px] animate-in rounded-2xl border border-black/5 bg-white/95 p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] fade-in zoom-in-95 duration-200 backdrop-blur-xl"
+        sideOffset={12}
+        className="group z-[100] w-[360px] animate-in rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_20px_45px_-12px_rgba(15,23,42,0.18)] fade-in zoom-in-95 duration-150 select-none overflow-hidden"
       >
-        <div className="absolute top-[60px] z-10 h-[14px] w-[14px] rotate-45 bg-white opacity-0 transition-all duration-200 group-data-[state=open]:opacity-100 group-data-[side=right]:-left-[7.5px] group-data-[side=right]:border-b group-data-[side=right]:border-l group-data-[side=right]:border-black/5 group-data-[side=left]:-right-[7.5px] group-data-[side=left]:border-r group-data-[side=left]:border-t group-data-[side=left]:border-black/5 group-data-[side=top]:hidden group-data-[side=bottom]:hidden" />
-
-        <h3 className="text-[17px] font-bold leading-snug text-[#1C1D1F]">
-          {course.title}
-        </h3>
-
-        <div className="mt-2.5 flex items-center gap-2.5">
-          {course.bestseller && (
-            <span className="rounded-[3px] bg-[#CCF0EB] px-1.5 py-0.5 text-[11px] font-bold text-[#115C52]">
-              Bestseller
+        {/* Header Badges */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5">
+            <span className="rounded-md bg-[#EDE9FF] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-[#5B4CF5]">
+              {course.code}
             </span>
-          )}
-          <span className="text-[12px] text-[#6A6F73]">
-            Updated{" "}
-            <span className="font-bold text-[#115C52]">{course.updatedDate}</span>
+            <span className="text-[11px] font-semibold text-slate-700">
+              {course.category}
+            </span>
+          </div>
+          <span className="text-[11px] font-medium text-slate-500">
+            {course.hours}h · {course.packageLength || "6 weeks"}
           </span>
         </div>
 
-        <div className="mt-1.5 text-[12px] text-[#6A6F73]">
-          {course.certLevel} · {course.modulesPerOutcome} modules · {course.hours} hours
+        {/* Title */}
+        <h3 className="mt-2 text-[15px] font-extrabold leading-snug text-slate-900 tracking-tight">
+          {course.title}
+        </h3>
+
+        {/* Target Audience & Purpose */}
+        <div className="mt-1 text-[11.5px] text-slate-600 leading-relaxed">
+          <span className="font-bold text-[#5B4CF5]">{course.audience}</span>
+          <span className="mx-1 text-slate-300">—</span>
+          <span>{course.description}</span>
         </div>
-        <p className="mt-1 text-[12px] text-[#6A6F73]">{course.prerequisiteLabel}</p>
 
-        <p className="mt-3 text-[13px] leading-relaxed text-[#1C1D1F]">
-          {course.description}
-        </p>
+        {/* 4 Modules: Minimalist & Clean with Tabular Numbers */}
+        <div className="mt-3 rounded-xl border border-slate-100 bg-slate-50/80 p-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+              Curriculum (4 Modules)
+            </span>
+            <span className="text-[10px] font-semibold text-slate-500">5h each · 20h total</span>
+          </div>
+          <ol className="space-y-1.5 text-[11.5px]">
+            {course.curriculum.slice(0, 4).map((m, idx) => (
+              <li key={m.sectionTitle} className="flex items-center gap-2">
+                <span className="font-mono text-[10.5px] font-bold text-slate-400 tabular-nums">
+                  0{idx + 1}
+                </span>
+                <span className="font-semibold text-slate-800 line-clamp-1">{m.sectionTitle}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-        <p className="mt-3 text-[11px] font-bold uppercase tracking-wider text-[#6A6F73]">
-          Modules inside
-        </p>
-        <ul className="mt-2 space-y-2.5">
-          {course.bulletPoints.slice(0, 3).map((point) => (
-            <li key={point} className="flex items-start gap-2.5">
-              <Check
-                className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#1C1D1F]"
-                strokeWidth={2}
-              />
-              <span className="text-[13px] leading-snug text-[#5A607A]">
-                {point}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {/* Demonstrated Outcomes */}
+        <div className="mt-3 text-[11.5px]">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+            Learners Will Demonstrate
+          </span>
+          <p className="font-medium text-slate-700 leading-relaxed line-clamp-2">
+            {course.whatYouWillLearn.join(" • ")}
+          </p>
+        </div>
 
+        {/* Evidence & Prerequisite */}
+        <div className="mt-2.5 grid grid-cols-2 gap-2 border-t border-slate-100 pt-2.5 text-[11px]">
+          <div>
+            <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block">
+              Assessment Evidence
+            </span>
+            <span className="font-semibold text-slate-800 line-clamp-1 block mt-0.5">
+              {course.artifact}
+            </span>
+          </div>
+          <div>
+            <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block">
+              Prerequisite
+            </span>
+            <span className="font-medium text-slate-600 line-clamp-1 block mt-0.5">
+              {course.prerequisite}
+            </span>
+          </div>
+        </div>
+
+        {/* Action Button */}
         <Link
           to="/course/$courseId"
           params={{ courseId: course.id }}
-          className="mt-6 flex w-full items-center justify-center rounded-lg bg-[#5B4CF5] py-2.5 text-[15px] font-bold text-white transition-all hover:bg-[#4A3BE8] hover:shadow-[0_8px_20px_-8px_rgba(91,76,245,0.6)]"
+          className="mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#5B4CF5] py-2 text-[12.5px] font-bold text-white transition-colors hover:bg-[#4A3BE8]"
         >
-          View Course
+          <span>View Course Details</span>
+          <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </HoverCardContent>
     </HoverCard>

@@ -158,7 +158,7 @@ export function CampusExploreSection() {
               </div>
             </div>
 
-            {/* ── V on the right — visible only when video is playing ── */}
+            {/* ── NEO on the right — visible only when video is playing ── */}
             <div
               className={`absolute transition-opacity duration-500 ${playing ? "opacity-0 pointer-events-none" : "opacity-100"}`}
               style={{ bottom: "0%", right: "6%", transform: "translateX(0)" }}

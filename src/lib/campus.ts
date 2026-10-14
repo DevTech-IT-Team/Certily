@@ -47,13 +47,13 @@ export const CAMPUS_BUILDINGS: CampusBuilding[] = [
     name: "My Classroom",
     tagline: "Your guided learning space",
     description:
-      "Self-paced lessons, knowledge checks, assignments, and V-guided progress tracking — all in one place once you enroll.",
+      "Self-paced lessons, knowledge checks, assignments, and NEO-guided progress tracking — all in one place once you enroll.",
     route: "/classroom",
     access: "enrolled",
     icon: BookOpen,
     mapPosition: { top: "62%", left: "26%" },
     vIntro:
-      "My Classroom is where your learning journey lives — structured lessons, quizzes, and V guiding you through every module. Enroll in a pathway to unlock it.",
+      "My Classroom is where your learning journey lives — structured lessons, quizzes, and NEO guiding you through every module. Enroll in a pathway to unlock it.",
     color: "#5B4FE0",
   },
   {

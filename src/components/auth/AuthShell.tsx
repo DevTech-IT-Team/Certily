@@ -6,7 +6,7 @@ import logoImg from "@/assets/logo/certicialogo.png";
 import { cn } from "@/lib/utils";
 
 const BENEFITS = [
-  { icon: Sparkles, title: "AI-guided pathways", copy: "Learn with V by your side." },
+  { icon: Sparkles, title: "AI-guided pathways", copy: "Learn with NEO by your side." },
   { icon: FlaskConical, title: "Real-world practice", copy: "Build skills in the AI Lab." },
   { icon: BadgeCheck, title: "Verified credentials", copy: "Showcase proof of mastery." },
 ] as const;

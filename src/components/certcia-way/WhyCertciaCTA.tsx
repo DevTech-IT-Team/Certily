@@ -21,7 +21,7 @@ export function WhyCertciaCTA() {
           Ready to get certified?
         </h2>
         <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#5A607A]">
-          Pick a pathway, practice with V, and earn proof you can showcase.
+          Pick a pathway, practice with NEO, and earn proof you can showcase.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

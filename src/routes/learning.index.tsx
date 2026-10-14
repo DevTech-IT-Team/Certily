@@ -6,9 +6,9 @@ import { pageHead } from "@/lib/seo";
 export const Route = createFileRoute("/learning/")({
   head: () =>
     pageHead({
-      title: "Learning Pathways",
+      title: "Learning Pathways — 30 Stackable Certifications",
       description:
-        "Browse K–5, middle school, high school, university, and professional AI certification tracks. Each certification includes modules, labs, and a capstone.",
+        "Browse Pre-elementary, Elementary, Middle School, High School, College & Universities, and Professional AI certification tracks. 30 courses, 20 hours each, 4 modules per outcome.",
       path: "/learning",
     }),
   component: LearningIndex,
@@ -21,14 +21,8 @@ function LearningIndex() {
   }, []);
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F3F2FF] via-[#F7F8FC] to-[#F0F2F8] pt-4 relative overflow-hidden">
-      {/* Subtle background ambient glow spots */}
-      <div className="pointer-events-none absolute left-1/4 top-10 h-[500px] w-[500px] rounded-full bg-[#5B4CF5]/[0.05] blur-3xl" />
-      <div className="pointer-events-none absolute right-1/4 top-96 h-[500px] w-[500px] rounded-full bg-[#4CD1B0]/[0.05] blur-3xl" />
-      
-      <div className="relative z-10 pt-10">
-        <PathwayBannersSection />
-      </div>
+    <div className="min-h-screen bg-white">
+      <PathwayBannersSection />
     </div>
   );
 }

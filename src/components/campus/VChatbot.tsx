@@ -125,7 +125,7 @@ function VMascotPanel({
         <div className="flex items-center gap-2.5">
           <VAvatar size="sm" reaction={isTyping ? "think" : reaction} className="bg-[#0F1533] p-0.5 rounded-full" />
           <div>
-            <p className="font-display text-sm font-semibold tracking-wide">V</p>
+            <p className="font-display text-sm font-semibold tracking-wide">NEO</p>
             <p className="text-[10px] text-white/80">Interactive AI Guide</p>
           </div>
         </div>
@@ -144,7 +144,7 @@ function VMascotPanel({
               type="button"
               onClick={onClose}
               className="rounded-lg p-1.5 text-white/80 hover:bg-white/15 transition-colors"
-              aria-label="Close V"
+              aria-label="Close NEO"
             >
               <X className="h-4 w-4" />
             </button>
@@ -269,7 +269,7 @@ export function VChatFloating() {
         type="button"
         onClick={() => setFloatingOpen(true)}
         className="group fixed bottom-6 right-6 z-[90]"
-        aria-label="Open V guide"
+        aria-label="Open NEO guide"
       >
         <span
           className="absolute inset-0 rounded-full bg-[#5B4CF5]/30 animate-ping"
@@ -281,7 +281,7 @@ export function VChatFloating() {
             <VAvatar size="md" reaction="hi" className="scale-[0.8]" />
           </div>
           <span className="font-display text-[15px] font-bold tracking-wide text-[#0F1533]">
-            Ask <span className="text-[#5B4CF5]">V</span>
+            Ask <span className="text-[#5B4CF5]">NEO</span>
           </span>
         </span>
       </button>

@@ -8,11 +8,13 @@ import {
 } from "lucide-react";
 
 export type PathwayLevelId =
-  | "k5"
+  | "pre-elementary"
+  | "elementary"
   | "middle"
   | "high"
   | "college"
-  | "professional";
+  | "professional"
+  | "k5";
 
 export type PathwayLevel = {
   id: PathwayLevelId;
@@ -51,27 +53,27 @@ export type PathwayLevel = {
 
 export const PATHWAY_LEVELS: PathwayLevel[] = [
   {
-    id: "k5",
-    label: "Elementary Foundations",
-    shortLabel: "Elementary Foundations",
-    subLabel: "Grades K–5",
-    badgeLabel: "📚 ELEMENTARY FOUNDATIONS",
-    themeTagline: "Discover AI through play, stories, and first programs",
+    id: "pre-elementary",
+    label: "Pre-elementary",
+    shortLabel: "Pre-elementary",
+    subLabel: "Nursery–K-2",
+    badgeLabel: "🎨 PRE-ELEMENTARY",
+    themeTagline: "Playful Algorithms, Early Coding & Smart Safety",
     description:
-      "Age-right AI certifications for elementary learners — start with AI Superkids: Discover AI and grow into creator, genius, game, and robot tracks.",
+      "Build sequencing, patterns and instructions through play, screen-based block stories, smart device safety, and early AI awareness.",
     focus: "launch",
     icon: Smile,
-    audience: "Ages 5–11 / elementary",
+    audience: "Nursery–K-2 (Ages 3–7)",
     outcomeCount: 5,
-    modulesPerOutcome: 5,
+    modulesPerOutcome: 4,
     hoursPerOutcome: 20,
-    deliveryModel: "Guided studio + family showcase",
-    badge: "Explorer / Creator",
+    deliveryModel: "14h facilitator-led · 4h self-paced · 2h capstone",
+    badge: "Explorer",
     outcomes: [
-      "AI literacy & safe exploration",
-      "ScratchJr and block coding",
-      "Storybook and helper capstones",
-      "Parent-guided discovery modules",
+      "Sequencing instructions & pattern recognition",
+      "Creative block coding with sprites & loops",
+      "Digital citizenship & smart device safety",
+      "Early robotics logic & AI awareness",
     ],
     theme: {
       gradientFrom: "#F59E0B",
@@ -91,27 +93,67 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     },
   },
   {
+    id: "elementary",
+    label: "Elementary",
+    shortLabel: "Elementary",
+    subLabel: "Grades 3-5",
+    badgeLabel: "📚 ELEMENTARY",
+    themeTagline: "Coding Stories, Data Detectives & Young Inventors",
+    description:
+      "Strengthen block coding and computational thinking, build data literacy and privacy habits, explore sensors, and practice responsible GenAI.",
+    focus: "launch",
+    icon: Smile,
+    audience: "Grades 3-5 (Ages 8–10)",
+    outcomeCount: 5,
+    modulesPerOutcome: 4,
+    hoursPerOutcome: 20,
+    deliveryModel: "14h facilitator-led · 4h self-paced · 2h capstone",
+    badge: "Creator",
+    outcomes: [
+      "Block coding stories, games & animations",
+      "Data detective investigations & digital safety",
+      "Robotics, sensors & physical computing",
+      "Responsible generative AI & model testing",
+    ],
+    theme: {
+      gradientFrom: "#EA580C",
+      gradientTo: "#C2410C",
+      glow: "rgba(234,88,12,0.30)",
+      accent: "#C2410C",
+      accentLight: "#FFF7ED",
+      accentText: "#9A3412",
+      darkBg: "#1C0A00",
+      heroGradient: "linear-gradient(135deg, #1C0A00 0%, #7C2D12 50%, #EA580C 100%)",
+      pageBg: "linear-gradient(180deg, #FFF7ED 0%, #FFEDD5 25%, #F7F8FC 100%)",
+      cardBorder: "#FED7AA",
+      cardHoverBorder: "#EA580C",
+      cardHoverGlow: "rgba(234,88,12,0.22)",
+      pillBg: "#FFEDD5",
+      badgeStyle: "bg-orange-600 text-white shadow-orange-200",
+    },
+  },
+  {
     id: "middle",
     label: "Middle School",
     shortLabel: "Middle School",
     subLabel: "Grades 6–8",
     badgeLabel: "🎮 MIDDLE SCHOOL",
-    themeTagline: "Build Real Projects, Games & AI Models",
+    themeTagline: "Python Foundations, Data Literacy & AI Perception",
     description:
-      "Interactive game creation, Python fundamentals, and generative AI tools for middle school students.",
+      "Transition to text programming, understand the data pipeline that powers AI, experiment with low-code models, and master cyber safety.",
     focus: "launch",
     icon: Gamepad2,
-    audience: "Ages 11–14 / grades 6–8",
+    audience: "Grades 6-8 (Ages 11–13)",
     outcomeCount: 5,
-    modulesPerOutcome: 6,
-    hoursPerOutcome: 30,
-    deliveryModel: "Guided lab + independent build",
+    modulesPerOutcome: 4,
+    hoursPerOutcome: 20,
+    deliveryModel: "14h facilitator-led · 4h self-paced · 2h capstone",
     badge: "Builder",
     outcomes: [
-      "Python programming fundamentals",
-      "GenAI prompt engineering for teens",
-      "Robotics & sensor simulation",
-      "Middle school capstone badge",
+      "Python programming & computational thinking",
+      "Data cleaning, visualization & statistics",
+      "AI perception, learning & natural interaction",
+      "Cyber safety, threat modeling & ethical tech",
     ],
     theme: {
       gradientFrom: "#10B981",
@@ -136,22 +178,22 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "High School",
     subLabel: "Grades 9–12",
     badgeLabel: "🚀 HIGH SCHOOL",
-    themeTagline: "Standout Portfolios, AP Prep & Advanced AI",
+    themeTagline: "Applied Python, Machine Learning & Capstone Portfolios",
     description:
-      "Advanced portfolio tracks, machine learning basics, and college application boosters for high schoolers.",
+      "Prepare for school-board and university pathways: software engineering repositories, ML model cards, GenAI grounding, and capstone defence.",
     focus: "launch",
     icon: Rocket,
-    audience: "Ages 14–18 / grades 9–12",
-    outcomeCount: 10,
-    modulesPerOutcome: 8,
-    hoursPerOutcome: 40,
-    deliveryModel: "Project studio + portfolio review",
+    audience: "Grades 9-12 (Ages 14–18)",
+    outcomeCount: 5,
+    modulesPerOutcome: 4,
+    hoursPerOutcome: 20,
+    deliveryModel: "14h facilitator-led · 4h self-paced · 2h capstone",
     badge: "Developer",
     outcomes: [
-      "Machine Learning & Data Science 101",
-      "College portfolio project build",
-      "AI ethics & responsible deployment",
-      "MSA High School Capstone Certificate",
+      "Modular Python & software engineering practices",
+      "Supervised ML workflows & responsible evaluation",
+      "Generative AI media literacy & risk registers",
+      "Interdisciplinary data science & robotics capstone",
     ],
     theme: {
       gradientFrom: "#6366F1",
@@ -172,26 +214,26 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "college",
-    label: "College & University",
-    shortLabel: "College & University",
-    subLabel: "College & University",
-    badgeLabel: "🎓 COLLEGE & UNIVERSITY",
-    themeTagline: "Authentic University Standards & Capstone Credit",
+    label: "College & Universities",
+    shortLabel: "College & Universities",
+    subLabel: "Postsecondary",
+    badgeLabel: "🎓 COLLEGE & UNIVERSITIES",
+    themeTagline: "AI & ML Foundations, Deep Learning & MLOps",
     description:
-      "College-ready certification outcomes with practical projects, knowledge checks, and credentials for admissions and portfolios.",
+      "Bridge to undergraduate and graduate AI study: reproducible ML pipelines, data engineering, vision, NLP, governance, and research vivas.",
     focus: "launch",
     icon: GraduationCap,
-    audience: "Age 18+ / degree learners",
-    outcomeCount: 10,
-    modulesPerOutcome: 10,
-    hoursPerOutcome: 50,
-    deliveryModel: "Applied lab + technical report",
+    audience: "Postsecondary / Undergrad & Grad",
+    outcomeCount: 5,
+    modulesPerOutcome: 4,
+    hoursPerOutcome: 20,
+    deliveryModel: "14h facilitator-led · 4h self-paced · 2h capstone",
     badge: "Engineer",
     outcomes: [
-      "Entry-level outcome courses",
-      "Capstone-ready skill tracks",
-      "College application support value",
-      "MSA college bridge programs",
+      "Supervised, unsupervised & optimization foundations",
+      "Data pipelines, schemas & analytics governance",
+      "Deep learning, vision representations & embeddings",
+      "UNESCO AI ethics, impact assessment & MLOps deployment",
     ],
     theme: {
       gradientFrom: "#2563EB",
@@ -212,26 +254,26 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
   },
   {
     id: "professional",
-    label: "Professional & Executive",
-    shortLabel: "Professional & Executive",
-    subLabel: "Professional & Executive",
-    badgeLabel: "💼 PROFESSIONAL & EXECUTIVE",
-    themeTagline: "Apply AI at work — leadership, product, and production systems",
+    label: "Professional Courses",
+    shortLabel: "Professional Courses",
+    subLabel: "Workforce & Trainers",
+    badgeLabel: "💼 PROFESSIONAL COURSES",
+    themeTagline: "Business AI Literacy, Prompt Design & Trainer Certification",
     description:
-      "Certifications for people already in the workforce: lead AI adoption, ship LLM workflows, and design production-ready systems.",
+      "Enable sound AI adoption for leaders, master prompt engineering productivity, build no-code automations, manage AI products, and certify educators.",
     focus: "launch",
     icon: Briefcase,
-    audience: "Age 21+ / career learners",
-    outcomeCount: 10,
-    modulesPerOutcome: 10,
-    hoursPerOutcome: 50,
-    deliveryModel: "Workplace case + production evidence",
-    badge: "Professional / Architect",
+    audience: "Owners, Managers, PMs & Educators",
+    outcomeCount: 5,
+    modulesPerOutcome: 4,
+    hoursPerOutcome: 20,
+    deliveryModel: "14h facilitator-led · 4h self-paced · 2h capstone",
+    badge: "Leader / Specialist",
     outcomes: [
-      "Executive AI literacy",
-      "Shareable workplace credentials",
-      "Production ML and LLM tracks",
-      "Architecture and product strategy",
+      "Executive AI adoption & use-case roadmaps",
+      "Prompt patterns, structured outputs & verification",
+      "No-code/low-code AI automation & SOPs",
+      "Educator micro-teaching & pedagogy certification",
     ],
     theme: {
       gradientFrom: "#8B5CF6",
@@ -279,7 +321,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
     learners: 2840,
     price: "$149",
     outcome: "Certified AI Explorer — portfolio-ready mini-project",
-    preview: "V-led nuggets, parent guides, and safe AI tool exploration.",
+    preview: "NEO-led nuggets, parent guides, and safe AI tool exploration.",
     img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
     featured: true,
   },
@@ -461,7 +503,7 @@ export const PATHWAY_COURSES: PathwayCourse[] = [
     learners: 2100,
     price: "$219",
     outcome: "Applied data project for admissions portfolios",
-    preview: "Knowledge checks, V mentorship, and capstone in AI Lab.",
+    preview: "Knowledge checks, NEO mentorship, and capstone in AI Lab.",
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
   },
   {
@@ -575,21 +617,28 @@ export function countCoursesForLevel(level: PathwayLevelId | "all") {
 
 export function normalizePathwayParam(pathwayId: string): PathwayLevelId | null {
   const map: Record<string, PathwayLevelId> = {
-    k2: "k5",
-    elementary: "k5",
-    k5: "k5",
+    "pre-elementary": "pre-elementary",
+    preelementary: "pre-elementary",
+    "pre-k": "pre-elementary",
+    prek: "pre-elementary",
+    k2: "pre-elementary",
+    elementary: "elementary",
+    k5: "elementary",
     middle: "middle",
     "middle-school": "middle",
     high: "high",
     "high-school": "high",
     college: "college",
     university: "college",
+    "college-university": "college",
+    "college-universities": "college",
     "university-college": "college",
     career: "professional",
     professional: "professional",
+    "professional-courses": "professional",
     "working-professionals": "professional",
   };
-  return map[pathwayId] ?? null;
+  return map[pathwayId?.toLowerCase()] ?? null;
 }
 
 export function pathwayToRouteId(id: PathwayLevelId): string {
@@ -599,18 +648,20 @@ export function pathwayToRouteId(id: PathwayLevelId): string {
 }
 
 export const LEVEL_CATEGORY: Record<PathwayLevelId, string> = {
-  k5: "Elementary Foundations",
+  "pre-elementary": "Pre-elementary",
+  elementary: "Elementary",
+  k5: "Elementary",
   middle: "Middle School",
   high: "High School",
-  college: "College & University",
-  professional: "Professional & Executive",
+  college: "College & Universities",
+  professional: "Professional Courses",
 };
 
 export const CATALOG_TOTALS = {
-  outcomes: 40,
-  modules: 335,
-  hours: 1650,
-  stack: "Explorer → Architect",
+  outcomes: 30,
+  modules: 120,
+  hours: 600,
+  stack: "Pre-elementary → Professional Courses",
 } as const;
 
 export function getPathwayLevel(id: PathwayLevelId) {
@@ -619,6 +670,7 @@ export function getPathwayLevel(id: PathwayLevelId) {
 
 export function categoryToLevel(category: string): PathwayLevelId | undefined {
   return (Object.entries(LEVEL_CATEGORY) as [PathwayLevelId, string][]).find(
-    ([, label]) => label === category,
+    ([, label]) => label.toLowerCase() === category.toLowerCase(),
   )?.[0];
 }
+

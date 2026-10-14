@@ -84,7 +84,7 @@ export function CampusBuildingHeader({
             )}
             {displayV && (
               <p className="mt-4 max-w-2xl rounded-xl border border-primary/10 bg-white/80 px-4 py-3 text-sm leading-relaxed text-foreground/85 shadow-sm">
-                <span className="font-semibold text-primary">V says: </span>
+                <span className="font-semibold text-primary">NEO says: </span>
                 {displayV}
               </p>
             )}

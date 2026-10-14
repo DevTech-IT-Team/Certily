@@ -12,7 +12,7 @@ const POINTS = [
   {
     n: "01",
     title: "Learning in micro-cohorts",
-    copy: "Small cohorts with a dedicated mentor — V, plus live office hours.",
+    copy: "Small cohorts with a dedicated mentor — NEO, plus live office hours.",
     icon: Users,
   },
   {
@@ -24,7 +24,7 @@ const POINTS = [
   {
     n: "03",
     title: "Mentors who stay with you",
-    copy: "V around the clock, with human mentors for checkpoints and project reviews.",
+    copy: "NEO around the clock, with human mentors for checkpoints and project reviews.",
     icon: Headphones,
   },
   {

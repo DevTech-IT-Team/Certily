@@ -293,7 +293,7 @@ function HeroCampusFrame({
           {HERO_BUILDING_ZONES.map((zone) => renderBuildingHit(zone))}
         </div>
 
-        {/* Hover the V already in the campus image — no extra floating avatar */}
+        {/* Hover the NEO already in the campus image — no extra floating avatar */}
         <button
           type="button"
           className="absolute z-[25] cursor-pointer border-0 bg-transparent p-0"
@@ -307,13 +307,13 @@ function HeroCampusFrame({
           onMouseEnter={() => setVHovered(true)}
           onMouseLeave={() => setVHovered(false)}
           onClick={onVClick}
-          aria-label="Hi, I'm V — how can I help you?"
+          aria-label="Hi, I'm NEO — how can I help you?"
         >
           {vHovered && (
             <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-1 w-max max-w-[13rem] -translate-x-1/2 sm:max-w-[15rem]">
               <div className="rounded-2xl border border-[#5B4CF5]/25 bg-white/95 px-3 py-2 text-center shadow-[0_10px_28px_-12px_rgba(15,21,51,0.35)] backdrop-blur-md">
                 <p className="text-[11px] font-bold leading-snug text-[#0F1533] sm:text-xs">
-                  Hi, I'm V — how can I help you?
+                  Hi, I'm NEO — how can I help you?
                 </p>
               </div>
               <div className="mx-auto h-2 w-2 -translate-y-1 rotate-45 border-b border-r border-[#5B4CF5]/25 bg-white/95" />
@@ -357,9 +357,9 @@ function HeroCampusFrame({
                         {building.name}
                       </span>
                       <div className="flex items-center gap-1">
-                        <img src={avatarHi} alt="V" className="h-4 w-4 drop-shadow-sm" />
+                        <img src={avatarHi} alt="NEO" className="h-4 w-4 drop-shadow-sm" />
                         <span className="text-[9px] font-bold text-[#5B4CF5] uppercase tracking-wider">
-                          V Guide
+                          NEO Guide
                         </span>
                       </div>
                     </div>
@@ -604,13 +604,13 @@ export function CampusMap({
               setMessage("Tap any building pin — I'll tell you what's inside!", true, "hi");
               (window as Window & { focusVChat?: () => void }).focusVChat?.();
             }}
-            aria-label="Hi, I'm V — how can I help you?"
+            aria-label="Hi, I'm NEO — how can I help you?"
           >
             {defaultVHovered && (
               <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-1 w-max max-w-[13rem] -translate-x-1/2">
                 <div className="rounded-2xl border border-[#5B4CF5]/25 bg-white/95 px-3 py-2 text-center shadow-[0_10px_28px_-12px_rgba(15,21,51,0.35)] backdrop-blur-md">
                   <p className="text-[11px] font-bold leading-snug text-[#0F1533] sm:text-xs">
-                    Hi, I'm V — how can I help you?
+                    Hi, I'm NEO — how can I help you?
                   </p>
                 </div>
                 <div className="mx-auto h-2 w-2 -translate-y-1 rotate-45 border-b border-r border-[#5B4CF5]/25 bg-white/95" />
@@ -649,7 +649,7 @@ export function CampusMap({
             <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center">
               <VAvatar size="md" />
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-primary">V · Campus guide</p>
+                <p className="text-xs font-semibold text-primary">NEO · Campus guide</p>
                 <p className="mt-1 text-sm leading-relaxed text-foreground/80">{displayMessage}</p>
               </div>
             </div>
@@ -659,7 +659,7 @@ export function CampusMap({
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-white/80"
             >
               <MessageCircle className="h-4 w-4 text-primary" />
-              Ask V
+              Ask NEO
             </button>
           </div>
         </div>

@@ -44,7 +44,7 @@ function K12Playground() {
   const [unlockedBadges, setUnlockedBadges] = useState<number[]>([0, 1]);
 
   const badges = [
-    { title: "AI Explorer", icon: Bot, color: "from-amber-400 to-orange-500", desc: "Completed first V AI quest!" },
+    { title: "AI Explorer", icon: Bot, color: "from-amber-400 to-orange-500", desc: "Completed first NEO AI quest!" },
     { title: "Digital Artist", icon: Palette, color: "from-pink-400 to-purple-500", desc: "Generated 5 creative AI artworks." },
     { title: "Logic Master", icon: Gamepad2, color: "from-emerald-400 to-teal-500", desc: "Solved 10 prompt puzzles." },
     { title: "Space Explorer", icon: Rocket, color: "from-blue-400 to-indigo-500", desc: "Built a space AI assistant." },
@@ -129,7 +129,7 @@ function K12Playground() {
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-xs font-bold text-orange-600">
                 <Sparkles className="h-4 w-4 text-amber-500" />
-                Try V's Cute AI Prompt Machine!
+                Try NEO's Cute AI Prompt Machine!
               </span>
               <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
                 Safe AI Sandbox
@@ -160,7 +160,7 @@ function K12Playground() {
             {/* AI Output Bubble */}
             <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/70 p-4">
               <p className="text-[11px] font-bold uppercase tracking-wider text-amber-800">
-                V's Magic Response:
+                NEO's Magic Response:
               </p>
               <p className="mt-1 font-display text-sm font-extrabold text-[#7C2D12]">
                 {aiOutput}

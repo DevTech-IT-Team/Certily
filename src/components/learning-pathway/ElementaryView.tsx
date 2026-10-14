@@ -52,7 +52,7 @@ export function ElementaryView() {
                 </div>
 
                 {/* Avatar Image - Overflowing */}
-                <img src={HiMascot} alt="V Mascot" className="absolute bottom-0 w-[95%] max-w-[300px] h-auto object-contain object-bottom z-20 pointer-events-none drop-shadow-2xl" />
+                <img src={HiMascot} alt="NEO Mascot" className="absolute bottom-0 w-[95%] max-w-[300px] h-auto object-contain object-bottom z-20 pointer-events-none drop-shadow-2xl" />
 
                 {/* Decorative floating elements specific to the container */}
                 <div className="absolute -bottom-8 -right-8 opacity-80">
