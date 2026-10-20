@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
-import { COURSES_DATA, coursesForBand, getTopicSlug } from "@/lib/courses";
+import { COURSES_DATA, coursesForBand } from "@/lib/courses";
 import { CourseCatalogCard } from "./CourseCatalogCard";
 import {
-  LEVEL_CATEGORY,
   PATHWAY_LEVELS,
+  type PathwayLevel,
   type PathwayLevelId,
 } from "@/lib/pathways";
 
@@ -62,34 +63,43 @@ export function PathwayBannersSection({
   return (
     <section
       className={cn(
-        "bg-white font-sans",
+        previewLimit ? "bg-[#F3F1FB] font-sans" : "bg-white font-sans",
         previewLimit
-          ? "pt-6 pb-8 sm:pt-8 sm:pb-10"
+          ? "pt-14 pb-12 sm:pt-16 sm:pb-14"
           : "pt-20 pb-8 sm:pt-24 sm:pb-10 lg:pt-28",
         className,
       )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className={cn("mx-auto px-4 sm:px-6", previewLimit ? "max-w-[90rem]" : "max-w-7xl")}>
+        {previewLimit ? (
+          <div>
+            <h2 className="text-center font-display text-4xl font-bold leading-[1.15] tracking-tight text-[#0F1533] sm:text-5xl">
+              Every learner has a path
+              <span className="mt-1 block text-[#5B4CF5]">Find yours</span>
+            </h2>
+            <StagePath stages={PATHWAY_LEVELS.filter((band) => band.id !== "k5")} />
+          </div>
+        ) : (
+        <>
         <Reveal>
           <div className="max-w-3xl">
-            <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-[#1C1D1F] sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-[#0F1533] sm:text-4xl">
               Every learner has a path — find yours
             </h2>
           </div>
         </Reveal>
-
         <Reveal delay={0.1}>
-          <div className="mt-8 flex gap-6 overflow-x-auto border-b border-[#D1D7DC] pb-0 scrollbar-hide">
+          <div className="mt-6 flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {TABS.map((tab) => (
               <button
                 key={tab}
                 type="button"
                 onClick={() => handleSelectTab(tab)}
                 className={cn(
-                  "whitespace-nowrap border-b-2 px-1 pb-3 text-sm font-bold transition-colors",
+                  "whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition",
                   activeTab === tab
-                    ? "border-black text-black"
-                    : "border-transparent text-[#6A6F73] hover:text-black",
+                    ? "bg-[#0F1533] text-white"
+                    : "bg-[#F4F2FF] text-[#3C415C] hover:bg-[#E7E3FF]",
                 )}
               >
                 {tab}
@@ -137,22 +147,61 @@ export function PathwayBannersSection({
               </p>
             </div>
           )}
-
-          {previewLimit && (
-            <div className="mt-8">
-              <Link
-                to="/learning"
-                className="group inline-flex items-center gap-2 text-[15px] font-bold text-[#5B4CF5] hover:text-[#4A3BE8]"
-              >
-                View all certifications
-                <span className="transition-transform group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
-            </div>
-          )}
         </div>
+        </>
+        )}
       </div>
     </section>
+  );
+}
+
+function StagePath({ stages }: { stages: PathwayLevel[] }) {
+  const stops = [
+    { id: "all", label: "All courses", sub: "30 certifications", image: coursesForBand("high")[0]?.image, accent: "#5B4CF5" },
+    ...stages.map((band) => ({
+      id: band.id,
+      label: band.shortLabel,
+      sub: band.subLabel,
+      image: coursesForBand(band.id)[0]?.image,
+      accent: band.theme.accent,
+    })),
+  ];
+
+  return (
+    <>
+    <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:hidden">
+      {stops.map((stop) => (
+        <Link key={stop.id} to="/learning" className="flex flex-col">
+          <img src={stop.image} alt="" className="aspect-[4/5] w-full rounded-[1.2rem] object-cover" />
+          <span className="mt-2 text-sm font-bold">{stop.label}</span>
+        </Link>
+      ))}
+    </div>
+    <div className="mt-8 hidden items-end gap-5 lg:flex">
+      {stops.map((stop, index) => (
+        <motion.div
+          key={stop.id}
+          className="min-w-0 flex-1"
+          initial={{ opacity: 0, y: 72 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 1.15, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+        >
+        <Link
+          to="/learning"
+          className="group flex flex-col"
+          style={{ marginBottom: `${index * 1.1}rem` }}
+        >
+          <span className="block overflow-hidden rounded-2xl shadow-[0_16px_30px_-18px_rgba(15,21,51,0.45)] transition duration-300 group-hover:-translate-y-1.5">
+            <img src={stop.image} alt="" className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
+          </span>
+          <span className="mt-3 block text-center font-display text-[15px] font-bold leading-tight text-[#0F1533] transition group-hover:text-[#5B4CF5]">
+            {stop.label}
+          </span>
+        </Link>
+        </motion.div>
+      ))}
+    </div>
+    </>
   );
 }

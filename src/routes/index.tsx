@@ -41,6 +41,45 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const BOARDS = [
+  "CSTA and AI4K12",
+  "England Computing",
+  "CBSE AI",
+  "DigComp",
+  "IB",
+  "Cambridge",
+  "Pearson Edexcel",
+  "AP College Board",
+  "Australia Digital Technologies",
+  "UNESCO AI",
+];
+
+function BoardStrip() {
+  return (
+    <div className="bg-[#0F1533] py-6">
+      <p className="text-center text-[11px] font-semibold uppercase tracking-[0.32em] text-[#C9C4FF]">
+        Aligned with Global Education Standards
+      </p>
+      <div
+        className="mt-4 overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)",
+        }}
+      >
+        <div className="flex w-max animate-marquee items-center">
+          {[...BOARDS, ...BOARDS].map((name, index) => (
+            <span key={`${name}-${index}`} className="flex items-center whitespace-nowrap text-[15px] font-medium text-white/90">
+              {name}
+              <span className="mx-8 h-1 w-1 shrink-0 rounded-full bg-[#7C6CFF]" />
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Home() {
   return (
     <div className="overflow-x-hidden bg-[#F7F8FC]">
@@ -50,6 +89,7 @@ function Home() {
       </Suspense>
       <Suspense fallback={<div className="min-h-screen bg-[#EEEEF8]" aria-hidden />}>
         <VMentorSection />
+        <BoardStrip />
         <PathwayBannersSection previewLimit={4} />
         <HomeStatsSection />
         <TrustLogosMarquee />

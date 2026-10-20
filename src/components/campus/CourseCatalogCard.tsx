@@ -23,7 +23,7 @@ export function CourseCatalogCard({
       closeDelay={120}
     >
       <HoverCardTrigger asChild>
-        <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white outline-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(91,76,245,0.12)] hover:border-[#5B4CF5]/40">
+        <div className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_16px_40px_-28px_rgba(15,21,51,0.45)] ring-1 ring-[#E7E5F1] outline-none transition duration-300 hover:-translate-y-1 hover:ring-[#5B4CF5]">
           <CourseHoverThumbnail
             image={course.image}
             alt={course.title}
@@ -33,58 +33,28 @@ export function CourseCatalogCard({
             priority={priority}
           />
 
-          <div className="flex flex-1 flex-col p-5 pt-4 pb-0">
-            {/* Top program info pill */}
-            <div className="mb-2 flex items-center justify-between gap-2">
-              <span className="inline-flex items-center rounded-md bg-[#EDE9FF] px-2 py-0.5 text-[10.5px] font-black uppercase tracking-wider text-[#5B4CF5]">
-                {course.code ? `${course.code} · ${course.hours}H` : course.pathwayLabel}
-              </span>
-              <span className="text-[11px] font-medium text-slate-500">
-                {course.packageLength || "6 weeks"}
-              </span>
-            </div>
-
-            {/* Course Title */}
-            <Link
-              to="/course/$courseId"
-              params={{ courseId: course.id }}
-              className="group-hover:text-[#5B4CF5] transition-colors"
-            >
-              <h3 className="min-h-[2.5em] line-clamp-2 text-[16px] font-extrabold leading-snug text-slate-900 tracking-tight">
+          <div className="flex flex-1 flex-col px-4 pb-4 pt-4">
+            <p className="text-[11px] font-bold tracking-wide text-[#5B4CF5]">
+              {course.code} · For {course.audience}
+            </p>
+            <Link to="/course/$courseId" params={{ courseId: course.id }}>
+              <h3 className="mt-1 line-clamp-2 min-h-[2.6em] font-display text-[17px] font-bold leading-snug tracking-tight text-[#0F1533] group-hover:text-[#5B4CF5]">
                 {course.title}
               </h3>
             </Link>
-
-            {/* Target Audience */}
-            <p className="mt-1 text-[11.5px] font-bold text-[#5B4CF5]">
-              {course.audience}
-            </p>
-
-            {/* Purpose / Tagline */}
-            <p className="mt-1.5 min-h-[2.6em] line-clamp-2 text-[12.5px] leading-relaxed text-slate-600">
+            <p className="mt-2 line-clamp-2 min-h-[2.5em] text-[13px] leading-relaxed text-[#5A607A]">
               {course.description}
             </p>
-
-            {/* Metadata strip (replaces price) */}
-            <div className="mt-auto pt-3 pb-1 flex items-center justify-between border-t border-slate-100 text-[11px] text-slate-500">
-              <span className="font-medium text-slate-700">
-                Prereq: <span className="font-normal text-slate-600">{course.prerequisiteLabel}</span>
-              </span>
-              <span className="font-semibold text-slate-500">
-                4 Modules
-              </span>
-            </div>
-          </div>
-
-          {/* Action button */}
-          <div className="px-5 pb-5 pt-2.5">
+            <p className="mt-3 text-[12px] font-medium text-[#5A607A]">
+              {course.hours} hours · {course.packageLength || "6 weeks"}
+            </p>
             <Link
               to="/course/$courseId"
               params={{ courseId: course.id }}
-              className="group/btn relative flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#5B4CF5] py-2.5 text-[13.5px] font-bold text-white transition-all duration-200 hover:bg-[#4A3BE8]"
+              className="mt-4 inline-flex h-11 items-center justify-center gap-1.5 rounded-full bg-[#5B4CF5] text-sm font-bold text-white hover:bg-[#4A3BE0]"
             >
-              <span>View Course</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
+              View course
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

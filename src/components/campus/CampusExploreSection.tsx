@@ -1,5 +1,6 @@
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { Reveal } from "./Reveal";
 import { VAvatar } from "./VAvatar";
 import campusBg from "@/assets/certbg.webp";
@@ -61,7 +62,13 @@ export function CampusExploreSection() {
         </div>
 
         {/* ── Cinematic container ── */}
-        <Reveal delay={0.14} className="mt-8">
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, y: 72 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div
             className="relative w-full overflow-hidden rounded-2xl shadow-[0_32px_80px_-24px_rgba(10,12,27,0.45)]"
             style={{ aspectRatio: "16/7", minHeight: 260 }}
@@ -170,7 +177,7 @@ export function CampusExploreSection() {
               />
             </div>
           </div>
-        </Reveal>
+        </motion.div>
       </div>
     </section>
   );

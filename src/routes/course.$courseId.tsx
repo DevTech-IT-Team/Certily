@@ -1,16 +1,56 @@
 import { useState, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, CheckCircle2, PlayCircle, Download, ChevronRight, ChevronDown, X, Layers, Award, FileText } from "lucide-react";
-import { COURSES_DATA, findCourseByIdOrCode, type CourseDetails } from "@/lib/courses";
+import { ChevronRight, ChevronDown, Layers, Star } from "lucide-react";
+import { findCourseByIdOrCode, type CourseDetails } from "@/lib/courses";
 import { cn } from "@/lib/utils";
-import { useCart } from "@/lib/CartContext";
-import { useCurrency } from "@/lib/CurrencyContext";
-import { parseInrAmount } from "@/lib/pricing";
-import { PREVIEW_VIDEO } from "@/lib/preview-video";
 import { breadcrumbJsonLd, courseJsonLd, pageHead } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
-
+import { CourseContextSections, CoursePurchaseCard } from "@/components/discovery/CourseJourneyPanels";
 type CurriculumSection = CourseDetails["curriculum"][number];
+
+function LearnSkills({
+  outcomes,
+  modules,
+}: {
+  outcomes: string[];
+  modules: CurriculumSection[];
+}) {
+  const [open, setOpen] = useState(0);
+  const current = modules[open];
+  return (
+    <div className="mt-4 overflow-hidden rounded-2xl bg-[#F4F2FF] sm:grid sm:grid-cols-[minmax(0,240px)_1fr]">
+      <ul className="flex gap-2 overflow-x-auto p-2 sm:flex-col sm:overflow-visible">
+        {outcomes.map((outcome, index) => {
+          const on = open === index;
+          return (
+            <li key={outcome} className="shrink-0 sm:shrink">
+              <button
+                type="button"
+                onClick={() => setOpen(index)}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold transition",
+                  on ? "bg-white text-[#0F1533] shadow-sm" : "text-[#3C415C] hover:bg-white/70",
+                )}
+              >
+                <span className={cn("font-display text-xs font-bold", on ? "text-[#5B4CF5]" : "text-[#8B90A8]")}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {outcome}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+      {current ? (
+        <div className="m-2 rounded-xl bg-[#0F1533] p-5 text-white sm:m-3">
+          <p className="text-xs font-semibold tracking-wide text-[#C9C4FF]">{current.moduleCode} · {current.duration}</p>
+          <p className="mt-2 font-display text-2xl font-bold leading-snug">{current.sectionTitle}</p>
+          <p className="mt-3 text-sm leading-relaxed text-white/75">{current.description}</p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 function isGenericCopy(text?: string) {
   if (!text) return true;
@@ -60,6 +100,69 @@ function shortDuration(section: {
   return "";
 }
 
+const FRAMEWORKS: { name: string; codes: string; note: string }[] = [
+  { name: "CSTA and AI4K12", codes: "P1-P5,E1-E5,M1-M5,H1-H5", note: "Algorithms, programming, data, and how AI sees, learns, and affects people." },
+  { name: "England Computing", codes: "P1-P5,E1-E5,M1-M5,H1,H5", note: "Algorithms, programming, logical reasoning, and staying safe online." },
+  { name: "CBSE AI", codes: "E2-E5,M2-M5,H1-H5,U4,P6-P10", note: "AI awareness, projects, data, and using technology ethically." },
+  { name: "DigComp", codes: "P3,E2,E5,M2,M5,H3,H4,U4,P6-P10", note: "Finding information, creating content, staying safe, and solving problems." },
+  { name: "IB", codes: "P1,E1,E3,E4,M4,H1,H5,U1,U4,U5", note: "Inquiry, design thinking, and projects you reflect on." },
+  { name: "Cambridge", codes: "M1-M4,H1-H5,U1-U3", note: "Problem solving, programming, data, and testing your work." },
+  { name: "Pearson Edexcel", codes: "M1,H1-H4,U1,U2", note: "Programming, algorithms, and applying them to real situations." },
+  { name: "AP Computer Science", codes: "E1,E2,M1,M2,H1-H5", note: "Computing ideas, data, the internet, and the impact of what you build." },
+  { name: "Australian Digital Technologies", codes: "E1-E4,M1-M4,H4,H5,U2", note: "Computational thinking, data, and designing digital solutions." },
+  { name: "UNESCO AI competencies", codes: "P5,E4,E5,M3,M5,H2,H3,H5,U4,P6-P10", note: "A human-centred view of AI, its ethics, and how you create with it." },
+];
+
+function codeListed(courseCode: string, spec: string) {
+  const match = courseCode.match(/^([A-Z]+)(\d+)$/i);
+  if (!match) return false;
+  const prefix = match[1].toUpperCase();
+  const number = Number(match[2]);
+  return spec.split(",").some((part) => {
+    const range = part.match(/^([A-Z]+)(\d+)-([A-Z]+)(\d+)$/i);
+    if (range) {
+      return prefix === range[1].toUpperCase() && prefix === range[3].toUpperCase() && number >= Number(range[2]) && number <= Number(range[4]);
+    }
+    return part.toUpperCase() === courseCode.toUpperCase();
+  });
+}
+
+function frameworksFor(courseCode: string) {
+  return FRAMEWORKS.filter((item) => codeListed(courseCode, item.codes));
+}
+
+function FrameworkPicks({ courseCode }: { courseCode: string }) {
+  const items = frameworksFor(courseCode);
+  const [open, setOpen] = useState(0);
+  const current = items[open];
+  if (!current) return null;
+  return (
+    <div className="mt-4">
+      <p className="text-sm font-medium text-[#C9C4FF]">This certification is mapped to</p>
+      <div className="mt-2 flex max-w-xl flex-wrap gap-2">
+        {items.map((item, index) => (
+          <button
+            key={item.name}
+            type="button"
+            onClick={() => setOpen(index)}
+            className={cn(
+              "rounded-full px-3 py-1.5 text-sm font-semibold transition",
+              open === index ? "bg-white text-[#0F1533]" : "bg-white/10 text-white hover:bg-white/20",
+            )}
+          >
+            {item.name}
+          </button>
+        ))}
+      </div>
+      <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80">{current.note}</p>
+      <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-white">
+        <span className="text-white/60">Issued by</span>
+        <span className="font-semibold">Certifier</span>
+      </p>
+    </div>
+  );
+}
+
 function outlineCode(code?: string) {
   if (!code) return "";
   if (/capstone/i.test(code)) return "CAP";
@@ -85,29 +188,32 @@ function ModuleExperience({
 
   if (!description && coverage.length === 0 && !takeaway) return null;
 
+  const steps = coverage
+    .map((item) => item.replace(/^[^:]+:\s*/, ""))
+    .filter((item) => item.toLowerCase() !== (section.sectionTitle ?? "").toLowerCase());
+
   return (
-    <div className="border-t border-black/5 bg-[#F8FAFC] px-5 py-4 sm:pl-[5.75rem]">
-      {description && (
-        <p className="max-w-2xl text-[14px] leading-relaxed text-[#424446]">
-          {description}
-        </p>
-      )}
-      {coverage.length > 0 ? (
-        <ul className={cn("max-w-2xl space-y-1.5", description && "mt-3")}>
-          {coverage.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-[13px] leading-snug text-[#5A607A]">
-              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#5B4CF5]" />
-              <span>{item}</span>
+    <div className="border-t border-[#EEEAF8] px-5 py-4 sm:pl-[4.75rem]">
+      {description ? <p className="max-w-xl text-sm leading-relaxed text-[#5A607A]">{description}</p> : null}
+      {steps.length > 0 ? (
+        <ol className={cn("max-w-xl", description && "mt-3")}>
+          {steps.map((item, index) => (
+            <li key={item} className="flex gap-3">
+              <span className="flex flex-col items-center">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#5B4CF5]" />
+                {index < steps.length - 1 ? <span className="w-px flex-1 bg-[#E4E0F5]" /> : null}
+              </span>
+              <span className="pb-3 text-sm leading-snug text-[#0F1533]">{item}</span>
             </li>
           ))}
-        </ul>
+        </ol>
       ) : null}
-      {takeaway && (
-        <p className={cn("max-w-2xl text-[13px] leading-relaxed text-[#5A607A]", (description || coverage.length) && "mt-3")}>
-          <span className="font-bold text-[#1C1D1F]">You take home: </span>
+      {takeaway ? (
+        <p className="max-w-xl text-sm text-[#5A607A]">
+          <span className="font-semibold text-[#0F1533]">Finish with </span>
           {takeaway}
         </p>
-      )}
+      ) : null}
     </div>
   );
 }
@@ -207,11 +313,6 @@ function CourseLandingPage() {
   const { courseId } = Route.useParams();
   const course = findCourseByIdOrCode(courseId);
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-  const [isHoveringVideo, setIsHoveringVideo] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<"bundle" | "individual">("bundle");
-  const { addToCart, isInCart } = useCart();
-  const { formatPrice, formatAmount } = useCurrency();
 
   if (!course) {
     return (
@@ -223,8 +324,6 @@ function CourseLandingPage() {
       </div>
     );
   }
-
-  const individualPrice = (parseInrAmount(course.originalPrice) ?? 999) * 3;
 
   const toggleSection = (index: number) => {
     setExpandedSections((prev) =>
@@ -268,9 +367,9 @@ function CourseLandingPage() {
     {
       key: "certificate",
       code: "Cert",
-      title: `Accredited Certification · Issued by ${course.certifier}`,
+      title: "Completion record, after the academy confirms the requirements",
       duration: "",
-      description: `Complete all 4 modules and the assessment evidence to earn this verifiable ${course.certLevel.toLowerCase()} credential.`,
+      description: `The certification record describes this evidence: ${course.artifact}. A certificate is not issued from this page.`,
     },
   ];
 
@@ -292,7 +391,7 @@ function CourseLandingPage() {
           ]),
         ]}
       />
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-[#0F1533] to-slate-900 pt-28 pb-20 md:pt-32 md:pb-24">
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-[#0F1533] to-slate-900 pt-28 pb-12 md:pt-32 md:pb-14">
         <div className="pointer-events-none absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-12 rounded-full bg-indigo-500/20 blur-[100px]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl lg:pr-8">
@@ -309,125 +408,61 @@ function CourseLandingPage() {
             <h1 className="font-display text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[44px]">
               {course.title}
             </h1>
-            <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-white/80 sm:text-[17px]">
-              {course.artifact}
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white">
-                {course.certLevel}
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-white">
+              <span className="inline-flex items-center gap-1 font-semibold text-[#F5C451]">
+                <Star className="h-4 w-4 fill-[#F5C451]" />
+                {course.rating}
               </span>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                {course.modulesPerOutcome} modules
-              </span>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                {course.hoursPerOutcome} hours
-              </span>
-              {course.prerequisiteCourseId ? (
-                <Link
-                  to="/course/$courseId"
-                  params={{ courseId: course.prerequisiteCourseId }}
-                  className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/90 hover:bg-white/20"
-                >
-                  {course.prerequisiteLabel}
-                </Link>
+              <span className="text-white/55">({course.ratingCount})</span>
+              {course.bestseller ? (
+                <span className="rounded-md bg-[#F5C451] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-[#1C1408]">
+                  Bestseller
+                </span>
               ) : (
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                  {course.prerequisiteLabel}
+                <span className="rounded-md bg-white/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+                  {course.certLevel}
                 </span>
               )}
             </div>
-
-            <div className="mt-6 grid max-w-xl grid-cols-[7.5rem_1fr] items-center gap-x-4 gap-y-2.5 text-sm">
-              <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/45">
-                How you learn
-              </span>
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-white">
-                  {course.tutor}
-                </span>
-                <span className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-white">
-                  Self-paced
-                </span>
-              </div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/45">
-                What you get
-              </span>
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-white">
-                  Certificate program
-                </span>
-                <span className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-white">
-                  {course.certifier}
-                </span>
-              </div>
-            </div>
+            <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-white/80 sm:text-[17px]">
+              {course.description}
+            </p>
+            <FrameworkPicks courseCode={course.code} />
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 pb-20 sm:px-6 lg:grid-cols-3 lg:gap-12 lg:px-8">
-        <div className="pt-10 lg:col-span-2">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 pb-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-10 lg:px-8">
+        <div className="order-2 pt-10 lg:order-1">
           {/* Learning Outcomes & Assessment Evidence Card */}
-          <div className="mb-8 rounded-2xl border border-black/5 bg-white p-6 shadow-sm sm:p-7">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md bg-[#EDE9FF] px-2.5 py-0.5 text-xs font-black uppercase tracking-wider text-[#5B4CF5]">
-                {course.code} · {course.hours} Hours · {course.packageLength || "6 Weeks"}
-              </span>
-              <span className="rounded-md bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-700">
-                {course.category}
-              </span>
-              <span className="rounded-md bg-amber-50 px-2.5 py-0.5 text-xs font-bold text-amber-800">
-                Audience: {course.audience}
-              </span>
-            </div>
-
-            <h3 className="mt-4 text-xl font-bold tracking-tight text-[#1C1D1F]">
-              Learners will demonstrate
-            </h3>
-            <p className="mt-1 text-sm text-[#6A6F73]">
-              Core competencies verified through hands-on practice, human-check reflection, and instructor observation.
+          <div className="mb-8 rounded-2xl border border-[#E7E5F1] bg-white p-6 sm:p-7">
+            <p className="text-sm font-medium text-[#5A607A]">
+              {course.code} · {course.category} · {course.audience}
             </p>
+            <p className="mt-3 text-lg font-semibold leading-snug text-[#0F1533]">{course.description}</p>
 
-            <ul className="mt-3.5 space-y-2">
-              {course.whatYouWillLearn.map((outcome, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-sm text-[#1C1D1F]">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5B4CF5]" />
-                  <span className="font-medium">{outcome}</span>
+            <h3 className="mt-6 font-display text-xl font-bold tracking-tight text-[#0F1533]">What you will learn</h3>
+            <p className="mt-1 text-sm text-[#5A607A]">Tap a skill to see which module covers it.</p>
+            <LearnSkills outcomes={course.whatYouWillLearn} modules={course.curriculum.slice(0, 4)} />
+
+            <h3 className="mt-8 font-display text-xl font-bold tracking-tight text-[#0F1533]">How the {course.hours} hours are used</h3>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-3">
+              {[
+                [course.facilitatorHours, "With a teacher"],
+                [course.selfPacedHours, "Practice on your own"],
+                [course.capstoneHours, "Final project"],
+              ].map(([hours, label]) => (
+                <li key={String(label)} className="rounded-2xl bg-[#F7F8FC] px-4 py-3">
+                  <p className="font-display text-2xl font-bold text-[#0F1533]">{hours}h</p>
+                  <p className="mt-0.5 text-sm text-[#5A607A]">{label}</p>
                 </li>
               ))}
             </ul>
-
-            <div className="mt-6 grid gap-4 pt-5 border-t border-slate-100 sm:grid-cols-2">
-              <div className="rounded-xl bg-[#F8FAFC] p-4 border border-slate-200/70">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#6A6F73]">
-                  Assessment Evidence
-                </p>
-                <p className="mt-1 text-sm font-bold text-[#1C1D1F]">
-                  {course.artifact}
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-[#F8FAFC] p-4 border border-slate-200/70">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#6A6F73]">
-                  Prerequisites
-                </p>
-                <p className="mt-1 text-sm font-bold text-[#1C1D1F]">
-                  {course.prerequisite}
-                </p>
-              </div>
-            </div>
-
-            {course.syllabusAlignment && (
-              <div className="mt-4 rounded-xl bg-indigo-50/50 p-4 border border-indigo-100/70">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-900">
-                  Syllabus Alignment Intent
-                </p>
-                <p className="mt-1 text-xs font-medium text-indigo-950">
-                  {course.syllabusAlignment}
-                </p>
-              </div>
-            )}
+            <p className="mt-4 text-sm leading-relaxed text-[#5A607A]">
+              This runs for {course.packageLength || "6 weeks"}. At the end you submit {course.artifact}.
+              {course.prerequisite && !/^none$/i.test(course.prerequisite) ? ` Before you start: ${course.prerequisite}.` : " Nothing is required before you start."}
+              {course.syllabusAlignment ? ` It lines up with ${course.syllabusAlignment.charAt(0).toLowerCase()}${course.syllabusAlignment.slice(1)}.` : ""}
+            </p>
           </div>
 
           <div className="mb-5 flex items-end justify-between gap-4">
@@ -481,169 +516,15 @@ function CourseLandingPage() {
             })}
           </div>
 
-          <div className="mt-5 flex justify-start">
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 rounded-lg border border-[#D8D4F5] px-4 py-2 text-sm font-bold text-[#5B4CF5] transition-colors hover:bg-white"
-            >
-              <Download className="h-4 w-4" /> Download syllabus
-            </button>
-          </div>
-
-          <div className="mt-10 flex items-center gap-4 rounded-2xl border border-black/5 bg-white px-5 py-4">
-            <div className="h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-              <img
-                src={`https://api.dicebear.com/7.x/notionists/svg?seed=${course.tutor}`}
-                alt={course.tutor}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#6A6F73]">
-                Tutor
-              </p>
-              <p className="text-[15px] font-bold text-[#1C1D1F]">{course.tutor}</p>
-            </div>
-          </div>
+          <CourseContextSections course={course} />
         </div>
 
-        <div className="relative z-20 lg:col-span-1 lg:-mt-56">
+        <div className="relative z-20 order-1 lg:order-2 lg:-mt-72">
           <div className="sticky top-24 pb-10">
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)]">
-              <div
-                className="group relative h-36 cursor-pointer overflow-hidden bg-slate-900"
-                onClick={() => setIsPreviewOpen(true)}
-                onMouseEnter={() => setIsHoveringVideo(true)}
-                onMouseLeave={() => setIsHoveringVideo(false)}
-              >
-                {isHoveringVideo ? (
-                  <video
-                    src={course.previewVideoUrl || PREVIEW_VIDEO}
-                    autoPlay
-                    muted
-                    loop
-                    className="absolute inset-0 z-0 h-full w-full object-cover opacity-80"
-                  />
-                ) : (
-                  <>
-                    <img
-                      src={course.previewThumbnailUrl || course.image}
-                      alt={course.title}
-                      width={640}
-                      height={360}
-                      decoding="async"
-                      className="absolute inset-0 z-0 h-full w-full object-cover opacity-90"
-                    />
-                    <div className="absolute inset-0 z-10 bg-slate-900/40 mix-blend-multiply" />
-                  </>
-                )}
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-end bg-gradient-to-t from-black/80 to-transparent pb-4">
-                  <div className="mb-2 rounded-full bg-white/20 p-3 backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
-                    <PlayCircle className="h-8 w-8 text-white" />
-                  </div>
-                  <div className="text-xs font-bold tracking-wide text-white">
-                    Preview this course
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-5">
-                <div className="mb-4 rounded-xl border border-indigo-100 bg-gradient-to-br from-indigo-50/60 to-purple-50/30 p-4">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="rounded-md bg-[#EDE9FF] px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#5B4CF5]">
-                      {course.code} · {course.certLevel}
-                    </span>
-                    <span className="text-[11px] font-bold text-slate-500">
-                      {course.hours} Hours Total
-                    </span>
-                  </div>
-
-                  <p className="text-base font-extrabold text-slate-900 leading-snug">
-                    Full Certification Package
-                  </p>
-                  <p className="mt-1 text-xs text-slate-600">
-                    {course.deliveryModel}
-                  </p>
-
-                  <div className="mt-3.5 space-y-2 text-[12px] text-slate-700 pt-3 border-t border-indigo-100/80">
-                    <div className="flex items-center gap-2">
-                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
-                      <span>Four 5-hour structured modules</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
-                      <span>Hands-on capstone assessment evidence</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
-                      <span>Verifiable digital badge & certificate</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" />
-                      <span>Tutor & mentor feedback included</span>
-                    </div>
-                  </div>
-                </div>
-
-                {isInCart(course.id) ? (
-                  <Link
-                    to="/cart"
-                    className="flex w-full items-center justify-center rounded-xl bg-[#5B4CF5] py-3.5 text-[15px] font-bold text-white shadow-[0_8px_20px_-8px_rgba(91,76,245,0.6)] transition-all hover:bg-[#4A3BE8]"
-                  >
-                    Go to cart
-                  </Link>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => addToCart(course.id)}
-                    className="w-full rounded-xl bg-[#3B82F6] py-3.5 text-[15px] font-bold text-white shadow-[0_8px_20px_-8px_rgba(59,130,246,0.6)] transition-all hover:bg-[#2563EB]"
-                  >
-                    Enroll Now
-                  </button>
-                )}
-
-                <p className="mt-4 text-center text-[10px] leading-relaxed text-gray-400">
-                  *Discount applies to the first year of membership, after which plans are converted to month-to-month.
-                </p>
-              </div>
-            </div>
+            <CoursePurchaseCard course={course} />
           </div>
         </div>
       </div>
-
-      {isPreviewOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-          <div
-            className="absolute inset-0 bg-black/80 backdrop-blur-md"
-            onClick={() => setIsPreviewOpen(false)}
-          />
-          <div className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-slate-950">
-            <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 py-4">
-              <h3 className="text-lg font-bold text-white">
-                Preview: <span className="font-normal opacity-80">{course.title}</span>
-              </h3>
-              <button
-                type="button"
-                onClick={() => setIsPreviewOpen(false)}
-                className="rounded-full bg-black/40 p-2 text-white/80 hover:bg-[#5B4CF5] hover:text-white"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-            <div className="aspect-video bg-black">
-              <video
-                src={course.previewVideoUrl || PREVIEW_VIDEO}
-                controls
-                autoPlay
-                controlsList="nodownload"
-                className="h-full w-full object-contain outline-none"
-              >
-                Your browser does not support HTML video.
-              </video>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

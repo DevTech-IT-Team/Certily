@@ -2,8 +2,8 @@ import {
   ArrowRight,
   Compass,
   MapPin,
+  Check,
   Play,
-  Sparkles,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -12,26 +12,19 @@ import avatarStand from "@/assets/avatars/stand.webp";
 import aboutBg from "@/assets/vbg.webp";
 import { VAvatar } from "./VAvatar";
 import { useV } from "./VContext";
-import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
 
 const DEMO_QUESTION =
   "Which pathway fits me in K–12, and where do I start?";
 
-/** Purple pointer cursor — matches CTA #5B4CF5 */
 function HeyGenCursor() {
   return (
-    <svg
-      viewBox="0 0 28 32"
-      className="h-9 w-8 drop-shadow-[0_6px_16px_rgba(91,76,245,0.45)]"
-      aria-hidden
-      fill="none"
-    >
+    <svg viewBox="0 0 24 24" className="h-6 w-6 drop-shadow-sm" aria-hidden>
       <path
-        d="M3 2.5v22.5l6.2-5.1 3.4 8.2 3.1-1.3-3.5-8.4h7.2L3 2.5z"
-        fill="#5B4CF5"
-        stroke="white"
-        strokeWidth="1.75"
+        d="M4 2.5 L4 18.2 L8.4 14.1 L11.2 21 L13.6 20 L10.7 13.2 L16.8 13.2 Z"
+        fill="#111827"
+        stroke="#fff"
+        strokeWidth="1.4"
         strokeLinejoin="round"
       />
     </svg>
@@ -289,7 +282,7 @@ export function VMentorSection() {
     <section
       id="meet-neo"
       data-v-section="v-mentor"
-      className="relative overflow-visible border-t border-border/40 bg-[#EEEEF8] py-16 sm:py-20"
+      className="relative overflow-visible border-t border-border/40 bg-[#EEEEF8] py-20 sm:py-24"
     >
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
         <img
@@ -312,34 +305,29 @@ export function VMentorSection() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(91,76,245,0.05),transparent_55%)] z-[1]" />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
-        <Reveal>
-          <div className="max-w-xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/95 px-3.5 py-1 text-xs font-bold tracking-wide text-[#0F1533] shadow-xs backdrop-blur-sm">
-              MEET <span className="text-[#5B4CF5]">NEO</span>
-            </span>
+        <div>
+          <div className="max-w-lg">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5B4CF5]">Meet NEO</p>
 
-            <h2 className="mt-4 font-display text-[2.2rem] md:text-[2.65rem] font-extrabold leading-[1.08] tracking-tight text-[#0F1533]">
-              Your 24/7<br />
-              <span className="text-[#5B4CF5]">AI Campus</span><br />
-              Guide & Mentor
+            <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-[#0F1533] sm:text-5xl">
+              Your 24/7
+              <span className="block text-[#5B4CF5]">AI Campus Guide</span>
             </h2>
 
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              NEO guides your learning journey, points you to custom pathways, assists in the AI Lab, and celebrates every milestone along the way.
+            <p className="mt-5 text-[15px] leading-relaxed text-[#5A607A] sm:text-base">
+              NEO points you to a pathway, helps in the AI Lab, and stays with you through each milestone.
             </p>
 
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-8 space-y-3.5">
               {[
-                "Personalized course & pathway recommendations.",
-                "Instant help with assignments and AI coding labs.",
-                "Keeps you on track with milestone celebrations.",
-                "24/7 answers to all your academic queries."
-              ].map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <div className="mt-1 shrink-0 rounded-full bg-[#5B4CF5]/10 p-1.5">
-                    <Sparkles className="h-4 w-4 text-[#5B4CF5]" />
-                  </div>
-                  <span className="text-[15px] font-medium text-[#1C1D1F]/90 leading-snug">{feature}</span>
+                "Course and pathway recommendations",
+                "Help with assignments and AI labs",
+                "Milestone check-ins along the way",
+                "Answers whenever you are stuck",
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-3 text-[15px] font-medium text-[#1C1D1F]">
+                  <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" strokeWidth={2.5} />
+                  {feature}
                 </li>
               ))}
             </ul>
@@ -347,17 +335,17 @@ export function VMentorSection() {
             <button
               type="button"
               onClick={openGuide}
-              className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_14px_40px_-14px_rgba(91,76,245,0.55)] transition-all hover:scale-[1.02] hover:bg-[#4A3BE8] active:scale-[0.98]"
+              className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white transition hover:bg-[#4A3BE8]"
             >
               Ask NEO anything
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.1} className="relative w-full overflow-visible">
+        <div className="relative w-full overflow-visible">
           <VShowcaseScene />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

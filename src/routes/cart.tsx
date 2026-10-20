@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCart } from "@/lib/CartContext";
 import { useCurrency } from "@/lib/CurrencyContext";
 import { COURSES_DATA } from "@/lib/courses";
-import { Star, Trash2, Plus } from "lucide-react";
+import { describeSelection, quoteCourses } from "@/lib/journey";
+import { Star } from "lucide-react";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/cart")({
@@ -16,12 +17,11 @@ export const Route = createFileRoute("/cart")({
 });
 
 function CartPage() {
-  const { cartItems, cartCount, cartTotal, removeFromCart } = useCart();
+  const { cartItems, cartTotal, removeFromCart, cartReady } = useCart();
   const { formatPrice, formatAmount } = useCurrency();
   const cartCourses = cartItems;
-  const totalPrice = cartTotal;
-  const totalOriginalPrice = cartTotal * (1 / 0.17);
-  // Recommended courses (not in cart)
+  const quote = quoteCourses(cartCourses);
+  const selection = describeSelection(cartCourses);
   const recommendedCourses = COURSES_DATA.filter(c => !cartItems.some(item => item.id === c.id)).slice(0, 4);
 
   const handleCheckout = () => {
@@ -48,15 +48,23 @@ function CartPage() {
     <div className="min-h-screen bg-white font-sans text-[#1C1D1F] pt-12 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
-        <h1 className="text-4xl font-bold text-[#1C1D1F] mb-8">Shopping Cart</h1>
+        <h1 className="text-4xl font-bold text-[#1C1D1F] mb-3">Review and checkout</h1>
+        <p className="mb-8 max-w-2xl text-sm leading-relaxed text-[#4B5168]">
+          {selection.title}. {selection.detail} Payment stays on the existing academy login. An order is not complete until that system confirms it.
+        </p>
         <div className="text-[#1C1D1F] font-bold text-[16px] mb-6 border-b border-black/10 pb-4">
-          {cartCourses.length} Course{cartCourses.length > 1 ? 's' : ''} in Cart
+          {cartReady ? `${cartCourses.length} certification${cartCourses.length === 1 ? "" : "s"}` : "Loading your selection"}
+          {cartCourses.length > 0 ? ` · ${quote.hours} learning hours` : ""}
         </div>
 
-        {cartCourses.length === 0 ? (
+        {!cartReady ? (
+          <p className="rounded-2xl border border-[#E7E5F2] bg-white px-6 py-10 text-sm text-[#4B5168]">
+            Loading the certifications in your selection.
+          </p>
+        ) : cartCourses.length === 0 ? (
           <div className="border border-gray-200 rounded-lg p-16 text-center flex flex-col items-center justify-center bg-white shadow-sm">
-            <h2 className="text-xl font-bold text-[#1C1D1F] mb-4">Your cart is empty</h2>
-            <p className="text-[#6A6F73] mb-8">Keep shopping to find a course and accelerate your career.</p>
+            <h2 className="text-xl font-bold text-[#1C1D1F] mb-4">Nothing is selected yet</h2>
+            <p className="text-[#6A6F73] mb-8">Choose one certification or build a pathway, then come back to checkout.</p>
             <Link 
               to="/learning"
               className="bg-[#5B4CF5] hover:bg-[#4A3BE8] text-white px-8 py-3.5 font-bold text-[15px] transition-all rounded-md shadow-sm"
@@ -118,17 +126,17 @@ function CartPage() {
             {/* Right Column: Checkout Sticky Sidebar */}
             <div className="lg:w-[300px] shrink-0">
               <div className="bg-white p-0 lg:sticky lg:top-24">
-                <div className="text-[14px] font-medium text-[#6A6F73] mb-1">Total:</div>
-                <div className="text-[1.75rem] font-bold text-[#1C1D1F] mb-1 tracking-tight leading-none">{formatAmount(totalPrice)}</div>
-                
-                <div className="flex items-center gap-2 mb-5 mt-1.5">
-                  <div className="text-[14px] text-[#6A6F73] line-through">
-                    {formatAmount(totalOriginalPrice)}
-                  </div>
-                  <div className="text-[14px] text-[#1C1D1F] font-medium">
-                    84% off
-                  </div>
-                </div>
+                <div className="text-[14px] font-medium text-[#6A6F73] mb-1">Listed total:</div>
+                <div className="text-[1.75rem] font-bold text-[#1C1D1F] mb-1 tracking-tight leading-none">{formatAmount(cartTotal)}</div>
+                {quote.listedDifference > 0 ? (
+                  <p className="mb-5 mt-2 text-[13px] leading-relaxed text-[#6A6F73]">
+                    Original listed prices add up to {formatAmount(quote.original)}. That difference is already on each certification. No extra bundle discount is applied.
+                  </p>
+                ) : (
+                  <p className="mb-5 mt-2 text-[13px] leading-relaxed text-[#6A6F73]">
+                    No additional bundle discount is configured.
+                  </p>
+                )}
 
                 <a 
                   href="https://lmsathena.com/login"
@@ -136,9 +144,12 @@ function CartPage() {
                 >
                   Checkout
                 </a>
-                <p className="text-center text-[12px] text-[#6A6F73] mt-3">
-                  Please log in to complete your enrollment.
+                <p className="text-center text-[12px] leading-relaxed text-[#6A6F73] mt-3">
+                  Continue to the academy login. This cart does not confirm payment.
                 </p>
+                <Link to="/learning/select" className="mt-3 block text-center text-[13px] font-bold text-[#5B4CF5]">
+                  Change certifications
+                </Link>
               </div>
             </div>
 

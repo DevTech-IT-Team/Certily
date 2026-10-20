@@ -32,6 +32,7 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as CourseCourseIdRouteImport } from './routes/course.$courseId'
 import { Route as LearningIndexRouteImport } from './routes/learning.index'
 import { Route as LearningPathwayIdRouteImport } from './routes/learning.$pathwayId'
+import { Route as LearningSelectRouteImport } from './routes/learning.select'
 import { Route as TopicTopicIdRouteImport } from './routes/topic.$topicId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -149,6 +150,11 @@ const LearningPathwayIdRoute = LearningPathwayIdRouteImport.update({
   path: '/learning/$pathwayId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearningSelectRoute = LearningSelectRouteImport.update({
+  id: '/learning/select',
+  path: '/learning/select',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TopicTopicIdRoute = TopicTopicIdRouteImport.update({
   id: '/topic/$topicId',
   path: '/topic/$topicId',
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/learning/select': typeof LearningSelectRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
   '/learning/': typeof LearningIndexRoute
 }
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/learning/select': typeof LearningSelectRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
   '/learning': typeof LearningIndexRoute
 }
@@ -231,6 +239,7 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/course/$courseId': typeof CourseCourseIdRoute
   '/learning/$pathwayId': typeof LearningPathwayIdRoute
+  '/learning/select': typeof LearningSelectRoute
   '/topic/$topicId': typeof TopicTopicIdRoute
   '/learning/': typeof LearningIndexRoute
 }
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/course/$courseId'
     | '/learning/$pathwayId'
+    | '/learning/select'
     | '/topic/$topicId'
     | '/learning/'
   fileRoutesByTo: FileRoutesByTo
@@ -285,6 +295,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/course/$courseId'
     | '/learning/$pathwayId'
+    | '/learning/select'
     | '/topic/$topicId'
     | '/learning'
   id:
@@ -311,6 +322,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/course/$courseId'
     | '/learning/$pathwayId'
+    | '/learning/select'
     | '/topic/$topicId'
     | '/learning/'
   fileRoutesById: FileRoutesById
@@ -338,6 +350,7 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   CourseCourseIdRoute: typeof CourseCourseIdRoute
   LearningPathwayIdRoute: typeof LearningPathwayIdRoute
+  LearningSelectRoute: typeof LearningSelectRoute
   TopicTopicIdRoute: typeof TopicTopicIdRoute
   LearningIndexRoute: typeof LearningIndexRoute
 }
@@ -505,6 +518,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearningPathwayIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learning/select': {
+      id: '/learning/select'
+      path: '/learning/select'
+      fullPath: '/learning/select'
+      preLoaderRoute: typeof LearningSelectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/topic/$topicId': {
       id: '/topic/$topicId'
       path: '/topic/$topicId'
@@ -538,6 +558,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   CourseCourseIdRoute: CourseCourseIdRoute,
   LearningPathwayIdRoute: LearningPathwayIdRoute,
+  LearningSelectRoute: LearningSelectRoute,
   TopicTopicIdRoute: TopicTopicIdRoute,
   LearningIndexRoute: LearningIndexRoute,
 }

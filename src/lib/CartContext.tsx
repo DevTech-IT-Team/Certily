@@ -20,10 +20,12 @@ const AddedToCartModal = lazy(() =>
 interface CartContextType {
   cartItems: CourseDetails[];
   addToCart: (courseId: string) => void;
+  addManyToCart: (courseIds: string[], options?: { silent?: boolean }) => void;
   removeFromCart: (courseId: string) => void;
   isInCart: (courseId: string) => boolean;
   cartCount: number;
   cartTotal: number;
+  cartReady: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -99,6 +101,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
     void loadCatalog();
   };
 
+  const addManyToCart = (courseIds: string[], options?: { silent?: boolean }) => {
+    setCartIds((prev) => {
+      const next = [...prev];
+      for (const courseId of courseIds) {
+        if (!next.includes(courseId)) next.push(courseId);
+      }
+      return next;
+    });
+    const last = courseIds[courseIds.length - 1];
+    if (last && !options?.silent) {
+      setLastAddedCourseId(last);
+      setIsModalOpen(true);
+    }
+    void loadCatalog();
+  };
+
   const removeFromCart = (courseId: string) => {
     setCartIds((prev) => prev.filter((id) => id !== courseId));
   };
@@ -114,7 +132,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, isInCart, cartCount, cartTotal }}
+      value={{
+        cartItems,
+        addToCart,
+        addManyToCart,
+        removeFromCart,
+        isInCart,
+        cartCount,
+        cartTotal,
+        cartReady: isLoaded && (cartIds.length === 0 || catalog !== null),
+      }}
     >
       {children}
       {isModalOpen ? (
