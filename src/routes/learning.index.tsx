@@ -3,6 +3,11 @@ import { DiscoveryLanding } from "@/components/discovery/DiscoveryLanding";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/learning/")({
+  validateSearch: (search: Record<string, unknown>): { stage?: string } => {
+    return {
+      stage: typeof search.stage === "string" ? search.stage : undefined,
+    };
+  },
   head: () =>
     pageHead({
       title: "Find a Learning Pathway",
@@ -14,5 +19,6 @@ export const Route = createFileRoute("/learning/")({
 });
 
 function LearningIndex() {
-  return <DiscoveryLanding />;
+  const { stage } = Route.useSearch();
+  return <DiscoveryLanding initialBandId={stage} />;
 }

@@ -7,6 +7,7 @@ import { COURSES_DATA, coursesForBand } from "@/lib/courses";
 import { CourseCatalogCard } from "./CourseCatalogCard";
 import {
   PATHWAY_LEVELS,
+  getPathwayThumbnail,
   type PathwayLevel,
   type PathwayLevelId,
 } from "@/lib/pathways";
@@ -157,12 +158,12 @@ export function PathwayBannersSection({
 
 function StagePath({ stages }: { stages: PathwayLevel[] }) {
   const stops = [
-    { id: "all", label: "All courses", sub: "30 certifications", image: coursesForBand("high")[0]?.image, accent: "#5B4CF5" },
+    { id: "all", label: "All courses", sub: "30 certifications", image: getPathwayThumbnail("all"), accent: "#5B4CF5" },
     ...stages.map((band) => ({
       id: band.id,
       label: band.shortLabel,
       sub: band.subLabel,
-      image: coursesForBand(band.id)[0]?.image,
+      image: getPathwayThumbnail(band.id) || band.thumbnail || coursesForBand(band.id)[0]?.image,
       accent: band.theme.accent,
     })),
   ];
@@ -171,7 +172,13 @@ function StagePath({ stages }: { stages: PathwayLevel[] }) {
     <>
     <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:hidden">
       {stops.map((stop) => (
-        <Link key={stop.id} to="/learning" className="flex flex-col">
+        <Link
+          key={stop.id}
+          to="/learning"
+          search={stop.id !== "all" ? { stage: stop.id } : undefined}
+          hash={stop.id !== "all" ? "courses-section" : undefined}
+          className="flex flex-col"
+        >
           <img src={stop.image} alt="" className="aspect-[4/5] w-full rounded-[1.2rem] object-cover" />
           <span className="mt-2 text-sm font-bold">{stop.label}</span>
         </Link>
@@ -189,6 +196,8 @@ function StagePath({ stages }: { stages: PathwayLevel[] }) {
         >
         <Link
           to="/learning"
+          search={stop.id !== "all" ? { stage: stop.id } : undefined}
+          hash={stop.id !== "all" ? "courses-section" : undefined}
           className="group flex flex-col"
           style={{ marginBottom: `${index * 1.1}rem` }}
         >

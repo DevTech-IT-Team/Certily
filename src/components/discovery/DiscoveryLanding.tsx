@@ -1,10 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
 import { coursesForBand } from "@/lib/courses";
 import { catalogBands } from "@/lib/journey";
-import { pathwayToRouteId } from "@/lib/pathways";
+import { getPathwayThumbnail, pathwayToRouteId } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 
 function stageName(id: string, label: string) {
@@ -12,29 +12,85 @@ function stageName(id: string, label: string) {
   return label;
 }
 
-export function DiscoveryLanding() {
+export function DiscoveryLanding({ initialBandId }: { initialBandId?: string }) {
   const bands = catalogBands();
   const catalog = useMemo(
     () => bands.flatMap((item) => coursesForBand(item.id).map((course) => ({ band: item, course }))),
     [bands],
   );
-  const [bandId, setBandId] = useState("all");
+
+  const getInitialBand = () => {
+    if (initialBandId) return initialBandId;
+    if (typeof window !== "undefined") {
+      const search = new URLSearchParams(window.location.search);
+      const stage = search.get("stage");
+      if (stage) return stage;
+      const hash = window.location.hash.replace("#", "");
+      if (hash && (hash === "all" || bands.some((b) => b.id === hash))) return hash;
+    }
+    return "all";
+  };
+
+  const [bandId, setBandId] = useState(getInitialBand);
   const visible = bandId === "all" ? catalog : catalog.filter((item) => item.band.id === bandId);
-  const [code, setCode] = useState(catalog[0]?.course.code ?? "");
+  const [code, setCode] = useState(() => {
+    const stage = getInitialBand();
+    const next = stage === "all" ? catalog : catalog.filter((item) => item.band.id === stage);
+    return next[0]?.course.code ?? catalog[0]?.course.code ?? "";
+  });
   const open = visible.find((item) => item.course.code === code) ?? visible[0] ?? catalog[0];
 
-  const chooseBand = (id: string) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSection = (behavior: ScrollBehavior = "smooth") => {
+    if (!sectionRef.current) return;
+    const navOffset = 84;
+    const targetY = sectionRef.current.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({
+      top: Math.max(0, targetY),
+      behavior,
+    });
+  };
+
+  const chooseBand = (id: string, shouldScroll = true) => {
     setBandId(id);
     const next = id === "all" ? catalog : catalog.filter((item) => item.band.id === id);
     setCode(next[0]?.course.code ?? "");
+
+    if (shouldScroll) {
+      setTimeout(() => {
+        scrollToSection("smooth");
+      }, 50);
+    }
   };
+
+  useEffect(() => {
+    const stageFromUrl = typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("stage")
+      : null;
+    const target = initialBandId || stageFromUrl;
+
+    if (target && target !== "all") {
+      chooseBand(target, false);
+
+      const t1 = setTimeout(() => scrollToSection("smooth"), 150);
+      const t2 = setTimeout(() => scrollToSection("smooth"), 400);
+      const t3 = setTimeout(() => scrollToSection("smooth"), 750);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
+    }
+  }, [initialBandId]);
 
   if (!open) return null;
   const { band, course } = open;
 
   return (
     <div className="min-h-screen bg-[#F6F5FB] text-[#12152B]">
-      <div className="bg-[#EEEDF6] pt-32 pb-[22vh]">
+      <div className="bg-[#EEEDF6] pt-32 pb-20 lg:pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -51,30 +107,30 @@ export function DiscoveryLanding() {
             <button
               type="button"
               onClick={() => chooseBand("all")}
-              className="group flex flex-col items-center"
+              className="group flex flex-col items-center cursor-pointer"
             >
               <span className={cn(
                 "relative block aspect-[4/5] w-full overflow-hidden rounded-[1.85rem] bg-[#EEEAF8] shadow-[0_18px_40px_-28px_rgba(15,21,51,0.8)] ring-1 ring-black/5 transition duration-500 group-hover:-translate-y-1",
                 bandId === "all" && "ring-2 ring-[#5B4CF5]",
               )}>
-                <span className="grid h-full w-full grid-cols-2">
-                  {["elementary", "middle", "high", "professional"].map((id) => (
-                    <img key={id} src={catalog.find((item) => item.band.id === id)?.course.image} alt="" className="h-full w-full object-cover" />
-                  ))}
-                </span>
+                <img
+                  src={getPathwayThumbnail("all")}
+                  alt="All courses"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
               </span>
               <span className={cn("mt-4 text-center font-display text-base font-bold leading-tight", bandId === "all" ? "text-[#5B4CF5]" : "text-[#0F1533]")}>All courses</span>
               <span className="mt-0.5 text-center text-[11px] font-semibold text-[#5B4CF5]">30 certifications</span>
             </button>
             {bands.map((item, index) => {
               const on = item.id === bandId;
-              const cover = coursesForBand(item.id)[0]?.image;
+              const cover = getPathwayThumbnail(item.id) || coursesForBand(item.id)[0]?.image;
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => chooseBand(item.id)}
-                  className={cn("group flex flex-col items-center", index % 2 === 0 && "lg:translate-y-8")}
+                  className={cn("group flex flex-col items-center cursor-pointer", index % 2 === 0 && "lg:translate-y-8")}
                 >
                   <span
                     className={cn(
@@ -95,9 +151,13 @@ export function DiscoveryLanding() {
       </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6">
+      <div
+        ref={sectionRef}
+        id="courses-section"
+        className="mx-auto max-w-7xl px-4 pb-24 pt-10 sm:pt-14 sm:px-6 scroll-mt-24"
+      >
         {bandId === "all" ? (
-          <div className="mt-8 space-y-16">
+          <div className="mt-4 space-y-16">
             {bands.map((itemBand) => {
               const stageCourses = catalog.filter((item) => item.band.id === itemBand.id);
               return (
@@ -131,13 +191,35 @@ export function DiscoveryLanding() {
             })}
           </div>
         ) : (
-        <div className="mt-8 grid items-start gap-6 lg:grid-cols-[1fr_300px]">
-          <AnimatePresence mode="wait">
-            <motion.article
-              key={course.code}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
+        <div className="mt-4 space-y-6">
+          <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-[#E7E5F1] pb-4">
+            <div>
+              <span
+                className="text-xs font-bold uppercase tracking-wider"
+                style={{ color: band.theme.accent }}
+              >
+                {stageName(band.id, band.shortLabel)} · {band.subLabel}
+              </span>
+              <h2 className="mt-1 font-display text-2xl font-bold text-[#0F1533] sm:text-3xl">
+                {stageName(band.id, band.shortLabel)} Certifications
+              </h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => chooseBand("all")}
+              className="text-xs font-semibold text-[#5B4CF5] transition hover:text-[#4A3BE8] hover:underline cursor-pointer"
+            >
+              ← Back to all courses
+            </button>
+          </div>
+
+          <div className="grid items-start gap-6 lg:grid-cols-[1fr_300px]">
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={course.code}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
               className="overflow-hidden rounded-[28px] bg-white ring-1 ring-[#E7E5F1]"
             >
@@ -211,6 +293,7 @@ export function DiscoveryLanding() {
               );
             })}
           </aside>
+        </div>
         </div>
         )}
       </div>

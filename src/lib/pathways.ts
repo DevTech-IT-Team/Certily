@@ -6,6 +6,28 @@ import {
   Rocket,
   Smile,
 } from "lucide-react";
+import allImg from "@/assets/pathway/all.jfif";
+import preelementaryImg from "@/assets/pathway/preelementary.jfif";
+import elementaryImg from "@/assets/pathway/elementary.jfif";
+import middleschoolImg from "@/assets/pathway/middleschool.jfif";
+import highschoolImg from "@/assets/pathway/highschool.jfif";
+import collegeImg from "@/assets/pathway/college.jfif";
+import professionalImg from "@/assets/pathway/professional.jfif";
+
+export const PATHWAY_THUMBNAILS: Record<string, string> = {
+  all: allImg,
+  "pre-elementary": preelementaryImg,
+  elementary: elementaryImg,
+  k5: elementaryImg,
+  middle: middleschoolImg,
+  high: highschoolImg,
+  college: collegeImg,
+  professional: professionalImg,
+};
+
+export function getPathwayThumbnail(id: string): string {
+  return PATHWAY_THUMBNAILS[id] || "";
+}
 
 export type PathwayLevelId =
   | "pre-elementary"
@@ -24,6 +46,7 @@ export type PathwayLevel = {
   badgeLabel: string;
   themeTagline: string;
   description: string;
+  thumbnail: string;
   focus: "launch" | "later";
   icon: LucideIcon;
   audience: string;
@@ -58,6 +81,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "Pre-elementary",
     subLabel: "Nursery–K-2",
     badgeLabel: "🎨 PRE-ELEMENTARY",
+    thumbnail: preelementaryImg,
     themeTagline: "Playful Algorithms, Early Coding & Smart Safety",
     description:
       "Build sequencing, patterns and instructions through play, screen-based block stories, smart device safety, and early AI awareness.",
@@ -98,6 +122,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "Elementary",
     subLabel: "Grades 3-5",
     badgeLabel: "📚 ELEMENTARY",
+    thumbnail: elementaryImg,
     themeTagline: "Coding Stories, Data Detectives & Young Inventors",
     description:
       "Strengthen block coding and computational thinking, build data literacy and privacy habits, explore sensors, and practice responsible GenAI.",
@@ -138,6 +163,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "Middle School",
     subLabel: "Grades 6–8",
     badgeLabel: "🎮 MIDDLE SCHOOL",
+    thumbnail: middleschoolImg,
     themeTagline: "Python Foundations, Data Literacy & AI Perception",
     description:
       "Transition to text programming, understand the data pipeline that powers AI, experiment with low-code models, and master cyber safety.",
@@ -178,6 +204,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "High School",
     subLabel: "Grades 9–12",
     badgeLabel: "🚀 HIGH SCHOOL",
+    thumbnail: highschoolImg,
     themeTagline: "Applied Python, Machine Learning & Capstone Portfolios",
     description:
       "Prepare for school-board and university pathways: software engineering repositories, ML model cards, GenAI grounding, and capstone defence.",
@@ -218,6 +245,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "College & Universities",
     subLabel: "Postsecondary",
     badgeLabel: "🎓 COLLEGE & UNIVERSITIES",
+    thumbnail: collegeImg,
     themeTagline: "AI & ML Foundations, Deep Learning & MLOps",
     description:
       "Bridge to undergraduate and graduate AI study: reproducible ML pipelines, data engineering, vision, NLP, governance, and research vivas.",
@@ -258,6 +286,7 @@ export const PATHWAY_LEVELS: PathwayLevel[] = [
     shortLabel: "Professional Courses",
     subLabel: "Workforce & Trainers",
     badgeLabel: "💼 PROFESSIONAL COURSES",
+    thumbnail: professionalImg,
     themeTagline: "Business AI Literacy, Prompt Design & Trainer Certification",
     description:
       "Enable sound AI adoption for leaders, master prompt engineering productivity, build no-code automations, manage AI products, and certify educators.",
