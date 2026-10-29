@@ -49,7 +49,7 @@ function PrivacyPolicy() {
           </p>
           <h2 className="mt-10 font-display text-2xl font-bold tracking-tight text-[#0F1533]">4. Contact Us</h2>
           <p className="mt-4">
-            If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at hello@certcia.com.
+            If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at letsconnect@certcia.com.
           </p>
         </div>
       </div>

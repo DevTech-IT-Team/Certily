@@ -58,7 +58,7 @@ function Contact() {
                 </div>
                 <ul className="divide-y divide-border/60 dark:divide-white/10">
                   {[
-                    { i: Mail, t: "Email", v: "hello@aicampus.io", hint: "Best for detailed questions" },
+                    { i: Mail, t: "Email", v: "letsconnect@certcia.com", hint: "Best for detailed questions" },
                     { i: Phone, t: "Phone", v: "+1 (415) 555-0142", hint: "9am–6pm PT" },
                     { i: MapPin, t: "Office", v: "548 Market St, San Francisco", hint: "Visits by appointment" },
                   ].map((c) => (

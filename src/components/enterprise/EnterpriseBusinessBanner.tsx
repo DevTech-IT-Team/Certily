@@ -17,9 +17,9 @@ export function EnterpriseBusinessBanner() {
           Our team will help you pick the right plan for your workforce.
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium text-white/75">
-          <a href="mailto:hello@aicampus.io" className="inline-flex items-center gap-2 hover:text-white">
+          <a href="mailto:letsconnect@certcia.com" className="inline-flex items-center gap-2 hover:text-white">
             <Mail className="h-4 w-4 text-[#4CD1B0]" />
-            hello@aicampus.io
+            letsconnect@certcia.com
           </a>
           <a href="tel:+14155550142" className="inline-flex items-center gap-2 hover:text-white">
             <Phone className="h-4 w-4 text-[#4CD1B0]" />

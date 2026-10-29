@@ -46,7 +46,7 @@ export function VProvider({ children }: { children: ReactNode }) {
       setReactionState(nextReaction);
     } else {
       const text = next.toLowerCase();
-      if (text.includes("hi") || text.includes("hello") || text.includes("hey") || text.includes("welcome")) {
+      if (text.includes("hi") || text.includes("v") || text.includes("hey") || text.includes("welcome")) {
         setReactionState("hi");
       } else if (text.includes("explore") || text.includes("map") || text.includes("click") || text.includes("tap") || text.includes("point") || text.includes("here is") || text.includes("unlock")) {
         setReactionState("point");
@@ -86,13 +86,13 @@ const SSR_V: VContextValue = {
   message: DEFAULT_V_MESSAGE,
   reaction: "hi",
   activeBuildingId: null,
-  setActiveBuildingId: () => {},
-  setMessage: () => {},
-  showTip: () => {},
+  setActiveBuildingId: () => { },
+  setMessage: () => { },
+  showTip: () => { },
   isPinned: () => false,
   floatingOpen: false,
-  setFloatingOpen: () => {},
-  setReaction: () => {},
+  setFloatingOpen: () => { },
+  setReaction: () => { },
 };
 
 export function useV() {

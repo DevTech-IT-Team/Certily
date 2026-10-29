@@ -23,12 +23,12 @@ function CookiePolicy() {
           <p>
             At Certcia, accessible from certcia.com, we use cookies and similar tracking technologies to track activity on our platform and hold certain information. This Cookie Policy explains what cookies are, how we use them, and your choices regarding cookies.
           </p>
-          
+
           <h2 className="mt-10 font-display text-2xl font-bold tracking-tight text-[#0F1533]">1. What are cookies?</h2>
           <p className="mt-4">
             Cookies are small files placed on your computer, mobile device, or any other device by a website, containing the details of your browsing history on that website among its many uses. They are widely used to make websites work or operate more efficiently, as well as to provide reporting information.
           </p>
-          
+
           <h2 className="mt-10 font-display text-2xl font-bold tracking-tight text-[#0F1533]">2. How we use cookies</h2>
           <p className="mt-4">
             We use cookies for various purposes, including:
@@ -53,7 +53,7 @@ function CookiePolicy() {
             If you have any questions about our Cookie Policy, please contact us at:
           </p>
           <ul className="mt-4 list-disc pl-8 space-y-2">
-            <li>By email: hello@certcia.com</li>
+            <li>By email: letsconnect@certcia.com</li>
           </ul>
         </div>
       </div>

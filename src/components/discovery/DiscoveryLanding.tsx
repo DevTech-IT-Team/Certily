@@ -172,16 +172,29 @@ export function DiscoveryLanding({ initialBandId }: { initialBandId?: string }) 
                         key={item.code}
                         to="/course/$courseId"
                         params={{ courseId: item.id }}
-                        className="overflow-hidden rounded-xl bg-white ring-1 ring-[#E7E5F1] transition hover:-translate-y-1"
+                        className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-[#E7E5F1] transition duration-200 hover:-translate-y-1 hover:ring-[#5B4CF5] hover:shadow-[0_16px_30px_-15px_rgba(91,76,245,0.2)]"
                       >
-                        <img src={item.image} alt="" className="h-48 w-full object-cover" />
-                        <span className="block p-4">
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                          />
+                        </div>
+                        <span className="flex flex-1 flex-col p-4 sm:p-5">
                           <span className="flex items-center gap-1 text-xs font-semibold text-[#7A8096]">
-                            {item.code}
-                            <Clock className="ml-auto h-3.5 w-3.5" />
-                            {item.hours}h
+                            <span className="font-bold text-[#5B4CF5]">{item.code}</span>
+                            <span className="mx-1 text-[#D8D6EE]">•</span>
+                            <span>{item.audience}</span>
+                            <Clock className="ml-auto h-3.5 w-3.5 text-[#9AA0B8]" />
+                            <span>{item.hours}h</span>
                           </span>
-                          <span className="mt-2 block font-display text-base font-semibold leading-snug">{item.title}</span>
+                          <span className="mt-2 block font-display text-base font-bold leading-snug text-[#0F1533] transition-colors group-hover:text-[#5B4CF5]">
+                            {item.title}
+                          </span>
+                          <p className="mt-2 text-xs leading-relaxed text-[#5A607A] line-clamp-2">
+                            {item.description}
+                          </p>
                         </span>
                       </Link>
                     ))}

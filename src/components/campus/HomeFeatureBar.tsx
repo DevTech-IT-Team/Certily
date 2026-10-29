@@ -1,61 +1,64 @@
-import { BookOpen, FlaskConical, Trophy, ShieldCheck } from "lucide-react";
+import { Compass, Code2, CheckCircle2, BadgeCheck } from "lucide-react";
 
 const JOURNEY_PILLARS = [
   {
-    icon: BookOpen,
-    title: "Structured Learning Paths",
-    description: "Beginner to Advanced",
-    bgClass: "bg-[#EDE9FF]",
-    textClass: "text-[#5B4CF5]",
+    icon: Compass,
+    title: "Structured Pathways",
+    description: "K–12 to Industry Tracks",
   },
   {
-    icon: FlaskConical,
+    icon: Code2,
     title: "Hands-on AI Labs",
-    description: "Practice. Build. Master.",
-    bgClass: "bg-[#E0F2FE]",
-    textClass: "text-[#0284C7]",
+    description: "Real Code with NEO Guidance",
   },
   {
-    icon: Trophy,
-    title: "Milestones & Achievements",
-    description: "Track. Earn. Celebrate.",
-    bgClass: "bg-[#FEF3C7]",
-    textClass: "text-[#D97706]",
+    icon: CheckCircle2,
+    title: "Milestone Artifacts",
+    description: "Verifiable Project Proof",
   },
   {
-    icon: ShieldCheck,
-    title: "Industry-Recognized Credentials",
-    description: "Prove Your Skills.",
-    bgClass: "bg-[#D1FAE5]",
-    textClass: "text-[#059669]",
+    icon: BadgeCheck,
+    title: "Global Standards",
+    description: "CBSE, IB, Cambridge & CSTA",
   },
 ] as const;
 
 export function HomeFeatureBar() {
   return (
-    <section id="pillars" data-v-section="pillars" className="bg-[#F0F1FA] px-4 pb-8 pt-0 sm:px-6 sm:pb-10">
+    <section
+      id="pillars"
+      data-v-section="pillars"
+      className="relative bg-[#EEEEF8] px-4 pb-8 pt-1 sm:px-6 sm:pb-10"
+    >
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-2xl border border-[#E4E2F0] bg-white px-5 py-5 shadow-sm sm:px-8 sm:py-6">
-          <ul className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-0">
-            {JOURNEY_PILLARS.map(({ title, description, icon: Icon, bgClass, textClass }, i) => (
-              <li
-                key={title}
-                className={`flex flex-1 items-start gap-3.5 ${
-                  i > 0 ? "lg:border-l lg:border-[#ECEAF8] lg:pl-6" : ""
-                }`}
-              >
-                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${bgClass} ${textClass}`}>
-                  <Icon className="h-5 w-5" strokeWidth={2} />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:flex lg:items-center lg:justify-between">
+          {JOURNEY_PILLARS.map(({ icon: Icon, title, description }, i) => (
+            <div key={title} className="contents">
+              <div className="group flex flex-1 items-center justify-center gap-3.5 rounded-xl px-3 py-2 transition-all duration-200 hover:bg-white/40">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#DDD9EC] bg-white text-[#5B4CF5] shadow-2xs transition-all duration-200 group-hover:scale-105 group-hover:border-[#5B4CF5] group-hover:bg-[#5B4CF5] group-hover:text-white">
+                  <Icon className="h-4.5 w-4.5" strokeWidth={1.9} />
                 </div>
-                <div className="min-w-0 pt-0.5">
-                  <p className="text-sm font-semibold leading-tight text-[#0F1533]">{title}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-[#6B7280]">{description}</p>
+                <div className="min-w-0 text-left">
+                  <p className="font-display text-[13.5px] font-bold leading-tight text-[#0F1533] transition-colors group-hover:text-[#5B4CF5] whitespace-nowrap">
+                    {title}
+                  </p>
+                  <p className="mt-0.5 text-[11.5px] font-medium leading-tight text-[#646A85] whitespace-nowrap">
+                    {description}
+                  </p>
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
+              {i < JOURNEY_PILLARS.length - 1 && (
+                <span
+                  className="hidden lg:block h-6 w-px bg-[#D6D2E7] shrink-0"
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
+

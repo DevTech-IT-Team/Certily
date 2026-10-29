@@ -1,14 +1,8 @@
-import {
-  ArrowRight,
-  Compass,
-  MapPin,
-  Check,
-  Play,
-} from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import vVideo from "@/assets/certcia.webm";
-import avatarStand from "@/assets/avatars/stand.webp";
+import vVideo from "@/assets/Neo.webm";
 import aboutBg from "@/assets/vbg.webp";
 import { VAvatar } from "./VAvatar";
 import { useV } from "./VContext";
@@ -38,10 +32,22 @@ function VShowcaseScene() {
   const guidanceRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
-  const [typed, setTyped] = useState("");
+  const videoMediaRef = useRef<HTMLVideoElement>(null);
+  const typedTextRef = useRef<HTMLSpanElement>(null);
   const [activeCard, setActiveCard] = useState<
     "identity" | "guidance" | "question" | "video" | null
   >(null);
+
+  useEffect(() => {
+    const v = videoMediaRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    const playPromise = v.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -54,7 +60,7 @@ function VShowcaseScene() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      setTyped(DEMO_QUESTION);
+      if (typedTextRef.current) typedTextRef.current.textContent = DEMO_QUESTION;
       return;
     }
 
@@ -74,10 +80,16 @@ function VShowcaseScene() {
     const buildTimeline = () => {
       ctx?.revert();
       tl?.kill();
-      gsap.set(cursor, { x: 12, y: 36, opacity: 0, scale: 1, transformOrigin: "0% 0%" });
+      window.clearInterval(typingTimer);
 
       ctx = gsap.context(() => {
-        tl = gsap.timeline({ repeat: -1, repeatDelay: 1.2 });
+        tl = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 1.2,
+          onRepeat: () => {
+            tl?.invalidate();
+          },
+        });
 
         const moveTo = (
           el: HTMLElement,
@@ -104,40 +116,44 @@ function VShowcaseScene() {
 
         const typeQuestion = () => {
           tl!.add(() => {
-            setTyped("");
+            if (typedTextRef.current) typedTextRef.current.textContent = "";
             let i = 0;
             window.clearInterval(typingTimer);
             typingTimer = window.setInterval(() => {
               i += 1;
-              setTyped(DEMO_QUESTION.slice(0, i));
+              if (typedTextRef.current) {
+                typedTextRef.current.textContent = DEMO_QUESTION.slice(0, i);
+              }
               if (i >= DEMO_QUESTION.length) window.clearInterval(typingTimer);
-            }, 28);
+            }, 26);
           });
-          tl!.to({}, { duration: DEMO_QUESTION.length * 0.028 + 0.55 });
+          tl!.to({}, { duration: DEMO_QUESTION.length * 0.026 + 0.6 });
         };
 
-        tl.to(cursor, { opacity: 1, duration: 0.3 });
+        // Reset cursor to start on every repeat
+        tl.set(cursor, { x: 12, y: 36, opacity: 0, scale: 1, transformOrigin: "0% 0%" });
+        tl.to(cursor, { opacity: 1, duration: 0.35 });
 
-        moveTo(identity, "identity", 0.88, 0.52);
+        moveTo(identity, "identity", 0.75, 0.5);
         click();
         tl.to({}, { duration: 0.25 });
 
-        moveTo(guidance, "guidance", 0.72, 0.42);
+        moveTo(guidance, "guidance", 0.65, 0.45);
         click();
         tl.to({}, { duration: 0.2 });
 
-        moveTo(question, "question", 0.8, 0.68);
+        moveTo(question, "question", 0.75, 0.65);
         click();
         typeQuestion();
 
-        moveTo(video, "video", 0.86, 0.78);
+        moveTo(video, "video", 0.55, 0.7);
         click();
         tl.to({}, { duration: 0.35 });
 
-        tl.to(cursor, { opacity: 0, duration: 0.3 });
+        tl.to(cursor, { opacity: 0, duration: 0.35 });
         tl.add(() => {
           setActiveCard(null);
-          setTyped("");
+          if (typedTextRef.current) typedTextRef.current.textContent = DEMO_QUESTION;
         });
       }, stage);
     };
@@ -147,7 +163,7 @@ function VShowcaseScene() {
       buildTimeline();
     };
 
-    const startDelay = window.setTimeout(buildTimeline, 700);
+    const startDelay = window.setTimeout(buildTimeline, 600);
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -184,32 +200,25 @@ function VShowcaseScene() {
           <span className="text-[13px] font-semibold text-foreground sm:text-sm">Your guide</span>
         </div>
 
-        {/* Video — centered on mobile, right collage on sm+ */}
+        {/* Avatar Video — transparent background, standing freely with NO zoom effect */}
         <div
           ref={videoRef}
-          className={cn(
-            "relative z-[1] mx-auto w-full max-w-[12.5rem] overflow-hidden rounded-[1.5rem] border bg-[#0F1533] shadow-[0_28px_60px_-22px_rgba(15,21,51,0.45)] transition-all duration-300 sm:absolute sm:right-0 sm:top-8 sm:mx-0 sm:w-[55%] sm:max-w-[18rem] lg:max-w-[19.5rem]",
-            activeCard === "video"
-              ? "border-[#5B4CF5]/35 shadow-[0_32px_64px_-20px_rgba(91,76,245,0.32)]"
-              : "border-border/50"
-          )}
+          className="relative z-[1] mx-auto w-full max-w-[13.5rem] sm:absolute sm:right-12 sm:top-1 sm:mx-0 sm:w-[56%] sm:max-w-[19.5rem] lg:right-18 lg:top-0 lg:max-w-[22rem]"
         >
-          <div className="relative aspect-[3/4] w-full">
+          <div className="relative aspect-[3/4] w-full flex items-end justify-center">
             <video
+              ref={videoMediaRef}
               src={vVideo}
               autoPlay
               loop
               muted
               playsInline
-              preload="none"
-              poster={avatarStand}
-              className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[center_74%]"
+              preload="auto"
+              className="h-full w-full object-contain object-bottom drop-shadow-[0_20px_35px_rgba(15,21,51,0.2)]"
               aria-label="NEO campus guide preview"
-            />
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#0F1533]/95 to-transparent"
-              aria-hidden
-            />
+            >
+              <source src={vVideo} type="video/webm" />
+            </video>
           </div>
         </div>
 
@@ -246,9 +255,9 @@ function VShowcaseScene() {
         >
           <p className="font-display text-[13px] font-bold text-foreground sm:text-sm">Your question</p>
           <p className="mt-2 min-h-[2.75rem] text-[11px] leading-snug text-foreground/85 sm:min-h-[3rem] sm:text-xs">
-            {typed.length > 0 ? typed : activeCard === "question" ? "" : DEMO_QUESTION}
+            <span ref={typedTextRef}>{DEMO_QUESTION}</span>
             {activeCard === "question" && (
-              <span className="ml-0.5 inline-block h-3.5 w-0.5 animate-pulse bg-[#5B4CF5]" />
+              <span className="ml-0.5 inline-block h-3.5 w-0.5 animate-pulse bg-[#5B4CF5] align-middle" />
             )}
           </p>
         </div>
@@ -256,8 +265,7 @@ function VShowcaseScene() {
         {/* Cursor — animates across stacked mobile + collage desktop */}
         <div
           ref={cursorRef}
-          className="pointer-events-none absolute left-0 top-0 z-[100] will-change-transform"
-          style={{ transform: "translate3d(0,0,0)" }}
+          className="pointer-events-none absolute left-0 top-0 z-[100] will-change-transform opacity-0"
         >
           <HeyGenCursor />
         </div>
@@ -307,39 +315,64 @@ export function VMentorSection() {
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-16">
         <div>
           <div className="max-w-lg">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5B4CF5]">Meet NEO</p>
-
-            <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-[#0F1533] sm:text-5xl">
-              Your 24/7
-              <span className="block text-[#5B4CF5]">AI Campus Guide</span>
-            </h2>
-
-            <p className="mt-5 text-[15px] leading-relaxed text-[#5A607A] sm:text-base">
-              NEO points you to a pathway, helps in the AI Lab, and stays with you through each milestone.
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#5B4CF5]">
+              Campus Companion
             </p>
 
-            <ul className="mt-8 space-y-3.5">
-              {[
-                "Course and pathway recommendations",
-                "Help with assignments and AI labs",
-                "Milestone check-ins along the way",
-                "Answers whenever you are stuck",
-              ].map((feature) => (
-                <li key={feature} className="flex items-center gap-3 text-[15px] font-medium text-[#1C1D1F]">
-                  <Check className="h-4 w-4 shrink-0 text-[#5B4CF5]" strokeWidth={2.5} />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <h2 className="mt-2.5 font-display text-3xl font-extrabold tracking-tight text-[#0F1533] sm:text-4xl lg:text-[2.65rem] leading-[1.15]">
+              Meet <span className="text-[#5B4CF5]">NEO</span>, your guide
+              <span className="block text-[#5B4CF5]">across the Certcia campus</span>
+            </h2>
 
-            <button
-              type="button"
-              onClick={openGuide}
-              className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white transition hover:bg-[#4A3BE8]"
-            >
-              Ask NEO anything
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </button>
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#5A607A]">
+              Your personal AI companion to navigate learning tracks, master hands-on labs, and stay on track for capstone milestones.
+            </p>
+
+            {/* Clean, Non-Texty Highlights */}
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-xs font-bold text-[#5B4CF5]">
+                  1
+                </span>
+                <span className="text-sm font-semibold text-[#0F1533]">
+                  Curriculum &amp; pathway recommendations
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-xs font-bold text-[#5B4CF5]">
+                  2
+                </span>
+                <span className="text-sm font-semibold text-[#0F1533]">
+                  Hands-on AI lab guidance &amp; walkthroughs
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#5B4CF5]/10 text-xs font-bold text-[#5B4CF5]">
+                  3
+                </span>
+                <span className="text-sm font-semibold text-[#0F1533]">
+                  Capstone milestones &amp; credential readiness
+                </span>
+              </div>
+            </div>
+
+            {/* Grounded Action & Status Row */}
+            <div className="mt-8 flex flex-wrap items-center gap-3.5">
+              <Link
+                to="/learning"
+                className="group inline-flex h-12 items-center gap-2.5 rounded-full bg-[#5B4CF5] px-7 text-sm font-bold text-white shadow-[0_8px_24px_-6px_rgba(91,76,245,0.45)] transition-all duration-200 hover:bg-[#4A3BE8] hover:shadow-[0_12px_28px_-6px_rgba(91,76,245,0.55)] hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>Explore Learning Pathways</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+
+              {/* <div className="inline-flex items-center gap-2 rounded-full border border-[#D8D6EE] bg-white/90 px-3.5 py-2 text-xs font-semibold text-[#5A607A] shadow-xs">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#5B4CF5]" />
+                <span>Interactive Guide · In Development</span>
+              </div> */}
+            </div>
           </div>
         </div>
 

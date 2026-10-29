@@ -1,3 +1,30 @@
+import playfulAlgorithmsImg from "@/assets/pre-elementary/Playful Algorithms and Patterns.jpg";
+import creativeCodingImg from "@/assets/pre-elementary/Creative Coding with Blocks.jpg";
+import digitalSafetyImg from "@/assets/pre-elementary/Digital Safety and Smart Devices.jpg";
+import earlyRoboticsImg from "@/assets/pre-elementary/Early Robotics and Logic.png";
+import aiAroundUsImg from "@/assets/pre-elementary/AI Around Us People, Pictures and Voices.png";
+
+import codingStoriesImg from "@/assets/elementary/Coding Stories, Games and Animations.png";
+import dataDetectivesImg from "@/assets/elementary/Data Detectives and Digital Citizenship.jpg";
+import youngInventorsImg from "@/assets/elementary/Young Inventors Robotics and Sensors.jpg";
+import aiExplorersImg from "@/assets/elementary/AI Explorers Learning from Data.jpg";
+import responsibleGenAiImg from "@/assets/elementary/Responsible Generative AI for Learners.jpeg";
+
+import howAiWorksImg from "@/assets/middle/How AI Works Perception, Learning and Language.jfif";
+import webAppPrototypingImg from "@/assets/middle/Web, App and Physical-Computing Prototyping.jfif";
+
+import appliedPythonImg from "@/assets/high/Applied Python, Algorithms and Software Engineering.jfif";
+import mlFoundationsImg from "@/assets/high/Machine Learning Foundations and Evaluation.jfif";
+import genAiMediaLitImg from "@/assets/high/Generative AI, Language and Media Literacy.jfif";
+import dataScienceSocialImg from "@/assets/high/Data Science for Social and Scientific Problems.jfif";
+import aiProductCapstoneImg from "@/assets/high/AI Product Design, Robotics and Capstone.jfif";
+
+import collegeAiMlFoundationsImg from "@/assets/college/AI and Machine Learning Foundations.jpg";
+import collegeDataEngImg from "@/assets/college/Data Engineering, Analytics and Visualisation.jpg";
+import collegeDeepLearningImg from "@/assets/college/Deep Learning, Computer Vision and NLP.jpg";
+import collegeResponsibleAiImg from "@/assets/college/Responsible AI, Governance and Policy.jpg";
+import collegeMlopsCapstoneImg from "@/assets/college/AI Research, MLOps and Portfolio Capstone.jfif";
+
 export interface RawProgram {
   category:
   | "Pre-elementary"
@@ -47,14 +74,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Playful Algorithms and Patterns",
     audience: "Nursery–K-2",
     prerequisites: "None",
-    purpose: "Build sequencing, patterns and instructions through play",
-    module1: "Stories, songs and patterns",
-    module2: "Unplugged algorithms and sorting",
-    module3: "Inputs, outputs and cause/effect",
-    module4: "Team challenge and reflection",
+    purpose:
+      "Spark early computational thinking through rhythm songs, tactile puzzle games, and hands-on pattern activities that turn everyday play into joyful problem solving.",
+    module1: "Storybook puzzles, rhythm songs, and color patterns",
+    module2: "Hands-on sorting adventures and unplugged mazes",
+    module3: "Cause, effect, and curious picture machines",
+    module4: "Playful team challenges and show-and-tell reflection",
     learningOutcomes:
-      "Sequence instructions; identify patterns; explain input/output; collaborate",
-    assessmentEvidence: "Picture algorithm, sorting task, oral explanation",
+      "Spot repeating patterns in daily life; assemble visual step-by-step instructions; explore cause and effect with friends",
+    assessmentEvidence:
+      "Picture algorithm journey map, tactile sorting challenge, and a guided show-and-tell",
     syllabusAlignment:
       "Early-years reasoning, computational thinking and digital readiness",
     facilitatorHours: 14,
@@ -64,8 +93,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹1,999",
     originalPrice: "₹3,999",
-    image:
-      "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80",
+    image: playfulAlgorithmsImg,
     bestseller: true,
   },
   {
@@ -75,14 +103,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Creative Coding with Blocks",
     audience: "K-1–K-2",
     prerequisites: "Basic device use",
-    purpose: "Introduce screen-based coding through stories and animation",
-    module1: "Sprites, scenes and events",
-    module2: "Sequences and loops",
-    module3: "Conditions, messages and debugging",
-    module4: "Create and present a mini story/game",
+    purpose:
+      "Bring stories to life with visual tap-and-snap coding blocks, animating colorful characters and building playful mini-games with zero typing needed.",
+    module1: "Meet the sprites: backgrounds, characters, and happy taps",
+    module2: "Dance loops, musical sequences, and character steps",
+    module3: "Action triggers, fun sound effects, and simple debugging",
+    module4: "Build and narrate your very own animated storybook",
     learningOutcomes:
-      "Working block project, annotated sequence, show-and-tell",
-    assessmentEvidence: "Early programming, logic, creativity and communication",
+      "Snap together block sequences; trigger animations with touch events; express imaginative ideas through interactive media",
+    assessmentEvidence:
+      "Playable animated story project, creative character sequence, and an oral storytelling walkthrough",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -92,8 +122,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹1,999",
     originalPrice: "₹3,999",
-    image:
-      "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+    image: creativeCodingImg,
   },
   {
     category: "Pre-elementary",
@@ -102,13 +131,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Digital Safety and Smart Devices",
     audience: "Nursery–K-2",
     prerequisites: "None",
-    purpose: "Develop safe, kind and purposeful device use",
-    module1: "Device parts and safe handling",
-    module2: "Privacy, passwords and asking for help",
-    module3: "Smart assistants, robots and human choice",
-    module4: "Safety poster and role-play",
-    learningOutcomes: "Safe-use routine, role-play, poster",
-    assessmentEvidence: "Digital citizenship, online safety and human agency",
+    purpose:
+      "Empower young digital explorers to use screens mindfully, build healthy screen-time habits, protect their personal boundaries, and always know when to ask a trusted adult.",
+    module1: "Smart devices at home: screen balance and kind handling",
+    module2: "Secret passcodes, personal boundaries, and asking grown-ups",
+    module3: "Voice helpers, robotic assistants, and human choices",
+    module4: "Kind digital citizenship badges and safety role-play",
+    learningOutcomes:
+      "Practice gentle device care; recognize personal information boundaries; choose intentional and creative screen activities",
+    assessmentEvidence:
+      "Illustrated family safety pledge, classroom role-play scenario, and friendly device habit badge",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -118,8 +150,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹1,999",
     originalPrice: "₹3,999",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+    image: digitalSafetyImg,
   },
   {
     category: "Pre-elementary",
@@ -128,13 +159,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Early Robotics and Logic",
     audience: "K-2",
     prerequisites: "P1 recommended",
-    purpose: "Use programmable toys or simulations to practise logic",
-    module1: "Robot commands and routes",
-    module2: "Sensors, movement and outputs",
-    module3: "Loops and simple conditions",
-    module4: "Obstacle-course challenge",
-    learningOutcomes: "Robot route, explanation, observation",
-    assessmentEvidence: "Inputs/outputs, algorithms and physical computing",
+    purpose:
+      "Discover how physical robots perceive the world by guiding tactile robotic toys through colorful floor mazes using light, sound, and sequence commands.",
+    module1: "Robot adventures: steering with arrows and directional cards",
+    module2: "Sensors in action: feeling obstacles and following colorful lines",
+    module3: "Looping laps and solving fun floor puzzle pathways",
+    module4: "The Great Robot Rescue: cooperative obstacle course challenge",
+    learningOutcomes:
+      "Translate path directions into robotic commands; debug wrong turns with patience; understand how physical machines take inputs and produce motion",
+    assessmentEvidence:
+      "Working robot navigation run, mapped route sketch, and live demonstration for peers",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -144,8 +178,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹1,999",
     originalPrice: "₹3,999",
-    image:
-      "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=800&q=80",
+    image: earlyRoboticsImg,
   },
   {
     category: "Pre-elementary",
@@ -155,14 +188,15 @@ export const RAW_PROGRAMS: RawProgram[] = [
     audience: "K-2",
     prerequisites: "P1 recommended",
     purpose:
-      "Introduce AI awareness without model training or child accounts",
-    module1: "Where children see AI",
-    module2: "Pictures, voices and recommendations",
-    module3: "What machines do well/poorly",
-    module4: "Human-check and reflection",
+      "Demystify artificial intelligence for curious young minds by exploring how machines recognize photos, hear voices, and help humans solve playful everyday challenges.",
+    module1: "Magical tech or clever computer? Spotting smart helpers around us",
+    module2: "How cameras see faces and microphones hear friendly voices",
+    module3: "What computers do super fast and where they still need humans",
+    module4: "The Human-Check detective challenge and future inventor gallery",
     learningOutcomes:
-      "Sort examples into human/machine/both; explain checking",
-    assessmentEvidence: "Picture sort, oral explanation, teacher observation",
+      "Distinguish natural human creativity from computer pattern recognition; celebrate how smart tools assist people; cultivate curious questions about technology",
+    assessmentEvidence:
+      "Human versus machine picture sorting gallery, hands-on detective case, and teacher-guided reflection",
     syllabusAlignment:
       "AI awareness, perception, natural interaction and critical thinking",
     facilitatorHours: 14,
@@ -172,8 +206,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹1,999",
     originalPrice: "₹3,999",
-    image:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    image: aiAroundUsImg,
   },
 
   // ==========================================
@@ -186,14 +219,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Coding Stories, Games and Animations",
     audience: "Grades 3-5",
     prerequisites: "P2 or equivalent",
-    purpose: "Strengthen block coding and computational thinking",
-    module1: "Events, loops and variables",
-    module2: "Conditions, messages and functions",
-    module3: "Debugging and user feedback",
-    module4: "Original game/story project",
-    learningOutcomes: "Working program, algorithm, debugging log",
+    purpose:
+      "Design interactive arcade games, animated adventures, and creative musical projects while mastering real computational logic with loops, variables, and broadcast messages.",
+    module1: "Game loops, player scores, and dynamic variables",
+    module2: "Conditional branching, secret keys, and event broadcasts",
+    module3: "Playtesting, player feedback, and systematic debugging",
+    module4: "Launch your original playable game and story showcase",
+    learningOutcomes:
+      "Construct working multi-level games; implement variables and game physics; document and fix code bugs with confidence",
     assessmentEvidence:
-      "Programming, algorithms, decomposition and creativity",
+      "Playable block-based game, interactive story project, and a recorded code walkthrough",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -203,8 +238,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,499",
     originalPrice: "₹4,999",
-    image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+    image: codingStoriesImg,
     bestseller: true,
   },
   {
@@ -214,14 +248,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Data Detectives and Digital Citizenship",
     audience: "Grades 3-5",
     prerequisites: "Basic spreadsheet or coding",
-    purpose: "Build data literacy, privacy and source-checking habits",
-    module1: "Data types and collection",
-    module2: "Sorting, charts and patterns",
-    module3: "Privacy, consent and misinformation",
-    module4: "Team investigation and presentation",
-    learningOutcomes: "Dataset, chart, source-check and privacy pledge",
+    purpose:
+      "Uncover real-world stories hidden in data, craft colorful visual charts, and build savvy digital citizenship habits to navigate information, privacy, and online truth.",
+    module1: "Detective field notes: gathering and structuring authentic data",
+    module2: "Visual storytelling: charts, graphs, and trend discovery",
+    module3: "Spotting misinformation, protecting privacy, and digital ethics",
+    module4: "Collaborative data investigation and interactive presentation",
+    learningOutcomes:
+      "Collect and clean data responsibly; build clear visual charts; evaluate source credibility; commit to safe online practices",
     assessmentEvidence:
-      "Data literacy, safety, communication and responsible technology",
+      "Visual data infographic, verified source checklist, and a classroom digital citizenship pledge",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -231,8 +267,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,499",
     originalPrice: "₹4,999",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    image: dataDetectivesImg,
   },
   {
     category: "Elementary",
@@ -241,13 +276,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Young Inventors: Robotics and Sensors",
     audience: "Grades 3-5",
     prerequisites: "E1 recommended",
-    purpose: "Apply coding to physical systems and engineering design",
-    module1: "Circuits, sensors and actuators",
-    module2: "Control logic and block coding",
-    module3: "Design, build and test",
-    module4: "Prototype challenge and reflection",
-    learningOutcomes: "Prototype/simulator, system diagram, test table",
-    assessmentEvidence: "Physical computing, design thinking and systems",
+    purpose:
+      "Step into the shoes of a hardware engineer by connecting circuits, microcontrollers, and smart environmental sensors to solve real-world community challenges.",
+    module1: "Tinkering with circuits: breadboards, lights, and buzzer signals",
+    module2: "Sensor intelligence: reading light, motion, and temperature",
+    module3: "Microcontroller code: logic rules that react to the physical world",
+    module4: "Smart invention showcase: working prototype and peer demonstration",
+    learningOutcomes:
+      "Wire functional input-output circuits; write logic that responds to live sensors; iterate on physical hardware prototypes",
+    assessmentEvidence:
+      "Working sensor-driven invention, schematic system diagram, and engineering test log",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -257,8 +295,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,499",
     originalPrice: "₹4,999",
-    image:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    image: youngInventorsImg,
   },
   {
     category: "Elementary",
@@ -267,14 +304,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "AI Explorers: Learning from Data",
     audience: "Grades 3-5",
     prerequisites: "E2 recommended",
-    purpose: "Explain data, patterns, predictions and model limitations",
-    module1: "Examples of classification",
-    module2: "Training examples and labels",
-    module3: "Predictions, errors and fairness",
-    module4: "No-code model experiment",
-    learningOutcomes: "Model experiment, error log, concept map",
+    purpose:
+      "Peek behind the curtain of machine learning by training custom vision and sound models with your own data, examining how computers make predictions and why fairness matters.",
+    module1: "How machines learn: training examples, classes, and labels",
+    module2: "Collecting balanced datasets and training vision classifiers",
+    module3: "Testing model confidence, prediction errors, and algorithmic fairness",
+    module4: "Interactive AI detector project and societal impact reflection",
+    learningOutcomes:
+      "Train, evaluate, and test a real machine learning classifier; spot dataset bias and blind spots; explain how models classify unseen data",
     assessmentEvidence:
-      "AI4K12 learning, representation, data and societal impact",
+      "Working interactive model demo, model confidence analysis, and an ethical AI concept map",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -284,8 +323,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,499",
     originalPrice: "₹4,999",
-    image:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    image: aiExplorersImg,
   },
   {
     category: "Elementary",
@@ -294,14 +332,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Responsible Generative AI for Learners",
     audience: "Grades 4-5",
     prerequisites: "E2 recommended; teacher mediated",
-    purpose: "Use generative tools critically, safely and creatively",
-    module1: "Prompts and generated patterns",
-    module2: "Checking facts and hallucinations",
-    module3: "Attribution, privacy and inclusion",
-    module4: "Human-reviewed creative artefact",
-    learningOutcomes: "Prompt journal, verification checklist, final artefact",
+    purpose:
+      "Unlock the creative power of generative AI tools responsibly, mastering effective prompt engineering, rigorous fact-checking, copyright awareness, and original storytelling.",
+    module1: "Prompt crafting: guiding language and visual generative models",
+    module2: "Detective checks: spotting hallucinations and verifying sources",
+    module3: "Respecting creators: intellectual property, bias, and privacy",
+    module4: "Co-creating an original verified multimedia publication",
+    learningOutcomes:
+      "Formulate clear, iterative prompts; apply fact-checking protocols to AI outputs; produce creative artifacts that cite sources and uphold ethical standards",
     assessmentEvidence:
-      "AI literacy, media literacy, ethics and human-centred design",
+      "Verified prompt and generation portfolio, fact-check audit trail, and human-curated final showcase",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -311,8 +351,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,499",
     originalPrice: "₹4,999",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    image: responsibleGenAiImg,
   },
 
   // ==========================================
@@ -326,15 +365,15 @@ export const RAW_PROGRAMS: RawProgram[] = [
     audience: "Grades 6-8",
     prerequisites: "Basic typing and maths",
     purpose:
-      "Transition to text programming and systematic problem solving",
-    module1: "Variables and syntax",
-    module2: "Conditions, loops and functions",
-    module3: "Lists, files and debugging",
-    module4: "Mini-project and code review",
+      "Transition from visual blocks to real-world Python coding, writing expressive algorithms, building interactive text games, and learning professional debugging techniques.",
+    module1: "Syntax and logic: writing your first clean Python scripts",
+    module2: "Dynamic control flow: loops, conditional branches, and custom functions",
+    module3: "Organizing data: lists, dictionaries, file I/O, and test cases",
+    module4: "Interactive capstone project and collaborative code review",
     learningOutcomes:
-      "Readable Python, data structures, tests, algorithm explanation",
+      "Write clean, readable Python scripts; architect robust data structures; test and debug code systematically",
     assessmentEvidence:
-      "Programming, algorithms, debugging and problem solving",
+      "Working Python software project, test suite, and peer code review report",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -355,13 +394,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Data Literacy and Visualisation",
     audience: "Grades 6-8",
     prerequisites: "M1 or equivalent",
-    purpose: "Teach the data pipeline that supports AI",
-    module1: "Data types and collection",
-    module2: "Cleaning and missing values",
-    module3: "Charts and basic statistics",
-    module4: "Data story and peer critique",
-    learningOutcomes: "Clean dataset, chart, data dictionary, limitations",
-    assessmentEvidence: "Data analysis, visualisation, bias and communication",
+    purpose:
+      "Master the modern data pipeline that powers artificial intelligence, exploring raw real-world datasets, spotting hidden patterns, and building compelling data visualisations.",
+    module1: "Data collection methods and ethical sourcing",
+    module2: "Data cleaning: handling missing values and outlier detection",
+    module3: "Statistical discovery: charts, histograms, and trend analysis",
+    module4: "Data journalism project: uncovering and presenting a compelling data story",
+    learningOutcomes:
+      "Clean and prepare datasets; design communicative charts; identify sampling bias and data limitations",
+    assessmentEvidence:
+      "Interactive data notebook, visual dashboard story, and methodology critique",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -381,15 +423,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "How AI Works: Perception, Learning and Language",
     audience: "Grades 6-8",
     prerequisites: "M1 recommended",
-    purpose: "Introduce AI through accessible experiments",
-    module1: "Perception and representation",
-    module2: "Training data, labels and classification",
-    module3: "Language, recommendations and GenAI",
-    module4: "Model test and error analysis",
+    purpose:
+      "Unravel how computers see images, understand speech, and generate language by conducting hands-on low-code experiments that explore neural networks and machine perception.",
+    module1: "Machine perception: transforming pixels and audio waves into numbers",
+    module2: "Supervised training: labels, feature extraction, and classification",
+    module3: "Language models and generative AI: embeddings, tokens, and transformers",
+    module4: "Stress-testing AI models: error analysis and ethical implications",
     learningOutcomes:
-      "Low-code model experiment, error analysis, concept map",
+      "Train and evaluate vision and NLP models; diagnose prediction failures; map core AI concepts to real-world applications",
     assessmentEvidence:
-      "AI4K12 perception, learning, natural interaction and impact",
+      "Low-code experiment notebook, model diagnostic audit, and conceptual system map",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -399,8 +442,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,999",
     originalPrice: "₹5,999",
-    image:
-      "https://images.unsplash.com/photo-1507146426996-ef05388891f7?auto=format&fit=crop&w=800&q=80",
+    image: howAiWorksImg,
   },
   {
     category: "Middle School",
@@ -409,13 +451,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Web, App and Physical-Computing Prototyping",
     audience: "Grades 6-8",
     prerequisites: "M1",
-    purpose: "Combine code, interface, sensors or APIs",
-    module1: "User needs and data flow",
-    module2: "Web/app or microcontroller basics",
-    module3: "APIs, sensors and events",
-    module4: "Prototype test and demo",
-    learningOutcomes: "Prototype, system diagram, feedback, test report",
-    assessmentEvidence: "Digital solutions, systems, design and coding",
+    purpose:
+      "Bridge software with the real world by building web applications connected to live APIs, microcontroller sensors, and smart device interfaces.",
+    module1: "User-centered design: wireframes, user flow, and API endpoints",
+    module2: "Interactive frontends: HTML, CSS, JavaScript, and dynamic components",
+    module3: "Physical computing: connecting microcontrollers, motors, and live sensor feeds",
+    module4: "Connected IoT prototype launch and live demonstration",
+    learningOutcomes:
+      "Build full-stack interactive prototypes; interface software with physical hardware; iterate based on usability testing",
+    assessmentEvidence:
+      "Working connected hardware/software prototype, architecture diagram, and usability report",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -425,8 +470,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹2,999",
     originalPrice: "₹5,999",
-    image:
-      "https://images.unsplash.com/photo-1517055729441-37497d94b4ee?auto=format&fit=crop&w=800&q=80",
+    image: webAppPrototypingImg,
   },
   {
     category: "Middle School",
@@ -435,13 +479,16 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Cyber Safety and Responsible Technology",
     audience: "Grades 6-8",
     prerequisites: "None; M1 recommended",
-    purpose: "Build security habits and ethical reasoning",
-    module1: "Accounts, privacy and phishing",
-    module2: "Networks and common threats",
-    module3: "Secure and inclusive design",
-    module4: "Incident-response scenario and campaign",
-    learningOutcomes: "Threat model, safety checklist, response exercise",
-    assessmentEvidence: "Systems, security, privacy, ethics and citizenship",
+    purpose:
+      "Develop defensive cybersecurity mindsets and ethical reasoning, investigating network security, password cryptography, social engineering, and responsible digital citizenship.",
+    module1: "Identity defense: multi-factor authentication, cryptography, and phishing triage",
+    module2: "Network architecture: packets, firewalls, and vulnerability assessment",
+    module3: "Ethical hacking boundaries and privacy-preserving design principles",
+    module4: "Cyber incident response simulation and community awareness campaign",
+    learningOutcomes:
+      "Identify common cyber vectors; simulate incident response protocols; champion secure and ethical digital practices",
+    assessmentEvidence:
+      "Threat modeling matrix, security audit report, and simulated incident defense plan",
     syllabusAlignment:
       "Board-aligned AI, coding, data, design and responsible-technology skills",
     facilitatorHours: 14,
@@ -466,7 +513,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     audience: "Grades 9-12",
     prerequisites: "M1 or equivalent",
     purpose:
-      "Prepare for school-board and university computing pathways",
+      "Engineer production-grade Python software, architect robust object-oriented systems, and master algorithmic problem solving benchmarked for university computing.",
     module1: "Modular and object-oriented design",
     module2: "Data structures and algorithms",
     module3: "Testing, version control and documentation",
@@ -483,8 +530,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,499",
     originalPrice: "₹6,999",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    image: appliedPythonImg,
     bestseller: true,
   },
   {
@@ -494,7 +540,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Machine Learning Foundations and Evaluation",
     audience: "Grades 9-12",
     prerequisites: "H1 plus algebra/statistics",
-    purpose: "Teach the supervised-learning workflow and limitations",
+    purpose:
+      "Master the core mathematical and statistical mechanics of machine learning, training and rigorously stress-testing models with real-world validation metrics.",
     module1: "Features, labels, train/test",
     module2: "Regression, classification and baselines",
     module3: "Metrics, overfitting and error analysis",
@@ -511,8 +558,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,499",
     originalPrice: "₹6,999",
-    image:
-      "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80",
+    image: mlFoundationsImg,
   },
   {
     category: "High School",
@@ -521,7 +567,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Generative AI, Language and Media Literacy",
     audience: "Grades 9-12",
     prerequisites: "H1 recommended",
-    purpose: "Develop informed creation and verification with GenAI",
+    purpose:
+      "Investigate deep learning models, prompt architecture, and synthetic media, learning to ground generative outputs, identify deepfakes, and build ethical AI tools.",
     module1: "Language models, prompting and context",
     module2: "Retrieval, citations and grounding",
     module3: "Multimodal media, copyright and deepfakes",
@@ -539,8 +586,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,499",
     originalPrice: "₹6,999",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+    image: genAiMediaLitImg,
   },
   {
     category: "High School",
@@ -549,7 +595,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Data Science for Social and Scientific Problems",
     audience: "Grades 9-12",
     prerequisites: "H1; intro statistics",
-    purpose: "Turn real questions into defensible investigations",
+    purpose:
+      "Transform raw global datasets into defensible scientific discoveries, mastering statistical inference, reproducible Jupyter pipelines, and compelling data storytelling.",
     module1: "Question and data acquisition",
     module2: "Cleaning and exploration",
     module3: "Statistics and visual storytelling",
@@ -567,8 +614,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,499",
     originalPrice: "₹6,999",
-    image:
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
+    image: dataScienceSocialImg,
   },
   {
     category: "High School",
@@ -577,7 +623,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "AI Product Design, Robotics and Capstone",
     audience: "Grades 9-12",
     prerequisites: "Two H certifications",
-    purpose: "Integrate AI, coding, systems, design and responsibility",
+    purpose:
+      "Turn breakthrough AI capabilities into real-world autonomous robots and interactive software products, culminating in a defendable capstone portfolio.",
     module1: "Problem discovery and requirements",
     module2: "Architecture and prototype",
     module3: "Build, test, safety and accessibility",
@@ -595,8 +642,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,499",
     originalPrice: "₹6,999",
-    image:
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    image: aiProductCapstoneImg,
   },
 
   // ==========================================
@@ -609,7 +655,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "AI and Machine Learning Foundations",
     audience: "Postsecondary",
     prerequisites: "Programming and quantitative foundations",
-    purpose: "Bridge to undergraduate AI study",
+    purpose:
+      "Build rigorous mathematical and practical foundations in statistical learning, implementing classical regression, classification, clustering, and optimization algorithms in reproducible Python pipelines.",
     module1: "Problem formulation and data pipeline",
     module2: "Supervised and unsupervised learning",
     module3: "Optimisation, evaluation and generalisation",
@@ -626,8 +673,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,999",
     originalPrice: "₹7,999",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    image: collegeAiMlFoundationsImg,
     bestseller: true,
   },
   {
@@ -637,7 +683,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Data Engineering, Analytics and Visualisation",
     audience: "Postsecondary",
     prerequisites: "Programming and statistics",
-    purpose: "Build data foundations for AI teams",
+    purpose:
+      "Architect resilient data pipelines and analytical warehouses for high-throughput AI systems, mastering schema design, stream transformation, automated data quality checks, and executive visual dashboards.",
     module1: "Relational data and schemas",
     module2: "Ingestion, cleaning and transformation",
     module3: "Analytics and visualisation",
@@ -654,8 +701,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,999",
     originalPrice: "₹7,999",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    image: collegeDataEngImg,
   },
   {
     category: "College & Universities",
@@ -664,7 +710,8 @@ export const RAW_PROGRAMS: RawProgram[] = [
     title: "Deep Learning, Computer Vision and NLP",
     audience: "Postsecondary",
     prerequisites: "U1 or equivalent",
-    purpose: "Survey modern architectures through experiments",
+    purpose:
+      "Explore cutting-edge neural architectures from convolutional backbones to attention-based transformers, fine-tuning pretrained foundation models for computer vision and natural language processing.",
     module1: "Neural networks",
     module2: "Vision and representation learning",
     module3: "Language and embeddings",
@@ -681,8 +728,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,999",
     originalPrice: "₹7,999",
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
+    image: collegeDeepLearningImg,
   },
   {
     category: "College & Universities",
@@ -692,7 +738,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     audience: "Postsecondary",
     prerequisites: "None; technical literacy helpful",
     purpose:
-      "Develop judgement to design, procure, audit or regulate AI",
+      "Navigate the legal, ethical, and societal frontiers of artificial intelligence, evaluating algorithmic fairness, regulatory frameworks, intellectual property, and verifiable risk-audit methodologies.",
     module1: "Human rights, fairness and privacy",
     module2: "Transparency and accountability",
     module3: "Risk and impact assessment",
@@ -709,8 +755,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,999",
     originalPrice: "₹7,999",
-    image:
-      "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+    image: collegeResponsibleAiImg,
   },
   {
     category: "College & Universities",
@@ -720,7 +765,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     audience: "Postsecondary",
     prerequisites: "U1 plus technical/governance elective",
     purpose:
-      "Prepare for research, graduate study and entry-level AI work",
+      "Bridge laboratory research with production engineering by developing an end-to-end MLOps pipeline featuring experiment tracking, automated model deployment, drift monitoring, and an academic viva defense.",
     module1: "Research question and experiment design",
     module2: "Reproducibility and deployment",
     module3: "Monitoring, drift and documentation",
@@ -738,8 +783,7 @@ export const RAW_PROGRAMS: RawProgram[] = [
     packageLength: "6 weeks",
     price: "₹3,999",
     originalPrice: "₹7,999",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    image: collegeMlopsCapstoneImg,
   },
 
   // ==========================================

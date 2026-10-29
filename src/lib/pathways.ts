@@ -9,9 +9,9 @@ import {
 import allImg from "@/assets/pathway/all.jfif";
 import preelementaryImg from "@/assets/pathway/preelementary.jfif";
 import elementaryImg from "@/assets/pathway/elementary.jfif";
-import middleschoolImg from "@/assets/pathway/middleschool.jfif";
-import highschoolImg from "@/assets/pathway/highschool.jfif";
-import collegeImg from "@/assets/pathway/college.jfif";
+import middleschoolImg from "@/assets/pathway/middleschool.png";
+import highschoolImg from "@/assets/pathway/highschool.png";
+import collegeImg from "@/assets/pathway/collegeanduni.png";
 import professionalImg from "@/assets/pathway/professional.jfif";
 
 export const PATHWAY_THUMBNAILS: Record<string, string> = {

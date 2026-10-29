@@ -53,7 +53,7 @@ function TermsAndConditions() {
           </p>
           <h2 className="mt-10 font-display text-2xl font-bold tracking-tight text-[#0F1533]">4. Contact Us</h2>
           <p className="mt-4">
-            If you have any questions about these Terms, please contact us at hello@certcia.com.
+            If you have any questions about these Terms, please contact us at letsconnect@certcia.com .
           </p>
         </div>
       </div>
